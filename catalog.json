@@ -1,4 +1,67 @@
 [
-  { "name": "迴圈基礎題組", "category": "迴圈", "url": "banks/loops-basic.txt" },
-  { "name": "條件判斷入門", "category": "條件", "url": "banks/if-intro.txt" }
+  {
+    "name": "S0 平台基礎（環境與除錯）",
+    "category": "S0",
+    "url": "banks/s0-basics.txt"
+  },
+  {
+    "name": "S1-1 循序與運算",
+    "category": "S1",
+    "url": "banks/s1-1-seq.txt"
+  },
+  {
+    "name": "S1-2 數值運算",
+    "category": "S1",
+    "url": "banks/s1-2-num.txt"
+  },
+  {
+    "name": "S1-3 選擇判斷",
+    "category": "S1",
+    "url": "banks/s1-3-sel.txt"
+  },
+  {
+    "name": "S1-4 迴圈",
+    "category": "S1",
+    "url": "banks/s1-4-loop.txt"
+  },
+  {
+    "name": "S1-5 字串",
+    "category": "S1",
+    "url": "banks/s1-5-str.txt"
+  },
+  {
+    "name": "S1-6 清單",
+    "category": "S1",
+    "url": "banks/s1-6-list.txt"
+  },
+  {
+    "name": "S2-1 數論基礎",
+    "category": "S2",
+    "url": "banks/s2-1-numtheory.txt"
+  },
+  {
+    "name": "S2-2 數位與進位",
+    "category": "S2",
+    "url": "banks/s2-2-digits.txt"
+  },
+  {
+    "name": "S2-3 巢狀迴圈",
+    "category": "S2",
+    "url": "banks/s2-3-nested.txt"
+  },
+  {
+    "name": "S2-4 字串進階",
+    "category": "S2",
+    "url": "banks/s2-4-str2.txt"
+  },
+  {
+    "name": "S2-5 自訂函式",
+    "category": "S2",
+    "url": "banks/s2-5-func.txt"
+  },
+  {
+    "name": "S2-6 搜尋與統計",
+    "category": "S2",
+    "url": "banks/s2-6-search.txt"
+  }
 ]
