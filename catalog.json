@@ -35,6 +35,21 @@
     "url": "banks/s1-6-list.txt"
   },
   {
+    "name": "S1-7 條件迴圈與中斷",
+    "category": "S1",
+    "url": "banks/s1-7-while.txt"
+  },
+  {
+    "name": "S1-8 字串切片與分割",
+    "category": "S1",
+    "url": "banks/s1-8-strops.txt"
+  },
+  {
+    "name": "S1-9 清單操作",
+    "category": "S1",
+    "url": "banks/s1-9-listops.txt"
+  },
+  {
     "name": "S2-1 數論基礎",
     "category": "S2",
     "url": "banks/s2-1-numtheory.txt"
@@ -65,6 +80,16 @@
     "url": "banks/s2-6-search.txt"
   },
   {
+    "name": "S2-7 位元與布林",
+    "category": "S2",
+    "url": "banks/s2-7-bitlogic.txt"
+  },
+  {
+    "name": "S2-8 前綴和",
+    "category": "S2",
+    "url": "banks/s2-8-prefix.txt"
+  },
+  {
     "name": "S3-1 排序",
     "category": "S3",
     "url": "banks/s3-1-sort.txt"
@@ -90,6 +115,11 @@
     "url": "banks/s3-5-window.txt"
   },
   {
+    "name": "S3-6 二分搜尋",
+    "category": "S3",
+    "url": "banks/s3-6-binsearch.txt"
+  },
+  {
     "name": "S4-1 貪婪",
     "category": "S4",
     "url": "banks/s4-1-greedy.txt"
@@ -108,5 +138,80 @@
     "name": "S4-4 圖論",
     "category": "S4",
     "url": "banks/s4-4-graph.txt"
+  },
+  {
+    "name": "縣賽模擬卷 01",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-01.txt"
+  },
+  {
+    "name": "縣賽模擬卷 02",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-02.txt"
+  },
+  {
+    "name": "縣賽模擬卷 03",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-03.txt"
+  },
+  {
+    "name": "縣賽模擬卷 04",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-04.txt"
+  },
+  {
+    "name": "縣賽模擬卷 05",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-05.txt"
+  },
+  {
+    "name": "縣賽模擬卷 06",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-06.txt"
+  },
+  {
+    "name": "縣賽模擬卷 07",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-07.txt"
+  },
+  {
+    "name": "縣賽模擬卷 08",
+    "category": "模擬-縣賽",
+    "url": "banks/mock-county-08.txt"
+  },
+  {
+    "name": "全國賽模擬卷 01",
+    "category": "模擬-全國",
+    "url": "banks/mock-national-01.txt"
+  },
+  {
+    "name": "全國賽模擬卷 02",
+    "category": "模擬-全國",
+    "url": "banks/mock-national-02.txt"
+  },
+  {
+    "name": "全國賽模擬卷 03",
+    "category": "模擬-全國",
+    "url": "banks/mock-national-03.txt"
+  },
+  {
+    "name": "全國賽模擬卷 04",
+    "category": "模擬-全國",
+    "url": "banks/mock-national-04.txt"
+  },
+  {
+    "name": "全國賽模擬卷 05",
+    "category": "模擬-全國",
+    "url": "banks/mock-national-05.txt"
+  },
+  {
+    "name": "全國賽模擬卷 06",
+    "category": "模擬-全國",
+    "url": "banks/mock-national-06.txt"
+  },
+  {
+    "name": "全國賽模擬卷 07",
+    "category": "模擬-全國",
+    "url": "banks/mock-national-07.txt"
   }
 ]
