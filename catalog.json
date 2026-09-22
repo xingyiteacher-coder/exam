@@ -63,5 +63,50 @@
     "name": "S2-6 搜尋與統計",
     "category": "S2",
     "url": "banks/s2-6-search.txt"
+  },
+  {
+    "name": "S3-1 排序",
+    "category": "S3",
+    "url": "banks/s3-1-sort.txt"
+  },
+  {
+    "name": "S3-2 狀態機",
+    "category": "S3",
+    "url": "banks/s3-2-fsm.txt"
+  },
+  {
+    "name": "S3-3 資料結構",
+    "category": "S3",
+    "url": "banks/s3-3-ds.txt"
+  },
+  {
+    "name": "S3-4 遞迴",
+    "category": "S3",
+    "url": "banks/s3-4-rec.txt"
+  },
+  {
+    "name": "S3-5 滑動視窗與雙指標",
+    "category": "S3",
+    "url": "banks/s3-5-window.txt"
+  },
+  {
+    "name": "S4-1 貪婪",
+    "category": "S4",
+    "url": "banks/s4-1-greedy.txt"
+  },
+  {
+    "name": "S4-2 動態規劃",
+    "category": "S4",
+    "url": "banks/s4-2-dp.txt"
+  },
+  {
+    "name": "S4-3 回溯",
+    "category": "S4",
+    "url": "banks/s4-3-backtrack.txt"
+  },
+  {
+    "name": "S4-4 圖論",
+    "category": "S4",
+    "url": "banks/s4-4-graph.txt"
   }
 ]
