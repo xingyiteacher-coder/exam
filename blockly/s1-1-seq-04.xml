@@ -1,0 +1,41 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="text_print" id="print" x="20" y="20">
+    <value name="TEXT">
+      <block type="math_arithmetic" id="add32">
+        <field name="OP">ADD</field>
+        <value name="A">
+          <block type="math_arithmetic" id="div5">
+            <field name="OP">DIVIDE</field>
+            <value name="A">
+              <block type="math_arithmetic" id="mult9">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <shadow type="math_number"><field name="NUM">1</field></shadow>
+                  <block type="text_prompt_ext" id="prompt_c">
+                    <mutation type="NUMBER"></mutation>
+                    <field name="TYPE">NUMBER</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="num9">
+                    <field name="NUM">9</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="num5">
+                <field name="NUM">5</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="num32">
+            <field name="NUM">32</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+  </block>
+</xml>
