@@ -1,0 +1,603 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_r">r</variable>
+    <variable id="var_c">c</variable>
+    <variable id="var_grid">grid</variable>
+    <variable id="var_ans_count">ans_count</variable>
+    <variable id="var_row">row</variable>
+    <variable id="var_col">col</variable>
+    <variable id="var_i">i</variable>
+    <variable id="var_raw_line">raw_line</variable>
+    <variable id="var_parts">parts</variable>
+  </variables>
+
+  <!-- 回溯函式定義 solve(row, col) -->
+  <block type="procedures_defnoreturn" id="proc_solve" x="20" y="20">
+    <mutation>
+      <arg name="row" varid="var_row"></arg>
+      <arg name="col" varid="var_col"></arg>
+    </mutation>
+    <field name="NAME">solve</field>
+    <comment pinned="false" h="80" w="160">Maze Backtracking</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="if_is_end">
+        <mutation else="1"></mutation>
+        <!-- 判斷是否抵達終點 (r, c) -->
+        <value name="IF0">
+          <block type="logic_operation" id="log_and_end">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="cmp_row_r">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="get_row1">
+                    <field name="VAR" id="var_row">row</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="get_r1">
+                    <field name="VAR" id="var_r">r</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="cmp_col_c">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="get_col1">
+                    <field name="VAR" id="var_col">col</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="get_c1">
+                    <field name="VAR" id="var_c">c</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <!-- 找到合法路徑，累加計數 -->
+          <block type="variables_set" id="set_inc_ans">
+            <field name="VAR" id="var_ans_count">ans_count</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="add_ans1">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <block type="variables_get" id="get_ans1">
+                    <field name="VAR" id="var_ans_count">ans_count</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="num_1_ans">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <!-- 分支 1：向下移動 (row + 1, col) -->
+          <block type="controls_if" id="if_can_down">
+            <value name="IF0">
+              <block type="logic_operation" id="and_down">
+                <field name="OP">AND</field>
+                <value name="A">
+                  <block type="logic_compare" id="cmp_down_bound">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="math_arithmetic" id="add_row_1">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_row2">
+                            <field name="VAR" id="var_row">row</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="num_1_down">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="get_r2">
+                        <field name="VAR" id="var_r">r</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_compare" id="cmp_down_char">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="text_charAt" id="char_down">
+                        <mutation at="true"></mutation>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE">
+                          <block type="lists_getIndex" id="get_grid_down">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="get_grid1">
+                                <field name="VAR" id="var_grid">grid</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="math_arithmetic" id="add_row_1_at">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="get_row3">
+                                    <field name="VAR" id="var_row">row</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="num_1_down_at">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="AT">
+                          <block type="variables_get" id="get_col2">
+                            <field name="VAR" id="var_col">col</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="text" id="text_zero1">
+                        <field name="TEXT">0</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="procedures_callnoreturn" id="call_down">
+                <mutation name="solve">
+                  <arg name="row"></arg>
+                  <arg name="col"></arg>
+                </mutation>
+                <value name="ARG0">
+                  <block type="math_arithmetic" id="add_row_call">
+                    <field name="OP">ADD</field>
+                    <value name="A">
+                      <block type="variables_get" id="get_row4">
+                        <field name="VAR" id="var_row">row</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="num_1_call1">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="ARG1">
+                  <block type="variables_get" id="get_col3">
+                    <field name="VAR" id="var_col">col</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <!-- 分支 2：向右移動 (row, col + 1) -->
+              <block type="controls_if" id="if_can_right">
+                <value name="IF0">
+                  <block type="logic_operation" id="and_right">
+                    <field name="OP">AND</field>
+                    <value name="A">
+                      <block type="logic_compare" id="cmp_right_bound">
+                        <field name="OP">LTE</field>
+                        <value name="A">
+                          <block type="math_arithmetic" id="add_col_1">
+                            <field name="OP">ADD</field>
+                            <value name="A">
+                              <block type="variables_get" id="get_col4">
+                                <field name="VAR" id="var_col">col</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="num_1_right">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="get_c2">
+                            <field name="VAR" id="var_c">c</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_compare" id="cmp_right_char">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="text_charAt" id="char_right">
+                            <mutation at="true"></mutation>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="lists_getIndex" id="get_grid_right">
+                                <mutation statement="false" at="true"></mutation>
+                                <field name="MODE">GET</field>
+                                <field name="WHERE">FROM_START</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="get_grid2">
+                                    <field name="VAR" id="var_grid">grid</field>
+                                  </block>
+                                </value>
+                                <value name="AT">
+                                  <block type="variables_get" id="get_row5">
+                                    <field name="VAR" id="var_row">row</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="math_arithmetic" id="add_col_1_at">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="get_col5">
+                                    <field name="VAR" id="var_col">col</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="num_1_right_at">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id="text_zero2">
+                            <field name="TEXT">0</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="procedures_callnoreturn" id="call_right">
+                    <mutation name="solve">
+                      <arg name="row"></arg>
+                      <arg name="col"></arg>
+                    </mutation>
+                    <value name="ARG0">
+                      <block type="variables_get" id="get_row6">
+                        <field name="VAR" id="var_row">row</field>
+                      </block>
+                    </value>
+                    <value name="ARG1">
+                      <block type="math_arithmetic" id="add_col_call">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_col6">
+                            <field name="VAR" id="var_col">col</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="num_1_call2">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+
+  <!-- 主程式進入點 -->
+  <block type="variables_set" id="set_raw" x="20" y="450">
+    <field name="VAR" id="var_raw_line">raw_line</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_line1">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+        <value name="TEXT">
+          <block type="text" id="t_empty1">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="set_parts">
+        <field name="VAR" id="var_parts">parts</field>
+        <value name="VALUE">
+          <block type="lists_split" id="split_line">
+            <mutation mode="SPLIT"></mutation>
+            <field name="MODE">SPLIT</field>
+            <value name="INPUT">
+              <block type="variables_get" id="get_raw1">
+                <field name="VAR" id="var_raw_line">raw_line</field>
+              </block>
+            </value>
+            <value name="DELIM">
+              <shadow type="text" id="t_space">
+                <field name="TEXT"> </field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <!-- 剖析 r 與 c -->
+          <block type="controls_if" id="if_split_len">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="cmp_len">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="lists_length" id="len_parts">
+                    <value name="VALUE">
+                      <block type="variables_get" id="get_parts_len">
+                        <field name="VAR" id="var_parts">parts</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="num_2">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="set_r_1">
+                <field name="VAR" id="var_r">r</field>
+                <value name="VALUE">
+                  <block type="math_single" id="abs_r1">
+                    <field name="OP">ABS</field>
+                    <value name="NUM">
+                      <block type="lists_getIndex" id="get_p1">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="get_parts1">
+                            <field name="VAR" id="var_parts">parts</field>
+                          </block>
+                        </value>
+                        <value name="AT">
+                          <block type="math_number" id="idx_1">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_c_1">
+                    <field name="VAR" id="var_c">c</field>
+                    <value name="VALUE">
+                      <block type="math_single" id="abs_c1">
+                        <field name="OP">ABS</field>
+                        <value name="NUM">
+                          <block type="lists_getIndex" id="get_p2">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="get_parts2">
+                                <field name="VAR" id="var_parts">parts</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="math_number" id="idx_2">
+                                <field name="NUM">2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="variables_set" id="set_r_2">
+                <field name="VAR" id="var_r">r</field>
+                <value name="VALUE">
+                  <block type="math_single" id="abs_r2">
+                    <field name="OP">ABS</field>
+                    <value name="NUM">
+                      <block type="lists_getIndex" id="get_p1_else">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="get_parts3">
+                            <field name="VAR" id="var_parts">parts</field>
+                          </block>
+                        </value>
+                        <value name="AT">
+                          <block type="math_number" id="idx_1_else">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_c_2">
+                    <field name="VAR" id="var_c">c</field>
+                    <value name="VALUE">
+                      <block type="text_prompt_ext" id="prompt_c2">
+                        <mutation type="NUMBER"></mutation>
+                        <field name="TYPE">NUMBER</field>
+                        <value name="TEXT">
+                          <block type="text" id="t_empty2">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <!-- 初始化網格陣列 grid -->
+              <block type="variables_set" id="set_grid_empty">
+                <field name="VAR" id="var_grid">grid</field>
+                <value name="VALUE">
+                  <block type="lists_create_with" id="create_empty_grid">
+                    <mutation items="0"></mutation>
+                  </block>
+                </value>
+                <next>
+                  <!-- 迴圈讀取 r 行網格字串 -->
+                  <block type="controls_for" id="for_i">
+                    <field name="VAR" id="var_i">i</field>
+                    <value name="FROM">
+                      <shadow type="math_number" id="shadow_from">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <value name="TO">
+                      <block type="variables_get" id="get_r_for">
+                        <field name="VAR" id="var_r">r</field>
+                      </block>
+                    </value>
+                    <value name="BY">
+                      <shadow type="math_number" id="shadow_by">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <statement name="DO">
+                      <block type="lists_setIndex" id="push_grid">
+                        <mutation at="false"></mutation>
+                        <field name="MODE">INSERT</field>
+                        <field name="WHERE">LAST</field>
+                        <value name="LIST">
+                          <block type="variables_get" id="get_grid_loop">
+                            <field name="VAR" id="var_grid">grid</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="text_prompt_ext" id="prompt_row_str">
+                            <mutation type="TEXT"></mutation>
+                            <field name="TYPE">TEXT</field>
+                            <value name="TEXT">
+                              <block type="text" id="t_empty_row">
+                                <field name="TEXT"></field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <!-- 初始化 ans_count = 0 -->
+                      <block type="variables_set" id="set_ans_0">
+                        <field name="VAR" id="var_ans_count">ans_count</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="num_ans_0">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- 檢查起點 (1,1) 是否可通行 ('0') -->
+                          <block type="controls_if" id="if_start_ok">
+                            <value name="IF0">
+                              <block type="logic_compare" id="cmp_start_zero">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="text_charAt" id="char_start">
+                                    <mutation at="true"></mutation>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE">
+                                      <block type="lists_getIndex" id="get_grid_start">
+                                        <mutation statement="false" at="true"></mutation>
+                                        <field name="MODE">GET</field>
+                                        <field name="WHERE">FROM_START</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="get_grid_start_val">
+                                            <field name="VAR" id="var_grid">grid</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT">
+                                          <block type="math_number" id="num_1_start_r">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="AT">
+                                      <block type="math_number" id="num_1_start_c">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="text" id="text_zero_start">
+                                    <field name="TEXT">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="procedures_callnoreturn" id="start_solve">
+                                <mutation name="solve">
+                                  <arg name="row"></arg>
+                                  <arg name="col"></arg>
+                                </mutation>
+                                <value name="ARG0">
+                                  <block type="math_number" id="num_start_row">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                                <value name="ARG1">
+                                  <block type="math_number" id="num_start_col">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <!-- 輸出路徑數量 -->
+                              <block type="text_print" id="print_ans">
+                                <value name="TEXT">
+                                  <block type="variables_get" id="get_ans_final">
+                                    <field name="VAR" id="var_ans_count">ans_count</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,347 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_N">N</variable>
+    <variable id="var_arr">arr</variable>
+    <variable id="var_i">i</variable>
+    <variable id="var_t">t</variable>
+    <variable id="var_found">found</variable>
+    <variable id="var_idx">idx</variable>
+    <variable id="var_current_sum">current_sum</variable>
+  </variables>
+
+  <!-- 回溯函式定義 solve(idx, current_sum) -->
+  <block type="procedures_defnoreturn" id="proc_solve" x="20" y="20">
+    <mutation>
+      <arg name="idx" varid="var_idx"></arg>
+      <arg name="current_sum" varid="var_current_sum"></arg>
+    </mutation>
+    <field name="NAME">solve</field>
+    <comment pinned="false" h="80" w="160">Subset Sum Backtracking</comment>
+    <statement name="STACK">
+      <!-- 若尚未找到解答才繼續探索 -->
+      <block type="controls_if" id="if_not_found_outer">
+        <value name="IF0">
+          <block type="logic_negate" id="neg1">
+            <value name="BOOL">
+              <block type="variables_get" id="get_f1">
+                <field name="VAR" id="var_found">found</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if" id="if_sum_eq_t">
+            <mutation else="1"></mutation>
+            <!-- 條件1：當前總和等於目標值 t -->
+            <value name="IF0">
+              <block type="logic_compare" id="cmp_eq_t">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="get_csum1">
+                    <field name="VAR" id="var_current_sum">current_sum</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="get_t1">
+                    <field name="VAR" id="var_t">t</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="set_found_true">
+                <field name="VAR" id="var_found">found</field>
+                <value name="VALUE">
+                  <block type="logic_boolean" id="bool_t">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <!-- 剪枝條件：索引未越界 且 當前總和未超過目標值 t -->
+              <block type="controls_if" id="if_valid_bound">
+                <value name="IF0">
+                  <block type="logic_operation" id="log_and1">
+                    <field name="OP">AND</field>
+                    <value name="A">
+                      <block type="logic_compare" id="cmp_idx_lte_N">
+                        <field name="OP">LTE</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_idx1">
+                            <field name="VAR" id="var_idx">idx</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="get_N1">
+                            <field name="VAR" id="var_N">N</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_compare" id="cmp_csum_lt_t">
+                        <field name="OP">LT</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_csum2">
+                            <field name="VAR" id="var_current_sum">current_sum</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="get_t2">
+                            <field name="VAR" id="var_t">t</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <!-- 分支 1：選擇包含 arr[idx] -->
+                  <block type="procedures_callnoreturn" id="call_inc">
+                    <mutation name="solve">
+                      <arg name="idx"></arg>
+                      <arg name="current_sum"></arg>
+                    </mutation>
+                    <value name="ARG0">
+                      <block type="math_arithmetic" id="add_idx1">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_idx2">
+                            <field name="VAR" id="var_idx">idx</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="num_1a">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="ARG1">
+                      <block type="math_arithmetic" id="add_csum1">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_csum3">
+                            <field name="VAR" id="var_current_sum">current_sum</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="lists_getIndex" id="get_arr_idx">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="get_arr1">
+                                <field name="VAR" id="var_arr">arr</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="variables_get" id="get_idx3">
+                                <field name="VAR" id="var_idx">idx</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- 分支 2：選擇不包含 arr[idx] (若包含分支執行完後仍未找到解答) -->
+                      <block type="controls_if" id="if_not_found_inner">
+                        <value name="IF0">
+                          <block type="logic_negate" id="neg2">
+                            <value name="BOOL">
+                              <block type="variables_get" id="get_f2">
+                                <field name="VAR" id="var_found">found</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="procedures_callnoreturn" id="call_exc">
+                            <mutation name="solve">
+                              <arg name="idx"></arg>
+                              <arg name="current_sum"></arg>
+                            </mutation>
+                            <value name="ARG0">
+                              <block type="math_arithmetic" id="add_idx2">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="get_idx4">
+                                    <field name="VAR" id="var_idx">idx</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="num_1b">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="ARG1">
+                              <block type="variables_get" id="get_csum4">
+                                <field name="VAR" id="var_current_sum">current_sum</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+
+  <!-- 主程式入口 -->
+  <!-- 1. 讀入 N -->
+  <block type="variables_set" id="set_N" x="20" y="380">
+    <field name="VAR" id="var_N">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_N">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+        <value name="TEXT">
+          <block type="text" id="t_empty1">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <!-- 初始化空陣列 arr -->
+      <block type="variables_set" id="set_arr_empty">
+        <field name="VAR" id="var_arr">arr</field>
+        <value name="VALUE">
+          <block type="lists_create_with" id="create_empty_arr">
+            <mutation items="0"></mutation>
+          </block>
+        </value>
+        <next>
+          <!-- 2. 迴圈讀入 N 個正整數存入 arr -->
+          <block type="controls_for" id="for_i">
+            <field name="VAR" id="var_i">i</field>
+            <value name="FROM">
+              <shadow type="math_number" id="shadow_from">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <value name="TO">
+              <block type="variables_get" id="get_N_for">
+                <field name="VAR" id="var_N">N</field>
+              </block>
+            </value>
+            <value name="BY">
+              <shadow type="math_number" id="shadow_by">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <statement name="DO">
+              <block type="lists_setIndex" id="push_arr">
+                <mutation at="false"></mutation>
+                <field name="MODE">INSERT</field>
+                <field name="WHERE">LAST</field>
+                <value name="LIST">
+                  <block type="variables_get" id="get_arr_loop">
+                    <field name="VAR" id="var_arr">arr</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="text_prompt_ext" id="prompt_elem">
+                    <mutation type="NUMBER"></mutation>
+                    <field name="TYPE">NUMBER</field>
+                    <value name="TEXT">
+                      <block type="text" id="t_empty_elem">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <!-- 3. 讀入目標值 t -->
+              <block type="variables_set" id="set_t">
+                <field name="VAR" id="var_t">t</field>
+                <value name="VALUE">
+                  <block type="text_prompt_ext" id="prompt_t">
+                    <mutation type="NUMBER"></mutation>
+                    <field name="TYPE">NUMBER</field>
+                    <value name="TEXT">
+                      <block type="text" id="t_empty3">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <!-- 4. 初始化 found 標記為 false -->
+                  <block type="variables_set" id="set_found_false">
+                    <field name="VAR" id="var_found">found</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="bool_f">
+                        <field name="BOOL">FALSE</field>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- 5. 啟動回溯搜尋：solve(1, 0) -->
+                      <block type="procedures_callnoreturn" id="start_solve">
+                        <mutation name="solve">
+                          <arg name="idx"></arg>
+                          <arg name="current_sum"></arg>
+                        </mutation>
+                        <value name="ARG0">
+                          <block type="math_number" id="num_start_idx">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <value name="ARG1">
+                          <block type="math_number" id="num_start_sum">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- 6. 輸出結果 -->
+                          <block type="controls_if" id="if_print_res">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="variables_get" id="get_found_final">
+                                <field name="VAR" id="var_found">found</field>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="text_print" id="print_yes">
+                                <value name="TEXT">
+                                  <shadow type="text" id="shadow_yes">
+                                    <field name="TEXT">yes</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="text_print" id="print_no">
+                                <value name="TEXT">
+                                  <shadow type="text" id="shadow_no">
+                                    <field name="TEXT">no</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

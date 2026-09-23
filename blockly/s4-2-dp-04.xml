@@ -1,0 +1,455 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_num_r">num_r</variable>
+    <variable id="var_num_c">num_c</variable>
+    <variable id="var_line">line</variable>
+    <variable id="var_parts">parts</variable>
+    <variable id="var_grid">grid</variable>
+    <variable id="var_dp">dp</variable>
+    <variable id="var_row">row</variable>
+    <variable id="var_dp_row">dp_row</variable>
+    <variable id="var_idx_i">idx_i</variable>
+    <variable id="var_idx_j">idx_j</variable>
+    <variable id="var_val_top">val_top</variable>
+    <variable id="var_val_left">val_left</variable>
+    <variable id="var_min_prev">min_prev</variable>
+    <variable id="var_cell_val">cell_val</variable>
+  </variables>
+
+  <!-- 1. 讀取 r 與 c -->
+  <block type="variables_set" id="read_rc_line" x="20" y="20">
+    <field name="VAR" id="var_line">line</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="split_rc">
+        <field name="VAR" id="var_parts">parts</field>
+        <value name="VALUE">
+          <block type="lists_split">
+            <mutation mode="SPLIT"></mutation>
+            <field name="MODE">SPLIT</field>
+            <value name="INPUT"><block type="variables_get"><field name="VAR" id="var_line">line</field></block></value>
+            <value name="DELIM"><shadow type="text"><field name="TEXT"> </field></shadow></value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="set_r">
+            <field name="VAR" id="var_num_r">num_r</field>
+            <value name="VALUE">
+              <block type="math_single">
+                <field name="OP">ABS</field>
+                <value name="NUM">
+                  <block type="lists_getIndex">
+                    <mutation statement="false" at="true"></mutation>
+                    <field name="MODE">GET</field>
+                    <field name="WHERE">FROM_START</field>
+                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_parts">parts</field></block></value>
+                    <value name="AT"><block type="math_number"><field name="NUM">1</field></block></value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="set_c">
+                <field name="VAR" id="var_num_c">num_c</field>
+                <value name="VALUE">
+                  <block type="math_single">
+                    <field name="OP">ABS</field>
+                    <value name="NUM">
+                      <block type="lists_getIndex">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_parts">parts</field></block></value>
+                        <value name="AT"><block type="math_number"><field name="NUM">2</field></block></value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <!-- 2. 讀取 r 行資料，建構 2D 陣列 grid -->
+                  <block type="variables_set" id="init_grid">
+                    <field name="VAR" id="var_grid">grid</field>
+                    <value name="VALUE"><block type="lists_create_with"><mutation items="0"></mutation></block></value>
+                    <next>
+                      <block type="controls_for" id="read_grid_loop">
+                        <field name="VAR" id="var_idx_i">idx_i</field>
+                        <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                        <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_r">num_r</field></block></value>
+                        <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                        <statement name="DO">
+                          <block type="variables_set" id="read_row_line">
+                            <field name="VAR" id="var_line">line</field>
+                            <value name="VALUE">
+                              <block type="text_prompt_ext">
+                                <mutation type="TEXT"></mutation>
+                                <field name="TYPE">TEXT</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="split_row">
+                                <field name="VAR" id="var_parts">parts</field>
+                                <value name="VALUE">
+                                  <block type="lists_split">
+                                    <mutation mode="SPLIT"></mutation>
+                                    <field name="MODE">SPLIT</field>
+                                    <value name="INPUT"><block type="variables_get"><field name="VAR" id="var_line">line</field></block></value>
+                                    <value name="DELIM"><shadow type="text"><field name="TEXT"> </field></shadow></value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="init_row_list">
+                                    <field name="VAR" id="var_row">row</field>
+                                    <value name="VALUE"><block type="lists_create_with"><mutation items="0"></mutation></block></value>
+                                    <next>
+                                      <block type="controls_for" id="read_cell_loop">
+                                        <field name="VAR" id="var_idx_j">idx_j</field>
+                                        <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                                        <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_c">num_c</field></block></value>
+                                        <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                                        <statement name="DO">
+                                          <block type="lists_setIndex" id="push_cell">
+                                            <mutation at="false"></mutation>
+                                            <field name="MODE">INSERT</field>
+                                            <field name="WHERE">LAST</field>
+                                            <value name="LIST"><block type="variables_get"><field name="VAR" id="var_row">row</field></block></value>
+                                            <value name="TO">
+                                              <block type="math_single">
+                                                <field name="OP">ABS</field>
+                                                <value name="NUM">
+                                                  <block type="lists_getIndex">
+                                                    <mutation statement="false" at="true"></mutation>
+                                                    <field name="MODE">GET</field>
+                                                    <field name="WHERE">FROM_START</field>
+                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_parts">parts</field></block></value>
+                                                    <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="lists_setIndex" id="push_row_to_grid">
+                                            <mutation at="false"></mutation>
+                                            <field name="MODE">INSERT</field>
+                                            <field name="WHERE">LAST</field>
+                                            <value name="LIST"><block type="variables_get"><field name="VAR" id="var_grid">grid</field></block></value>
+                                            <value name="TO"><block type="variables_get"><field name="VAR" id="var_row">row</field></block></value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <!-- 3. 初始化 DP 矩陣並計算最小路徑和 -->
+                          <block type="variables_set" id="init_dp_matrix">
+                            <field name="VAR" id="var_dp">dp</field>
+                            <value name="VALUE"><block type="lists_create_with"><mutation items="0"></mutation></block></value>
+                            <next>
+                              <block type="controls_for" id="dp_outer_loop">
+                                <field name="VAR" id="var_idx_i">idx_i</field>
+                                <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                                <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_r">num_r</field></block></value>
+                                <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                                <statement name="DO">
+                                  <block type="variables_set" id="init_dp_row">
+                                    <field name="VAR" id="var_dp_row">dp_row</field>
+                                    <value name="VALUE"><block type="lists_create_with"><mutation items="0"></mutation></block></value>
+                                    <next>
+                                      <block type="controls_for" id="dp_inner_loop">
+                                        <field name="VAR" id="var_idx_j">idx_j</field>
+                                        <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                                        <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_c">num_c</field></block></value>
+                                        <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                                        <statement name="DO">
+                                          <!-- 取得當前格子權重 grid[i][j] -->
+                                          <block type="variables_set" id="get_cell_val">
+                                            <field name="VAR" id="var_cell_val">cell_val</field>
+                                            <value name="VALUE">
+                                              <block type="lists_getIndex">
+                                                <mutation statement="false" at="true"></mutation>
+                                                <field name="MODE">GET</field>
+                                                <field name="WHERE">FROM_START</field>
+                                                <value name="VALUE">
+                                                  <block type="lists_getIndex">
+                                                    <mutation statement="false" at="true"></mutation>
+                                                    <field name="MODE">GET</field>
+                                                    <field name="WHERE">FROM_START</field>
+                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_grid">grid</field></block></value>
+                                                    <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <!-- 分狀態計算來源極小值 -->
+                                              <block type="controls_if" id="check_grid_pos">
+                                                <mutation elseif="2" else="0"></mutation>
+                                                <!-- Case 1: 起點 (1, 1) -->
+                                                <value name="IF0">
+                                                  <block type="logic_operation">
+                                                    <field name="OP">AND</field>
+                                                    <value name="A">
+                                                      <block type="logic_compare">
+                                                        <field name="OP">EQ</field>
+                                                        <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                        <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="logic_compare">
+                                                        <field name="OP">EQ</field>
+                                                        <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                        <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="variables_set" id="set_min_start">
+                                                    <field name="VAR" id="var_min_prev">min_prev</field>
+                                                    <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                                                  </block>
+                                                </statement>
+                                                <!-- Case 2: 第一列 (只能從左來) -->
+                                                <value name="IF1">
+                                                  <block type="logic_compare">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                    <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO1">
+                                                  <block type="variables_set" id="set_min_row1">
+                                                    <field name="VAR" id="var_min_prev">min_prev</field>
+                                                    <value name="VALUE">
+                                                      <block type="lists_getIndex">
+                                                        <mutation statement="false" at="true"></mutation>
+                                                        <field name="MODE">GET</field>
+                                                        <field name="WHERE">FROM_START</field>
+                                                        <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp_row">dp_row</field></block></value>
+                                                        <value name="AT">
+                                                          <block type="math_arithmetic">
+                                                            <field name="OP">MINUS</field>
+                                                            <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                            <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <!-- Case 3: 第一行 (只能從上來) -->
+                                                <value name="IF2">
+                                                  <block type="logic_compare">
+                                                    <field name="OP">EQ</field>
+                                                    <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                    <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO2">
+                                                  <block type="variables_set" id="set_min_col1">
+                                                    <field name="VAR" id="var_min_prev">min_prev</field>
+                                                    <value name="VALUE">
+                                                      <block type="lists_getIndex">
+                                                        <mutation statement="false" at="true"></mutation>
+                                                        <field name="MODE">GET</field>
+                                                        <field name="WHERE">FROM_START</field>
+                                                        <value name="VALUE">
+                                                          <block type="lists_getIndex">
+                                                            <mutation statement="false" at="true"></mutation>
+                                                            <field name="MODE">GET</field>
+                                                            <field name="WHERE">FROM_START</field>
+                                                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                                            <value name="AT">
+                                                              <block type="math_arithmetic">
+                                                                <field name="OP">MINUS</field>
+                                                                <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                                <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="AT"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <!-- 一般情況: min(上, 左) -->
+                                                <next>
+                                                  <block type="controls_if" id="check_general">
+                                                    <value name="IF0">
+                                                      <block type="logic_operation">
+                                                        <field name="OP">AND</field>
+                                                        <value name="A">
+                                                          <block type="logic_compare">
+                                                            <field name="OP">GT</field>
+                                                            <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                            <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="logic_compare">
+                                                            <field name="OP">GT</field>
+                                                            <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                            <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="variables_set" id="get_top">
+                                                        <field name="VAR" id="var_val_top">val_top</field>
+                                                        <value name="VALUE">
+                                                          <block type="lists_getIndex">
+                                                            <mutation statement="false" at="true"></mutation>
+                                                            <field name="MODE">GET</field>
+                                                            <field name="WHERE">FROM_START</field>
+                                                            <value name="VALUE">
+                                                              <block type="lists_getIndex">
+                                                                <mutation statement="false" at="true"></mutation>
+                                                                <field name="MODE">GET</field>
+                                                                <field name="WHERE">FROM_START</field>
+                                                                <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                                                <value name="AT">
+                                                                  <block type="math_arithmetic">
+                                                                    <field name="OP">MINUS</field>
+                                                                    <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                                    <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="variables_set" id="get_left">
+                                                            <field name="VAR" id="var_val_left">val_left</field>
+                                                            <value name="VALUE">
+                                                              <block type="lists_getIndex">
+                                                                <mutation statement="false" at="true"></mutation>
+                                                                <field name="MODE">GET</field>
+                                                                <field name="WHERE">FROM_START</field>
+                                                                <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp_row">dp_row</field></block></value>
+                                                                <value name="AT">
+                                                                  <block type="math_arithmetic">
+                                                                    <field name="OP">MINUS</field>
+                                                                    <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                                    <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="controls_if" id="calc_min">
+                                                                <mutation else="1"></mutation>
+                                                                <value name="IF0">
+                                                                  <block type="logic_compare">
+                                                                    <field name="OP">LT</field>
+                                                                    <value name="A"><block type="variables_get"><field name="VAR" id="var_val_top">val_top</field></block></value>
+                                                                    <value name="B"><block type="variables_get"><field name="VAR" id="var_val_left">val_left</field></block></value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="DO0">
+                                                                  <block type="variables_set" id="set_top_min">
+                                                                    <field name="VAR" id="var_min_prev">min_prev</field>
+                                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_val_top">val_top</field></block></value>
+                                                                  </block>
+                                                                </statement>
+                                                                <statement name="ELSE">
+                                                                  <block type="variables_set" id="set_left_min">
+                                                                    <field name="VAR" id="var_min_prev">min_prev</field>
+                                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_val_left">val_left</field></block></value>
+                                                                  </block>
+                                                                </statement>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <!-- dp_row.push(cell_val + min_prev) -->
+                                                      <block type="lists_setIndex" id="push_dp_cell">
+                                                        <mutation at="false"></mutation>
+                                                        <field name="MODE">INSERT</field>
+                                                        <field name="WHERE">LAST</field>
+                                                        <value name="LIST"><block type="variables_get"><field name="VAR" id="var_dp_row">dp_row</field></block></value>
+                                                        <value name="TO">
+                                                          <block type="math_arithmetic">
+                                                            <field name="OP">ADD</field>
+                                                            <value name="A"><block type="variables_get"><field name="VAR" id="var_cell_val">cell_val</field></block></value>
+                                                            <value name="B"><block type="variables_get"><field name="VAR" id="var_min_prev">min_prev</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="lists_setIndex" id="push_dp_row_to_dp">
+                                            <mutation at="false"></mutation>
+                                            <field name="MODE">INSERT</field>
+                                            <field name="WHERE">LAST</field>
+                                            <value name="LIST"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                            <value name="TO"><block type="variables_get"><field name="VAR" id="var_dp_row">dp_row</field></block></value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <!-- 4. 輸出 dp[r][c] -->
+                                  <block type="text_print" id="print_answer">
+                                    <value name="TEXT">
+                                      <block type="lists_getIndex">
+                                        <mutation statement="false" at="true"></mutation>
+                                        <field name="MODE">GET</field>
+                                        <field name="WHERE">FROM_START</field>
+                                        <value name="VALUE">
+                                          <block type="lists_getIndex">
+                                            <mutation statement="false" at="true"></mutation>
+                                            <field name="MODE">GET</field>
+                                            <field name="WHERE">FROM_START</field>
+                                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                            <value name="AT"><block type="variables_get"><field name="VAR" id="var_num_r">num_r</field></block></value>
+                                          </block>
+                                        </value>
+                                        <value name="AT"><block type="variables_get"><field name="VAR" id="var_num_c">num_c</field></block></value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

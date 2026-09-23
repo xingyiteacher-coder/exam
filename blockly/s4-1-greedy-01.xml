@@ -1,0 +1,223 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_amount">amount</variable>
+    <variable id="var_coins">coins</variable>
+  </variables>
+  
+  <block type="variables_set" id="init_amount" x="20" y="20">
+    <field name="VAR" id="var_amount">amount</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <!-- 初始化總硬幣數量為 0 -->
+      <block type="variables_set" id="init_coins">
+        <field name="VAR" id="var_coins">coins</field>
+        <value name="VALUE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <!-- 1. 優先使用 50 元硬幣 -->
+          <block type="variables_set" id="add_50">
+            <field name="VAR" id="var_coins">coins</field>
+            <value name="VALUE">
+              <block type="math_arithmetic">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR" id="var_coins">coins</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_round">
+                    <field name="OP">ROUNDDOWN</field>
+                    <value name="NUM">
+                      <block type="math_arithmetic">
+                        <field name="OP">DIVIDE</field>
+                        <value name="A">
+                          <block type="variables_get">
+                            <field name="VAR" id="var_amount">amount</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number">
+                            <field name="NUM">50</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="mod_50">
+                <field name="VAR" id="var_amount">amount</field>
+                <value name="VALUE">
+                  <block type="math_modulo">
+                    <value name="DIVIDEND">
+                      <block type="variables_get">
+                        <field name="VAR" id="var_amount">amount</field>
+                      </block>
+                    </value>
+                    <value name="DIVISOR">
+                      <block type="math_number">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <!-- 2. 再使用 10 元硬幣 -->
+                  <block type="variables_set" id="add_10">
+                    <field name="VAR" id="var_coins">coins</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get">
+                            <field name="VAR" id="var_coins">coins</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_round">
+                            <field name="OP">ROUNDDOWN</field>
+                            <value name="NUM">
+                              <block type="math_arithmetic">
+                                <field name="OP">DIVIDE</field>
+                                <value name="A">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="var_amount">amount</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="mod_10">
+                        <field name="VAR" id="var_amount">amount</field>
+                        <value name="VALUE">
+                          <block type="math_modulo">
+                            <value name="DIVIDEND">
+                              <block type="variables_get">
+                                <field name="VAR" id="var_amount">amount</field>
+                              </block>
+                            </value>
+                            <value name="DIVISOR">
+                              <block type="math_number">
+                                <field name="NUM">10</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- 3. 再使用 5 元硬幣 -->
+                          <block type="variables_set" id="add_5">
+                            <field name="VAR" id="var_coins">coins</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="var_coins">coins</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_round">
+                                    <field name="OP">ROUNDDOWN</field>
+                                    <value name="NUM">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">DIVIDE</field>
+                                        <value name="A">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="var_amount">amount</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number">
+                                            <field name="NUM">5</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="mod_5">
+                                <field name="VAR" id="var_amount">amount</field>
+                                <value name="VALUE">
+                                  <block type="math_modulo">
+                                    <value name="DIVIDEND">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="var_amount">amount</field>
+                                      </block>
+                                    </value>
+                                    <value name="DIVISOR">
+                                      <block type="math_number">
+                                        <field name="NUM">5</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <!-- 4. 剩下的全部用 1 元硬幣 -->
+                                  <block type="variables_set" id="add_1">
+                                    <field name="VAR" id="var_coins">coins</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="var_coins">coins</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="var_amount">amount</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <!-- 輸出最少硬幣總數 -->
+                                      <block type="text_print" id="print_ans">
+                                        <value name="TEXT">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="var_coins">coins</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

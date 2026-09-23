@@ -1,0 +1,146 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_num_n">num_n</variable>
+    <variable id="var_dp_list">dp_list</variable>
+    <variable id="var_idx_i">idx_i</variable>
+    <variable id="var_val_prev1">val_prev1</variable>
+    <variable id="var_val_prev2">val_prev2</variable>
+    <variable id="var_val_curr">val_curr</variable>
+  </variables>
+
+  <!-- 1. 讀取 n -->
+  <block type="variables_set" id="read_n" x="20" y="20">
+    <field name="VAR" id="var_num_n">num_n</field>
+    <value name="VALUE">
+      <block type="math_single">
+        <field name="OP">ABS</field>
+        <value name="NUM">
+          <block type="text_prompt_ext">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <!-- 判斷 n <= 2 的基本情況 -->
+      <block type="controls_if" id="check_base_case">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare">
+            <field name="OP">LTE</field>
+            <value name="A"><block type="variables_get"><field name="VAR" id="var_num_n">num_n</field></block></value>
+            <value name="B"><block type="math_number"><field name="NUM">2</field></block></value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_print" id="print_base">
+            <value name="TEXT">
+              <block type="variables_get"><field name="VAR" id="var_num_n">num_n</field></block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <!-- 2. 動態規劃建表求解 (n > 2) -->
+          <block type="variables_set" id="init_dp">
+            <field name="VAR" id="var_dp_list">dp_list</field>
+            <value name="VALUE">
+              <block type="lists_create_with">
+                <mutation items="2"></mutation>
+                <value name="ADD0"><block type="math_number"><field name="NUM">1</field></block></value>
+                <value name="ADD1"><block type="math_number"><field name="NUM">2</field></block></value>
+              </block>
+            </value>
+            <next>
+              <block type="controls_for" id="dp_loop">
+                <field name="VAR" id="var_idx_i">idx_i</field>
+                <value name="FROM"><block type="math_number"><field name="NUM">3</field></block></value>
+                <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_n">num_n</field></block></value>
+                <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                <statement name="DO">
+                  <!-- val_prev1 = dp_list[i - 1] -->
+                  <block type="variables_set" id="get_p1">
+                    <field name="VAR" id="var_val_prev1">val_prev1</field>
+                    <value name="VALUE">
+                      <block type="lists_getIndex">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp_list">dp_list</field></block></value>
+                        <value name="AT">
+                          <block type="math_arithmetic">
+                            <field name="OP">MINUS</field>
+                            <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                            <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- val_prev2 = dp_list[i - 2] -->
+                      <block type="variables_set" id="get_p2">
+                        <field name="VAR" id="var_val_prev2">val_prev2</field>
+                        <value name="VALUE">
+                          <block type="lists_getIndex">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp_list">dp_list</field></block></value>
+                            <value name="AT">
+                              <block type="math_arithmetic">
+                                <field name="OP">MINUS</field>
+                                <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                <value name="B"><block type="math_number"><field name="NUM">2</field></block></value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- val_curr = val_prev1 + val_prev2 -->
+                          <block type="variables_set" id="calc_curr">
+                            <field name="VAR" id="var_val_curr">val_curr</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic">
+                                <field name="OP">ADD</field>
+                                <value name="A"><block type="variables_get"><field name="VAR" id="var_val_prev1">val_prev1</field></block></value>
+                                <value name="B"><block type="variables_get"><field name="VAR" id="var_val_prev2">val_prev2</field></block></value>
+                              </block>
+                            </value>
+                            <next>
+                              <!-- dp_list.append(val_curr) -->
+                              <block type="lists_setIndex" id="push_dp">
+                                <mutation at="false"></mutation>
+                                <field name="MODE">INSERT</field>
+                                <field name="WHERE">LAST</field>
+                                <value name="LIST"><block type="variables_get"><field name="VAR" id="var_dp_list">dp_list</field></block></value>
+                                <value name="TO"><block type="variables_get"><field name="VAR" id="var_val_curr">val_curr</field></block></value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <!-- 3. 輸出 dp_list[n] -->
+                  <block type="text_print" id="print_dp">
+                    <value name="TEXT">
+                      <block type="lists_getIndex">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp_list">dp_list</field></block></value>
+                        <value name="AT"><block type="variables_get"><field name="VAR" id="var_num_n">num_n</field></block></value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,200 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+    <variable id="var_left">left</variable>
+    <variable id="var_right">right</variable>
+    <variable id="var_mid">mid</variable>
+    <variable id="var_ans">ans</variable>
+  </variables>
+  
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <!-- 設定搜尋邊界：left = 0, right = 1000000000 -->
+      <block type="variables_set" id="set_left">
+        <field name="VAR" id="var_left">left</field>
+        <value name="VALUE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="set_right">
+            <field name="VAR" id="var_right">right</field>
+            <value name="VALUE">
+              <block type="math_number">
+                <field name="NUM">1000000000</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="set_ans">
+                <field name="VAR" id="var_ans">ans</field>
+                <value name="VALUE">
+                  <block type="math_number">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <!-- 二分搜尋迴圈 (left <= right) -->
+                  <block type="controls_whileUntil" id="search_loop">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="logic_compare">
+                        <field name="OP">LTE</field>
+                        <value name="A">
+                          <block type="variables_get">
+                            <field name="VAR" id="var_left">left</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get">
+                            <field name="VAR" id="var_right">right</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <!-- mid = floor((left + right) / 2) -->
+                      <block type="variables_set" id="calc_mid">
+                        <field name="VAR" id="var_mid">mid</field>
+                        <value name="VALUE">
+                          <block type="math_round">
+                            <field name="OP">ROUNDDOWN</field>
+                            <value name="NUM">
+                              <block type="math_arithmetic">
+                                <field name="OP">DIVIDE</field>
+                                <value name="A">
+                                  <block type="math_arithmetic">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="var_left">left</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="var_right">right</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number">
+                                    <field name="NUM">2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- 判斷 mid * mid <= n -->
+                          <block type="controls_if" id="check_mid">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare">
+                                <field name="OP">LTE</field>
+                                <value name="A">
+                                  <block type="math_arithmetic">
+                                    <field name="OP">MULTIPLY</field>
+                                    <value name="A">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="var_mid">mid</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="var_mid">mid</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="var_n">n</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <!-- 符合條件，記錄當前 mid 為 ans，並嘗試往右尋找更大的 k -->
+                              <block type="variables_set" id="update_ans">
+                                <field name="VAR" id="var_ans">ans</field>
+                                <value name="VALUE">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="var_mid">mid</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="update_left">
+                                    <field name="VAR" id="var_left">left</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="var_mid">mid</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <!-- mid * mid > n，數值過大，往左縮減右界 -->
+                              <block type="variables_set" id="update_right">
+                                <field name="VAR" id="var_right">right</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="var_mid">mid</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <!-- 輸出結果 -->
+                      <block type="text_print" id="print_ans">
+                        <value name="TEXT">
+                          <block type="variables_get">
+                            <field name="VAR" id="var_ans">ans</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,282 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_num_N">num_N</variable>
+    <variable id="var_line">line</variable>
+    <variable id="var_parts">parts</variable>
+    <variable id="var_arr">arr</variable>
+    <variable id="var_dp">dp</variable>
+    <variable id="var_idx_i">idx_i</variable>
+    <variable id="var_idx_j">idx_j</variable>
+    <variable id="var_val_i">val_i</variable>
+    <variable id="var_val_j">val_j</variable>
+    <variable id="var_dp_j">dp_j</variable>
+    <variable id="var_max_ans">max_ans</variable>
+  </variables>
+
+  <!-- 1. 讀取 N -->
+  <block type="variables_set" id="read_N" x="20" y="20">
+    <field name="VAR" id="var_num_N">num_N</field>
+    <value name="VALUE">
+      <block type="math_single">
+        <field name="OP">ABS</field>
+        <value name="NUM">
+          <block type="text_prompt_ext">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <!-- 2. 讀取陣列資料 -->
+      <block type="variables_set" id="read_arr_line">
+        <field name="VAR" id="var_line">line</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="split_arr">
+            <field name="VAR" id="var_parts">parts</field>
+            <value name="VALUE">
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT"><block type="variables_get"><field name="VAR" id="var_line">line</field></block></value>
+                <value name="DELIM"><shadow type="text"><field name="TEXT"> </field></shadow></value>
+              </block>
+            </value>
+            <next>
+              <!-- 轉成數字陣列並初始化 DP 陣列為 1 -->
+              <block type="variables_set" id="init_arr">
+                <field name="VAR" id="var_arr">arr</field>
+                <value name="VALUE"><block type="lists_create_with"><mutation items="0"></mutation></block></value>
+                <next>
+                  <block type="variables_set" id="init_dp">
+                    <field name="VAR" id="var_dp">dp</field>
+                    <value name="VALUE"><block type="lists_create_with"><mutation items="0"></mutation></block></value>
+                    <next>
+                      <block type="controls_for" id="build_list_loop">
+                        <field name="VAR" id="var_idx_i">idx_i</field>
+                        <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                        <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_N">num_N</field></block></value>
+                        <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                        <statement name="DO">
+                          <block type="lists_setIndex" id="push_arr">
+                            <mutation at="false"></mutation>
+                            <field name="MODE">INSERT</field>
+                            <field name="WHERE">LAST</field>
+                            <value name="LIST"><block type="variables_get"><field name="VAR" id="var_arr">arr</field></block></value>
+                            <value name="TO">
+                              <block type="math_single">
+                                <field name="OP">ABS</field>
+                                <value name="NUM">
+                                  <block type="lists_getIndex">
+                                    <mutation statement="false" at="true"></mutation>
+                                    <field name="MODE">GET</field>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_parts">parts</field></block></value>
+                                    <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="lists_setIndex" id="push_dp">
+                                <mutation at="false"></mutation>
+                                <field name="MODE">INSERT</field>
+                                <field name="WHERE">LAST</field>
+                                <value name="LIST"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                <value name="TO"><block type="math_number"><field name="NUM">1</field></block></value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <!-- 3. 動態規劃雙重迴圈計算 LIS -->
+                          <block type="controls_for" id="outer_loop">
+                            <field name="VAR" id="var_idx_i">idx_i</field>
+                            <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                            <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_N">num_N</field></block></value>
+                            <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                            <statement name="DO">
+                              <block type="variables_set" id="get_val_i">
+                                <field name="VAR" id="var_val_i">val_i</field>
+                                <value name="VALUE">
+                                  <block type="lists_getIndex">
+                                    <mutation statement="false" at="true"></mutation>
+                                    <field name="MODE">GET</field>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_arr">arr</field></block></value>
+                                    <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_for" id="inner_loop">
+                                    <field name="VAR" id="var_idx_j">idx_j</field>
+                                    <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                                    <value name="TO">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">MINUS</field>
+                                        <value name="A"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                        <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                      </block>
+                                    </value>
+                                    <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                                    <statement name="DO">
+                                      <block type="variables_set" id="get_val_j">
+                                        <field name="VAR" id="var_val_j">val_j</field>
+                                        <value name="VALUE">
+                                          <block type="lists_getIndex">
+                                            <mutation statement="false" at="true"></mutation>
+                                            <field name="MODE">GET</field>
+                                            <field name="WHERE">FROM_START</field>
+                                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_arr">arr</field></block></value>
+                                            <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <!-- 若 arr[j] < arr[i] 則考慮轉移 -->
+                                          <block type="controls_if" id="check_increasing">
+                                            <value name="IF0">
+                                              <block type="logic_compare">
+                                                <field name="OP">LT</field>
+                                                <value name="A"><block type="variables_get"><field name="VAR" id="var_val_j">val_j</field></block></value>
+                                                <value name="B"><block type="variables_get"><field name="VAR" id="var_val_i">val_i</field></block></value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="variables_set" id="get_dp_j">
+                                                <field name="VAR" id="var_dp_j">dp_j</field>
+                                                <value name="VALUE">
+                                                  <block type="lists_getIndex">
+                                                    <mutation statement="false" at="true"></mutation>
+                                                    <field name="MODE">GET</field>
+                                                    <field name="WHERE">FROM_START</field>
+                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                                    <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_j">idx_j</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <!-- dp[i] = max(dp[i], dp[j] + 1) -->
+                                                  <block type="controls_if" id="check_update_dp">
+                                                    <value name="IF0">
+                                                      <block type="logic_compare">
+                                                        <field name="OP">GT</field>
+                                                        <value name="A">
+                                                          <block type="math_arithmetic">
+                                                            <field name="OP">ADD</field>
+                                                            <value name="A"><block type="variables_get"><field name="VAR" id="var_dp_j">dp_j</field></block></value>
+                                                            <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="lists_getIndex">
+                                                            <mutation statement="false" at="true"></mutation>
+                                                            <field name="MODE">GET</field>
+                                                            <field name="WHERE">FROM_START</field>
+                                                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                                            <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="lists_setIndex" id="update_dp_i">
+                                                        <mutation at="true"></mutation>
+                                                        <field name="MODE">SET</field>
+                                                        <field name="WHERE">FROM_START</field>
+                                                        <value name="LIST"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                                        <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                                        <value name="TO">
+                                                          <block type="math_arithmetic">
+                                                            <field name="OP">ADD</field>
+                                                            <value name="A"><block type="variables_get"><field name="VAR" id="var_dp_j">dp_j</field></block></value>
+                                                            <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <!-- 4. 尋找 dp 陣列中的最大值並輸出 -->
+                              <block type="variables_set" id="init_max">
+                                <field name="VAR" id="var_max_ans">max_ans</field>
+                                <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                                <next>
+                                  <block type="controls_for" id="find_max_loop">
+                                    <field name="VAR" id="var_idx_i">idx_i</field>
+                                    <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                                    <value name="TO"><block type="variables_get"><field name="VAR" id="var_num_N">num_N</field></block></value>
+                                    <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                                    <statement name="DO">
+                                      <block type="controls_if" id="check_new_max">
+                                        <value name="IF0">
+                                          <block type="logic_compare">
+                                            <field name="OP">GT</field>
+                                            <value name="A">
+                                              <block type="lists_getIndex">
+                                                <mutation statement="false" at="true"></mutation>
+                                                <field name="MODE">GET</field>
+                                                <field name="WHERE">FROM_START</field>
+                                                <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                                <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                              </block>
+                                            </value>
+                                            <value name="B"><block type="variables_get"><field name="VAR" id="var_max_ans">max_ans</field></block></value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="variables_set" id="set_new_max">
+                                            <field name="VAR" id="var_max_ans">max_ans</field>
+                                            <value name="VALUE">
+                                              <block type="lists_getIndex">
+                                                <mutation statement="false" at="true"></mutation>
+                                                <field name="MODE">GET</field>
+                                                <field name="WHERE">FROM_START</field>
+                                                <value name="VALUE"><block type="variables_get"><field name="VAR" id="var_dp">dp</field></block></value>
+                                                <value name="AT"><block type="variables_get"><field name="VAR" id="var_idx_i">idx_i</field></block></value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="text_print" id="print_result">
+                                        <value name="TEXT">
+                                          <block type="variables_get"><field name="VAR" id="var_max_ans">max_ans</field></block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

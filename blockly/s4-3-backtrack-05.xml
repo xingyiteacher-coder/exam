@@ -1,0 +1,521 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_N">N</variable>
+    <variable id="var_target">target</variable>
+    <variable id="var_coins">coins</variable>
+    <variable id="var_ans_count">ans_count</variable>
+    <variable id="var_idx">idx</variable>
+    <variable id="var_current_sum">current_sum</variable>
+    <variable id="var_i">i</variable>
+    <variable id="var_raw_line1">raw_line1</variable>
+    <variable id="var_parts1">parts1</variable>
+    <variable id="var_raw_line2">raw_line2</variable>
+    <variable id="var_parts2">parts2</variable>
+  </variables>
+
+  <!-- 自訂函式：solve(idx, current_sum) -->
+  <block type="procedures_defnoreturn" id="proc_solve" x="20" y="20">
+    <mutation>
+      <arg name="idx" varid="var_idx"></arg>
+      <arg name="current_sum" varid="var_current_sum"></arg>
+    </mutation>
+    <field name="NAME">solve</field>
+    <comment pinned="false" h="80" w="160">硬幣組合數回溯法</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="if_check_target">
+        <mutation else="1"></mutation>
+        <!-- 條件1：當前金額等於目標金額 target -->
+        <value name="IF0">
+          <block type="logic_compare" id="cmp_sum_target">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="get_csum1">
+                <field name="VAR" id="var_current_sum">current_sum</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="variables_get" id="get_target1">
+                <field name="VAR" id="var_target">target</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <!-- 成功湊出目標，方法數加 1 -->
+          <block type="variables_set" id="set_inc_ans">
+            <field name="VAR" id="var_ans_count">ans_count</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="add_ans1">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <block type="variables_get" id="get_ans1">
+                    <field name="VAR" id="var_ans_count">ans_count</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="num_1_ans">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <!-- 條件2：索引未超出範圍 (idx <= N) 且當前金額小於目標 (current_sum < target) -->
+          <block type="controls_if" id="if_valid_bound">
+            <value name="IF0">
+              <block type="logic_operation" id="log_and1">
+                <field name="OP">AND</field>
+                <value name="A">
+                  <block type="logic_compare" id="cmp_idx_lte_N">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="variables_get" id="get_idx1">
+                        <field name="VAR" id="var_idx">idx</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="get_N1">
+                        <field name="VAR" id="var_N">N</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_compare" id="cmp_csum_lt_target">
+                    <field name="OP">LT</field>
+                    <value name="A">
+                      <block type="variables_get" id="get_csum2">
+                        <field name="VAR" id="var_current_sum">current_sum</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="get_target2">
+                        <field name="VAR" id="var_target">target</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <!-- 分支 1：選用當前硬幣 (需確保加上後金額 <= target) -->
+              <block type="controls_if" id="if_can_pick">
+                <value name="IF0">
+                  <block type="logic_compare" id="cmp_pick_bound">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="math_arithmetic" id="add_csum_coin">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_csum3">
+                            <field name="VAR" id="var_current_sum">current_sum</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="lists_getIndex" id="get_coin_idx">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="get_coins1">
+                                <field name="VAR" id="var_coins">coins</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="variables_get" id="get_idx2">
+                                <field name="VAR" id="var_idx">idx</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="get_target3">
+                        <field name="VAR" id="var_target">target</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="procedures_callnoreturn" id="call_pick">
+                    <mutation name="solve">
+                      <arg name="idx"></arg>
+                      <arg name="current_sum"></arg>
+                    </mutation>
+                    <value name="ARG0">
+                      <block type="variables_get" id="get_idx3">
+                        <field name="VAR" id="var_idx">idx</field>
+                      </block>
+                    </value>
+                    <value name="ARG1">
+                      <block type="math_arithmetic" id="add_csum_coin_call">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_csum4">
+                            <field name="VAR" id="var_current_sum">current_sum</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="lists_getIndex" id="get_coin_idx2">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="get_coins2">
+                                <field name="VAR" id="var_coins">coins</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="variables_get" id="get_idx4">
+                                <field name="VAR" id="var_idx">idx</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <!-- 分支 2：放棄當前硬幣，換下一種面額 solve(idx + 1, current_sum) -->
+                  <block type="procedures_callnoreturn" id="call_skip">
+                    <mutation name="solve">
+                      <arg name="idx"></arg>
+                      <arg name="current_sum"></arg>
+                    </mutation>
+                    <value name="ARG0">
+                      <block type="math_arithmetic" id="add_idx1">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="get_idx5">
+                            <field name="VAR" id="var_idx">idx</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="num_1_idx">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="ARG1">
+                      <block type="variables_get" id="get_csum5">
+                        <field name="VAR" id="var_current_sum">current_sum</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+
+  <!-- 主程式流程 -->
+  <block type="variables_set" id="set_raw1" x="20" y="450">
+    <field name="VAR" id="var_raw_line1">raw_line1</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_line1">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+        <value name="TEXT">
+          <block type="text" id="t_empty1">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <!-- 解析第一行 N 與 target -->
+      <block type="variables_set" id="set_parts1">
+        <field name="VAR" id="var_parts1">parts1</field>
+        <value name="VALUE">
+          <block type="lists_split" id="split_line1">
+            <mutation mode="SPLIT"></mutation>
+            <field name="MODE">SPLIT</field>
+            <value name="INPUT">
+              <block type="variables_get" id="get_raw1">
+                <field name="VAR" id="var_raw_line1">raw_line1</field>
+              </block>
+            </value>
+            <value name="DELIM">
+              <shadow type="text" id="t_space1">
+                <field name="TEXT"> </field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="if_split_len1">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="cmp_len1">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="lists_length" id="len_parts1">
+                    <value name="VALUE">
+                      <block type="variables_get" id="get_parts1_len">
+                        <field name="VAR" id="var_parts1">parts1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="num_2_len1">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="set_N_1">
+                <field name="VAR" id="var_N">N</field>
+                <value name="VALUE">
+                  <block type="math_single" id="abs_N1">
+                    <field name="OP">ABS</field>
+                    <value name="NUM">
+                      <block type="lists_getIndex" id="get_p1_1">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="get_parts1_val1">
+                            <field name="VAR" id="var_parts1">parts1</field>
+                          </block>
+                        </value>
+                        <value name="AT">
+                          <block type="math_number" id="idx_1_1">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_target_1">
+                    <field name="VAR" id="var_target">target</field>
+                    <value name="VALUE">
+                      <block type="math_single" id="abs_target1">
+                        <field name="OP">ABS</field>
+                        <value name="NUM">
+                          <block type="lists_getIndex" id="get_p1_2">
+                            <mutation statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_START</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="get_parts1_val2">
+                                <field name="VAR" id="var_parts1">parts1</field>
+                              </block>
+                            </value>
+                            <value name="AT">
+                              <block type="math_number" id="idx_1_2">
+                                <field name="NUM">2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="variables_set" id="set_N_2">
+                <field name="VAR" id="var_N">N</field>
+                <value name="VALUE">
+                  <block type="math_single" id="abs_N2">
+                    <field name="OP">ABS</field>
+                    <value name="NUM">
+                      <block type="lists_getIndex" id="get_p1_else">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="get_parts1_val3">
+                            <field name="VAR" id="var_parts1">parts1</field>
+                          </block>
+                        </value>
+                        <value name="AT">
+                          <block type="math_number" id="idx_1_else">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_target_2">
+                    <field name="VAR" id="var_target">target</field>
+                    <value name="VALUE">
+                      <block type="text_prompt_ext" id="prompt_target2">
+                        <mutation type="NUMBER"></mutation>
+                        <field name="TYPE">NUMBER</field>
+                        <value name="TEXT">
+                          <block type="text" id="t_empty2">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <!-- 讀取第二行：N 個硬幣面額 -->
+              <block type="variables_set" id="set_raw2">
+                <field name="VAR" id="var_raw_line2">raw_line2</field>
+                <value name="VALUE">
+                  <block type="text_prompt_ext" id="prompt_line2">
+                    <mutation type="TEXT"></mutation>
+                    <field name="TYPE">TEXT</field>
+                    <value name="TEXT">
+                      <block type="text" id="t_empty3">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_parts2">
+                    <field name="VAR" id="var_parts2">parts2</field>
+                    <value name="VALUE">
+                      <block type="lists_split" id="split_line2">
+                        <mutation mode="SPLIT"></mutation>
+                        <field name="MODE">SPLIT</field>
+                        <value name="INPUT">
+                          <block type="variables_get" id="get_raw2">
+                            <field name="VAR" id="var_raw_line2">raw_line2</field>
+                          </block>
+                        </value>
+                        <value name="DELIM">
+                          <shadow type="text" id="t_space2">
+                            <field name="TEXT"> </field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- 初始化硬幣清單 coins -->
+                      <block type="variables_set" id="set_coins_empty">
+                        <field name="VAR" id="var_coins">coins</field>
+                        <value name="VALUE">
+                          <block type="lists_create_with" id="create_empty_coins">
+                            <mutation items="0"></mutation>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- 將輸入的面額依序加入 coins 陣列 -->
+                          <block type="controls_for" id="for_i">
+                            <field name="VAR" id="var_i">i</field>
+                            <value name="FROM">
+                              <shadow type="math_number" id="shadow_from">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <value name="TO">
+                              <block type="variables_get" id="get_N_for">
+                                <field name="VAR" id="var_N">N</field>
+                              </block>
+                            </value>
+                            <value name="BY">
+                              <shadow type="math_number" id="shadow_by">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <statement name="DO">
+                              <block type="lists_setIndex" id="push_coin">
+                                <mutation at="false"></mutation>
+                                <field name="MODE">INSERT</field>
+                                <field name="WHERE">LAST</field>
+                                <value name="LIST">
+                                  <block type="variables_get" id="get_coins_loop">
+                                    <field name="VAR" id="var_coins">coins</field>
+                                  </block>
+                                </value>
+                                <value name="TO">
+                                  <block type="math_single" id="abs_coin_val">
+                                    <field name="OP">ABS</field>
+                                    <value name="NUM">
+                                      <block type="lists_getIndex" id="get_p2_val">
+                                        <mutation statement="false" at="true"></mutation>
+                                        <field name="MODE">GET</field>
+                                        <field name="WHERE">FROM_START</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="get_parts2_val">
+                                            <field name="VAR" id="var_parts2">parts2</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT">
+                                          <block type="variables_get" id="get_i_for">
+                                            <field name="VAR" id="var_i">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <!-- 初始化累計方法數 ans_count = 0 -->
+                              <block type="variables_set" id="set_ans_0">
+                                <field name="VAR" id="var_ans_count">ans_count</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="num_ans_0">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <!-- 從第 1 種硬幣、累計金額 0 開始回溯 -->
+                                  <block type="procedures_callnoreturn" id="start_solve">
+                                    <mutation name="solve">
+                                      <arg name="idx"></arg>
+                                      <arg name="current_sum"></arg>
+                                    </mutation>
+                                    <value name="ARG0">
+                                      <block type="math_number" id="num_start_idx">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                    <value name="ARG1">
+                                      <block type="math_number" id="num_start_sum">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <!-- 印出最終解答組合數 -->
+                                      <block type="text_print" id="print_ans">
+                                        <value name="TEXT">
+                                          <block type="variables_get" id="get_ans_final">
+                                            <field name="VAR" id="var_ans_count">ans_count</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
