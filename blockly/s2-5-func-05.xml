@@ -1,0 +1,93 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_x">x</variable>
+    <variable id="var_a">a</variable>
+    <variable id="var_b">b</variable>
+  </variables>
+  <!-- 函式定義：square(x) -->
+  <block type="procedures_defreturn" id="def_sq" x="20" y="20">
+    <mutation>
+      <arg name="x" varid="var_x"></arg>
+    </mutation>
+    <field name="NAME">square</field>
+    <value name="RETURN">
+      <block type="math_arithmetic" id="calc_sq">
+        <field name="OP">MULTIPLY</field>
+        <value name="A"><block type="variables_get" id="gx1"><field name="VAR" id="var_x">x</field></block></value>
+        <value name="B"><block type="variables_get" id="gx2"><field name="VAR" id="var_x">x</field></block></value>
+      </block>
+    </value>
+  </block>
+  <!-- 函式定義：sumOfSquares(a, b) -->
+  <block type="procedures_defreturn" id="def_sum_sq" x="20" y="120">
+    <mutation>
+      <arg name="a" varid="var_a"></arg>
+      <arg name="b" varid="var_b"></arg>
+    </mutation>
+    <field name="NAME">sumOfSquares</field>
+    <value name="RETURN">
+      <block type="math_arithmetic" id="add_sq">
+        <field name="OP">ADD</field>
+        <value name="A">
+          <block type="procedures_callreturn" id="call_sq1">
+            <mutation name="square"><arg name="x"></arg></mutation>
+            <value name="ARG0"><block type="variables_get" id="ga1"><field name="VAR" id="var_a">a</field></block></value>
+          </block>
+        </value>
+        <value name="B">
+          <block type="procedures_callreturn" id="call_sq2">
+            <mutation name="square"><arg name="x"></arg></mutation>
+            <value name="ARG0"><block type="variables_get" id="gb1"><field name="VAR" id="var_b">b</field></block></value>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <!-- 主程式 -->
+  <block type="variables_set" id="init_main_a" x="20" y="250">
+    <field name="VAR" id="var_a">a</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_a">
+        <field name="OP">ADD</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_a">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B"><shadow type="math_number" id="n0_1"><field name="NUM">0</field></shadow></value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_main_b">
+        <field name="VAR" id="var_b">b</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="cast_b">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <block type="text_prompt_ext" id="prompt_b">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+              </block>
+            </value>
+            <value name="B"><shadow type="math_number" id="n0_2"><field name="NUM">0</field></shadow></value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="print">
+            <value name="TEXT">
+              <block type="procedures_callreturn" id="call_sum_sq">
+                <mutation name="sumOfSquares">
+                  <arg name="a"></arg>
+                  <arg name="b"></arg>
+                </mutation>
+                <value name="ARG0"><block type="variables_get" id="ga2"><field name="VAR" id="var_a">a</field></block></value>
+                <value name="ARG1"><block type="variables_get" id="gb2"><field name="VAR" id="var_b">b</field></block></value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

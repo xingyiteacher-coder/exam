@@ -1,0 +1,24 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_S">S</variable>
+  </variables>
+  <block type="variables_set" id="init_S" x="20" y="20">
+    <field name="VAR" id="var_S">S</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_S">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="print">
+        <value name="TEXT">
+          <block type="text_changeCase" id="to_upper">
+            <field name="CASE">UPPERCASE</field>
+            <value name="TEXT"><block type="variables_get" id="gS1"><field name="VAR" id="var_S">S</field></block></value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

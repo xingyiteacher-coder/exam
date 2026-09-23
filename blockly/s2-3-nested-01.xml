@@ -1,0 +1,144 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_N">N</variable>
+    <variable id="var_count">count</variable>
+    <variable id="var_i">i</variable>
+    <variable id="var_isPrime">isPrime</variable>
+    <variable id="var_j">j</variable>
+  </variables>
+  <block type="variables_set" id="init_N" x="20" y="20">
+    <field name="VAR" id="var_N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_N">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_N">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="num1"><field name="NUM">1</field></shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_cnt">
+        <field name="VAR" id="var_count">count</field>
+        <value name="VALUE">
+          <shadow type="math_number" id="num0"><field name="NUM">0</field></shadow>
+        </value>
+        <next>
+          <!-- 若 N >= 2，質數個數先加 1 (代表 2 這個質數) -->
+          <block type="controls_if" id="check_N_ge_2">
+            <value name="IF0">
+              <block type="logic_compare" id="cmp_N_ge_2">
+                <field name="OP">GTE</field>
+                <value name="A"><block type="variables_get" id="gN1"><field name="VAR" id="var_N">N</field></block></value>
+                <value name="B"><shadow type="math_number" id="num2"><field name="NUM">2</field></shadow></value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="add_2_cnt">
+                <field name="VAR" id="var_count">count</field>
+                <value name="VALUE">
+                  <shadow type="math_number" id="c1"><field name="NUM">1</field></shadow>
+                </value>
+                <next>
+                  <!-- 只有當 N >= 3 時，才進迴圈檢查 3 到 N -->
+                  <block type="controls_if" id="check_N_ge_3">
+                    <value name="IF0">
+                      <block type="logic_compare" id="cmp_N_ge_3">
+                        <field name="OP">GTE</field>
+                        <value name="A"><block type="variables_get" id="gN3"><field name="VAR" id="var_N">N</field></block></value>
+                        <value name="B"><shadow type="math_number" id="num3"><field name="NUM">3</field></shadow></value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_for" id="loop_i">
+                        <field name="VAR" id="var_i">i</field>
+                        <value name="FROM"><shadow type="math_number" id="f3"><field name="NUM">3</field></shadow></value>
+                        <value name="TO"><block type="variables_get" id="gN2"><field name="VAR" id="var_N">N</field></block></value>
+                        <value name="BY"><shadow type="math_number" id="b1"><field name="NUM">1</field></shadow></value>
+                        <statement name="DO">
+                          <block type="variables_set" id="set_flag">
+                            <field name="VAR" id="var_isPrime">isPrime</field>
+                            <value name="VALUE"><block type="logic_boolean" id="bt"><field name="BOOL">TRUE</field></block></value>
+                            <next>
+                              <block type="controls_for" id="loop_j">
+                                <field name="VAR" id="var_j">j</field>
+                                <value name="FROM"><shadow type="math_number" id="jf2"><field name="NUM">2</field></shadow></value>
+                                <value name="TO">
+                                  <block type="math_single" id="sqrt_i">
+                                    <field name="OP">ROOT</field>
+                                    <value name="NUM"><block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block></value>
+                                  </block>
+                                </value>
+                                <value name="BY"><shadow type="math_number" id="jb1"><field name="NUM">1</field></shadow></value>
+                                <statement name="DO">
+                                  <block type="controls_if" id="check_mod">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="cmp_mod0">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="math_modulo" id="mod_ij">
+                                            <value name="DIVIDEND"><block type="variables_get" id="gi2"><field name="VAR" id="var_i">i</field></block></value>
+                                            <value name="DIVISOR"><block type="variables_get" id="gj1"><field name="VAR" id="var_j">j</field></block></value>
+                                          </block>
+                                        </value>
+                                        <value name="B"><shadow type="math_number" id="m0"><field name="NUM">0</field></shadow></value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="variables_set" id="set_false">
+                                        <field name="VAR" id="var_isPrime">isPrime</field>
+                                        <value name="VALUE"><block type="logic_boolean" id="bf"><field name="BOOL">FALSE</field></block></value>
+                                        <next>
+                                          <block type="controls_flow_statements" id="break_j">
+                                            <field name="FLOW">BREAK</field>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="controls_if" id="check_p">
+                                    <value name="IF0"><block type="variables_get" id="gp"><field name="VAR" id="var_isPrime">isPrime</field></block></value>
+                                    <statement name="DO0">
+                                      <block type="variables_set" id="add_cnt">
+                                        <field name="VAR" id="var_count">count</field>
+                                        <value name="VALUE">
+                                          <block type="math_arithmetic" id="inc_cnt">
+                                            <field name="OP">ADD</field>
+                                            <value name="A"><block type="variables_get" id="gc1"><field name="VAR" id="var_count">count</field></block></value>
+                                            <value name="B"><shadow type="math_number" id="inc1"><field name="NUM">1</field></shadow></value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print" id="print">
+                <value name="TEXT">
+                  <block type="variables_get" id="gc2"><field name="VAR" id="var_count">count</field></block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

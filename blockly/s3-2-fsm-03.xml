@@ -1,0 +1,99 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="floor">floor</variable>
+    <variable id="cmds">cmds</variable>
+    <variable id="i">i</variable>
+    <variable id="cmd">cmd</variable>
+  </variables>
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="floor">floor</field>
+    <value name="VALUE">
+      <block type="math_arithmetic">
+        <field name="OP">MINUS</field>
+        <value name="A"><block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block></value>
+        <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="cmds">cmds</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext"><mutation type="TEXT"></mutation><field name="TYPE">TEXT</field></block>
+        </value>
+        <next>
+          <block type="controls_for">
+            <field name="VAR" id="i">i</field>
+            <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+            <value name="TO"><block type="text_length"><value name="VALUE"><block type="variables_get"><field name="VAR" id="cmds">cmds</field></block></value></block></value>
+            <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+            <statement name="DO">
+              <block type="variables_set">
+                <field name="VAR" id="cmd">cmd</field>
+                <value name="VALUE">
+                  <block type="text_charAt">
+                    <mutation at="true"></mutation>
+                    <field name="WHERE">FROM_START</field>
+                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="cmds">cmds</field></block></value>
+                    <value name="AT"><block type="variables_get"><field name="VAR" id="i">i</field></block></value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare">
+                        <field name="OP">EQ</field>
+                        <value name="A"><block type="variables_get"><field name="VAR" id="cmd">cmd</field></block></value>
+                        <value name="B"><block type="text"><field name="TEXT">U</field></block></value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set">
+                        <field name="VAR" id="floor">floor</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic">
+                            <field name="OP">ADD</field>
+                            <value name="A"><block type="variables_get"><field name="VAR" id="floor">floor</field></block></value>
+                            <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="controls_if">
+                        <value name="IF0">
+                          <block type="logic_compare">
+                            <field name="OP">EQ</field>
+                            <value name="A"><block type="variables_get"><field name="VAR" id="cmd">cmd</field></block></value>
+                            <value name="B"><block type="text"><field name="TEXT">D</field></block></value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set">
+                            <field name="VAR" id="floor">floor</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic">
+                                <field name="OP">MINUS</field>
+                                <value name="A"><block type="variables_get"><field name="VAR" id="floor">floor</field></block></value>
+                                <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print">
+                <value name="TEXT"><block type="variables_get"><field name="VAR" id="floor">floor</field></block></value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

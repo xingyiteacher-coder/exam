@@ -1,0 +1,123 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_N">N</variable>
+    <variable id="var_list">list</variable>
+    <variable id="var_t">t</variable>
+    <variable id="var_cnt">cnt</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_N" x="20" y="20">
+    <field name="VAR" id="var_N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_N">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_N">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B"><shadow type="math_number" id="num1_1"><field name="NUM">1</field></shadow></value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_list">
+        <field name="VAR" id="var_list">list</field>
+        <value name="VALUE">
+          <block type="lists_create_with" id="create_empty_list">
+            <mutation items="0"></mutation>
+          </block>
+        </value>
+        <next>
+          <block type="controls_for" id="loop_input">
+            <field name="VAR" id="var_i">i</field>
+            <value name="FROM"><shadow type="math_number" id="f1"><field name="NUM">1</field></shadow></value>
+            <value name="TO"><block type="variables_get" id="gN1"><field name="VAR" id="var_N">N</field></block></value>
+            <value name="BY"><shadow type="math_number" id="b1"><field name="NUM">1</field></shadow></value>
+            <statement name="DO">
+              <block type="lists_setIndex" id="push_item">
+                <mutation at="false" statement="true"></mutation>
+                <field name="MODE">INSERT</field>
+                <field name="WHERE">LAST</field>
+                <value name="LIST"><block type="variables_get" id="glist1"><field name="VAR" id="var_list">list</field></block></value>
+                <value name="TO">
+                  <block type="math_arithmetic" id="cast_item">
+                    <field name="OP">MULTIPLY</field>
+                    <value name="A">
+                      <block type="text_prompt_ext" id="prompt_item">
+                        <mutation type="NUMBER"></mutation>
+                        <field name="TYPE">NUMBER</field>
+                      </block>
+                    </value>
+                    <value name="B"><shadow type="math_number" id="num1_2"><field name="NUM">1</field></shadow></value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="variables_set" id="init_t">
+                <field name="VAR" id="var_t">t</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic" id="cast_t">
+                    <field name="OP">MULTIPLY</field>
+                    <value name="A">
+                      <block type="text_prompt_ext" id="prompt_t">
+                        <mutation type="NUMBER"></mutation>
+                        <field name="TYPE">NUMBER</field>
+                      </block>
+                    </value>
+                    <value name="B"><shadow type="math_number" id="num1_3"><field name="NUM">1</field></shadow></value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="init_cnt">
+                    <field name="VAR" id="var_cnt">cnt</field>
+                    <value name="VALUE"><shadow type="math_number" id="num0_1"><field name="NUM">0</field></shadow></value>
+                    <next>
+                      <block type="controls_for" id="loop_check">
+                        <field name="VAR" id="var_i">i</field>
+                        <value name="FROM"><shadow type="math_number" id="f2"><field name="NUM">1</field></shadow></value>
+                        <value name="TO"><block type="variables_get" id="gN2"><field name="VAR" id="var_N">N</field></block></value>
+                        <value name="BY"><shadow type="math_number" id="b2"><field name="NUM">1</field></shadow></value>
+                        <statement name="DO">
+                          <block type="controls_if" id="check_eq">
+                            <value name="IF0">
+                              <block type="logic_compare" id="cmp_eq">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="lists_getIndex" id="get_elem">
+                                    <mutation statement="false" at="true"></mutation>
+                                    <field name="MODE">GET</field>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE"><block type="variables_get" id="glist2"><field name="VAR" id="var_list">list</field></block></value>
+                                    <value name="AT"><block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block></value>
+                                  </block>
+                                </value>
+                                <value name="B"><block type="variables_get" id="gt1"><field name="VAR" id="var_t">t</field></block></value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="math_change" id="inc_cnt">
+                                <field name="VAR" id="var_cnt">cnt</field>
+                                <value name="DELTA"><shadow type="math_number" id="num1_4"><field name="NUM">1</field></shadow></value>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="text_print" id="print">
+                            <value name="TEXT"><block type="variables_get" id="gcnt"><field name="VAR" id="var_cnt">cnt</field></block></value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

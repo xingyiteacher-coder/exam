@@ -1,0 +1,58 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_S">S</variable>
+    <variable id="var_rev">rev</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_S" x="20" y="20">
+    <field name="VAR" id="var_S">S</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_S">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_rev">
+        <field name="VAR" id="var_rev">rev</field>
+        <value name="VALUE"><block type="text" id="txt_empty"><field name="TEXT"></field></block></value>
+        <next>
+          <block type="controls_for" id="loop_rev">
+            <field name="VAR" id="var_i">i</field>
+            <value name="FROM">
+              <block type="text_length" id="len_S">
+                <value name="VALUE"><block type="variables_get" id="gS1"><field name="VAR" id="var_S">S</field></block></value>
+              </block>
+            </value>
+            <value name="TO"><shadow type="math_number" id="t1"><field name="NUM">1</field></shadow></value>
+            <value name="BY"><shadow type="math_number" id="b_neg1"><field name="NUM">-1</field></shadow></value>
+            <statement name="DO">
+              <block type="variables_set" id="append_rev">
+                <field name="VAR" id="var_rev">rev</field>
+                <value name="VALUE">
+                  <block type="text_join" id="join_rev">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0"><block type="variables_get" id="grev1"><field name="VAR" id="var_rev">rev</field></block></value>
+                    <value name="ADD1">
+                      <block type="text_charAt" id="char_at">
+                        <mutation at="true"></mutation>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE"><block type="variables_get" id="gS2"><field name="VAR" id="var_S">S</field></block></value>
+                        <value name="AT"><block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block></value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print" id="print">
+                <value name="TEXT"><block type="variables_get" id="grev2"><field name="VAR" id="var_rev">rev</field></block></value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

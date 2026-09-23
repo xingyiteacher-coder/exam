@@ -1,0 +1,99 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="N">N</variable>
+    <variable id="raw_input">raw_input</variable>
+    <variable id="l">l</variable>
+    <variable id="r">r</variable>
+    <variable id="arr">arr</variable>
+    <variable id="sum">sum</variable>
+    <variable id="i">i</variable>
+  </variables>
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="N">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="raw_input">raw_input</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext"><mutation type="TEXT"></mutation><field name="TYPE">TEXT</field></block>
+        </value>
+        <next>
+          <block type="variables_set">
+            <field name="VAR" id="l">l</field>
+            <value name="VALUE">
+              <block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block>
+            </value>
+            <next>
+              <block type="variables_set">
+                <field name="VAR" id="r">r</field>
+                <value name="VALUE">
+                  <block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block>
+                </value>
+                <next>
+                  <block type="variables_set">
+                    <field name="VAR" id="arr">arr</field>
+                    <value name="VALUE">
+                      <block type="lists_split">
+                        <mutation mode="SPLIT"></mutation>
+                        <field name="MODE">SPLIT</field>
+                        <value name="INPUT"><block type="variables_get"><field name="VAR" id="raw_input">raw_input</field></block></value>
+                        <value name="DELIM"><block type="text"><field name="TEXT"> </field></block></value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set">
+                        <field name="VAR" id="sum">sum</field>
+                        <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                        <next>
+                          <block type="controls_for">
+                            <field name="VAR" id="i">i</field>
+                            <value name="FROM"><block type="variables_get"><field name="VAR" id="l">l</field></block></value>
+                            <value name="TO"><block type="variables_get"><field name="VAR" id="r">r</field></block></value>
+                            <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                            <statement name="DO">
+                              <block type="variables_set">
+                                <field name="VAR" id="sum">sum</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic">
+                                    <field name="OP">ADD</field>
+                                    <value name="A"><block type="variables_get"><field name="VAR" id="sum">sum</field></block></value>
+                                    <value name="B">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">MULTIPLY</field>
+                                        <value name="A">
+                                          <block type="lists_getIndex">
+                                            <mutation statement="false" at="true"></mutation>
+                                            <field name="MODE">GET</field>
+                                            <field name="WHERE">FROM_START</field>
+                                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="arr">arr</field></block></value>
+                                            <value name="AT"><block type="variables_get"><field name="VAR" id="i">i</field></block></value>
+                                          </block>
+                                        </value>
+                                        <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="text_print">
+                                <value name="TEXT"><block type="variables_get"><field name="VAR" id="sum">sum</field></block></value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

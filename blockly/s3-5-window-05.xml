@@ -1,0 +1,191 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="N">N</variable>
+    <variable id="raw_line">raw_line</variable>
+    <variable id="arr">arr</variable>
+    <variable id="Target">Target</variable>
+    <variable id="left">left</variable>
+    <variable id="right">right</variable>
+    <variable id="curr_sum">curr_sum</variable>
+    <variable id="max_len">max_len</variable>
+    <variable id="curr_len">curr_len</variable>
+  </variables>
+  
+  <!-- 讀取 N -->
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic">
+        <field name="OP">MULTIPLY</field>
+        <value name="A"><block type="math_number"><field name="NUM">1</field></block></value>
+        <value name="B"><block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block></value>
+      </block>
+    </value>
+    <next>
+      <!-- 讀取陣列字串並切分 -->
+      <block type="variables_set">
+        <field name="VAR" id="raw_line">raw_line</field>
+        <value name="VALUE"><block type="text_prompt_ext"><mutation type="TEXT"></mutation><field name="TYPE">TEXT</field></block></value>
+        <next>
+          <block type="variables_set">
+            <field name="VAR" id="arr">arr</field>
+            <value name="VALUE">
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT"><block type="variables_get"><field name="VAR" id="raw_line">raw_line</field></block></value>
+                <value name="DELIM"><block type="text"><field name="TEXT"> </field></block></value>
+              </block>
+            </value>
+            <next>
+              <!-- 讀取 Target -->
+              <block type="variables_set">
+                <field name="VAR" id="Target">Target</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic">
+                    <field name="OP">MULTIPLY</field>
+                    <value name="A"><block type="math_number"><field name="NUM">1</field></block></value>
+                    <value name="B"><block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block></value>
+                  </block>
+                </value>
+                <next>
+                  <!-- 初始化變數 -->
+                  <block type="variables_set">
+                    <field name="VAR" id="left">left</field>
+                    <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value>
+                    <next>
+                      <block type="variables_set">
+                        <field name="VAR" id="curr_sum">curr_sum</field>
+                        <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                        <next>
+                          <block type="variables_set">
+                            <field name="VAR" id="max_len">max_len</field>
+                            <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                            <next>
+                              <!-- 滑動視窗主迴圈 right from 1 to N -->
+                              <block type="controls_for">
+                                <field name="VAR" id="right">right</field>
+                                <value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value>
+                                <value name="TO"><block type="variables_get"><field name="VAR" id="N">N</field></block></value>
+                                <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                                <statement name="DO">
+                                  <!-- curr_sum += 1 * arr[right] -->
+                                  <block type="math_change">
+                                    <field name="VAR" id="curr_sum">curr_sum</field>
+                                    <value name="DELTA">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">MULTIPLY</field>
+                                        <value name="A"><block type="math_number"><field name="NUM">1</field></block></value>
+                                        <value name="B">
+                                          <block type="lists_getIndex">
+                                            <mutation statement="false" at="true"></mutation>
+                                            <field name="MODE">GET</field>
+                                            <field name="WHERE">FROM_START</field>
+                                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="arr">arr</field></block></value>
+                                            <value name="AT"><block type="variables_get"><field name="VAR" id="right">right</field></block></value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <!-- while curr_sum > Target -->
+                                      <block type="controls_whileUntil">
+                                        <field name="MODE">WHILE</field>
+                                        <value name="BOOL">
+                                          <block type="logic_compare">
+                                            <field name="OP">GT</field>
+                                            <value name="A"><block type="variables_get"><field name="VAR" id="curr_sum">curr_sum</field></block></value>
+                                            <value name="B"><block type="variables_get"><field name="VAR" id="Target">Target</field></block></value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO">
+                                          <!-- curr_sum -= 1 * arr[left] -->
+                                          <block type="math_change">
+                                            <field name="VAR" id="curr_sum">curr_sum</field>
+                                            <value name="DELTA">
+                                              <block type="math_arithmetic">
+                                                <field name="OP">MULTIPLY</field>
+                                                <value name="A"><block type="math_number"><field name="NUM">-1</field></block></value>
+                                                <value name="B">
+                                                  <block type="lists_getIndex">
+                                                    <mutation statement="false" at="true"></mutation>
+                                                    <field name="MODE">GET</field>
+                                                    <field name="WHERE">FROM_START</field>
+                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="arr">arr</field></block></value>
+                                                    <value name="AT"><block type="variables_get"><field name="VAR" id="left">left</field></block></value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <!-- left += 1 -->
+                                              <block type="math_change">
+                                                <field name="VAR" id="left">left</field>
+                                                <value name="DELTA"><block type="math_number"><field name="NUM">1</field></block></value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <!-- curr_len = right - left + 1 -->
+                                          <block type="variables_set">
+                                            <field name="VAR" id="curr_len">curr_len</field>
+                                            <value name="VALUE">
+                                              <block type="math_arithmetic">
+                                                <field name="OP">ADD</field>
+                                                <value name="A">
+                                                  <block type="math_arithmetic">
+                                                    <field name="OP">MINUS</field>
+                                                    <value name="A"><block type="variables_get"><field name="VAR" id="right">right</field></block></value>
+                                                    <value name="B"><block type="variables_get"><field name="VAR" id="left">left</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <!-- if curr_len > max_len then max_len = curr_len -->
+                                              <block type="controls_if">
+                                                <value name="IF0">
+                                                  <block type="logic_compare">
+                                                    <field name="OP">GT</field>
+                                                    <value name="A"><block type="variables_get"><field name="VAR" id="curr_len">curr_len</field></block></value>
+                                                    <value name="B"><block type="variables_get"><field name="VAR" id="max_len">max_len</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="variables_set">
+                                                    <field name="VAR" id="max_len">max_len</field>
+                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="curr_len">curr_len</field></block></value>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <!-- 印出結果 max_len -->
+                                  <block type="text_print">
+                                    <value name="TEXT"><block type="variables_get"><field name="VAR" id="max_len">max_len</field></block></value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

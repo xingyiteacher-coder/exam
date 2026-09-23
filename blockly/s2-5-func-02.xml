@@ -1,0 +1,90 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+    <variable id="var_ans">ans</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <!-- 函式定義：factorial(n) -->
+  <block type="procedures_defreturn" id="def_fact" x="20" y="20">
+    <mutation>
+      <arg name="n" varid="var_n"></arg>
+    </mutation>
+    <field name="NAME">factorial</field>
+    <statement name="STACK">
+      <block type="controls_if" id="check_n_0">
+        <mutation else="1"></mutation>
+        <!-- 特殊處理 0! = 1 -->
+        <value name="IF0">
+          <block type="logic_compare" id="cmp_n_0">
+            <field name="OP">EQ</field>
+            <value name="A"><block type="variables_get" id="gn0"><field name="VAR" id="var_n">n</field></block></value>
+            <value name="B"><shadow type="math_number" id="num0_1"><field name="NUM">0</field></shadow></value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="set_ans_1">
+            <field name="VAR" id="var_ans">ans</field>
+            <value name="VALUE"><shadow type="math_number" id="num1_1"><field name="NUM">1</field></shadow></value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="init_ans">
+            <field name="VAR" id="var_ans">ans</field>
+            <value name="VALUE"><shadow type="math_number" id="num1_2"><field name="NUM">1</field></shadow></value>
+            <next>
+              <block type="controls_for" id="loop_i">
+                <field name="VAR" id="var_i">i</field>
+                <value name="FROM"><shadow type="math_number" id="f1"><field name="NUM">1</field></shadow></value>
+                <value name="TO"><block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block></value>
+                <value name="BY"><shadow type="math_number" id="b1"><field name="NUM">1</field></shadow></value>
+                <statement name="DO">
+                  <block type="variables_set" id="mul_ans">
+                    <field name="VAR" id="var_ans">ans</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic" id="calc_mul">
+                        <field name="OP">MULTIPLY</field>
+                        <value name="A"><block type="variables_get" id="gans1"><field name="VAR" id="var_ans">ans</field></block></value>
+                        <value name="B"><block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block></value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="variables_get" id="gans2"><field name="VAR" id="var_ans">ans</field></block>
+    </value>
+  </block>
+  <!-- 主程式 -->
+  <block type="variables_set" id="init_main_n" x="20" y="320">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_n">
+        <field name="OP">ADD</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_n">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B"><shadow type="math_number" id="num0_2"><field name="NUM">0</field></shadow></value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="print">
+        <value name="TEXT">
+          <block type="procedures_callreturn" id="call_fact">
+            <mutation name="factorial">
+              <arg name="n"></arg>
+            </mutation>
+            <value name="ARG0"><block type="variables_get" id="gn2"><field name="VAR" id="var_n">n</field></block></value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

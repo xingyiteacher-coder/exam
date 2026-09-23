@@ -1,0 +1,90 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="N">N</variable>
+    <variable id="raw_input">raw_input</variable>
+    <variable id="arr">arr</variable>
+    <variable id="num_list">num_list</variable>
+    <variable id="x">x</variable>
+    <variable id="sorted_list">sorted_list</variable>
+  </variables>
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic">
+        <field name="OP">MINUS</field>
+        <value name="A"><block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block></value>
+        <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="raw_input">raw_input</field>
+        <value name="VALUE"><block type="text_prompt_ext"><mutation type="TEXT"></mutation><field name="TYPE">TEXT</field></block></value>
+        <next>
+          <block type="variables_set">
+            <field name="VAR" id="arr">arr</field>
+            <value name="VALUE">
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT"><block type="variables_get"><field name="VAR" id="raw_input">raw_input</field></block></value>
+                <value name="DELIM"><block type="text"><field name="TEXT"> </field></block></value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set">
+                <field name="VAR" id="num_list">num_list</field>
+                <value name="VALUE"><block type="lists_create_empty"></block></value>
+                <next>
+                  <block type="controls_forEach">
+                    <field name="VAR" id="x">x</field>
+                    <value name="LIST"><block type="variables_get"><field name="VAR" id="arr">arr</field></block></value>
+                    <statement name="DO">
+                      <block type="lists_setIndex">
+                        <mutation at="false"></mutation>
+                        <field name="MODE">INSERT</field>
+                        <field name="WHERE">LAST</field>
+                        <value name="LIST"><block type="variables_get"><field name="VAR" id="num_list">num_list</field></block></value>
+                        <value name="TO">
+                          <block type="math_arithmetic">
+                            <field name="OP">MINUS</field>
+                            <value name="A"><block type="variables_get"><field name="VAR" id="x">x</field></block></value>
+                            <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="variables_set">
+                        <field name="VAR" id="sorted_list">sorted_list</field>
+                        <value name="VALUE">
+                          <block type="lists_sort">
+                            <field name="TYPE">NUMERIC</field>
+                            <field name="DIRECTION">-1</field>
+                            <value name="LIST"><block type="variables_get"><field name="VAR" id="num_list">num_list</field></block></value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="text_print">
+                            <value name="TEXT">
+                              <block type="lists_split">
+                                <mutation mode="JOIN"></mutation>
+                                <field name="MODE">JOIN</field>
+                                <value name="INPUT"><block type="variables_get"><field name="VAR" id="sorted_list">sorted_list</field></block></value>
+                                <value name="DELIM"><block type="text"><field name="TEXT"> </field></block></value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

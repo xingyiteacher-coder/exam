@@ -1,0 +1,83 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_S">S</variable>
+    <variable id="var_count">count</variable>
+    <variable id="var_i">i</variable>
+    <variable id="var_ch">ch</variable>
+  </variables>
+  <block type="variables_set" id="init_S" x="20" y="20">
+    <field name="VAR" id="var_S">S</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_S">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_cnt">
+        <field name="VAR" id="var_count">count</field>
+        <value name="VALUE"><shadow type="math_number" id="num0"><field name="NUM">0</field></shadow></value>
+        <next>
+          <block type="controls_for" id="loop_S">
+            <field name="VAR" id="var_i">i</field>
+            <value name="FROM"><shadow type="math_number" id="f1"><field name="NUM">1</field></shadow></value>
+            <value name="TO">
+              <block type="text_length" id="len_S">
+                <value name="VALUE"><block type="variables_get" id="gS1"><field name="VAR" id="var_S">S</field></block></value>
+              </block>
+            </value>
+            <value name="BY"><shadow type="math_number" id="b1"><field name="NUM">1</field></shadow></value>
+            <statement name="DO">
+              <block type="variables_set" id="get_ch">
+                <field name="VAR" id="var_ch">ch</field>
+                <value name="VALUE">
+                  <block type="text_charAt" id="char_at">
+                    <mutation at="true"></mutation>
+                    <field name="WHERE">FROM_START</field>
+                    <value name="VALUE"><block type="variables_get" id="gS2"><field name="VAR" id="var_S">S</field></block></value>
+                    <value name="AT"><block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block></value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="check_vowel">
+                    <value name="IF0">
+                      <block type="logic_compare" id="cmp_vowel">
+                        <field name="OP">NEQ</field>
+                        <value name="A">
+                          <block type="text_indexOf" id="find_vowel">
+                            <mutation at="true"></mutation>
+                            <field name="END">FIRST</field>
+                            <value name="VALUE"><shadow type="text" id="vowels"><field name="TEXT">aeiou</field></shadow></value>
+                            <value name="FIND"><block type="variables_get" id="gch1"><field name="VAR" id="var_ch">ch</field></block></value>
+                          </block>
+                        </value>
+                        <value name="B"><shadow type="math_number" id="m1"><field name="NUM">0</field></shadow></value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="inc_cnt">
+                        <field name="VAR" id="var_count">count</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id="add1">
+                            <field name="OP">ADD</field>
+                            <value name="A"><block type="variables_get" id="gc1"><field name="VAR" id="var_count">count</field></block></value>
+                            <value name="B"><shadow type="math_number" id="n1"><field name="NUM">1</field></shadow></value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print" id="print">
+                <value name="TEXT"><block type="variables_get" id="gc2"><field name="VAR" id="var_count">count</field></block></value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

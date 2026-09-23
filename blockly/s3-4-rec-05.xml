@@ -1,0 +1,79 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="a">a</variable>
+    <variable id="b">b</variable>
+  </variables>
+  <block type="procedures_defreturn" x="20" y="20">
+    <mutation>
+      <arg name="a" varid="a"></arg>
+      <arg name="b" varid="b"></arg>
+    </mutation>
+    <field name="NAME">gcd</field>
+    <comment pinned="false" h="80" w="160">輾轉相除法 GCD 遞迴函式</comment>
+    <value name="RETURN">
+      <block type="logic_ternary">
+        <value name="IF">
+          <block type="logic_compare">
+            <field name="OP">EQ</field>
+            <value name="A"><block type="variables_get"><field name="VAR" id="b">b</field></block></value>
+            <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+          </block>
+        </value>
+        <value name="THEN">
+          <block type="variables_get"><field name="VAR" id="a">a</field></block>
+        </value>
+        <value name="ELSE">
+          <block type="procedures_callreturn">
+            <mutation name="gcd">
+              <arg name="a"></arg>
+              <arg name="b"></arg>
+            </mutation>
+            <value name="ARG0">
+              <block type="variables_get"><field name="VAR" id="b">b</field></block>
+            </value>
+            <value name="ARG1">
+              <block type="math_modulo">
+                <value name="DIVIDEND"><block type="variables_get"><field name="VAR" id="a">a</field></block></value>
+                <value name="DIVISOR"><block type="variables_get"><field name="VAR" id="b">b</field></block></value>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="variables_set" x="20" y="220">
+    <field name="VAR" id="a">a</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="b">b</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <next>
+          <block type="text_print">
+            <value name="TEXT">
+              <block type="procedures_callreturn">
+                <mutation name="gcd">
+                  <arg name="a"></arg>
+                  <arg name="b"></arg>
+                </mutation>
+                <value name="ARG0"><block type="variables_get"><field name="VAR" id="a">a</field></block></value>
+                <value name="ARG1"><block type="variables_get"><field name="VAR" id="b">b</field></block></value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

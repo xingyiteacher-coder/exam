@@ -1,0 +1,100 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_a">a</variable>
+    <variable id="var_b">b</variable>
+    <variable id="var_temp">temp</variable>
+  </variables>
+  <!-- 函式定義：gcd(a, b) -->
+  <block type="procedures_defreturn" id="def_gcd" x="20" y="20">
+    <mutation>
+      <arg name="a" varid="var_a"></arg>
+      <arg name="b" varid="var_b"></arg>
+    </mutation>
+    <field name="NAME">gcd</field>
+    <statement name="STACK">
+      <block type="controls_whileUntil" id="loop_gcd">
+        <field name="MODE">WHILE</field>
+        <value name="BOOL">
+          <block type="logic_compare" id="cmp_b">
+            <field name="OP">NEQ</field>
+            <value name="A"><block type="variables_get" id="gb1"><field name="VAR" id="var_b">b</field></block></value>
+            <value name="B"><shadow type="math_number" id="num0"><field name="NUM">0</field></shadow></value>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="variables_set" id="set_temp">
+            <field name="VAR" id="var_temp">temp</field>
+            <value name="VALUE"><block type="variables_get" id="gb2"><field name="VAR" id="var_b">b</field></block></value>
+            <next>
+              <block type="variables_set" id="set_b">
+                <field name="VAR" id="var_b">b</field>
+                <value name="VALUE">
+                  <block type="math_modulo" id="mod_ab">
+                    <value name="DIVIDEND"><block type="variables_get" id="ga1"><field name="VAR" id="var_a">a</field></block></value>
+                    <value name="DIVISOR"><block type="variables_get" id="gb3"><field name="VAR" id="var_b">b</field></block></value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_a">
+                    <field name="VAR" id="var_a">a</field>
+                    <value name="VALUE"><block type="variables_get" id="gtemp"><field name="VAR" id="var_temp">temp</field></block></value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="variables_get" id="ga2"><field name="VAR" id="var_a">a</field></block>
+    </value>
+  </block>
+  <!-- 主程式 -->
+  <block type="variables_set" id="init_main_a" x="20" y="250">
+    <field name="VAR" id="var_a">a</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_a">
+        <field name="OP">ADD</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_a">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B"><shadow type="math_number" id="n0_1"><field name="NUM">0</field></shadow></value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_main_b">
+        <field name="VAR" id="var_b">b</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="cast_b">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <block type="text_prompt_ext" id="prompt_b">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+              </block>
+            </value>
+            <value name="B"><shadow type="math_number" id="n0_2"><field name="NUM">0</field></shadow></value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="print">
+            <value name="TEXT">
+              <block type="procedures_callreturn" id="call_gcd">
+                <mutation name="gcd">
+                  <arg name="a"></arg>
+                  <arg name="b"></arg>
+                </mutation>
+                <value name="ARG0"><block type="variables_get" id="ga3"><field name="VAR" id="var_a">a</field></block></value>
+                <value name="ARG1"><block type="variables_get" id="gb4"><field name="VAR" id="var_b">b</field></block></value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

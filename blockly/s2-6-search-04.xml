@@ -1,0 +1,101 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_N">N</variable>
+    <variable id="var_maxVal">maxVal</variable>
+    <variable id="var_maxPos">maxPos</variable>
+    <variable id="var_x">x</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_N" x="20" y="20">
+    <field name="VAR" id="var_N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_N">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_N">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B"><shadow type="math_number" id="num1_1"><field name="NUM">1</field></shadow></value>
+      </block>
+    </value>
+    <next>
+      <!-- 讀入第一個數 -->
+      <block type="variables_set" id="init_maxVal">
+        <field name="VAR" id="var_maxVal">maxVal</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="cast_first">
+            <field name="OP">MULTIPLY</field>
+            <value name="A">
+              <block type="text_prompt_ext" id="prompt_first">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+              </block>
+            </value>
+            <value name="B"><shadow type="math_number" id="num1_2"><field name="NUM">1</field></shadow></value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="init_maxPos">
+            <field name="VAR" id="var_maxPos">maxPos</field>
+            <value name="VALUE"><shadow type="math_number" id="num1_3"><field name="NUM">1</field></shadow></value>
+            <next>
+              <block type="controls_for" id="loop_rest">
+                <field name="VAR" id="var_i">i</field>
+                <value name="FROM"><shadow type="math_number" id="f2"><field name="NUM">2</field></shadow></value>
+                <value name="TO"><block type="variables_get" id="gN1"><field name="VAR" id="var_N">N</field></block></value>
+                <value name="BY"><shadow type="math_number" id="b1"><field name="NUM">1</field></shadow></value>
+                <statement name="DO">
+                  <block type="variables_set" id="read_x">
+                    <field name="VAR" id="var_x">x</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic" id="cast_x">
+                        <field name="OP">MULTIPLY</field>
+                        <value name="A">
+                          <block type="text_prompt_ext" id="prompt_x">
+                            <mutation type="NUMBER"></mutation>
+                            <field name="TYPE">NUMBER</field>
+                          </block>
+                        </value>
+                        <value name="B"><shadow type="math_number" id="num1_4"><field name="NUM">1</field></shadow></value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="check_gt">
+                        <value name="IF0">
+                          <block type="logic_compare" id="cmp_gt">
+                            <field name="OP">GT</field>
+                            <value name="A"><block type="variables_get" id="gx1"><field name="VAR" id="var_x">x</field></block></value>
+                            <value name="B"><block type="variables_get" id="gmaxVal1"><field name="VAR" id="var_maxVal">maxVal</field></block></value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="set_maxVal">
+                            <field name="VAR" id="var_maxVal">maxVal</field>
+                            <value name="VALUE"><block type="variables_get" id="gx2"><field name="VAR" id="var_x">x</field></block></value>
+                            <next>
+                              <block type="variables_set" id="set_maxPos">
+                                <field name="VAR" id="var_maxPos">maxPos</field>
+                                <value name="VALUE"><block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block></value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print" id="print">
+                    <value name="TEXT"><block type="variables_get" id="gmaxPos"><field name="VAR" id="var_maxPos">maxPos</field></block></value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

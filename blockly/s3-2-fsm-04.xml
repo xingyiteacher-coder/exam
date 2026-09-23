@@ -1,0 +1,122 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="start_light">start_light</variable>
+    <variable id="steps">steps</variable>
+    <variable id="start_code">start_code</variable>
+    <variable id="final_code">final_code</variable>
+  </variables>
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="start_light">start_light</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext"><mutation type="TEXT"></mutation><field name="TYPE">TEXT</field></block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="steps">steps</field>
+        <value name="VALUE">
+          <block type="math_arithmetic">
+            <field name="OP">MINUS</field>
+            <value name="A"><block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block></value>
+            <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if">
+            <mutation elseif="2"></mutation>
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A"><block type="variables_get"><field name="VAR" id="start_light">start_light</field></block></value>
+                <value name="B"><block type="text"><field name="TEXT">R</field></block></value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set">
+                <field name="VAR" id="start_code">start_code</field>
+                <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A"><block type="variables_get"><field name="VAR" id="start_light">start_light</field></block></value>
+                <value name="B"><block type="text"><field name="TEXT">G</field></block></value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="variables_set">
+                <field name="VAR" id="start_code">start_code</field>
+                <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value>
+              </block>
+            </statement>
+            <value name="IF2">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A"><block type="variables_get"><field name="VAR" id="start_light">start_light</field></block></value>
+                <value name="B"><block type="text"><field name="TEXT">Y</field></block></value>
+              </block>
+            </value>
+            <statement name="DO2">
+              <block type="variables_set">
+                <field name="VAR" id="start_code">start_code</field>
+                <value name="VALUE"><block type="math_number"><field name="NUM">2</field></block></value>
+              </block>
+            </statement>
+            <next>
+              <block type="variables_set">
+                <field name="VAR" id="final_code">final_code</field>
+                <value name="VALUE">
+                  <block type="math_modulo">
+                    <value name="DIVIDEND">
+                      <block type="math_arithmetic">
+                        <field name="OP">ADD</field>
+                        <value name="A"><block type="variables_get"><field name="VAR" id="start_code">start_code</field></block></value>
+                        <value name="B"><block type="variables_get"><field name="VAR" id="steps">steps</field></block></value>
+                      </block>
+                    </value>
+                    <value name="DIVISOR"><block type="math_number"><field name="NUM">3</field></block></value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if">
+                    <mutation elseif="2"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare">
+                        <field name="OP">EQ</field>
+                        <value name="A"><block type="variables_get"><field name="VAR" id="final_code">final_code</field></block></value>
+                        <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="text_print"><value name="TEXT"><block type="text"><field name="TEXT">R</field></block></value></block>
+                    </statement>
+                    <value name="IF1">
+                      <block type="logic_compare">
+                        <field name="OP">EQ</field>
+                        <value name="A"><block type="variables_get"><field name="VAR" id="final_code">final_code</field></block></value>
+                        <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                      </block>
+                    </value>
+                    <statement name="DO1">
+                      <block type="text_print"><value name="TEXT"><block type="text"><field name="TEXT">G</field></block></value></block>
+                    </statement>
+                    <value name="IF2">
+                      <block type="logic_compare">
+                        <field name="OP">EQ</field>
+                        <value name="A"><block type="variables_get"><field name="VAR" id="final_code">final_code</field></block></value>
+                        <value name="B"><block type="math_number"><field name="NUM">2</field></block></value>
+                      </block>
+                    </value>
+                    <statement name="DO2">
+                      <block type="text_print"><value name="TEXT"><block type="text"><field name="TEXT">Y</field></block></value></block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

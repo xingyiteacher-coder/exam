@@ -1,0 +1,116 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="N">N</variable>
+    <variable id="raw_line">raw_line</variable>
+    <variable id="str_arr">str_arr</variable>
+    <variable id="x">x</variable>
+    <variable id="val">val</variable>
+    <variable id="curr_len">curr_len</variable>
+    <variable id="max_len">max_len</variable>
+  </variables>
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic">
+        <field name="OP">MULTIPLY</field>
+        <value name="A"><block type="math_number"><field name="NUM">1</field></block></value>
+        <value name="B"><block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block></value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="raw_line">raw_line</field>
+        <value name="VALUE"><block type="text_prompt_ext"><mutation type="TEXT"></mutation><field name="TYPE">TEXT</field></block></value>
+        <next>
+          <block type="variables_set">
+            <field name="VAR" id="str_arr">str_arr</field>
+            <value name="VALUE">
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT"><block type="variables_get"><field name="VAR" id="raw_line">raw_line</field></block></value>
+                <value name="DELIM"><block type="text"><field name="TEXT"> </field></block></value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set">
+                <field name="VAR" id="curr_len">curr_len</field>
+                <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                <next>
+                  <block type="variables_set">
+                    <field name="VAR" id="max_len">max_len</field>
+                    <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                    <next>
+                      <block type="controls_forEach">
+                        <field name="VAR" id="x">x</field>
+                        <value name="LIST"><block type="variables_get"><field name="VAR" id="str_arr">str_arr</field></block></value>
+                        <statement name="DO">
+                          <block type="variables_set">
+                            <field name="VAR" id="val">val</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic">
+                                <field name="OP">MULTIPLY</field>
+                                <value name="A"><block type="math_number"><field name="NUM">1</field></block></value>
+                                <value name="B"><block type="variables_get"><field name="VAR" id="x">x</field></block></value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_if">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="logic_compare">
+                                    <field name="OP">GT</field>
+                                    <value name="A"><block type="variables_get"><field name="VAR" id="val">val</field></block></value>
+                                    <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="math_change">
+                                    <field name="VAR" id="curr_len">curr_len</field>
+                                    <value name="DELTA"><block type="math_number"><field name="NUM">1</field></block></value>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="variables_set">
+                                    <field name="VAR" id="curr_len">curr_len</field>
+                                    <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="controls_if">
+                                    <value name="IF0">
+                                      <block type="logic_compare">
+                                        <field name="OP">GT</field>
+                                        <value name="A"><block type="variables_get"><field name="VAR" id="curr_len">curr_len</field></block></value>
+                                        <value name="B"><block type="variables_get"><field name="VAR" id="max_len">max_len</field></block></value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="variables_set">
+                                        <field name="VAR" id="max_len">max_len</field>
+                                        <value name="VALUE"><block type="variables_get"><field name="VAR" id="curr_len">curr_len</field></block></value>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="text_print">
+                            <value name="TEXT"><block type="variables_get"><field name="VAR" id="max_len">max_len</field></block></value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

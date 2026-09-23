@@ -1,0 +1,37 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_N">N</variable>
+  </variables>
+  <block type="variables_set" id="init_N" x="20" y="20">
+    <field name="VAR" id="var_N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_N">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_N">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="num1"><field name="NUM">1</field></shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="print">
+        <value name="TEXT">
+          <block type="math_round" id="floor_sqrt">
+            <field name="OP">ROUNDDOWN</field>
+            <value name="NUM">
+              <block type="math_single" id="sqrt_N">
+                <field name="OP">ROOT</field>
+                <value name="NUM"><block type="variables_get" id="gN1"><field name="VAR" id="var_N">N</field></block></value>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

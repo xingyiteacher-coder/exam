@@ -1,0 +1,128 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="a">a</variable>
+    <variable id="b">b</variable>
+    <variable id="ans">ans</variable>
+    <variable id="base">base</variable>
+  </variables>
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="a">a</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="b">b</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set">
+            <field name="VAR" id="ans">ans</field>
+            <value name="VALUE">
+              <block type="math_number"><field name="NUM">0</field></block>
+            </value>
+            <next>
+              <block type="variables_set">
+                <field name="VAR" id="base">base</field>
+                <value name="VALUE">
+                  <block type="math_number"><field name="NUM">1</field></block>
+                </value>
+                <next>
+                  <block type="controls_whileUntil">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="logic_operation">
+                        <field name="OP">OR</field>
+                        <value name="A">
+                          <block type="logic_compare">
+                            <field name="OP">GT</field>
+                            <value name="A"><block type="variables_get"><field name="VAR" id="a">a</field></block></value>
+                            <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="logic_compare">
+                            <field name="OP">GT</field>
+                            <value name="A"><block type="variables_get"><field name="VAR" id="b">b</field></block></value>
+                            <value name="B"><block type="math_number"><field name="NUM">0</field></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="controls_if">
+                        <value name="IF0">
+                          <block type="logic_compare">
+                            <field name="OP">NEQ</field>
+                            <value name="A"><block type="math_modulo"><value name="DIVIDEND"><block type="variables_get"><field name="VAR" id="a">a</field></block></value><value name="DIVISOR"><block type="math_number"><field name="NUM">2</field></block></value></block></value>
+                            <value name="B"><block type="math_modulo"><value name="DIVIDEND"><block type="variables_get"><field name="VAR" id="b">b</field></block></value><value name="DIVISOR"><block type="math_number"><field name="NUM">2</field></block></value></block></value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="math_change">
+                            <field name="VAR" id="ans">ans</field>
+                            <value name="DELTA"><block type="variables_get"><field name="VAR" id="base">base</field></block></value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="variables_set">
+                            <field name="VAR" id="base">base</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic">
+                                <field name="OP">MULTIPLY</field>
+                                <value name="A"><block type="variables_get"><field name="VAR" id="base">base</field></block></value>
+                                <value name="B"><block type="math_number"><field name="NUM">2</field></block></value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set">
+                                <field name="VAR" id="a">a</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic">
+                                    <field name="OP">DIVIDE</field>
+                                    <value name="A"><block type="math_arithmetic"><field name="OP">MINUS</field><value name="A"><block type="variables_get"><field name="VAR" id="a">a</field></block></value><value name="B"><block type="math_modulo"><value name="DIVIDEND"><block type="variables_get"><field name="VAR" id="a">a</field></block></value><value name="DIVISOR"><block type="math_number"><field name="NUM">2</field></block></value></block></value></block></value>
+                                    <value name="B"><block type="math_number"><field name="NUM">2</field></block></value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set">
+                                    <field name="VAR" id="b">b</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">DIVIDE</field>
+                                        <value name="A"><block type="math_arithmetic"><field name="OP">MINUS</field><value name="A"><block type="variables_get"><field name="VAR" id="b">b</field></block></value><value name="B"><block type="math_modulo"><value name="DIVIDEND"><block type="variables_get"><field name="VAR" id="b">b</field></block></value><value name="DIVISOR"><block type="math_number"><field name="NUM">2</field></block></value></block></value></block></value>
+                                        <value name="B"><block type="math_number"><field name="NUM">2</field></block></value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="text_print">
+                        <value name="TEXT">
+                          <block type="variables_get"><field name="VAR" id="ans">ans</field></block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,204 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="N">N</variable>
+    <variable id="raw_line">raw_line</variable>
+    <variable id="str_arr">str_arr</variable>
+    <variable id="num_list">num_list</variable>
+    <variable id="x">x</variable>
+    <variable id="sorted_list">sorted_list</variable>
+    <variable id="max_cnt">max_cnt</variable>
+    <variable id="ans">ans</variable>
+    <variable id="curr_cnt">curr_cnt</variable>
+    <variable id="i">i</variable>
+    <variable id="curr_val">curr_val</variable>
+    <variable id="prev_val">prev_val</variable>
+  </variables>
+  <block type="variables_set" x="20" y="20">
+    <field name="VAR" id="N">N</field>
+    <value name="VALUE">
+      <block type="math_arithmetic">
+        <field name="OP">MULTIPLY</field>
+        <value name="A"><block type="math_number"><field name="NUM">1</field></block></value>
+        <value name="B"><block type="text_prompt_ext"><mutation type="NUMBER"></mutation><field name="TYPE">NUMBER</field></block></value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR" id="raw_line">raw_line</field>
+        <value name="VALUE"><block type="text_prompt_ext"><mutation type="TEXT"></mutation><field name="TYPE">TEXT</field></block></value>
+        <next>
+          <block type="variables_set">
+            <field name="VAR" id="str_arr">str_arr</field>
+            <value name="VALUE">
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT"><block type="variables_get"><field name="VAR" id="raw_line">raw_line</field></block></value>
+                <value name="DELIM"><block type="text"><field name="TEXT"> </field></block></value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set">
+                <field name="VAR" id="num_list">num_list</field>
+                <value name="VALUE"><block type="lists_create_empty"></block></value>
+                <next>
+                  <block type="controls_forEach">
+                    <field name="VAR" id="x">x</field>
+                    <value name="LIST"><block type="variables_get"><field name="VAR" id="str_arr">str_arr</field></block></value>
+                    <statement name="DO">
+                      <block type="lists_setIndex">
+                        <mutation at="false"></mutation>
+                        <field name="MODE">INSERT</field>
+                        <field name="WHERE">LAST</field>
+                        <value name="LIST"><block type="variables_get"><field name="VAR" id="num_list">num_list</field></block></value>
+                        <value name="TO">
+                          <block type="math_arithmetic">
+                            <field name="OP">MULTIPLY</field>
+                            <value name="A"><block type="math_number"><field name="NUM">1</field></block></value>
+                            <value name="B"><block type="variables_get"><field name="VAR" id="x">x</field></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="variables_set">
+                        <field name="VAR" id="sorted_list">sorted_list</field>
+                        <value name="VALUE">
+                          <block type="lists_sort">
+                            <field name="TYPE">NUMERIC</field>
+                            <field name="DIRECTION">1</field>
+                            <value name="LIST"><block type="variables_get"><field name="VAR" id="num_list">num_list</field></block></value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set">
+                            <field name="VAR" id="ans">ans</field>
+                            <value name="VALUE">
+                              <block type="lists_getIndex">
+                                <mutation statement="false" at="true"></mutation>
+                                <field name="MODE">GET</field>
+                                <field name="WHERE">FROM_START</field>
+                                <value name="VALUE"><block type="variables_get"><field name="VAR" id="sorted_list">sorted_list</field></block></value>
+                                <value name="AT"><block type="math_number"><field name="NUM">1</field></block></value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set">
+                                <field name="VAR" id="max_cnt">max_cnt</field>
+                                <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value>
+                                <next>
+                                  <block type="variables_set">
+                                    <field name="VAR" id="curr_cnt">curr_cnt</field>
+                                    <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value>
+                                    <next>
+                                      <block type="controls_for">
+                                        <field name="VAR" id="i">i</field>
+                                        <value name="FROM"><block type="math_number"><field name="NUM">2</field></block></value>
+                                        <value name="TO"><block type="lists_length"><value name="VALUE"><block type="variables_get"><field name="VAR" id="sorted_list">sorted_list</field></block></value></block></value>
+                                        <value name="BY"><block type="math_number"><field name="NUM">1</field></block></value>
+                                        <statement name="DO">
+                                          <block type="variables_set">
+                                            <field name="VAR" id="curr_val">curr_val</field>
+                                            <value name="VALUE">
+                                              <block type="lists_getIndex">
+                                                <mutation statement="false" at="true"></mutation>
+                                                <field name="MODE">GET</field>
+                                                <field name="WHERE">FROM_START</field>
+                                                <value name="VALUE"><block type="variables_get"><field name="VAR" id="sorted_list">sorted_list</field></block></value>
+                                                <value name="AT"><block type="variables_get"><field name="VAR" id="i">i</field></block></value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="variables_set">
+                                                <field name="VAR" id="prev_val">prev_val</field>
+                                                <value name="VALUE">
+                                                  <block type="lists_getIndex">
+                                                    <mutation statement="false" at="true"></mutation>
+                                                    <field name="MODE">GET</field>
+                                                    <field name="WHERE">FROM_START</field>
+                                                    <value name="VALUE"><block type="variables_get"><field name="VAR" id="sorted_list">sorted_list</field></block></value>
+                                                    <value name="AT">
+                                                      <block type="math_arithmetic">
+                                                        <field name="OP">MINUS</field>
+                                                        <value name="A"><block type="variables_get"><field name="VAR" id="i">i</field></block></value>
+                                                        <value name="B"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="controls_if">
+                                                    <mutation else="1"></mutation>
+                                                    <value name="IF0">
+                                                      <block type="logic_compare">
+                                                        <field name="OP">EQ</field>
+                                                        <value name="A"><block type="variables_get"><field name="VAR" id="curr_val">curr_val</field></block></value>
+                                                        <value name="B"><block type="variables_get"><field name="VAR" id="prev_val">prev_val</field></block></value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="math_change">
+                                                        <field name="VAR" id="curr_cnt">curr_cnt</field>
+                                                        <value name="DELTA"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                      </block>
+                                                    </statement>
+                                                    <statement name="ELSE">
+                                                      <block type="variables_set">
+                                                        <field name="VAR" id="curr_cnt">curr_cnt</field>
+                                                        <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="controls_if">
+                                                        <value name="IF0">
+                                                          <block type="logic_compare">
+                                                            <field name="OP">GT</field>
+                                                            <value name="A"><block type="variables_get"><field name="VAR" id="curr_cnt">curr_cnt</field></block></value>
+                                                            <value name="B"><block type="variables_get"><field name="VAR" id="max_cnt">max_cnt</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="DO0">
+                                                          <block type="variables_set">
+                                                            <field name="VAR" id="max_cnt">max_cnt</field>
+                                                            <value name="VALUE"><block type="variables_get"><field name="VAR" id="curr_cnt">curr_cnt</field></block></value>
+                                                            <next>
+                                                              <block type="variables_set">
+                                                                <field name="VAR" id="ans">ans</field>
+                                                                <value name="VALUE"><block type="variables_get"><field name="VAR" id="curr_val">curr_val</field></block></value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="text_print">
+                                            <value name="TEXT"><block type="variables_get"><field name="VAR" id="ans">ans</field></block></value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
