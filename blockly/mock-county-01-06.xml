@@ -1,0 +1,144 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+    <variable id="var_cnt">count</variable>
+    <variable id="var_d">d</variable>
+    <variable id="var_temp">temp</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_cnt">
+        <field name="VAR" id="var_cnt">count</field>
+        <value name="VALUE">
+          <block type="math_number" id="zero"><field name="NUM">0</field></block>
+        </value>
+        <next>
+          <block type="variables_set" id="init_temp">
+            <field name="VAR" id="var_temp">temp</field>
+            <value name="VALUE">
+              <block type="variables_get" id="get_n1"><field name="VAR" id="var_n">n</field></block>
+            </value>
+            <next>
+              <block type="variables_set" id="init_d">
+                <field name="VAR" id="var_d">d</field>
+                <value name="VALUE">
+                  <block type="math_number" id="two"><field name="NUM">2</field></block>
+                </value>
+                <next>
+                  <block type="controls_whileUntil" id="while_d">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="logic_compare" id="cmp_d">
+                        <field name="OP">LTE</field>
+                        <value name="A">
+                          <block type="math_arithmetic" id="d_sq">
+                            <field name="OP">MULTIPLY</field>
+                            <value name="A"><block type="variables_get" id="get_d1"><field name="VAR" id="var_d">d</field></block></value>
+                            <value name="B"><block type="variables_get" id="get_d2"><field name="VAR" id="var_d">d</field></block></value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="get_temp1"><field name="VAR" id="var_temp">temp</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="controls_if" id="if_mod">
+                        <value name="IF0">
+                          <block type="logic_compare" id="cmp_mod">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="math_modulo" id="mod">
+                                <field name="OP">MOD</field>
+                                <value name="DIVIDEND"><block type="variables_get" id="get_temp2"><field name="VAR" id="var_temp">temp</field></block></value>
+                                <value name="DIVISOR"><block type="variables_get" id="get_d3"><field name="VAR" id="var_d">d</field></block></value>
+                              </block>
+                            </value>
+                            <value name="B"><block type="math_number" id="z1"><field name="NUM">0</field></block></value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="math_change" id="inc_cnt">
+                            <field name="VAR" id="var_cnt">count</field>
+                            <value name="DELTA"><block type="math_number" id="one1"><field name="NUM">1</field></block></value>
+                            <next>
+                              <block type="controls_whileUntil" id="while_div">
+                                <field name="MODE">WHILE</field>
+                                <value name="BOOL">
+                                  <block type="logic_compare" id="cmp_div">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="math_modulo" id="mod2">
+                                        <field name="OP">MOD</field>
+                                        <value name="DIVIDEND"><block type="variables_get" id="get_temp3"><field name="VAR" id="var_temp">temp</field></block></value>
+                                        <value name="DIVISOR"><block type="variables_get" id="get_d4"><field name="VAR" id="var_d">d</field></block></value>
+                                      </block>
+                                    </value>
+                                    <value name="B"><block type="math_number" id="z2"><field name="NUM">0</field></block></value>
+                                  </block>
+                                </value>
+                                <statement name="DO">
+                                  <block type="variables_set" id="div_temp">
+                                    <field name="VAR" id="var_temp">temp</field>
+                                    <value name="VALUE">
+                                      <block type="math_arithmetic" id="div_op">
+                                        <field name="OP">DIVIDE</field>
+                                        <value name="A"><block type="variables_get" id="get_temp4"><field name="VAR" id="var_temp">temp</field></block></value>
+                                        <value name="B"><block type="variables_get" id="get_d5"><field name="VAR" id="var_d">d</field></block></value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="math_change" id="inc_d">
+                            <field name="VAR" id="var_d">d</field>
+                            <value name="DELTA"><block type="math_number" id="one2"><field name="NUM">1</field></block></value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="if_last">
+                        <value name="IF0">
+                          <block type="logic_compare" id="cmp_last">
+                            <field name="OP">GT</field>
+                            <value name="A"><block type="variables_get" id="get_temp5"><field name="VAR" id="var_temp">temp</field></block></value>
+                            <value name="B"><block type="math_number" id="one3"><field name="NUM">1</field></block></value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="math_change" id="inc_cnt2">
+                            <field name="VAR" id="var_cnt">count</field>
+                            <value name="DELTA"><block type="math_number" id="one4"><field name="NUM">1</field></block></value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="text_print" id="print_ans">
+                            <value name="TEXT">
+                              <block type="variables_get" id="get_cnt"><field name="VAR" id="var_cnt">count</field></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

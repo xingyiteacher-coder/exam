@@ -1,0 +1,79 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_amt">amount</variable>
+    <variable id="var_cnt">total_coins</variable>
+    <variable id="var_c">coin</variable>
+    <variable id="var_list">coins</variable>
+  </variables>
+  <block type="variables_set" id="init_amt" x="20" y="20">
+    <field name="VAR" id="var_amt">amount</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_amt">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_cnt">
+        <field name="VAR" id="var_cnt">total_coins</field>
+        <value name="VALUE"><block type="math_number" id="num0"><field name="NUM">0</field></block></value>
+        <next>
+          <block type="variables_set" id="init_coins">
+            <field name="VAR" id="var_list">coins</field>
+            <value name="VALUE">
+              <block type="lists_create_with" id="list_coins">
+                <mutation items="4"></mutation>
+                <value name="ADD0"><block type="math_number" id="c50"><field name="NUM">50</field></block></value>
+                <value name="ADD1"><block type="math_number" id="c10"><field name="NUM">10</field></block></value>
+                <value name="ADD2"><block type="math_number" id="c5"><field name="NUM">5</field></block></value>
+                <value name="ADD3"><block type="math_number" id="c1"><field name="NUM">1</field></block></value>
+              </block>
+            </value>
+            <next>
+              <block type="controls_forEach" id="for_each">
+                <field name="VAR" id="var_c">coin</field>
+                <value name="LIST"><block type="variables_get" id="glist"><field name="VAR" id="var_list">coins</field></block></value>
+                <statement name="DO">
+                  <block type="math_change" id="inc_cnt">
+                    <field name="VAR" id="var_cnt">total_coins</field>
+                    <value name="DELTA">
+                      <block type="math_single" id="floor">
+                        <field name="OP">ROUNDDOWN</field>
+                        <value name="NUM">
+                          <block type="math_arithmetic" id="div">
+                            <field name="OP">DIVIDE</field>
+                            <value name="A"><block type="variables_get" id="gamt1"><field name="VAR" id="var_amt">amount</field></block></value>
+                            <value name="B"><block type="variables_get" id="gc1"><field name="VAR" id="var_c">coin</field></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="set_rem">
+                        <field name="VAR" id="var_amt">amount</field>
+                        <value name="VALUE">
+                          <block type="math_modulo" id="mod">
+                            <field name="OP">MOD</field>
+                            <value name="DIVIDEND"><block type="variables_get" id="gamt2"><field name="VAR" id="var_amt">amount</field></block></value>
+                            <value name="DIVISOR"><block type="variables_get" id="gc2"><field name="VAR" id="var_c">coin</field></block></value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print" id="print">
+                    <value name="TEXT">
+                      <block type="variables_get" id="gcnt"><field name="VAR" id="var_cnt">total_coins</field></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
