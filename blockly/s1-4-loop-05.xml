@@ -1,0 +1,26 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="text_print" id="print" x="20" y="20">
+    <value name="TEXT">
+      <block type="math_round" id="floor">
+        <field name="OP">ROUNDDOWN</field>
+        <value name="NUM">
+          <block type="math_arithmetic" id="div3">
+            <field name="OP">DIVIDE</field>
+            <value name="A">
+              <shadow type="math_number"><field name="NUM">1</field></shadow>
+              <block type="text_prompt_ext" id="prompt_n">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+              </block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="num3">
+                <field name="NUM">3</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+</xml>

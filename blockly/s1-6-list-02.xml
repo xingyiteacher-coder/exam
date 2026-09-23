@@ -1,0 +1,85 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">N</variable>
+    <variable id="var_lst">list</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_lst">
+        <field name="VAR" id="var_lst">list</field>
+        <value name="VALUE">
+          <block type="lists_create_empty" id="create_lst"></block>
+        </value>
+        <next>
+          <block type="variables_set" id="init_i">
+            <field name="VAR" id="var_i">i</field>
+            <value name="VALUE">
+              <block type="math_number" id="num1"><field name="NUM">1</field></block>
+            </value>
+            <next>
+              <block type="controls_whileUntil" id="loop_input">
+                <field name="MODE">WHILE</field>
+                <value name="BOOL">
+                  <block type="logic_compare" id="cmp_i_n">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="gn1"><field name="VAR" id="var_n">N</field></block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="lists_setIndex" id="add_item">
+                    <mutation at="false" statement="true"></mutation>
+                    <field name="MODE">INSERT</field>
+                    <field name="WHERE">LAST</field>
+                    <value name="LIST">
+                      <block type="variables_get" id="glst1"><field name="VAR" id="var_lst">list</field></block>
+                    </value>
+                    <value name="TO">
+                      <block type="text_prompt_ext" id="prompt_val">
+                        <mutation type="NUMBER"></mutation>
+                        <field name="TYPE">NUMBER</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="math_change" id="inc_i">
+                        <field name="VAR" id="var_i">i</field>
+                        <value name="DELTA">
+                          <shadow type="math_number" id="step1"><field name="NUM">1</field></shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print" id="print">
+                    <value name="TEXT">
+                      <block type="math_on_list" id="max_list">
+                        <mutation op="MAX"></mutation>
+                        <field name="OP">MAX</field>
+                        <value name="LIST">
+                          <block type="variables_get" id="glst2"><field name="VAR" id="var_lst">list</field></block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

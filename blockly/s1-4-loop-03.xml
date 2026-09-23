@@ -1,0 +1,91 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_m">m</variable>
+    <variable id="var_n">n</variable>
+    <variable id="var_res">result</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_m" x="20" y="20">
+    <field name="VAR" id="var_m">m</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_m">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_n">
+        <field name="VAR" id="var_n">n</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_n">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="init_res">
+            <field name="VAR" id="var_res">result</field>
+            <value name="VALUE">
+              <block type="math_number" id="num1"><field name="NUM">1</field></block>
+            </value>
+            <next>
+              <block type="variables_set" id="init_i">
+                <field name="VAR" id="var_i">i</field>
+                <value name="VALUE">
+                  <block type="math_number" id="num1_2"><field name="NUM">1</field></block>
+                </value>
+                <next>
+                  <block type="controls_whileUntil" id="loop_pow">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="logic_compare" id="cmp_i_n">
+                        <field name="OP">LTE</field>
+                        <value name="A">
+                          <block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="variables_set" id="mul_m">
+                        <field name="VAR" id="var_res">result</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id="mul">
+                            <field name="OP">MULTIPLY</field>
+                            <value name="A">
+                              <block type="variables_get" id="gres1"><field name="VAR" id="var_res">result</field></block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="gm"><field name="VAR" id="var_m">m</field></block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="math_change" id="inc_i">
+                            <field name="VAR" id="var_i">i</field>
+                            <value name="DELTA">
+                              <shadow type="math_number" id="num1_3"><field name="NUM">1</field></shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="text_print" id="print">
+                        <value name="TEXT">
+                          <block type="variables_get" id="gres2"><field name="VAR" id="var_res">result</field></block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

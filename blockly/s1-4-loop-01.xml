@@ -1,0 +1,53 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">N</variable>
+    <variable id="var_sum">sum</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_sum">
+        <field name="VAR" id="var_sum">sum</field>
+        <value name="VALUE">
+          <block type="math_number" id="num0"><field name="NUM">0</field></block>
+        </value>
+        <next>
+          <block type="controls_for" id="loop_sum">
+            <field name="VAR" id="var_i">i</field>
+            <value name="FROM">
+              <shadow type="math_number" id="num1"><field name="NUM">1</field></shadow>
+            </value>
+            <value name="TO">
+              <block type="variables_get" id="gn"><field name="VAR" id="var_n">N</field></block>
+            </value>
+            <value name="BY">
+              <shadow type="math_number" id="step1"><field name="NUM">1</field></shadow>
+            </value>
+            <statement name="DO">
+              <block type="math_change" id="add_i">
+                <field name="VAR" id="var_sum">sum</field>
+                <value name="DELTA">
+                  <block type="variables_get" id="gi"><field name="VAR" id="var_i">i</field></block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print" id="print">
+                <value name="TEXT">
+                  <block type="variables_get" id="gsum"><field name="VAR" id="var_sum">sum</field></block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,68 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_sum">sum</variable>
+    <variable id="var_x">x</variable>
+  </variables>
+  <block type="variables_set" id="init_sum" x="20" y="20">
+    <field name="VAR" id="var_sum">sum</field>
+    <value name="VALUE">
+      <block type="math_number" id="num0"><field name="NUM">0</field></block>
+    </value>
+    <next>
+      <block type="controls_whileUntil" id="loop_read">
+        <field name="MODE">WHILE</field>
+        <value name="BOOL">
+          <block type="logic_boolean" id="true_val">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="variables_set" id="read_x">
+            <field name="VAR" id="var_x">x</field>
+            <value name="VALUE">
+              <block type="text_prompt_ext" id="prompt_x">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="check_zero">
+                <value name="IF0">
+                  <block type="logic_compare" id="cmp_zero">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="variables_get" id="gx1"><field name="VAR" id="var_x">x</field></block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="num0_2"><field name="NUM">0</field></shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="controls_flow_statements" id="break_loop">
+                    <field name="FLOW">BREAK</field>
+                  </block>
+                </statement>
+                <next>
+                  <block type="math_change" id="add_x">
+                    <field name="VAR" id="var_sum">sum</field>
+                    <value name="DELTA">
+                      <block type="variables_get" id="gx2"><field name="VAR" id="var_x">x</field></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="text_print" id="print">
+            <value name="TEXT">
+              <block type="variables_get" id="gsum"><field name="VAR" id="var_sum">sum</field></block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

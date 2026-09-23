@@ -1,0 +1,61 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">N</variable>
+    <variable id="var_fact">fact</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_fact">
+        <field name="VAR" id="var_fact">fact</field>
+        <value name="VALUE">
+          <block type="math_number" id="num1_1"><field name="NUM">1</field></block>
+        </value>
+        <next>
+          <block type="controls_for" id="loop_fact">
+            <field name="VAR" id="var_i">i</field>
+            <value name="FROM">
+              <shadow type="math_number" id="num1_2"><field name="NUM">1</field></shadow>
+            </value>
+            <value name="TO">
+              <block type="variables_get" id="gn"><field name="VAR" id="var_n">N</field></block>
+            </value>
+            <value name="BY">
+              <shadow type="math_number" id="step1"><field name="NUM">1</field></shadow>
+            </value>
+            <statement name="DO">
+              <block type="variables_set" id="mul_i">
+                <field name="VAR" id="var_fact">fact</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic" id="mul">
+                    <field name="OP">MULTIPLY</field>
+                    <value name="A">
+                      <block type="variables_get" id="gfact"><field name="VAR" id="var_fact">fact</field></block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="gi"><field name="VAR" id="var_i">i</field></block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print" id="print">
+                <value name="TEXT">
+                  <block type="variables_get" id="gres"><field name="VAR" id="var_fact">fact</field></block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
