@@ -1,0 +1,79 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_x" islocal="false" iscloud="false">x</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_w3" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_w3">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_w3"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_w3_N">
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_w3"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="init_x_w3">
+                <field name="VARIABLE" id="v_x" variabletype="">x</field>
+                <value name="VALUE">
+                  <shadow type="text" id="one_w3_init"><field name="TEXT">1</field></shadow>
+                </value>
+                <next>
+                  <block type="control_repeat_until" id="rep_w3">
+                    <value name="CONDITION">
+                      <block type="operator_compare" id="cmp_w3">
+                        <field name="OPERATOR">&gt;</field>
+                        <value name="OPERAND1">
+                          <shadow type="text" id="sh_op1_w3"><field name="TEXT"></field></shadow>
+                          <block type="operator_arithmetic" id="sq_w3">
+                            <field name="OPERATOR">*</field>
+                            <value name="NUM1">
+                              <block type="data_variable" id="get_x1_w3">
+                                <field name="VARIABLE" id="v_x" variabletype="">x</field>
+                              </block>
+                            </value>
+                            <value name="NUM2">
+                              <block type="data_variable" id="get_x2_w3">
+                                <field name="VARIABLE" id="v_x" variabletype="">x</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="OPERAND2">
+                          <shadow type="text" id="sh_op2_w3"><field name="TEXT"></field></shadow>
+                          <block type="data_variable" id="get_N_w3">
+                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="data_changevariableby" id="inc_x_w3">
+                        <field name="VARIABLE" id="v_x" variabletype="">x</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id="one_w3_step"><field name="NUM">1</field></shadow>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_say" id="say_w3">
+                        <value name="TEXT">
+                          <block type="data_variable" id="out_x_w3">
+                            <field name="VARIABLE" id="v_x" variabletype="">x</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

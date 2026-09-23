@@ -1,0 +1,115 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="var_year" islocal="false" iscloud="false">year</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag" x="50" y="50">
+    <next>
+      <block type="scratch_ask" id="ask_year">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_yr">
+            <field name="TEXT">year</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_year">
+            <field name="VARIABLE" id="var_year" variabletype="">year</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_year"></block>
+            </value>
+            <next>
+              <block type="control_if_else" id="if_leap">
+                <value name="CONDITION">
+                  <!-- (y % 4 == 0 and not y % 100 == 0) or (y % 400 == 0) -->
+                  <block type="operator_or" id="or_cond">
+                    <value name="OPERAND1">
+                      <block type="operator_and" id="and_cond">
+                        <value name="OPERAND1">
+                          <block type="operator_compare" id="cmp_mod4">
+                            <field name="OPERATOR">==</field>
+                            <value name="OPERAND1">
+                              <block type="operator_mod" id="mod4">
+                                <value name="NUM1">
+                                  <block type="data_variable" id="get_y1">
+                                    <field name="VARIABLE" id="var_year" variabletype="">year</field>
+                                  </block>
+                                </value>
+                                <value name="NUM2">
+                                  <shadow type="math_number" id="num4"><field name="NUM">4</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="OPERAND2">
+                              <shadow type="math_number" id="num0_1"><field name="NUM">0</field></shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="OPERAND2">
+                          <block type="operator_not" id="not_mod100">
+                            <value name="OPERAND">
+                              <block type="operator_compare" id="cmp_mod100">
+                                <field name="OPERATOR">==</field>
+                                <value name="OPERAND1">
+                                  <block type="operator_mod" id="mod100">
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="get_y2">
+                                        <field name="VARIABLE" id="var_year" variabletype="">year</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <shadow type="math_number" id="num100"><field name="NUM">100</field></shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <shadow type="math_number" id="num0_2"><field name="NUM">0</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="OPERAND2">
+                      <block type="operator_compare" id="cmp_mod400">
+                        <field name="OPERATOR">==</field>
+                        <value name="OPERAND1">
+                          <block type="operator_mod" id="mod400">
+                            <value name="NUM1">
+                              <block type="data_variable" id="get_y3">
+                                <field name="VARIABLE" id="var_year" variabletype="">year</field>
+                              </block>
+                            </value>
+                            <value name="NUM2">
+                              <shadow type="math_number" id="num400"><field name="NUM">400</field></shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="OPERAND2">
+                          <shadow type="math_number" id="num0_3"><field name="NUM">0</field></shadow>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="SUBSTACK">
+                  <block type="scratch_say" id="say_yes">
+                    <value name="TEXT">
+                      <shadow type="text" id="txt_yes"><field name="TEXT">yes</field></shadow>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="SUBSTACK2">
+                  <block type="scratch_say" id="say_no">
+                    <value name="TEXT">
+                      <shadow type="text" id="txt_no"><field name="TEXT">no</field></shadow>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

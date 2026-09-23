@@ -1,0 +1,93 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_num" islocal="false" iscloud="false">數</variable>
+    <variable type="" id="v_sum" islocal="false" iscloud="false">總和</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_w4" x="10" y="10">
+    <next>
+      <block type="data_setvariableto" id="init_sum_w4">
+        <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+        <value name="VALUE">
+          <shadow type="text" id="zero_w4"><field name="TEXT">0</field></shadow>
+        </value>
+        <next>
+          <block type="scratch_ask" id="ask_w4_1">
+            <value name="QUESTION">
+              <shadow type="text" id="txt_w4_1"><field name="TEXT">數</field></shadow>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_num_w4_1">
+                <field name="VARIABLE" id="v_num" variabletype="">數</field>
+                <value name="VALUE">
+                  <block type="scratch_answer" id="ans_w4_1"></block>
+                </value>
+                <next>
+                  <block type="control_repeat_until" id="rep_w4">
+                    <value name="CONDITION">
+                      <block type="operator_compare" id="cmp_w4">
+                        <field name="OPERATOR">==</field>
+                        <value name="OPERAND1">
+                          <shadow type="text" id="sh_op1_w4"><field name="TEXT"></field></shadow>
+                          <block type="data_variable" id="get_num_w4">
+                            <field name="VARIABLE" id="v_num" variabletype="">數</field>
+                          </block>
+                        </value>
+                        <value name="OPERAND2">
+                          <shadow type="text" id="zero_cmp_w4"><field name="TEXT">0</field></shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="data_setvariableto" id="add_sum_w4">
+                        <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                        <value name="VALUE">
+                          <block type="operator_arithmetic" id="plus_w4">
+                            <field name="OPERATOR">+</field>
+                            <value name="NUM1">
+                              <block type="data_variable" id="get_sum_w4">
+                                <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                              </block>
+                            </value>
+                            <value name="NUM2">
+                              <block type="data_variable" id="get_num_add_w4">
+                                <field name="VARIABLE" id="v_num" variabletype="">數</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="scratch_ask" id="ask_w4_2">
+                            <value name="QUESTION">
+                              <shadow type="text" id="txt_w4_2"><field name="TEXT">數</field></shadow>
+                            </value>
+                            <next>
+                              <block type="data_setvariableto" id="set_num_w4_2">
+                                <field name="VARIABLE" id="v_num" variabletype="">數</field>
+                                <value name="VALUE">
+                                  <block type="scratch_answer" id="ans_w4_2"></block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_say" id="say_w4">
+                        <value name="TEXT">
+                          <block type="data_variable" id="out_sum_w4">
+                            <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

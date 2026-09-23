@@ -1,0 +1,89 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="var_n" islocal="false" iscloud="false">n</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag" x="50" y="50">
+    <next>
+      <block type="scratch_ask" id="ask_n">
+        <value name="QUESTION">
+          <shadow type="text" id="text_q">
+            <field name="TEXT">n</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_n">
+            <field name="VARIABLE" id="var_n" variabletype="">n</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_n"></block>
+            </value>
+            <next>
+              <block type="control_if_else" id="if_pos">
+                <value name="CONDITION">
+                  <block type="operator_compare" id="cmp_pos">
+                    <field name="OPERATOR">&gt;</field>
+                    <value name="OPERAND1">
+                      <block type="data_variable" id="get_n1">
+                        <field name="VARIABLE" id="var_n" variabletype="">n</field>
+                      </block>
+                    </value>
+                    <value name="OPERAND2">
+                      <shadow type="math_number" id="num0_1">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="SUBSTACK">
+                  <block type="scratch_say" id="say_pos">
+                    <value name="TEXT">
+                      <shadow type="text" id="txt_pos">
+                        <field name="TEXT">positive</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="SUBSTACK2">
+                  <block type="control_if_else" id="if_neg">
+                    <value name="CONDITION">
+                      <block type="operator_compare" id="cmp_neg">
+                        <field name="OPERATOR">&lt;</field>
+                        <value name="OPERAND1">
+                          <block type="data_variable" id="get_n2">
+                            <field name="VARIABLE" id="var_n" variabletype="">n</field>
+                          </block>
+                        </value>
+                        <value name="OPERAND2">
+                          <shadow type="math_number" id="num0_2">
+                            <field name="NUM">0</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_say" id="say_neg">
+                        <value name="TEXT">
+                          <shadow type="text" id="txt_neg">
+                            <field name="TEXT">negative</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="SUBSTACK2">
+                      <block type="scratch_say" id="say_zero">
+                        <value name="TEXT">
+                          <shadow type="text" id="txt_zero">
+                            <field name="TEXT">zero</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,86 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="z_s" islocal="false" iscloud="false">字串</variable>
+    <variable type="" id="z_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="z_res" islocal="false" iscloud="false">結果</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_s3" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_s3_1">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_s3_1"><field name="TEXT">字串</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_s3_1">
+            <field name="VARIABLE" id="z_s" variabletype="">字串</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_s3_1"></block>
+            </value>
+            <next>
+              <block type="scratch_ask" id="ask_s3_2">
+                <value name="QUESTION">
+                  <shadow type="text" id="txt_s3_2"><field name="TEXT">n</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_s3_2">
+                    <field name="VARIABLE" id="z_n" variabletype="">n</field>
+                    <value name="VALUE">
+                      <block type="scratch_answer" id="ans_s3_2"></block>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="init_res_s3">
+                        <field name="VARIABLE" id="z_res" variabletype="">結果</field>
+                        <value name="VALUE">
+                          <shadow type="text" id="empty_s3"><field name="TEXT"></field></shadow>
+                        </value>
+                        <next>
+                          <block type="control_repeat" id="rep_s3">
+                            <value name="TIMES">
+                              <block type="data_variable" id="get_n_s3">
+                                <field name="VARIABLE" id="z_n" variabletype="">n</field>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="append_res_s3">
+                                <field name="VARIABLE" id="z_res" variabletype="">結果</field>
+                                <value name="VALUE">
+                                  <block type="operator_join" id="join_s3">
+                                    <value name="OPERAND1">
+                                      <shadow type="text" id="sh_res_s3"><field name="TEXT"></field></shadow>
+                                      <block type="data_variable" id="get_res_s3">
+                                        <field name="VARIABLE" id="z_res" variabletype="">結果</field>
+                                      </block>
+                                    </value>
+                                    <value name="OPERAND2">
+                                      <shadow type="text" id="sh_str_s3"><field name="TEXT"></field></shadow>
+                                      <block type="data_variable" id="get_str_s3">
+                                        <field name="VARIABLE" id="z_s" variabletype="">字串</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="scratch_say" id="say_s3">
+                                <value name="TEXT">
+                                  <block type="data_variable" id="out_res_s3">
+                                    <field name="VARIABLE" id="z_res" variabletype="">結果</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

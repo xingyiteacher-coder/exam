@@ -1,0 +1,85 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_sum" islocal="false" iscloud="false">總和</variable>
+    <variable type="" id="v_x" islocal="false" iscloud="false">數</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_l1" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_l1_N">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_l1_N"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_l1_N">
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_l1_N"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="init_sum_l1">
+                <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                <value name="VALUE">
+                  <shadow type="text" id="zero_l1"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="control_repeat" id="rep_l1">
+                    <value name="TIMES">
+                      <block type="data_variable" id="get_N_l1">
+                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_l1_x">
+                        <value name="QUESTION">
+                          <shadow type="text" id="txt_l1_x"><field name="TEXT">數</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_l1_x">
+                            <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                            <value name="VALUE">
+                              <block type="scratch_answer" id="ans_l1_x"></block>
+                            </value>
+                            <next>
+                              <block type="data_setvariableto" id="add_sum_l1">
+                                <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                <value name="VALUE">
+                                  <block type="operator_arithmetic" id="plus_l1">
+                                    <field name="OPERATOR">+</field>
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="get_sum_l1">
+                                        <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <block type="data_variable" id="get_x_l1">
+                                        <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_say" id="say_l1">
+                        <value name="TEXT">
+                          <block type="data_variable" id="out_sum_l1">
+                            <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

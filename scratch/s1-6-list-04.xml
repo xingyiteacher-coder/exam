@@ -1,0 +1,99 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_cnt" islocal="false" iscloud="false">個數</variable>
+    <variable type="" id="v_x" islocal="false" iscloud="false">數</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_l4" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_l4_N">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_l4_N"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_l4_N">
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_l4_N"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="init_cnt_l4">
+                <field name="VARIABLE" id="v_cnt" variabletype="">個數</field>
+                <value name="VALUE">
+                  <shadow type="text" id="zero_l4"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="control_repeat" id="rep_l4">
+                    <value name="TIMES">
+                      <block type="data_variable" id="get_N_l4">
+                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_l4_x">
+                        <value name="QUESTION">
+                          <shadow type="text" id="txt_l4_x"><field name="TEXT">數</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_l4_x">
+                            <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                            <value name="VALUE">
+                              <block type="scratch_answer" id="ans_l4_x"></block>
+                            </value>
+                            <next>
+                              <block type="control_if" id="if_l4">
+                                <value name="CONDITION">
+                                  <block type="operator_compare" id="cmp_l4">
+                                    <field name="OPERATOR">==</field>
+                                    <value name="OPERAND1">
+                                      <shadow type="text" id="sh_op1_l4"><field name="TEXT"></field></shadow>
+                                      <block type="operator_mod" id="mod_l4">
+                                        <value name="NUM1">
+                                          <shadow type="math_number" id="s_m1_l4"><field name="NUM"></field></shadow>
+                                          <block type="data_variable" id="get_x_mod_l4">
+                                            <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <shadow type="math_number" id="two_l4"><field name="NUM">2</field></shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="OPERAND2">
+                                      <shadow type="text" id="sh_op2_l4"><field name="TEXT">0</field></shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="data_changevariableby" id="inc_cnt_l4">
+                                    <field name="VARIABLE" id="v_cnt" variabletype="">個數</field>
+                                    <value name="VALUE">
+                                      <shadow type="math_number" id="step_l4"><field name="NUM">1</field></shadow>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_say" id="say_l4">
+                        <value name="TEXT">
+                          <block type="data_variable" id="out_cnt_l4">
+                            <field name="VARIABLE" id="v_cnt" variabletype="">個數</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

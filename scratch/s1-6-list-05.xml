@@ -1,0 +1,176 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_max" islocal="false" iscloud="false">最大值</variable>
+    <variable type="" id="v_min" islocal="false" iscloud="false">最小值</variable>
+    <variable type="" id="v_x" islocal="false" iscloud="false">數</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_l5" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_l5_N">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_l5_N"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_l5_N">
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_l5_N"></block>
+            </value>
+            <next>
+              <block type="scratch_ask" id="ask_l5_x1">
+                <value name="QUESTION">
+                  <shadow type="text" id="txt_l5_x1"><field name="TEXT">數</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_l5_x1">
+                    <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                    <value name="VALUE">
+                      <block type="scratch_answer" id="ans_l5_x1"></block>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="init_max_l5">
+                        <field name="VARIABLE" id="v_max" variabletype="">最大值</field>
+                        <value name="VALUE">
+                          <block type="data_variable" id="get_x1_max_l5">
+                            <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="init_min_l5">
+                            <field name="VARIABLE" id="v_min" variabletype="">最小值</field>
+                            <value name="VALUE">
+                              <block type="data_variable" id="get_x1_min_l5">
+                                <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="control_repeat" id="rep_l5">
+                                <value name="TIMES">
+                                  <block type="operator_arithmetic" id="sub_l5_times">
+                                    <field name="OPERATOR">-</field>
+                                    <value name="NUM1">
+                                      <shadow type="math_number" id="s1_l5"><field name="NUM">0</field></shadow>
+                                      <block type="data_variable" id="get_N_l5">
+                                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <shadow type="math_number" id="s2_l5"><field name="NUM">1</field></shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="scratch_ask" id="ask_l5_x">
+                                    <value name="QUESTION">
+                                      <shadow type="text" id="txt_l5_x"><field name="TEXT">數</field></shadow>
+                                    </value>
+                                    <next>
+                                      <block type="data_setvariableto" id="set_l5_x">
+                                        <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                                        <value name="VALUE">
+                                          <block type="scratch_answer" id="ans_l5_x"></block>
+                                        </value>
+                                        <next>
+                                          <block type="control_if" id="if_l5_max">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_l5_max">
+                                                <field name="OPERATOR">&gt;</field>
+                                                <value name="OPERAND1">
+                                                  <shadow type="text" id="sh_op1_l5_max"><field name="TEXT"></field></shadow>
+                                                  <block type="data_variable" id="get_x_l5_max">
+                                                    <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <shadow type="text" id="sh_op2_l5_max"><field name="TEXT"></field></shadow>
+                                                  <block type="data_variable" id="get_max_l5">
+                                                    <field name="VARIABLE" id="v_max" variabletype="">最大值</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="data_setvariableto" id="update_max_l5">
+                                                <field name="VARIABLE" id="v_max" variabletype="">最大值</field>
+                                                <value name="VALUE">
+                                                  <block type="data_variable" id="get_x_newmax_l5">
+                                                    <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="control_if" id="if_l5_min">
+                                                <value name="CONDITION">
+                                                  <block type="operator_compare" id="cmp_l5_min">
+                                                    <field name="OPERATOR">&lt;</field>
+                                                    <value name="OPERAND1">
+                                                      <shadow type="text" id="sh_op1_l5_min"><field name="TEXT"></field></shadow>
+                                                      <block type="data_variable" id="get_x_l5_min">
+                                                        <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="OPERAND2">
+                                                      <shadow type="text" id="sh_op2_l5_min"><field name="TEXT"></field></shadow>
+                                                      <block type="data_variable" id="get_min_l5">
+                                                        <field name="VARIABLE" id="v_min" variabletype="">最小值</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <block type="data_setvariableto" id="update_min_l5">
+                                                    <field name="VARIABLE" id="v_min" variabletype="">最小值</field>
+                                                    <value name="VALUE">
+                                                      <block type="data_variable" id="get_x_newmin_l5">
+                                                        <field name="VARIABLE" id="v_x" variabletype="">數</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="scratch_say" id="say_l5">
+                                    <value name="TEXT">
+                                      <block type="operator_arithmetic" id="sub_l5_out">
+                                        <field name="OPERATOR">-</field>
+                                        <value name="NUM1">
+                                          <shadow type="math_number" id="s1_l5_out"><field name="NUM">0</field></shadow>
+                                          <block type="data_variable" id="get_max_out_l5">
+                                            <field name="VARIABLE" id="v_max" variabletype="">最大值</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <shadow type="math_number" id="s2_l5_out"><field name="NUM">0</field></shadow>
+                                          <block type="data_variable" id="get_min_out_l5">
+                                            <field name="VARIABLE" id="v_min" variabletype="">最小值</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

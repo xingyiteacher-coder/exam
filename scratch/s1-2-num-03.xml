@@ -1,0 +1,44 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="var_n">n</variable>
+  </variables>
+  <block type="event_whenflagclicked" x="50" y="50">
+    <next>
+      <!-- 1. 詢問並讀入 n -->
+      <block type="scratch_ask">
+        <value name="QUESTION">
+          <shadow type="text">
+            <field name="TEXT">n</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto">
+            <field name="VARIABLE" id="var_n" variabletype="">n</field>
+            <value name="VALUE">
+              <block type="scratch_answer"></block>
+            </value>
+            <next>
+              <!-- 2. 計算 n mod 10 (除以 10 的餘數) 並輸出 -->
+              <block type="scratch_say">
+                <value name="TEXT">
+                  <block type="operator_mod">
+                    <value name="NUM1">
+                      <block type="data_variable">
+                        <field name="VARIABLE" id="var_n" variabletype="">n</field>
+                      </block>
+                    </value>
+                    <value name="NUM2">
+                      <block type="math_number">
+                        <field name="NUM">10</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

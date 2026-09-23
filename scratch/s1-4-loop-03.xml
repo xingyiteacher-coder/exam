@@ -1,0 +1,79 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="var_m" islocal="false" iscloud="false">m</variable>
+    <variable type="" id="var_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="var_ans" islocal="false" iscloud="false">答案</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag" x="50" y="50">
+    <next>
+      <block type="scratch_ask" id="ask_m">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_m"><field name="TEXT">m</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_m">
+            <field name="VARIABLE" id="var_m" variabletype="">m</field>
+            <value name="VALUE"><block type="scratch_answer" id="ans_m"></block></value>
+            <next>
+              <block type="scratch_ask" id="ask_n">
+                <value name="QUESTION">
+                  <shadow type="text" id="txt_n"><field name="TEXT">n</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_n">
+                    <field name="VARIABLE" id="var_n" variabletype="">n</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_n"></block></value>
+                    <next>
+                      <block type="data_setvariableto" id="init_ans">
+                        <field name="VARIABLE" id="var_ans" variabletype="">答案</field>
+                        <value name="VALUE"><shadow type="math_number" id="num1"><field name="NUM">1</field></shadow></value>
+                        <next>
+                          <block type="control_repeat" id="loop">
+                            <value name="TIMES">
+                              <block type="data_variable" id="get_n">
+                                <field name="VARIABLE" id="var_n" variabletype="">n</field>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="mul_m">
+                                <field name="VARIABLE" id="var_ans" variabletype="">答案</field>
+                                <value name="VALUE">
+                                  <block type="operator_arithmetic" id="mult">
+                                    <field name="OPERATOR">*</field>
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="get_ans">
+                                        <field name="VARIABLE" id="var_ans" variabletype="">答案</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <block type="data_variable" id="get_m">
+                                        <field name="VARIABLE" id="var_m" variabletype="">m</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="scratch_say" id="say_res">
+                                <value name="TEXT">
+                                  <block type="data_variable" id="out_ans">
+                                    <field name="VARIABLE" id="var_ans" variabletype="">答案</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

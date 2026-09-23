@@ -1,0 +1,63 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="var_a">a</variable>
+    <variable type="" id="var_b">b</variable>
+  </variables>
+  <block type="event_whenflagclicked" x="50" y="50">
+    <next>
+      <!-- 1. 詢問並讀入 a -->
+      <block type="scratch_ask">
+        <value name="QUESTION">
+          <shadow type="text">
+            <field name="TEXT">a</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto">
+            <field name="VARIABLE" id="var_a" variabletype="">a</field>
+            <value name="VALUE">
+              <block type="scratch_answer"></block>
+            </value>
+            <next>
+              <!-- 2. 詢問並讀入 b -->
+              <block type="scratch_ask">
+                <value name="QUESTION">
+                  <shadow type="text">
+                    <field name="TEXT">b</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto">
+                    <field name="VARIABLE" id="var_b" variabletype="">b</field>
+                    <value name="VALUE">
+                      <block type="scratch_answer"></block>
+                    </value>
+                    <next>
+                      <!-- 3. 計算 a 除以 b 的餘數並輸出 -->
+                      <block type="scratch_say">
+                        <value name="TEXT">
+                          <block type="operator_mod">
+                            <value name="NUM1">
+                              <block type="data_variable">
+                                <field name="VARIABLE" id="var_a" variabletype="">a</field>
+                              </block>
+                            </value>
+                            <value name="NUM2">
+                              <block type="data_variable">
+                                <field name="VARIABLE" id="var_b" variabletype="">b</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

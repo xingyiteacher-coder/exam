@@ -1,0 +1,107 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="z_s" islocal="false" iscloud="false">字串</variable>
+    <variable type="" id="z_cnt" islocal="false" iscloud="false">個數</variable>
+    <variable type="" id="z_i" islocal="false" iscloud="false">i</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_s5" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_s5">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_s5"><field name="TEXT">字串</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_s5">
+            <field name="VARIABLE" id="z_s" variabletype="">字串</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_s5"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="init_cnt_s5">
+                <field name="VARIABLE" id="z_cnt" variabletype="">個數</field>
+                <value name="VALUE">
+                  <shadow type="text" id="zero_s5"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="init_i_s5">
+                    <field name="VARIABLE" id="z_i" variabletype="">i</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="one_s5"><field name="TEXT">1</field></shadow>
+                    </value>
+                    <next>
+                      <block type="control_repeat" id="rep_s5">
+                        <value name="TIMES">
+                          <block type="operator_length" id="len_s5">
+                            <value name="STRING">
+                              <block type="data_variable" id="get_s5_len">
+                                <field name="VARIABLE" id="z_s" variabletype="">字串</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="control_if" id="if_s5">
+                            <value name="CONDITION">
+                              <block type="operator_compare" id="cmp_s5">
+                                <field name="OPERATOR">==</field>
+                                <value name="OPERAND1">
+                                  <shadow type="text" id="sh_op1_s5"><field name="TEXT"></field></shadow>
+                                  <block type="operator_letter_of" id="let_s5">
+                                    <value name="STRING">
+                                      <shadow type="text" id="sh_str_let_s5"><field name="TEXT"></field></shadow>
+                                      <block type="data_variable" id="get_s5_str">
+                                        <field name="VARIABLE" id="z_s" variabletype="">字串</field>
+                                      </block>
+                                    </value>
+                                    <value name="LETTER">
+                                      <shadow type="math_whole_number" id="sh_num_let_s5"><field name="NUM">1</field></shadow>
+                                      <block type="data_variable" id="get_s5_i">
+                                        <field name="VARIABLE" id="z_i" variabletype="">i</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <shadow type="text" id="txt_a_s5"><field name="TEXT">a</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_changevariableby" id="inc_cnt_s5">
+                                <field name="VARIABLE" id="z_cnt" variabletype="">個數</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="step_cnt_s5"><field name="NUM">1</field></shadow>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="data_changevariableby" id="inc_i_s5">
+                                <field name="VARIABLE" id="z_i" variabletype="">i</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="step_i_s5"><field name="NUM">1</field></shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="scratch_say" id="say_s5">
+                            <value name="TEXT">
+                              <block type="data_variable" id="out_cnt_s5">
+                                <field name="VARIABLE" id="z_cnt" variabletype="">個數</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

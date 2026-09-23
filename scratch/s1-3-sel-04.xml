@@ -1,0 +1,126 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="var_a" islocal="false" iscloud="false">a</variable>
+    <variable type="" id="var_b" islocal="false" iscloud="false">b</variable>
+    <variable type="" id="var_c" islocal="false" iscloud="false">c</variable>
+    <variable type="" id="var_max" islocal="false" iscloud="false">最大</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag" x="50" y="50">
+    <next>
+      <block type="scratch_ask" id="ask_a">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_a"><field name="TEXT">a</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_a">
+            <field name="VARIABLE" id="var_a" variabletype="">a</field>
+            <value name="VALUE"><block type="scratch_answer" id="ans_a"></block></value>
+            <next>
+              <block type="scratch_ask" id="ask_b">
+                <value name="QUESTION">
+                  <shadow type="text" id="txt_b"><field name="TEXT">b</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_b">
+                    <field name="VARIABLE" id="var_b" variabletype="">b</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_b"></block></value>
+                    <next>
+                      <block type="scratch_ask" id="ask_c">
+                        <value name="QUESTION">
+                          <shadow type="text" id="txt_c"><field name="TEXT">c</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_c">
+                            <field name="VARIABLE" id="var_c" variabletype="">c</field>
+                            <value name="VALUE"><block type="scratch_answer" id="ans_c"></block></value>
+                            <next>
+                              <block type="data_setvariableto" id="init_max">
+                                <field name="VARIABLE" id="var_max" variabletype="">最大</field>
+                                <value name="VALUE">
+                                  <block type="data_variable" id="get_a">
+                                    <field name="VARIABLE" id="var_a" variabletype="">a</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="control_if" id="if_b">
+                                    <value name="CONDITION">
+                                      <block type="operator_compare" id="cmp_b">
+                                        <field name="OPERATOR">&gt;</field>
+                                        <value name="OPERAND1">
+                                          <block type="data_variable" id="get_b">
+                                            <field name="VARIABLE" id="var_b" variabletype="">b</field>
+                                          </block>
+                                        </value>
+                                        <value name="OPERAND2">
+                                          <block type="data_variable" id="get_max1">
+                                            <field name="VARIABLE" id="var_max" variabletype="">最大</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="data_setvariableto" id="set_max_b">
+                                        <field name="VARIABLE" id="var_max" variabletype="">最大</field>
+                                        <value name="VALUE">
+                                          <block type="data_variable" id="get_b2">
+                                            <field name="VARIABLE" id="var_b" variabletype="">b</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="control_if" id="if_c">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="cmp_c">
+                                            <field name="OPERATOR">&gt;</field>
+                                            <value name="OPERAND1">
+                                              <block type="data_variable" id="get_c">
+                                                <field name="VARIABLE" id="var_c" variabletype="">c</field>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <block type="data_variable" id="get_max2">
+                                                <field name="VARIABLE" id="var_max" variabletype="">最大</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_setvariableto" id="set_max_c">
+                                            <field name="VARIABLE" id="var_max" variabletype="">最大</field>
+                                            <value name="VALUE">
+                                              <block type="data_variable" id="get_c2">
+                                                <field name="VARIABLE" id="var_c" variabletype="">c</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="scratch_say" id="say_max">
+                                            <value name="TEXT">
+                                              <block type="data_variable" id="out_max">
+                                                <field name="VARIABLE" id="var_max" variabletype="">最大</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,100 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_cnt" islocal="false" iscloud="false">個數</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag5" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask5">
+        <value name="QUESTION">
+          <shadow type="text" id="txt5"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N5">
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans5"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_cnt5">
+                <field name="VARIABLE" id="v_cnt" variabletype="">個數</field>
+                <value name="VALUE">
+                  <shadow type="text" id="zero5"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_i5">
+                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="one5"><field name="TEXT">1</field></shadow>
+                    </value>
+                    <next>
+                      <block type="control_repeat" id="rep5">
+                        <value name="TIMES">
+                          <block type="data_variable" id="get_N5">
+                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="control_if" id="if_mult3_5">
+                            <value name="CONDITION">
+                              <block type="operator_compare" id="cmp_mod3_5">
+                                <field name="OPERATOR">==</field>
+                                <value name="OPERAND1">
+                                  <shadow type="text" id="shadow_op1_5"><field name="TEXT"></field></shadow>
+                                  <block type="operator_mod" id="mod3_5">
+                                    <value name="NUM1">
+                                      <shadow type="math_number" id="shadow_m1_5"><field name="NUM"></field></shadow>
+                                      <block type="data_variable" id="get_i5_cond">
+                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <shadow type="math_number" id="num3_5"><field name="NUM">3</field></shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <shadow type="text" id="shadow_op2_5"><field name="TEXT">0</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_changevariableby" id="inc_cnt5">
+                                <field name="VARIABLE" id="v_cnt" variabletype="">個數</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="step5_cnt"><field name="NUM">1</field></shadow>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="data_changevariableby" id="inc_i5">
+                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="step5_1"><field name="NUM">1</field></shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="scratch_say" id="say5">
+                            <value name="TEXT">
+                              <block type="data_variable" id="out_cnt5">
+                                <field name="VARIABLE" id="v_cnt" variabletype="">個數</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

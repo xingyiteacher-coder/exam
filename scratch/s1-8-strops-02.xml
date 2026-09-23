@@ -1,0 +1,101 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_s1" islocal="false" iscloud="false">字串1</variable>
+    <variable type="" id="v_s2" islocal="false" iscloud="false">字串2</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag_so2" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_so2_1">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_so2_1"><field name="TEXT">字串1</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_so2_1">
+            <field name="VARIABLE" id="v_s1" variabletype="">字串1</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_so2_1"></block>
+            </value>
+            <next>
+              <block type="scratch_ask" id="ask_so2_2">
+                <value name="QUESTION">
+                  <shadow type="text" id="txt_so2_2"><field name="TEXT">字串2</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_so2_2">
+                    <field name="VARIABLE" id="v_s2" variabletype="">字串2</field>
+                    <value name="VALUE">
+                      <block type="scratch_answer" id="ans_so2_2"></block>
+                    </value>
+                    <next>
+                      <block type="control_if_else" id="if_else_so2_eq">
+                        <value name="CONDITION">
+                          <block type="operator_compare" id="cmp_so2_eq">
+                            <field name="OPERATOR">==</field>
+                            <value name="OPERAND1">
+                              <shadow type="text" id="sh_op1_so2_eq"><field name="TEXT"></field></shadow>
+                              <block type="data_variable" id="get_s1_eq_so2">
+                                <field name="VARIABLE" id="v_s1" variabletype="">字串1</field>
+                              </block>
+                            </value>
+                            <value name="OPERAND2">
+                              <shadow type="text" id="sh_op2_so2_eq"><field name="TEXT"></field></shadow>
+                              <block type="data_variable" id="get_s2_eq_so2">
+                                <field name="VARIABLE" id="v_s2" variabletype="">字串2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="scratch_say" id="say_so2_equal">
+                            <value name="TEXT">
+                              <shadow type="text" id="txt_equal_so2"><field name="TEXT">equal</field></shadow>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="SUBSTACK2">
+                          <block type="control_if_else" id="if_else_so2_lt">
+                            <value name="CONDITION">
+                              <block type="operator_compare" id="cmp_so2_lt">
+                                <field name="OPERATOR">&lt;</field>
+                                <value name="OPERAND1">
+                                  <shadow type="text" id="sh_op1_so2_lt"><field name="TEXT"></field></shadow>
+                                  <block type="data_variable" id="get_s1_lt_so2">
+                                    <field name="VARIABLE" id="v_s1" variabletype="">字串1</field>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <shadow type="text" id="sh_op2_so2_lt"><field name="TEXT"></field></shadow>
+                                  <block type="data_variable" id="get_s2_lt_so2">
+                                    <field name="VARIABLE" id="v_s2" variabletype="">字串2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="scratch_say" id="say_so2_first">
+                                <value name="TEXT">
+                                  <shadow type="text" id="txt_first_so2"><field name="TEXT">first</field></shadow>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="SUBSTACK2">
+                              <block type="scratch_say" id="say_so2_second">
+                                <value name="TEXT">
+                                  <shadow type="text" id="txt_second_so2"><field name="TEXT">second</field></shadow>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
