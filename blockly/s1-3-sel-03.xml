@@ -1,0 +1,56 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_a">a</variable>
+    <variable id="var_b">b</variable>
+  </variables>
+  <block type="variables_set" id="init_a" x="20" y="20">
+    <field name="VAR" id="var_a">a</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_a">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_b">
+        <field name="VAR" id="var_b">b</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_b">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="if_max">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="cmp_a_b">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="variables_get" id="ga1"><field name="VAR" id="var_a">a</field></block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="gb1"><field name="VAR" id="var_b">b</field></block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="text_print" id="print_a">
+                <value name="TEXT">
+                  <block type="variables_get" id="ga2"><field name="VAR" id="var_a">a</field></block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="text_print" id="print_b">
+                <value name="TEXT">
+                  <block type="variables_get" id="gb2"><field name="VAR" id="var_b">b</field></block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

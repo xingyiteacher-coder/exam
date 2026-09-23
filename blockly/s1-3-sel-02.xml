@@ -1,0 +1,62 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="controls_if" id="if_sign">
+        <mutation elseif="1" else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="cmp_gt">
+            <field name="OP">GT</field>
+            <value name="A">
+              <block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="num0_1"><field name="NUM">0</field></shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_print" id="print_pos">
+            <value name="TEXT">
+              <shadow type="text" id="txt_pos"><field name="TEXT">positive</field></shadow>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_compare" id="cmp_lt">
+            <field name="OP">LT</field>
+            <value name="A">
+              <block type="variables_get" id="gn2"><field name="VAR" id="var_n">n</field></block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="num0_2"><field name="NUM">0</field></shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_print" id="print_neg">
+            <value name="TEXT">
+              <shadow type="text" id="txt_neg"><field name="TEXT">negative</field></shadow>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="text_print" id="print_zero">
+            <value name="TEXT">
+              <shadow type="text" id="txt_zero"><field name="TEXT">zero</field></shadow>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

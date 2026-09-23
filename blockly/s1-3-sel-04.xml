@@ -1,0 +1,100 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_a">a</variable>
+    <variable id="var_b">b</variable>
+    <variable id="var_c">c</variable>
+    <variable id="var_max">max_val</variable>
+  </variables>
+  <block type="variables_set" id="init_a" x="20" y="20">
+    <field name="VAR" id="var_a">a</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_a">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_b">
+        <field name="VAR" id="var_b">b</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_b">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="init_c">
+            <field name="VAR" id="var_c">c</field>
+            <value name="VALUE">
+              <block type="text_prompt_ext" id="prompt_c">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="set_max_a">
+                <field name="VAR" id="var_max">max_val</field>
+                <value name="VALUE">
+                  <block type="variables_get" id="ga1"><field name="VAR" id="var_a">a</field></block>
+                </value>
+                <next>
+                  <block type="controls_if" id="check_b">
+                    <value name="IF0">
+                      <block type="logic_compare" id="cmp_b">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="variables_get" id="gb1"><field name="VAR" id="var_b">b</field></block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="gm1"><field name="VAR" id="var_max">max_val</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="set_max_b">
+                        <field name="VAR" id="var_max">max_val</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="gb2"><field name="VAR" id="var_b">b</field></block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="check_c">
+                        <value name="IF0">
+                          <block type="logic_compare" id="cmp_c">
+                            <field name="OP">GT</field>
+                            <value name="A">
+                              <block type="variables_get" id="gc1"><field name="VAR" id="var_c">c</field></block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="gm2"><field name="VAR" id="var_max">max_val</field></block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="set_max_c">
+                            <field name="VAR" id="var_max">max_val</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="gc2"><field name="VAR" id="var_c">c</field></block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="text_print" id="print_max">
+                            <value name="TEXT">
+                              <block type="variables_get" id="gm3"><field name="VAR" id="var_max">max_val</field></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

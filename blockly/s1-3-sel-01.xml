@@ -1,0 +1,49 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="controls_if" id="if_even" x="20" y="20">
+    <mutation else="1"></mutation>
+    <value name="IF0">
+      <block type="logic_compare" id="cmp_mod">
+        <field name="OP">EQ</field>
+        <value name="A">
+          <block type="math_modulo" id="mod2">
+            <field name="OP">MOD</field>
+            <value name="DIVIDEND">
+              <block type="text_prompt_ext" id="prompt_n">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+              </block>
+            </value>
+            <value name="DIVISOR">
+              <shadow type="math_number" id="num2">
+                <field name="NUM">2</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="num0">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <statement name="DO0">
+      <block type="text_print" id="print_even">
+        <value name="TEXT">
+          <shadow type="text" id="txt_even">
+            <field name="TEXT">even</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+    <statement name="ELSE">
+      <block type="text_print" id="print_odd">
+        <value name="TEXT">
+          <shadow type="text" id="txt_odd">
+            <field name="TEXT">odd</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+</xml>
