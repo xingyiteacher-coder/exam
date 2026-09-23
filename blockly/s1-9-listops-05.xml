@@ -1,0 +1,177 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">N</variable>
+    <variable id="var_line">line</variable>
+    <variable id="var_sorted">sorted_list</variable>
+    <variable id="var_max">max_val</variable>
+    <variable id="var_second">second_val</variable>
+    <variable id="var_found">found</variable>
+    <variable id="var_item">item</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_line">
+        <field name="VAR" id="var_line">line</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_line">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="sort_lst">
+            <field name="VAR" id="var_sorted">sorted_list</field>
+            <value name="VALUE">
+              <block type="lists_sort" id="do_sort">
+                <field name="TYPE">NUMERIC</field>
+                <field name="DIRECTION">-1</field>
+                <value name="LIST">
+                  <block type="lists_split" id="split_space">
+                    <mutation mode="SPLIT"></mutation>
+                    <field name="MODE">SPLIT</field>
+                    <value name="INPUT">
+                      <block type="variables_get" id="gline"><field name="VAR" id="var_line">line</field></block>
+                    </value>
+                    <value name="DELIM">
+                      <shadow type="text" id="delim_sp"><field name="TEXT"> </field></shadow>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="check_length">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="cmp_len">
+                    <field name="OP">LT</field>
+                    <value name="A">
+                      <block type="lists_length" id="len_sorted">
+                        <value name="VALUE">
+                          <block type="variables_get" id="gsort1"><field name="VAR" id="var_sorted">sorted_list</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="num2"><field name="NUM">2</field></shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="text_print" id="print_none1">
+                    <value name="TEXT">
+                      <block type="text" id="txt_none1"><field name="TEXT">none</field></block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="variables_set" id="init_max">
+                    <field name="VAR" id="var_max">max_val</field>
+                    <value name="VALUE">
+                      <block type="lists_getIndex" id="get_first">
+                        <mutation statement="false" at="false"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FIRST</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="gsort2"><field name="VAR" id="var_sorted">sorted_list</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="init_found">
+                        <field name="VAR" id="var_found">found</field>
+                        <value name="VALUE">
+                          <block type="logic_boolean" id="bool_false"><field name="BOOL">FALSE</field></block>
+                        </value>
+                        <next>
+                          <block type="controls_forEach" id="loop_check">
+                            <field name="VAR" id="var_item">item</field>
+                            <value name="LIST">
+                              <block type="variables_get" id="gsort3"><field name="VAR" id="var_sorted">sorted_list</field></block>
+                            </value>
+                            <statement name="DO">
+                              <block type="controls_if" id="check_diff">
+                                <value name="IF0">
+                                  <block type="logic_operation" id="and_cond">
+                                    <field name="OP">AND</field>
+                                    <value name="A">
+                                      <block type="logic_negate" id="not_found">
+                                        <value name="BOOL">
+                                          <block type="variables_get" id="gfound1"><field name="VAR" id="var_found">found</field></block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="logic_compare" id="cmp_neq">
+                                        <field name="OP">NEQ</field>
+                                        <value name="A">
+                                          <block type="variables_get" id="gitem"><field name="VAR" id="var_item">item</field></block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="variables_get" id="gmax"><field name="VAR" id="var_max">max_val</field></block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="variables_set" id="set_second">
+                                    <field name="VAR" id="var_second">second_val</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="gitem2"><field name="VAR" id="var_item">item</field></block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="set_found">
+                                        <field name="VAR" id="var_found">found</field>
+                                        <value name="VALUE">
+                                          <block type="logic_boolean" id="bool_true"><field name="BOOL">TRUE</field></block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="print_result">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="variables_get" id="gfound2"><field name="VAR" id="var_found">found</field></block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="text_print" id="print_second">
+                                    <value name="TEXT">
+                                      <block type="variables_get" id="gsecond"><field name="VAR" id="var_second">second_val</field></block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="text_print" id="print_none2">
+                                    <value name="TEXT">
+                                      <block type="text" id="txt_none2"><field name="TEXT">none</field></block>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,63 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_str">s</variable>
+    <variable id="var_k">k</variable>
+    <variable id="var_lst">list</variable>
+  </variables>
+  <block type="variables_set" id="init_str" x="20" y="20">
+    <field name="VAR" id="var_str">s</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_str">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_k">
+        <field name="VAR" id="var_k">k</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_k">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="split_str">
+            <field name="VAR" id="var_lst">list</field>
+            <value name="VALUE">
+              <block type="lists_split" id="split_comma">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT">
+                  <block type="variables_get" id="gstr"><field name="VAR" id="var_str">s</field></block>
+                </value>
+                <value name="DELIM">
+                  <shadow type="text" id="delim_comma">
+                    <field name="TEXT">,</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="print">
+                <value name="TEXT">
+                  <block type="lists_getIndex" id="get_item">
+                    <mutation statement="false" at="true"></mutation>
+                    <field name="MODE">GET</field>
+                    <field name="WHERE">FROM_START</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="glst"><field name="VAR" id="var_lst">list</field></block>
+                    </value>
+                    <value name="AT">
+                      <block type="variables_get" id="gk"><field name="VAR" id="var_k">k</field></block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

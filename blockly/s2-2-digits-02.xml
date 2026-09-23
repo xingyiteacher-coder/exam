@@ -1,0 +1,52 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="cast_n">
+        <field name="OP">ADD</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_n">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="num0"><field name="NUM">0</field></shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="print">
+        <value name="TEXT">
+          <block type="math_arithmetic" id="add1">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <shadow type="math_number" id="num1_1"><field name="NUM">1</field></shadow>
+            </value>
+            <value name="B">
+              <block type="math_modulo" id="mod9">
+                <value name="DIVIDEND">
+                  <block type="math_arithmetic" id="sub1">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="num1_2"><field name="NUM">1</field></shadow>
+                    </value>
+                  </block>
+                </value>
+                <value name="DIVISOR">
+                  <shadow type="math_number" id="num9"><field name="NUM">9</field></shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,36 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_str">s</variable>
+  </variables>
+  <block type="variables_set" id="init_str" x="20" y="20">
+    <field name="VAR" id="var_str">s</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_str">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="print">
+        <value name="TEXT">
+          <block type="lists_length" id="get_len">
+            <value name="VALUE">
+              <block type="lists_split" id="split_space">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT">
+                  <block type="variables_get" id="gstr"><field name="VAR" id="var_str">s</field></block>
+                </value>
+                <value name="DELIM">
+                  <shadow type="text" id="delim_space">
+                    <field name="TEXT"> </field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

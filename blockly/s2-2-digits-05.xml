@@ -1,0 +1,124 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+    <variable id="var_ans">ans</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <!-- 乘以 1 強制轉為數值 -->
+      <block type="math_arithmetic" id="cast_num">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_n">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="num1"><field name="NUM">1</field></shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="controls_if" id="check_zero">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="cmp_eq0">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="gn0"><field name="VAR" id="var_n">n</field></block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="num0"><field name="NUM">0</field></shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_print" id="print_0">
+            <value name="TEXT">
+              <block type="text" id="txt_0"><field name="TEXT">0</field></block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="init_ans">
+            <field name="VAR" id="var_ans">ans</field>
+            <value name="VALUE">
+              <block type="text" id="txt_empty"><field name="TEXT"></field></block>
+            </value>
+            <next>
+              <block type="controls_whileUntil" id="loop_bin">
+                <field name="MODE">WHILE</field>
+                <value name="BOOL">
+                  <block type="logic_compare" id="cmp_gt0">
+                    <field name="OP">GT</field>
+                    <value name="A">
+                      <block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="num_z"><field name="NUM">0</field></shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <!-- ans = (n % 2) + ans -->
+                  <block type="variables_set" id="set_ans">
+                    <field name="VAR" id="var_ans">ans</field>
+                    <value name="VALUE">
+                      <block type="text_join" id="join_ans">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="math_modulo" id="mod2">
+                            <value name="DIVIDEND">
+                              <block type="variables_get" id="gn2"><field name="VAR" id="var_n">n</field></block>
+                            </value>
+                            <value name="DIVISOR">
+                              <shadow type="math_number" id="num2"><field name="NUM">2</field></shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="variables_get" id="gans1"><field name="VAR" id="var_ans">ans</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- n = Math.floor(n / 2) -->
+                      <block type="variables_set" id="div_n">
+                        <field name="VAR" id="var_n">n</field>
+                        <value name="VALUE">
+                          <block type="math_round" id="floor_n">
+                            <field name="OP">ROUNDDOWN</field>
+                            <value name="NUM">
+                              <block type="math_arithmetic" id="div2">
+                                <field name="OP">DIVIDE</field>
+                                <value name="A">
+                                  <block type="variables_get" id="gn3"><field name="VAR" id="var_n">n</field></block>
+                                </value>
+                                <value name="B">
+                                  <shadow type="math_number" id="num_d2"><field name="NUM">2</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print" id="print_ans">
+                    <value name="TEXT">
+                      <block type="variables_get" id="gans2"><field name="VAR" id="var_ans">ans</field></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

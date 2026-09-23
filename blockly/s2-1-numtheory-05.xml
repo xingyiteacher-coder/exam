@@ -1,0 +1,193 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+    <variable id="var_sum">sum</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="controls_if" id="check_le_1">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="cmp_n_le_1">
+            <field name="OP">LTE</field>
+            <value name="A">
+              <block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="num1"><field name="NUM">1</field></shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_print" id="print_no_le1">
+            <value name="TEXT">
+              <block type="text" id="tno1"><field name="TEXT">no</field></block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="init_sum">
+            <field name="VAR" id="var_sum">sum</field>
+            <value name="VALUE">
+              <shadow type="math_number" id="num0"><field name="NUM">0</field></shadow>
+            </value>
+            <next>
+              <block type="controls_for" id="loop_factor">
+                <field name="VAR" id="var_i">i</field>
+                <value name="FROM">
+                  <shadow type="math_number" id="num_from"><field name="NUM">1</field></shadow>
+                </value>
+                <value name="TO">
+                  <block type="math_single" id="sqrt_n">
+                    <field name="OP">ROOT</field>
+                    <value name="NUM">
+                      <block type="variables_get" id="gn2"><field name="VAR" id="var_n">n</field></block>
+                    </value>
+                  </block>
+                </value>
+                <value name="BY">
+                  <shadow type="math_number" id="num_by"><field name="NUM">1</field></shadow>
+                </value>
+                <statement name="DO">
+                  <block type="controls_if" id="check_div">
+                    <value name="IF0">
+                      <block type="logic_compare" id="cmp_mod">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="math_modulo" id="mod_ni">
+                            <value name="DIVIDEND">
+                              <block type="variables_get" id="gn3"><field name="VAR" id="var_n">n</field></block>
+                            </value>
+                            <value name="DIVISOR">
+                              <block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="num_0"><field name="NUM">0</field></shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_if" id="check_i_1">
+                        <mutation elseif="1" else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="cmp_i_1">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="gi2"><field name="VAR" id="var_i">i</field></block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="num_1"><field name="NUM">1</field></shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="math_change" id="add_1">
+                            <field name="VAR" id="var_sum">sum</field>
+                            <value name="DELTA">
+                              <shadow type="math_number" id="num_delta1"><field name="NUM">1</field></shadow>
+                            </value>
+                          </block>
+                        </statement>
+                        <value name="IF1">
+                          <block type="logic_compare" id="cmp_sq">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="math_arithmetic" id="mul_ii">
+                                <field name="OP">MULTIPLY</field>
+                                <value name="A">
+                                  <block type="variables_get" id="gi3"><field name="VAR" id="var_i">i</field></block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get" id="gi4"><field name="VAR" id="var_i">i</field></block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="gn4"><field name="VAR" id="var_n">n</field></block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO1">
+                          <block type="math_change" id="add_i">
+                            <field name="VAR" id="var_sum">sum</field>
+                            <value name="DELTA">
+                              <block type="variables_get" id="gi5"><field name="VAR" id="var_i">i</field></block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="math_change" id="add_pair">
+                            <field name="VAR" id="var_sum">sum</field>
+                            <value name="DELTA">
+                              <block type="math_arithmetic" id="add_i_n_div_i">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="gi6"><field name="VAR" id="var_i">i</field></block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_arithmetic" id="div_ni">
+                                    <field name="OP">DIVIDE</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="gn5"><field name="VAR" id="var_n">n</field></block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get" id="gi7"><field name="VAR" id="var_i">i</field></block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="check_perfect">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="cmp_sum_n">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="gsum"><field name="VAR" id="var_sum">sum</field></block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="gn6"><field name="VAR" id="var_n">n</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="text_print" id="print_yes">
+                        <value name="TEXT">
+                          <block type="text" id="tyes"><field name="TEXT">yes</field></block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="text_print" id="print_no">
+                        <value name="TEXT">
+                          <block type="text" id="tno2"><field name="TEXT">no</field></block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

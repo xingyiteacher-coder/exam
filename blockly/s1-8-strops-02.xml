@@ -1,0 +1,85 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_s1">s1</variable>
+    <variable id="var_s2">s2</variable>
+  </variables>
+  <block type="variables_set" id="init_s1" x="20" y="20">
+    <field name="VAR" id="var_s1">s1</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_s1">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_s2">
+        <field name="VAR" id="var_s2">s2</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_s2">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="cmp_str">
+            <mutation elseif="2"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="cmp_lt">
+                <field name="OP">LT</field>
+                <value name="A">
+                  <block type="variables_get" id="gs1_1"><field name="VAR" id="var_s1">s1</field></block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="gs2_1"><field name="VAR" id="var_s2">s2</field></block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="text_print" id="p1">
+                <value name="TEXT">
+                  <block type="text" id="t1"><field name="TEXT">first</field></block>
+                </value>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare" id="cmp_gt">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="variables_get" id="gs1_2"><field name="VAR" id="var_s1">s1</field></block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="gs2_2"><field name="VAR" id="var_s2">s2</field></block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="text_print" id="p2">
+                <value name="TEXT">
+                  <block type="text" id="t2"><field name="TEXT">second</field></block>
+                </value>
+              </block>
+            </statement>
+            <value name="IF2">
+              <block type="logic_compare" id="cmp_eq">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="gs1_3"><field name="VAR" id="var_s1">s1</field></block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="gs2_3"><field name="VAR" id="var_s2">s2</field></block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO2">
+              <block type="text_print" id="p3">
+                <value name="TEXT">
+                  <block type="text" id="t3"><field name="TEXT">equal</field></block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

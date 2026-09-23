@@ -1,0 +1,97 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_s">s</variable>
+    <variable id="var_p">p</variable>
+  </variables>
+  <block type="variables_set" id="init_s" x="20" y="20">
+    <field name="VAR" id="var_s">s</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_s">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_p">
+        <field name="VAR" id="var_p">p</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_p">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="check_prefix">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_operation" id="and_cond">
+                <field name="OP">AND</field>
+                <value name="A">
+                  <block type="logic_compare" id="cmp_len">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="text_length" id="len_s">
+                        <value name="VALUE">
+                          <block type="variables_get" id="gs1"><field name="VAR" id="var_s">s</field></block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="text_length" id="len_p">
+                        <value name="VALUE">
+                          <block type="variables_get" id="gp1"><field name="VAR" id="var_p">p</field></block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_compare" id="cmp_sub">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="text_getSubstring" id="sub_s">
+                        <mutation at1="true" at2="true" is_player="false"></mutation>
+                        <field name="WHERE1">FROM_START</field>
+                        <field name="WHERE2">FROM_START</field>
+                        <value name="STRING">
+                          <block type="variables_get" id="gs2"><field name="VAR" id="var_s">s</field></block>
+                        </value>
+                        <value name="AT1">
+                          <shadow type="math_number" id="num1"><field name="NUM">1</field></shadow>
+                        </value>
+                        <value name="AT2">
+                          <block type="text_length" id="len_p2">
+                            <value name="VALUE">
+                              <block type="variables_get" id="gp2"><field name="VAR" id="var_p">p</field></block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="gp3"><field name="VAR" id="var_p">p</field></block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="text_print" id="pyes">
+                <value name="TEXT">
+                  <block type="text" id="tyes"><field name="TEXT">yes</field></block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="text_print" id="pno">
+                <value name="TEXT">
+                  <block type="text" id="tno"><field name="TEXT">no</field></block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,145 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">N</variable>
+    <variable id="var_line">line</variable>
+    <variable id="var_v">v</variable>
+    <variable id="var_lst">list</variable>
+    <variable id="var_ans">ans</variable>
+    <variable id="var_item">item</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_line">
+        <field name="VAR" id="var_line">line</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext" id="prompt_line">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="init_v">
+            <field name="VAR" id="var_v">v</field>
+            <value name="VALUE">
+              <block type="text_prompt_ext" id="prompt_v">
+                <mutation type="TEXT"></mutation>
+                <field name="TYPE">TEXT</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="split_lst">
+                <field name="VAR" id="var_lst">list</field>
+                <value name="VALUE">
+                  <block type="lists_split" id="split_space">
+                    <mutation mode="SPLIT"></mutation>
+                    <field name="MODE">SPLIT</field>
+                    <value name="INPUT">
+                      <block type="variables_get" id="gline"><field name="VAR" id="var_line">line</field></block>
+                    </value>
+                    <value name="DELIM">
+                      <shadow type="text" id="delim_sp"><field name="TEXT"> </field></shadow>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="init_ans">
+                    <field name="VAR" id="var_ans">ans</field>
+                    <value name="VALUE">
+                      <block type="lists_create_empty" id="create_ans"></block>
+                    </value>
+                    <next>
+                      <block type="controls_forEach" id="loop_filter">
+                        <field name="VAR" id="var_item">item</field>
+                        <value name="LIST">
+                          <block type="variables_get" id="glst"><field name="VAR" id="var_lst">list</field></block>
+                        </value>
+                        <statement name="DO">
+                          <block type="controls_if" id="check_neq">
+                            <value name="IF0">
+                              <block type="logic_compare" id="cmp_neq">
+                                <field name="OP">NEQ</field>
+                                <value name="A">
+                                  <block type="variables_get" id="gitem"><field name="VAR" id="var_item">item</field></block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get" id="gv"><field name="VAR" id="var_v">v</field></block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="lists_setIndex" id="add_ans">
+                                <mutation at="false" statement="true"></mutation>
+                                <field name="MODE">INSERT</field>
+                                <field name="WHERE">LAST</field>
+                                <value name="LIST">
+                                  <block type="variables_get" id="gans1"><field name="VAR" id="var_ans">ans</field></block>
+                                </value>
+                                <value name="TO">
+                                  <block type="variables_get" id="gitem2"><field name="VAR" id="var_item">item</field></block>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="controls_if" id="check_empty">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="cmp_len">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="lists_length" id="len_ans">
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="gans2"><field name="VAR" id="var_ans">ans</field></block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <shadow type="math_number" id="num0"><field name="NUM">0</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="text_print" id="print_empty">
+                                <value name="TEXT">
+                                  <block type="text" id="txt_empty"><field name="TEXT">empty</field></block>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="text_print" id="print_ans">
+                                <value name="TEXT">
+                                  <block type="lists_split" id="join_space">
+                                    <mutation mode="JOIN"></mutation>
+                                    <field name="MODE">JOIN</field>
+                                    <value name="INPUT">
+                                      <block type="variables_get" id="gans3"><field name="VAR" id="var_ans">ans</field></block>
+                                    </value>
+                                    <value name="DELIM">
+                                      <shadow type="text" id="delim_sp2"><field name="TEXT"> </field></shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

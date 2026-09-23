@@ -1,0 +1,123 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+    <variable id="var_is_prime">isPrime</variable>
+    <variable id="var_i">i</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext" id="prompt_n">
+        <mutation type="NUMBER"></mutation>
+        <field name="TYPE">NUMBER</field>
+      </block>
+    </value>
+    <next>
+      <block type="controls_if" id="check_lt_2">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="cmp_n_lt_2">
+            <field name="OP">LT</field>
+            <value name="A">
+              <block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="num2"><field name="NUM">2</field></shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_print" id="print_no_lt2">
+            <value name="TEXT">
+              <block type="text" id="tno1"><field name="TEXT">no</field></block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="init_flag">
+            <field name="VAR" id="var_is_prime">isPrime</field>
+            <value name="VALUE">
+              <block type="logic_boolean" id="bool_true"><field name="BOOL">TRUE</field></block>
+            </value>
+            <next>
+              <block type="controls_for" id="loop_check">
+                <field name="VAR" id="var_i">i</field>
+                <value name="FROM">
+                  <shadow type="math_number" id="num_from"><field name="NUM">2</field></shadow>
+                </value>
+                <value name="TO">
+                  <block type="math_single" id="sqrt_n">
+                    <field name="OP">ROOT</field>
+                    <value name="NUM">
+                      <block type="variables_get" id="gn2"><field name="VAR" id="var_n">n</field></block>
+                    </value>
+                  </block>
+                </value>
+                <value name="BY">
+                  <shadow type="math_number" id="num_by"><field name="NUM">1</field></shadow>
+                </value>
+                <statement name="DO">
+                  <block type="controls_if" id="check_divisible">
+                    <value name="IF0">
+                      <block type="logic_compare" id="cmp_mod0">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="math_modulo" id="mod_ni">
+                            <value name="DIVIDEND">
+                              <block type="variables_get" id="gn3"><field name="VAR" id="var_n">n</field></block>
+                            </value>
+                            <value name="DIVISOR">
+                              <block type="variables_get" id="gi1"><field name="VAR" id="var_i">i</field></block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="num0"><field name="NUM">0</field></shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="set_false">
+                        <field name="VAR" id="var_is_prime">isPrime</field>
+                        <value name="VALUE">
+                          <block type="logic_boolean" id="bool_false"><field name="BOOL">FALSE</field></block>
+                        </value>
+                        <next>
+                          <block type="controls_flow_statements" id="break_loop">
+                            <field name="FLOW">BREAK</field>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="print_ans">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="variables_get" id="gflag"><field name="VAR" id="var_is_prime">isPrime</field></block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="text_print" id="print_yes">
+                        <value name="TEXT">
+                          <block type="text" id="tyes"><field name="TEXT">yes</field></block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="text_print" id="print_no">
+                        <value name="TEXT">
+                          <block type="text" id="tno2"><field name="TEXT">no</field></block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,115 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="var_n">n</variable>
+    <variable id="var_ans">ans</variable>
+    <variable id="var_i">i</variable>
+    <variable id="var_digit">digit</variable>
+  </variables>
+  <block type="variables_set" id="init_n" x="20" y="20">
+    <field name="VAR" id="var_n">n</field>
+    <value name="VALUE">
+      <!-- 乘以 1 強制轉為數值 -->
+      <block type="math_arithmetic" id="cast_num">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <block type="text_prompt_ext" id="prompt_n">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="num1"><field name="NUM">1</field></shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="init_ans">
+        <field name="VAR" id="var_ans">ans</field>
+        <value name="VALUE">
+          <shadow type="math_number" id="num0"><field name="NUM">0</field></shadow>
+        </value>
+        <next>
+          <block type="controls_for" id="loop_20">
+            <field name="VAR" id="var_i">i</field>
+            <value name="FROM">
+              <shadow type="math_number" id="f1"><field name="NUM">1</field></shadow>
+            </value>
+            <value name="TO">
+              <shadow type="math_number" id="t20"><field name="NUM">20</field></shadow>
+            </value>
+            <value name="BY">
+              <shadow type="math_number" id="b1"><field name="NUM">1</field></shadow>
+            </value>
+            <statement name="DO">
+              <block type="controls_if" id="check_gt">
+                <value name="IF0">
+                  <block type="logic_compare" id="cmp_gt">
+                    <field name="OP">GT</field>
+                    <value name="A"><block type="variables_get" id="gn1"><field name="VAR" id="var_n">n</field></block></value>
+                    <value name="B"><shadow type="math_number" id="z0"><field name="NUM">0</field></shadow></value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <!-- digit = n % 10 -->
+                  <block type="variables_set" id="set_digit">
+                    <field name="VAR" id="var_digit">digit</field>
+                    <value name="VALUE">
+                      <block type="math_modulo" id="mod10">
+                        <value name="DIVIDEND"><block type="variables_get" id="gn2"><field name="VAR" id="var_n">n</field></block></value>
+                        <value name="DIVISOR"><shadow type="math_number" id="m10"><field name="NUM">10</field></shadow></value>
+                      </block>
+                    </value>
+                    <next>
+                      <!-- ans = ans * 10 + digit -->
+                      <block type="variables_set" id="calc_ans">
+                        <field name="VAR" id="var_ans">ans</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id="add_digit">
+                            <field name="OP">ADD</field>
+                            <value name="A">
+                              <block type="math_arithmetic" id="mul_10">
+                                <field name="OP">MULTIPLY</field>
+                                <value name="A"><block type="variables_get" id="gans1"><field name="VAR" id="var_ans">ans</field></block></value>
+                                <value name="B"><shadow type="math_number" id="a10"><field name="NUM">10</field></shadow></value>
+                              </block>
+                            </value>
+                            <value name="B"><block type="variables_get" id="gd1"><field name="VAR" id="var_digit">digit</field></block></value>
+                          </block>
+                        </value>
+                        <next>
+                          <!-- n = Math.floor(n / 10) -->
+                          <block type="variables_set" id="div_n">
+                            <field name="VAR" id="var_n">n</field>
+                            <value name="VALUE">
+                              <block type="math_round" id="floor_n">
+                                <field name="OP">ROUNDDOWN</field>
+                                <value name="NUM">
+                                  <block type="math_arithmetic" id="div10">
+                                    <field name="OP">DIVIDE</field>
+                                    <value name="A"><block type="variables_get" id="gn3"><field name="VAR" id="var_n">n</field></block></value>
+                                    <value name="B"><shadow type="math_number" id="d10"><field name="NUM">10</field></shadow></value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+            <next>
+              <block type="text_print" id="print">
+                <value name="TEXT">
+                  <block type="variables_get" id="gans2"><field name="VAR" id="var_ans">ans</field></block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
