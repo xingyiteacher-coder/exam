@@ -1,0 +1,119 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="aa_res" islocal="false" iscloud="false">結果</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+  </variables>
+
+  <!-- 自訂函式：階乘 %s -->
+  <block type="procedures_definition" id="def_fact" x="10" y="220">
+    <statement name="custom_block">
+      <block type="procedures_prototype" id="proto_fact">
+        <mutation proccode="階乘 %s" argumentids='["arg_1"]' argumentnames='["n"]' argumentdefaults='["0"]' warp="false"/>
+        <value name="arg_1">
+          <block type="argument_reporter_string_number" id="arg_rep1">
+            <field name="VALUE">n</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="data_setvariableto" id="set_res_1">
+        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+        <value name="VALUE">
+          <shadow type="math_number" id="shd_res_1"><field name="NUM">1</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_i_1">
+            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+            <value name="VALUE">
+              <shadow type="math_number" id="shd_i_1"><field name="NUM">1</field></shadow>
+            </value>
+            <next>
+              <block type="control_repeat" id="loop_fact">
+                <value name="TIMES">
+                  <block type="argument_reporter_string_number" id="arg_rep_n_times">
+                    <field name="VALUE">n</field>
+                  </block>
+                </value>
+                <statement name="SUBSTACK">
+                  <block type="data_setvariableto" id="mul_res">
+                    <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                    <value name="VALUE">
+                      <block type="operator_multiply" id="op_mul">
+                        <field name="OPERATOR">*</field>
+                        <value name="NUM1">
+                          <shadow type="math_number" id="shd_m1"><field name="NUM">1</field></shadow>
+                          <block type="data_variable" id="var_res_curr">
+                            <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                          </block>
+                        </value>
+                        <value name="NUM2">
+                          <shadow type="math_number" id="shd_m2"><field name="NUM">1</field></shadow>
+                          <block type="data_variable" id="var_i_curr">
+                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="data_changevariableby" id="inc_i">
+                        <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id="num_inc_1"><field name="NUM">1</field></shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+
+  <!-- 主程式 -->
+  <block type="event_whenflagclicked" id="start_flag" x="500" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_n">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_n">
+            <field name="TEXT">n</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_n">
+            <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_n_0"><field name="TEXT"></field></shadow>
+              <block type="scratch_answer" id="get_ans"></block>
+            </value>
+            <next>
+              <block type="procedures_call" id="call_fact">
+                <mutation proccode="階乘 %s" argumentids='["arg_1"]' warp="false"/>
+                <value name="arg_1">
+                  <shadow type="text" id="shd_arg_val"><field name="TEXT"></field></shadow>
+                  <block type="data_variable" id="var_n_val">
+                    <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="scratch_say" id="say_res">
+                    <value name="TEXT">
+                      <shadow type="text" id="shd_say_def"><field name="TEXT">Hello!</field></shadow>
+                      <block type="data_variable" id="var_res_out">
+                        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
