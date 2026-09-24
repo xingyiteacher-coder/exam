@@ -1,0 +1,166 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_raw" islocal="false" iscloud="false">raw_input</variable>
+    <variable type="" id="v_max_len" islocal="false" iscloud="false">max_len</variable>
+    <variable type="" id="v_cur_len" islocal="false" iscloud="false">cur_len</variable>
+    <variable type="" id="v_prev_char" islocal="false" iscloud="false">prev_char</variable>
+    <variable type="" id="v_ptr" islocal="false" iscloud="false">ptr</variable>
+    <variable type="" id="v_char" islocal="false" iscloud="false">char</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <block type="scratch_ask" id="ask_input">
+        <value name="QUESTION">
+          <shadow type="text" id="q_input"><field name="TEXT">請輸入字串</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_raw">
+            <field name="VARIABLE" id="v_raw" variabletype="">raw_input</field>
+            <value name="VALUE"><block type="scratch_answer" id="ans_input"></block></value>
+            <next>
+              <block type="data_setvariableto" id="set_max_0">
+                <field name="VARIABLE" id="v_max_len" variabletype="">max_len</field>
+                <value name="VALUE"><shadow type="math_number" id="num0_1"><field name="NUM">0</field></shadow></value>
+                <next>
+                  <block type="data_setvariableto" id="set_cur_0">
+                    <field name="VARIABLE" id="v_cur_len" variabletype="">cur_len</field>
+                    <value name="VALUE"><shadow type="math_number" id="num0_2"><field name="NUM">0</field></shadow></value>
+                    <next>
+                      <block type="data_setvariableto" id="set_prev_empty">
+                        <field name="VARIABLE" id="v_prev_char" variabletype="">prev_char</field>
+                        <value name="VALUE"><shadow type="text" id="t_empty"><field name="TEXT"></field></shadow></value>
+                        <next>
+                          <block type="data_setvariableto" id="set_ptr_1">
+                            <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                            <value name="VALUE"><shadow type="math_number" id="num1_1"><field name="NUM">1</field></shadow></value>
+                            <next>
+                              <block type="control_repeat" id="loop_all">
+                                <value name="TIMES">
+                                  <block type="operator_length" id="len_raw">
+                                    <value name="STRING">
+                                      <block type="data_variable" id="v_raw1">
+                                        <field name="VARIABLE" id="v_raw" variabletype="">raw_input</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="data_setvariableto" id="set_char">
+                                    <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                    <value name="VALUE">
+                                      <block type="operator_letter_of" id="get_char">
+                                        <value name="STRING">
+                                          <block type="data_variable" id="v_raw2">
+                                            <field name="VARIABLE" id="v_raw" variabletype="">raw_input</field>
+                                          </block>
+                                        </value>
+                                        <value name="LETTER">
+                                          <block type="data_variable" id="v_ptr1">
+                                            <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="control_if_else" id="check_same">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="cmp_char_prev">
+                                            <field name="OPERATOR">==</field>
+                                            <value name="OPERAND1">
+                                              <block type="data_variable" id="v_char1">
+                                                <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <block type="data_variable" id="v_prev1">
+                                                <field name="VARIABLE" id="v_prev_char" variabletype="">prev_char</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_changevariableby" id="inc_cur">
+                                            <field name="VARIABLE" id="v_cur_len" variabletype="">cur_len</field>
+                                            <value name="VALUE"><shadow type="math_number" id="num1_inc"><field name="NUM">1</field></shadow></value>
+                                          </block>
+                                        </statement>
+                                        <statement name="SUBSTACK2">
+                                          <block type="data_setvariableto" id="reset_cur">
+                                            <field name="VARIABLE" id="v_cur_len" variabletype="">cur_len</field>
+                                            <value name="VALUE"><shadow type="math_number" id="num1_reset"><field name="NUM">1</field></shadow></value>
+                                            <next>
+                                              <block type="data_setvariableto" id="update_prev">
+                                                <field name="VARIABLE" id="v_prev_char" variabletype="">prev_char</field>
+                                                <value name="VALUE">
+                                                  <block type="data_variable" id="v_char2">
+                                                    <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="control_if" id="check_max">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_cur_max">
+                                                <field name="OPERATOR">&gt;</field>
+                                                <value name="OPERAND1">
+                                                  <block type="data_variable" id="v_cur1">
+                                                    <field name="VARIABLE" id="v_cur_len" variabletype="">cur_len</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <block type="data_variable" id="v_max1">
+                                                    <field name="VARIABLE" id="v_max_len" variabletype="">max_len</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="data_setvariableto" id="update_max">
+                                                <field name="VARIABLE" id="v_max_len" variabletype="">max_len</field>
+                                                <value name="VALUE">
+                                                  <block type="data_variable" id="v_cur2">
+                                                    <field name="VARIABLE" id="v_cur_len" variabletype="">cur_len</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="data_changevariableby" id="inc_ptr">
+                                                <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                                <value name="VALUE"><shadow type="math_number" id="num1_ptr"><field name="NUM">1</field></shadow></value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="scratch_say" id="say_result">
+                                    <value name="TEXT">
+                                      <block type="data_variable" id="v_max_out">
+                                        <field name="VARIABLE" id="v_max_len" variabletype="">max_len</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
