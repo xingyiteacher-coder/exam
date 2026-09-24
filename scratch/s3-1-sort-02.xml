@@ -220,19 +220,19 @@
                                                                 <field name="VARIABLE" id="aa_temp" variabletype="">temp</field>
                                                               </block>
                                                             </value>
+                                                            <next>
+                                                              <block type="data_changevariableby" id="inc_i">
+                                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                                <value name="VALUE">
+                                                                  <shadow type="math_number" id="shd_inc_i"><field name="NUM">1</field></shadow>
+                                                                </value>
+                                                              </block>
+                                                            </next>
                                                           </block>
                                                         </next>
                                                       </block>
                                                     </next>
                                                   </block>
-                                                  <next>
-                                                    <block type="data_changevariableby" id="inc_i">
-                                                      <field name="VARIABLE" id="aa_i" variabletype="">i</field>
-                                                      <value name="VALUE">
-                                                        <shadow type="math_number" id="shd_inc_i"><field name="NUM">1</field></shadow>
-                                                      </value>
-                                                    </block>
-                                                  </next>
                                                 </next>
                                               </block>
                                             </next>
