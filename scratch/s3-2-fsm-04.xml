@@ -1,0 +1,153 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_light" islocal="false" iscloud="false">light</variable>
+    <variable type="" id="v_steps" islocal="false" iscloud="false">steps</variable>
+    <variable type="" id="v_state" islocal="false" iscloud="false">state</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <block type="scratch_ask" id="ask_light">
+        <value name="QUESTION">
+          <shadow type="text" id="q_light"><field name="TEXT">請輸入起始燈號 (R/G/Y)</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_light">
+            <field name="VARIABLE" id="v_light" variabletype="">light</field>
+            <value name="VALUE"><block type="scratch_answer" id="ans_light"></block></value>
+            <next>
+              <block type="scratch_ask" id="ask_steps">
+                <value name="QUESTION">
+                  <shadow type="text" id="q_steps"><field name="TEXT">請輸入步數 S</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_steps">
+                    <field name="VARIABLE" id="v_steps" variabletype="">steps</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_steps"></block></value>
+                    <next>
+                      <block type="control_if_else" id="check_r">
+                        <value name="CONDITION">
+                          <block type="operator_compare" id="cmp_r">
+                            <field name="OPERATOR">==</field>
+                            <value name="OPERAND1">
+                              <block type="data_variable" id="v_light1">
+                                <field name="VARIABLE" id="v_light" variabletype="">light</field>
+                              </block>
+                            </value>
+                            <value name="OPERAND2"><shadow type="text" id="t_r"><field name="TEXT">R</field></shadow></value>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="data_setvariableto" id="set_state_0">
+                            <field name="VARIABLE" id="v_state" variabletype="">state</field>
+                            <value name="VALUE"><shadow type="math_number" id="num0_1"><field name="NUM">0</field></shadow></value>
+                          </block>
+                        </statement>
+                        <statement name="SUBSTACK2">
+                          <block type="control_if_else" id="check_g">
+                            <value name="CONDITION">
+                              <block type="operator_compare" id="cmp_g">
+                                <field name="OPERATOR">==</field>
+                                <value name="OPERAND1">
+                                  <block type="data_variable" id="v_light2">
+                                    <field name="VARIABLE" id="v_light" variabletype="">light</field>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2"><shadow type="text" id="t_g"><field name="TEXT">G</field></shadow></value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="set_state_1">
+                                <field name="VARIABLE" id="v_state" variabletype="">state</field>
+                                <value name="VALUE"><shadow type="math_number" id="num1_1"><field name="NUM">1</field></shadow></value>
+                              </block>
+                            </statement>
+                            <statement name="SUBSTACK2">
+                              <block type="data_setvariableto" id="set_state_2">
+                                <field name="VARIABLE" id="v_state" variabletype="">state</field>
+                                <value name="VALUE"><shadow type="math_number" id="num2_1"><field name="NUM">2</field></shadow></value>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="data_setvariableto" id="calc_final_state">
+                            <field name="VARIABLE" id="v_state" variabletype="">state</field>
+                            <value name="VALUE">
+                              <block type="operator_mod" id="mod_3">
+                                <value name="NUM1">
+                                  <block type="operator_arithmetic" id="add_state_steps">
+                                    <field name="OPERATOR">+</field>
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="v_state3">
+                                        <field name="VARIABLE" id="v_state" variabletype="">state</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <block type="data_variable" id="v_steps1">
+                                        <field name="VARIABLE" id="v_steps" variabletype="">steps</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="NUM2"><shadow type="math_number" id="num3_mod"><field name="NUM">3</field></shadow></value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="control_if_else" id="check_state_0">
+                                <value name="CONDITION">
+                                  <block type="operator_compare" id="cmp_s0">
+                                    <field name="OPERATOR">==</field>
+                                    <value name="OPERAND1">
+                                      <block type="data_variable" id="v_state4">
+                                        <field name="VARIABLE" id="v_state" variabletype="">state</field>
+                                      </block>
+                                    </value>
+                                    <value name="OPERAND2"><shadow type="math_number" id="num0_2"><field name="NUM">0</field></shadow></value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="scratch_say" id="say_r">
+                                    <value name="TEXT"><shadow type="text" id="t_out_r"><field name="TEXT">R</field></shadow></value>
+                                  </block>
+                                </statement>
+                                <statement name="SUBSTACK2">
+                                  <block type="control_if_else" id="check_state_1">
+                                    <value name="CONDITION">
+                                      <block type="operator_compare" id="cmp_s1">
+                                        <field name="OPERATOR">==</field>
+                                        <value name="OPERAND1">
+                                          <block type="data_variable" id="v_state5">
+                                            <field name="VARIABLE" id="v_state" variabletype="">state</field>
+                                          </block>
+                                        </value>
+                                        <value name="OPERAND2"><shadow type="math_number" id="num1_2"><field name="NUM">1</field></shadow></value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="scratch_say" id="say_g">
+                                        <value name="TEXT"><shadow type="text" id="t_out_g"><field name="TEXT">G</field></shadow></value>
+                                      </block>
+                                    </statement>
+                                    <statement name="SUBSTACK2">
+                                      <block type="scratch_say" id="say_y">
+                                        <value name="TEXT"><shadow type="text" id="t_out_y"><field name="TEXT">Y</field></shadow></value>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
