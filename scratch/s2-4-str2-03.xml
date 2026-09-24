@@ -1,0 +1,120 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_str" islocal="false" iscloud="false">字串</variable>
+    <variable type="" id="aa_rev" islocal="false" iscloud="false">反轉字串</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="aa_len" islocal="false" iscloud="false">長度</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_str">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_text">
+            <field name="TEXT">字串</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_str">
+            <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_str_0"><field name="TEXT"></field></shadow>
+              <block type="scratch_answer" id="get_answer"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_len">
+                <field name="VARIABLE" id="aa_len" variabletype="">長度</field>
+                <value name="VALUE">
+                  <block type="operator_length" id="get_len">
+                    <value name="STRING">
+                      <shadow type="text" id="shd_s1"><field name="TEXT">world</field></shadow>
+                      <block type="data_variable" id="var_str1">
+                        <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_i">
+                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                    <value name="VALUE">
+                      <block type="data_variable" id="var_len1">
+                        <field name="VARIABLE" id="aa_len" variabletype="">長度</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="set_rev_empty">
+                        <field name="VARIABLE" id="aa_rev" variabletype="">反轉字串</field>
+                        <value name="VALUE">
+                          <shadow type="text" id="shd_empty"><field name="TEXT"></field></shadow>
+                        </value>
+                        <next>
+                          <block type="control_repeat" id="loop_rev">
+                            <value name="TIMES">
+                              <block type="data_variable" id="var_len2">
+                                <field name="VARIABLE" id="aa_len" variabletype="">長度</field>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="append_rev">
+                                <field name="VARIABLE" id="aa_rev" variabletype="">反轉字串</field>
+                                <value name="VALUE">
+                                  <block type="operator_join" id="join_rev">
+                                    <value name="OPERAND1">
+                                      <shadow type="text" id="shd_j1"><field name="TEXT"></field></shadow>
+                                      <block type="data_variable" id="var_rev_curr">
+                                        <field name="VARIABLE" id="aa_rev" variabletype="">反轉字串</field>
+                                      </block>
+                                    </value>
+                                    <value name="OPERAND2">
+                                      <shadow type="text" id="shd_j2"><field name="TEXT"></field></shadow>
+                                      <block type="operator_letter_of" id="get_char">
+                                        <value name="STRING">
+                                          <shadow type="text" id="shd_s2"><field name="TEXT">world</field></shadow>
+                                          <block type="data_variable" id="var_str2">
+                                            <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                                          </block>
+                                        </value>
+                                        <value name="LETTER">
+                                          <shadow type="math_number" id="shd_i_num"><field name="NUM">1</field></shadow>
+                                          <block type="data_variable" id="var_i_curr">
+                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="data_changevariableby" id="dec_i">
+                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                    <value name="VALUE">
+                                      <shadow type="math_number" id="shd_dec"><field name="NUM">-1</field></shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="scratch_say" id="say_rev">
+                                <value name="TEXT">
+                                  <shadow type="text" id="shd_say_default"><field name="TEXT">Hello!</field></shadow>
+                                  <block type="data_variable" id="get_rev_out">
+                                    <field name="VARIABLE" id="aa_rev" variabletype="">反轉字串</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
