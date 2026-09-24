@@ -1,0 +1,128 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="v_bin" islocal="false" iscloud="false">二進位</variable>
+    <variable type="" id="v_digit" islocal="false" iscloud="false">數</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag1" x="171" y="-102">
+    <next>
+      <block type="scratch_ask" id="ask_n">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_n">
+            <field name="TEXT">n</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_n">
+            <field name="VARIABLE" id="v_n" variabletype="">n</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_n"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_bin_empty">
+                <field name="VARIABLE" id="v_bin" variabletype="">二進位</field>
+                <value name="VALUE">
+                  <shadow type="text" id="txt_empty">
+                    <field name="TEXT"></field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="control_repeat_until" id="loop_bin">
+                    <field name="OPERATOR">until</field>
+                    <value name="CONDITION">
+                      <block type="operator_compare" id="cmp_eq0">
+                        <field name="OPERATOR">==</field>
+                        <value name="OPERAND1">
+                          <block type="data_variable" id="get_n">
+                            <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                          </block>
+                        </value>
+                        <value name="OPERAND2">
+                          <shadow type="text" id="txt_0">
+                            <field name="TEXT">0</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="data_setvariableto" id="set_digit">
+                        <field name="VARIABLE" id="v_digit" variabletype="">數</field>
+                        <value name="VALUE">
+                          <block type="operator_mod" id="mod_2">
+                            <value name="NUM1">
+                              <block type="data_variable" id="get_n_mod">
+                                <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                              </block>
+                            </value>
+                            <value name="NUM2">
+                              <shadow type="math_number" id="num_2">
+                                <field name="NUM">2</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="update_bin">
+                            <field name="VARIABLE" id="v_bin" variabletype="">二進位</field>
+                            <value name="VALUE">
+                              <block type="operator_join" id="join_rem">
+                                <value name="OPERAND1">
+                                  <block type="data_variable" id="get_digit">
+                                    <field name="VARIABLE" id="v_digit" variabletype="">數</field>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <block type="data_variable" id="get_bin_old">
+                                    <field name="VARIABLE" id="v_bin" variabletype="">二進位</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="data_setvariableto" id="update_n">
+                                <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                                <value name="VALUE">
+                                  <block type="operator_mathop" id="floor_n">
+                                    <field name="OPERATOR">floor</field>
+                                    <value name="NUM">
+                                      <block type="operator_arithmetic" id="div_2">
+                                        <field name="OPERATOR">/</field>
+                                        <value name="NUM1">
+                                          <block type="data_variable" id="get_n_div">
+                                            <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <shadow type="math_number" id="num_2_div">
+                                            <field name="NUM">2</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_say" id="say_ans">
+                        <value name="TEXT">
+                          <block type="data_variable" id="get_bin_ans">
+                            <field name="VARIABLE" id="v_bin" variabletype="">二進位</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
