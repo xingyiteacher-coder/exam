@@ -1,0 +1,290 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_str" islocal="false" iscloud="false">str_input</variable>
+    <variable type="" id="v_valid" islocal="false" iscloud="false">valid</variable>
+    <variable type="" id="v_ptr" islocal="false" iscloud="false">ptr</variable>
+    <variable type="" id="v_char" islocal="false" iscloud="false">char</variable>
+    <variable type="" id="v_top" islocal="false" iscloud="false">top</variable>
+    <variable type="list" id="l_stack" islocal="false" iscloud="false">stack</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <block type="scratch_ask" id="ask_str">
+        <value name="QUESTION">
+          <shadow type="text" id="q_str"><field name="TEXT">請輸入括號字串</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_str">
+            <field name="VARIABLE" id="v_str" variabletype="">str_input</field>
+            <value name="VALUE"><block type="scratch_answer" id="ans_str"></block></value>
+            <next>
+              <block type="data_deletealloflist" id="clear_stack">
+                <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                <next>
+                  <block type="data_setvariableto" id="set_valid_1">
+                    <field name="VARIABLE" id="v_valid" variabletype="">valid</field>
+                    <value name="VALUE"><shadow type="math_number" id="num1_v"><field name="NUM">1</field></shadow></value>
+                    <next>
+                      <block type="data_setvariableto" id="set_ptr_1">
+                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                        <value name="VALUE"><shadow type="math_number" id="num1_p"><field name="NUM">1</field></shadow></value>
+                        <next>
+                          <block type="control_repeat" id="loop_str">
+                            <value name="TIMES">
+                              <block type="operator_length" id="len_str">
+                                <value name="STRING">
+                                  <block type="data_variable" id="v_str1">
+                                    <field name="VARIABLE" id="v_str" variabletype="">str_input</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="control_if" id="if_valid_still_1">
+                                <value name="CONDITION">
+                                  <block type="operator_compare" id="cmp_valid_1">
+                                    <field name="OPERATOR">==</field>
+                                    <value name="OPERAND1">
+                                      <block type="data_variable" id="v_valid1">
+                                        <field name="VARIABLE" id="v_valid" variabletype="">valid</field>
+                                      </block>
+                                    </value>
+                                    <value name="OPERAND2"><shadow type="math_number" id="num1_check"><field name="NUM">1</field></shadow></value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="data_setvariableto" id="set_char">
+                                    <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                    <value name="VALUE">
+                                      <block type="operator_letter_of" id="get_char">
+                                        <value name="STRING">
+                                          <block type="data_variable" id="v_str2">
+                                            <field name="VARIABLE" id="v_str" variabletype="">str_input</field>
+                                          </block>
+                                        </value>
+                                        <value name="LETTER">
+                                          <block type="data_variable" id="v_ptr1">
+                                            <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="control_if_else" id="is_left">
+                                        <value name="CONDITION">
+                                          <block type="operator_or" id="or_left12">
+                                            <value name="OPERAND1">
+                                              <block type="operator_compare" id="cmp_left_round">
+                                                <field name="OPERATOR">==</field>
+                                                <value name="OPERAND1"><block type="data_variable" id="vc1"><field name="VARIABLE" id="v_char" variabletype="">char</field></block></value>
+                                                <value name="OPERAND2"><shadow type="text" id="tl_r"><field name="TEXT">(</field></shadow></value>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <block type="operator_or" id="or_left23">
+                                                <value name="OPERAND1">
+                                                  <block type="operator_compare" id="cmp_left_square">
+                                                    <field name="OPERATOR">==</field>
+                                                    <value name="OPERAND1"><block type="data_variable" id="vc2"><field name="VARIABLE" id="v_char" variabletype="">char</field></block></value>
+                                                    <value name="OPERAND2"><shadow type="text" id="tl_s"><field name="TEXT">[</field></shadow></value>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <block type="operator_compare" id="cmp_left_curly">
+                                                    <field name="OPERATOR">==</field>
+                                                    <value name="OPERAND1"><block type="data_variable" id="vc3"><field name="VARIABLE" id="v_char" variabletype="">char</field></block></value>
+                                                    <value name="OPERAND2"><shadow type="text" id="tl_c"><field name="TEXT">{</field></shadow></value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_addtolist" id="push_stack">
+                                            <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                                            <value name="ITEM">
+                                              <block type="data_variable" id="vc_push"><field name="VARIABLE" id="v_char" variabletype="">char</field></block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <statement name="SUBSTACK2">
+                                          <block type="control_if_else" id="check_empty">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_empty">
+                                                <field name="OPERATOR">==</field>
+                                                <value name="OPERAND1">
+                                                  <block type="data_lengthoflist" id="len_stack1">
+                                                    <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2"><shadow type="math_number" id="num0_e"><field name="NUM">0</field></shadow></value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="data_setvariableto" id="set_valid_0_e">
+                                                <field name="VARIABLE" id="v_valid" variabletype="">valid</field>
+                                                <value name="VALUE"><shadow type="math_number" id="num0_v1"><field name="NUM">0</field></shadow></value>
+                                              </block>
+                                            </statement>
+                                            <statement name="SUBSTACK2">
+                                              <block type="data_setvariableto" id="set_top">
+                                                <field name="VARIABLE" id="v_top" variabletype="">top</field>
+                                                <value name="VALUE">
+                                                  <block type="data_itemoflist" id="get_top">
+                                                    <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                                                    <value name="INDEX">
+                                                      <block type="data_lengthoflist" id="len_stack2">
+                                                        <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="control_if_else" id="match_check">
+                                                    <value name="CONDITION">
+                                                      <block type="operator_or" id="match_or12">
+                                                        <value name="OPERAND1">
+                                                          <block type="operator_and" id="m_r">
+                                                            <value name="OPERAND1">
+                                                              <block type="operator_compare" id="cmp_cr">
+                                                                <field name="OPERATOR">==</field>
+                                                                <value name="OPERAND1"><block type="data_variable" id="vc4"><field name="VARIABLE" id="v_char" variabletype="">char</field></block></value>
+                                                                <value name="OPERAND2"><shadow type="text" id="tr_r"><field name="TEXT">)</field></shadow></value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="OPERAND2">
+                                                              <block type="operator_compare" id="cmp_tr">
+                                                                <field name="OPERATOR">==</field>
+                                                                <value name="OPERAND1"><block type="data_variable" id="vt1"><field name="VARIABLE" id="v_top" variabletype="">top</field></block></value>
+                                                                <value name="OPERAND2"><shadow type="text" id="tr_l"><field name="TEXT">(</field></shadow></value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <block type="operator_or" id="match_or23">
+                                                            <value name="OPERAND1">
+                                                              <block type="operator_and" id="m_s">
+                                                                <value name="OPERAND1">
+                                                                  <block type="operator_compare" id="cmp_cs">
+                                                                    <field name="OPERATOR">==</field>
+                                                                    <value name="OPERAND1"><block type="data_variable" id="vc5"><field name="VARIABLE" id="v_char" variabletype="">char</field></block></value>
+                                                                    <value name="OPERAND2"><shadow type="text" id="tr_s"><field name="TEXT">]</field></shadow></value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="OPERAND2">
+                                                                  <block type="operator_compare" id="cmp_ts">
+                                                                    <field name="OPERATOR">==</field>
+                                                                    <value name="OPERAND1"><block type="data_variable" id="vt2"><field name="VARIABLE" id="v_top" variabletype="">top</field></block></value>
+                                                                    <value name="OPERAND2"><shadow type="text" id="ts_l"><field name="TEXT">[</field></shadow></value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="OPERAND2">
+                                                              <block type="operator_and" id="m_c">
+                                                                <value name="OPERAND1">
+                                                                  <block type="operator_compare" id="cmp_cc">
+                                                                    <field name="OPERATOR">==</field>
+                                                                    <value name="OPERAND1"><block type="data_variable" id="vc6"><field name="VARIABLE" id="v_char" variabletype="">char</field></block></value>
+                                                                    <value name="OPERAND2"><shadow type="text" id="tr_c"><field name="TEXT">}</field></shadow></value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="OPERAND2">
+                                                                  <block type="operator_compare" id="cmp_tc">
+                                                                    <field name="OPERATOR">==</field>
+                                                                    <value name="OPERAND1"><block type="data_variable" id="vt3"><field name="VARIABLE" id="v_top" variabletype="">top</field></block></value>
+                                                                    <value name="OPERAND2"><shadow type="text" id="tc_l"><field name="TEXT">{</field></shadow></value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="SUBSTACK">
+                                                      <block type="data_deleteoflist" id="pop_stack">
+                                                        <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                                                        <value name="INDEX">
+                                                          <block type="data_lengthoflist" id="len_stack3">
+                                                            <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                    <statement name="SUBSTACK2">
+                                                      <block type="data_setvariableto" id="set_valid_0_m">
+                                                        <field name="VARIABLE" id="v_valid" variabletype="">valid</field>
+                                                        <value name="VALUE"><shadow type="math_number" id="num0_v2"><field name="NUM">0</field></shadow></value>
+                                                      </block>
+                                                    </statement>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="data_changevariableby" id="inc_ptr">
+                                    <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                    <value name="VALUE"><shadow type="math_number" id="num1_ptr"><field name="NUM">1</field></shadow></value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="control_if_else" id="check_final">
+                                <value name="CONDITION">
+                                  <block type="operator_and" id="and_final">
+                                    <value name="OPERAND1">
+                                      <block type="operator_compare" id="cmp_valid_final">
+                                        <field name="OPERATOR">==</field>
+                                        <value name="OPERAND1"><block type="data_variable" id="vf_out"><field name="VARIABLE" id="v_valid" variabletype="">valid</field></block></value>
+                                        <value name="OPERAND2"><shadow type="math_number" id="num1_out"><field name="NUM">1</field></shadow></value>
+                                      </block>
+                                    </value>
+                                    <value name="OPERAND2">
+                                      <block type="operator_compare" id="cmp_len_final">
+                                        <field name="OPERATOR">==</field>
+                                        <value name="OPERAND1">
+                                          <block type="data_lengthoflist" id="len_stack_final">
+                                            <field name="LIST" id="l_stack" variabletype="list">stack</field>
+                                          </block>
+                                        </value>
+                                        <value name="OPERAND2"><shadow type="math_number" id="num0_out"><field name="NUM">0</field></shadow></value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="scratch_say" id="say_yes">
+                                    <value name="TEXT"><shadow type="text" id="t_yes"><field name="TEXT">yes</field></shadow></value>
+                                  </block>
+                                </statement>
+                                <statement name="SUBSTACK2">
+                                  <block type="scratch_say" id="say_no">
+                                    <value name="TEXT"><shadow type="text" id="t_no"><field name="TEXT">no</field></shadow></value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
