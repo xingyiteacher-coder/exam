@@ -1,0 +1,172 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_t" islocal="false" iscloud="false">t</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="aa_found" islocal="false" iscloud="false">找到</variable>
+    <variable type="list" id="aa_list" islocal="false" iscloud="false">數列</variable>
+  </variables>
+
+  <!-- 主程式 -->
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_N"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_0"><field name="TEXT"></field></shadow>
+              <block type="scratch_answer" id="get_ans_N"></block>
+            </value>
+            <next>
+              <block type="data_deletealloflist" id="del_all">
+                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                <next>
+                  <block type="control_repeat" id="loop_input">
+                    <value name="TIMES">
+                      <block type="data_variable" id="var_N1">
+                        <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_elem">
+                        <value name="QUESTION">
+                          <shadow type="text" id="shd_ask_elem"><field name="TEXT">元素</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_addtolist" id="add_item">
+                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                            <value name="ITEM">
+                              <shadow type="text" id="shd_item_def"><field name="TEXT">thing</field></shadow>
+                              <block type="scratch_answer" id="get_ans_elem"></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_ask" id="ask_t">
+                        <value name="QUESTION">
+                          <shadow type="text" id="shd_ask_t"><field name="TEXT">t</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_t">
+                            <field name="VARIABLE" id="aa_t" variabletype="">t</field>
+                            <value name="VALUE">
+                              <shadow type="text" id="shd_t_0"><field name="TEXT"></field></shadow>
+                              <block type="scratch_answer" id="get_ans_t"></block>
+                            </value>
+                            <next>
+                              <block type="data_setvariableto" id="set_found_0">
+                                <field name="VARIABLE" id="aa_found" variabletype="">找到</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="shd_f0"><field name="NUM">0</field></shadow>
+                                </value>
+                                <next>
+                                  <block type="data_setvariableto" id="set_i_1">
+                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                    <value name="VALUE">
+                                      <shadow type="math_number" id="shd_i1"><field name="NUM">1</field></shadow>
+                                    </value>
+                                    <next>
+                                      <block type="control_repeat" id="loop_search">
+                                        <value name="TIMES">
+                                          <block type="data_variable" id="var_N2">
+                                            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="control_if" id="check_match">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_item_t">
+                                                <field name="OPERATOR">==</field>
+                                                <value name="OPERAND1">
+                                                  <block type="data_itemoflist" id="get_item_i">
+                                                    <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                    <value name="INDEX">
+                                                      <shadow type="math_number" id="shd_idx"><field name="NUM">1</field></shadow>
+                                                      <block type="data_variable" id="var_i1">
+                                                        <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <block type="data_variable" id="var_t1">
+                                                    <field name="VARIABLE" id="aa_t" variabletype="">t</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="data_setvariableto" id="set_found_1">
+                                                <field name="VARIABLE" id="aa_found" variabletype="">找到</field>
+                                                <value name="VALUE">
+                                                  <shadow type="math_number" id="shd_f1"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="data_changevariableby" id="inc_i">
+                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                <value name="VALUE">
+                                                  <shadow type="math_number" id="shd_inc1"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="control_if_else" id="check_result">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_found_1">
+                                                <field name="OPERATOR">==</field>
+                                                <value name="OPERAND1">
+                                                  <block type="data_variable" id="var_found_out">
+                                                    <field name="VARIABLE" id="aa_found" variabletype="">找到</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <shadow type="math_number" id="shd_f1_chk"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="scratch_say" id="say_yes">
+                                                <value name="TEXT">
+                                                  <shadow type="text" id="shd_yes"><field name="TEXT">yes</field></shadow>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <statement name="SUBSTACK2">
+                                              <block type="scratch_say" id="say_no">
+                                                <value name="TEXT">
+                                                  <shadow type="text" id="shd_no"><field name="TEXT">no</field></shadow>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
