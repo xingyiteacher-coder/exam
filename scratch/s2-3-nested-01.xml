@@ -1,0 +1,276 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_cnt" islocal="false" iscloud="false">計數</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_isPrime" islocal="false" iscloud="false">是質數</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag1" x="117" y="-163">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_N">
+            <field name="TEXT">N</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="K=R$v|QLDOVntA(CK5#}">
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+            <value name="VALUE">
+              <block type="operator_arithmetic" id="mul_N1">
+                <field name="OPERATOR">*</field>
+                <value name="NUM1">
+                  <block type="scratch_answer" id="ans_N"></block>
+                </value>
+                <value name="NUM2">
+                  <shadow type="math_number" id="num_1_mul">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_cnt0">
+                <field name="VARIABLE" id="v_cnt" variabletype="">計數</field>
+                <value name="VALUE">
+                  <shadow type="math_number" id="num_0">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_i2">
+                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                    <value name="VALUE">
+                      <shadow type="math_number" id="num_2">
+                        <field name="NUM">2</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="control_repeat_until" id="loop_i">
+                        <field name="OPERATOR">until</field>
+                        <value name="CONDITION">
+                          <block type="operator_compare" id="MYr}w6[|3(scpzmgLtqu">
+                            <field name="OPERATOR">&gt;</field>
+                            <value name="OPERAND1">
+                              <shadow type="text" id="Jjf3H#~1cP@n[1RHcHbd">
+                                <field name="TEXT"></field>
+                              </shadow>
+                              <block type="data_variable" id="get_i">
+                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                              </block>
+                            </value>
+                            <value name="OPERAND2">
+                              <shadow type="text" id="1.B_$(:s_zzYOwrj1X{%">
+                                <field name="TEXT"></field>
+                              </shadow>
+                              <block type="data_variable" id="get_N">
+                                <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="data_setvariableto" id="set_prime1">
+                            <field name="VARIABLE" id="v_isPrime" variabletype="">是質數</field>
+                            <value name="VALUE">
+                              <shadow type="math_number" id="num_1">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="data_setvariableto" id="set_j2">
+                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="num_2_j">
+                                    <field name="NUM">2</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="control_repeat_until" id="loop_j">
+                                    <field name="OPERATOR">until</field>
+                                    <value name="CONDITION">
+                                      <block type="operator_or" id="or_j">
+                                        <value name="OPERAND1">
+                                          <block type="operator_compare" id="cmp_prime">
+                                            <field name="OPERATOR">==</field>
+                                            <value name="OPERAND1">
+                                              <block type="data_variable" id="get_prime">
+                                                <field name="VARIABLE" id="v_isPrime" variabletype="">是質數</field>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <shadow type="text" id="txt_0_prime">
+                                                <field name="TEXT">0</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="OPERAND2">
+                                          <block type="operator_compare" id="Vfw[M+aa5oiG/qfdlK6O">
+                                            <field name="OPERATOR">&gt;</field>
+                                            <value name="OPERAND1">
+                                              <shadow type="text" id="Ye5PIb+8[/VLOfSx`OPB">
+                                                <field name="TEXT"></field>
+                                              </shadow>
+                                              <block type="operator_arithmetic" id="?6rGz3rtICDZUb4S*|+:">
+                                                <field name="OPERATOR">*</field>
+                                                <value name="NUM1">
+                                                  <shadow type="math_number" id="X]qFbXOz8|(T~}OA_9h$">
+                                                    <field name="NUM">0</field>
+                                                  </shadow>
+                                                  <block type="data_variable" id="get_j1">
+                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <shadow type="math_number" id="fqxSH)ybzRZBdMdPSoQ0">
+                                                    <field name="NUM">0</field>
+                                                  </shadow>
+                                                  <block type="data_variable" id="get_j2">
+                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <shadow type="text" id="0mRbv#Lum?+QK|IxB[94">
+                                                <field name="TEXT"></field>
+                                              </shadow>
+                                              <block type="data_variable" id="get_i_cmp">
+                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="control_if" id="if_mod">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="A$^57|b82a9F*Z`2@*Sw">
+                                            <field name="OPERATOR">==</field>
+                                            <value name="OPERAND1">
+                                              <shadow type="text" id=":xjdp!osGx~TaaXj/)1]">
+                                                <field name="TEXT"></field>
+                                              </shadow>
+                                              <block type="operator_mod" id="7FwoPVU%/,P]Urb()#mu">
+                                                <value name="NUM1">
+                                                  <shadow type="math_number" id="*6cV;eFXbtAG?x-P*Q4r">
+                                                    <field name="NUM"></field>
+                                                  </shadow>
+                                                  <block type="data_variable" id="get_i_mod">
+                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <shadow type="math_number" id="H8C![31pb;9HHLmDC^Xm">
+                                                    <field name="NUM"></field>
+                                                  </shadow>
+                                                  <block type="data_variable" id="get_j_mod">
+                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <shadow type="text" id="j3x{~j9c9`,o@xU{=O-a">
+                                                <field name="TEXT">0</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_setvariableto" id="set_prime0">
+                                            <field name="VARIABLE" id="v_isPrime" variabletype="">是質數</field>
+                                            <value name="VALUE">
+                                              <shadow type="math_number" id="num_0_prime">
+                                                <field name="NUM">0</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="data_changevariableby" id="inc_j">
+                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                            <value name="VALUE">
+                                              <shadow type="math_number" id="num_1_incj">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="control_if" id="if_is_prime">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="RlBk9Ju2Z_3``%{gS!7p">
+                                            <field name="OPERATOR">==</field>
+                                            <value name="OPERAND1">
+                                              <shadow type="text" id="ZfVlXgFyLp_h3%]l`iBs">
+                                                <field name="TEXT"></field>
+                                              </shadow>
+                                              <block type="data_variable" id="get_prime_check">
+                                                <field name="VARIABLE" id="v_isPrime" variabletype="">是質數</field>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <shadow type="text" id="34GN]5{y|c,-c=2]foUV">
+                                                <field name="TEXT">1</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_changevariableby" id="inc_cnt">
+                                            <field name="VARIABLE" id="v_cnt" variabletype="">計數</field>
+                                            <value name="VALUE">
+                                              <shadow type="math_number" id="num_1_inccnt">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="data_changevariableby" id="inc_i">
+                                            <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                            <value name="VALUE">
+                                              <shadow type="math_number" id="num_1_inci">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="scratch_say" id="Q+.2)zG`g|4vU(2G=RY.">
+                            <value name="TEXT">
+                              <shadow type="text" id="sdkF@;7a+0C/9H[+]pw~">
+                                <field name="TEXT">Hello!</field>
+                              </shadow>
+                              <block type="data_variable" id="get_cnt">
+                                <field name="VARIABLE" id="v_cnt" variabletype="">計數</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
