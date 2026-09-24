@@ -1,0 +1,94 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_s" islocal="false" iscloud="false">總和</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_text">
+            <field name="TEXT">N</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_val"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_answer"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_sum_0">
+                <field name="VARIABLE" id="aa_s" variabletype="">總和</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_sum_val"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_i_1">
+                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="shd_i_val"><field name="TEXT">1</field></shadow>
+                    </value>
+                    <next>
+                      <block type="control_repeat" id="repeat_9">
+                        <value name="TIMES">
+                          <shadow type="math_number" id="shd_repeat_9">
+                            <field name="NUM">9</field>
+                          </shadow>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="data_changevariableby" id="add_product">
+                            <field name="VARIABLE" id="aa_s" variabletype="">總和</field>
+                            <value name="VALUE">
+                              <block type="operator_arithmetic" id="mult_op">
+                                <field name="OPERATOR">*</field>
+                                <value name="NUM1">
+                                  <shadow type="math_number" id="shd_m1"><field name="NUM">0</field></shadow>
+                                  <block type="data_variable" id="get_N_var">
+                                    <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                                  </block>
+                                </value>
+                                <value name="NUM2">
+                                  <shadow type="math_number" id="shd_m2"><field name="NUM">0</field></shadow>
+                                  <block type="data_variable" id="get_i_var">
+                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="data_changevariableby" id="inc_i">
+                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="shd_inc_1">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="scratch_say" id="say_sum">
+                            <value name="TEXT">
+                              <shadow type="text" id="shd_say_default"><field name="TEXT">Hello!</field></shadow>
+                              <block type="data_variable" id="get_sum_var">
+                                <field name="VARIABLE" id="aa_s" variabletype="">總和</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
