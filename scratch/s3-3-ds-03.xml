@@ -1,0 +1,150 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_k" islocal="false" iscloud="false">k</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="list" id="l_queue" islocal="false" iscloud="false">queue</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="q_N"><field name="TEXT">請輸入 N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+            <value name="VALUE"><block type="scratch_answer" id="ans_N"></block></value>
+            <next>
+              <block type="scratch_ask" id="ask_k">
+                <value name="QUESTION">
+                  <shadow type="text" id="q_k"><field name="TEXT">請輸入 k</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_k">
+                    <field name="VARIABLE" id="v_k" variabletype="">k</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_k"></block></value>
+                    <next>
+                      <block type="data_deletealloflist" id="clear_queue">
+                        <field name="LIST" id="l_queue" variabletype="list">queue</field>
+                        <next>
+                          <block type="data_setvariableto" id="set_i_1">
+                            <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                            <value name="VALUE"><shadow type="math_number" id="num_1"><field name="NUM">1</field></shadow></value>
+                            <next>
+                              <!-- 初始化佇列：放入 1 到 N -->
+                              <block type="control_repeat" id="init_loop">
+                                <value name="TIMES">
+                                  <block type="data_variable" id="var_N1">
+                                    <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="data_addtolist" id="add_i">
+                                    <field name="LIST" id="l_queue" variabletype="list">queue</field>
+                                    <value name="ITEM">
+                                      <block type="data_variable" id="var_i1">
+                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="data_changevariableby" id="inc_i">
+                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                        <value name="VALUE"><shadow type="math_number" id="num_inc1"><field name="NUM">1</field></shadow></value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <!-- 佇列模擬：重複 N-1 次淘汰 -->
+                                  <block type="control_repeat" id="sim_loop">
+                                    <value name="TIMES">
+                                      <block type="operator_subtract" id="sub_N_1">
+                                        <value name="NUM1">
+                                          <block type="data_variable" id="var_N2">
+                                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <shadow type="math_number" id="num_sub1"><field name="NUM">1</field></shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <!-- 將前 k-1 個人移到佇列尾端 -->
+                                      <block type="control_repeat" id="move_k_1">
+                                        <value name="TIMES">
+                                          <block type="operator_subtract" id="sub_k_1">
+                                            <value name="NUM1">
+                                              <block type="data_variable" id="var_k1">
+                                                <field name="VARIABLE" id="v_k" variabletype="">k</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM2">
+                                              <shadow type="math_number" id="num_sub2"><field name="NUM">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_addtolist" id="requeue_front">
+                                            <field name="LIST" id="l_queue" variabletype="list">queue</field>
+                                            <value name="ITEM">
+                                              <block type="data_itemoflist" id="get_front">
+                                                <field name="LIST" id="l_queue" variabletype="list">queue</field>
+                                                <value name="INDEX">
+                                                  <shadow type="math_number" id="idx_1"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="data_deleteoflist" id="del_front">
+                                                <field name="LIST" id="l_queue" variabletype="list">queue</field>
+                                                <value name="INDEX">
+                                                  <shadow type="math_number" id="idx_1_del"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <!-- 淘汰第 k 個人（刪除隊首第 1 項） -->
+                                          <block type="data_deleteoflist" id="del_kth">
+                                            <field name="LIST" id="l_queue" variabletype="list">queue</field>
+                                            <value name="INDEX">
+                                              <shadow type="math_number" id="idx_1_kth"><field name="NUM">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <!-- 說出最後剩下的人 -->
+                                      <block type="scratch_say" id="say_ans">
+                                        <value name="TEXT">
+                                          <block type="data_itemoflist" id="get_winner">
+                                            <field name="LIST" id="l_queue" variabletype="list">queue</field>
+                                            <value name="INDEX">
+                                              <shadow type="math_number" id="idx_winner"><field name="NUM">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
