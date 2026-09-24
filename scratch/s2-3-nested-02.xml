@@ -1,0 +1,73 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_str" islocal="false" iscloud="false">字串</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_text">
+            <field name="TEXT">N</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_val"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_answer"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_str_empty">
+                <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_empty"><field name="TEXT"></field></shadow>
+                </value>
+                <next>
+                  <block type="control_repeat" id="repeat_loop">
+                    <value name="TIMES">
+                      <block type="data_variable" id="get_N_var">
+                        <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="data_setvariableto" id="append_star">
+                        <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                        <value name="VALUE">
+                          <block type="operator_join" id="join_op">
+                            <value name="OPERAND1">
+                              <shadow type="text" id="shd_j1"><field name="TEXT">hello </field></shadow>
+                              <block type="data_variable" id="get_str_var">
+                                <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                              </block>
+                            </value>
+                            <value name="OPERAND2">
+                              <shadow type="text" id="shd_star">
+                                <field name="TEXT">*</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_say" id="say_str">
+                        <value name="TEXT">
+                          <shadow type="text" id="shd_say_default"><field name="TEXT">Hello!</field></shadow>
+                          <block type="data_variable" id="get_str_out">
+                            <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
