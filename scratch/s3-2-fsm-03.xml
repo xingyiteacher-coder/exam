@@ -1,0 +1,131 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_floor" islocal="false" iscloud="false">floor</variable>
+    <variable type="" id="v_moves" islocal="false" iscloud="false">moves_input</variable>
+    <variable type="" id="v_ptr" islocal="false" iscloud="false">ptr</variable>
+    <variable type="" id="v_char" islocal="false" iscloud="false">char</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <block type="scratch_ask" id="ask_floor">
+        <value name="QUESTION">
+          <shadow type="text" id="q_floor"><field name="TEXT">請輸入起始樓層</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_floor">
+            <field name="VARIABLE" id="v_floor" variabletype="">floor</field>
+            <value name="VALUE"><block type="scratch_answer" id="ans_floor"></block></value>
+            <next>
+              <block type="scratch_ask" id="ask_moves">
+                <value name="QUESTION">
+                  <shadow type="text" id="q_moves"><field name="TEXT">請輸入指令 (U/D)</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_moves">
+                    <field name="VARIABLE" id="v_moves" variabletype="">moves_input</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_moves"></block></value>
+                    <next>
+                      <block type="data_setvariableto" id="set_ptr_1">
+                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                        <value name="VALUE"><shadow type="math_number" id="num1_1"><field name="NUM">1</field></shadow></value>
+                        <next>
+                          <block type="control_repeat" id="loop_moves">
+                            <value name="TIMES">
+                              <block type="operator_length" id="len_moves">
+                                <value name="STRING">
+                                  <block type="data_variable" id="v_moves1">
+                                    <field name="VARIABLE" id="v_moves" variabletype="">moves_input</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="set_char">
+                                <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                <value name="VALUE">
+                                  <block type="operator_letter_of" id="get_char">
+                                    <value name="STRING">
+                                      <block type="data_variable" id="v_moves2">
+                                        <field name="VARIABLE" id="v_moves" variabletype="">moves_input</field>
+                                      </block>
+                                    </value>
+                                    <value name="LETTER">
+                                      <block type="data_variable" id="v_ptr1">
+                                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="control_if_else" id="check_u">
+                                    <value name="CONDITION">
+                                      <block type="operator_compare" id="cmp_u">
+                                        <field name="OPERATOR">==</field>
+                                        <value name="OPERAND1">
+                                          <block type="data_variable" id="v_char1">
+                                            <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                          </block>
+                                        </value>
+                                        <value name="OPERAND2"><shadow type="text" id="t_u"><field name="TEXT">U</field></shadow></value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="data_changevariableby" id="inc_floor">
+                                        <field name="VARIABLE" id="v_floor" variabletype="">floor</field>
+                                        <value name="VALUE"><shadow type="math_number" id="num1_inc"><field name="NUM">1</field></shadow></value>
+                                      </block>
+                                    </statement>
+                                    <statement name="SUBSTACK2">
+                                      <block type="control_if" id="check_d">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="cmp_d">
+                                            <field name="OPERATOR">==</field>
+                                            <value name="OPERAND1">
+                                              <block type="data_variable" id="v_char2">
+                                                <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2"><shadow type="text" id="t_d"><field name="TEXT">D</field></shadow></value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_changevariableby" id="dec_floor">
+                                            <field name="VARIABLE" id="v_floor" variabletype="">floor</field>
+                                            <value name="VALUE"><shadow type="math_number" id="num1_dec"><field name="NUM">-1</field></shadow></value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="data_changevariableby" id="inc_ptr">
+                                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                        <value name="VALUE"><shadow type="math_number" id="num1_ptr"><field name="NUM">1</field></shadow></value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="scratch_say" id="say_result">
+                                <value name="TEXT">
+                                  <block type="data_variable" id="v_floor_out">
+                                    <field name="VARIABLE" id="v_floor" variabletype="">floor</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
