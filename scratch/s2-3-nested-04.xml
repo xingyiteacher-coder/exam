@@ -1,0 +1,170 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_cnt" islocal="false" iscloud="false">個數</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="aa_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="aa_flag" islocal="false" iscloud="false">是完全平方數</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_text">
+            <field name="TEXT">N</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_val"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_answer"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_cnt_0">
+                <field name="VARIABLE" id="aa_cnt" variabletype="">個數</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_cnt_val"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_i_1">
+                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="shd_i_val"><field name="TEXT">1</field></shadow>
+                    </value>
+                    <next>
+                      <block type="control_repeat" id="outer_loop">
+                        <value name="TIMES">
+                          <block type="data_variable" id="get_N_var">
+                            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="data_setvariableto" id="set_flag_0">
+                            <field name="VARIABLE" id="aa_flag" variabletype="">是完全平方數</field>
+                            <value name="VALUE">
+                              <shadow type="text" id="shd_flag_0"><field name="TEXT">0</field></shadow>
+                            </value>
+                            <next>
+                              <block type="data_setvariableto" id="set_j_1">
+                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                <value name="VALUE">
+                                  <shadow type="text" id="shd_j_val"><field name="TEXT">1</field></shadow>
+                                </value>
+                                <next>
+                                  <block type="control_repeat" id="inner_loop">
+                                    <value name="TIMES">
+                                      <block type="data_variable" id="get_i_var1">
+                                        <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="control_if" id="check_square">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="cmp_sq">
+                                            <field name="OPERATOR">==</field>
+                                            <value name="OPERAND1">
+                                              <block type="operator_arithmetic" id="mult_j">
+                                                <field name="OPERATOR">*</field>
+                                                <value name="NUM1">
+                                                  <shadow type="math_number" id="shd_j_num1"><field name="NUM">0</field></shadow>
+                                                  <block type="data_variable" id="get_j_var1">
+                                                    <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <shadow type="math_number" id="shd_j_num2"><field name="NUM">0</field></shadow>
+                                                  <block type="data_variable" id="get_j_var2">
+                                                    <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <shadow type="text" id="shd_i_str"><field name="TEXT">0</field></shadow>
+                                              <block type="data_variable" id="get_i_var2">
+                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_setvariableto" id="set_flag_1">
+                                            <field name="VARIABLE" id="aa_flag" variabletype="">是完全平方數</field>
+                                            <value name="VALUE">
+                                              <shadow type="text" id="shd_flag_1"><field name="TEXT">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="data_changevariableby" id="inc_j">
+                                            <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                            <value name="VALUE">
+                                              <shadow type="math_number" id="num_inc_j"><field name="NUM">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="control_if" id="check_flag">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="cmp_flag_1">
+                                            <field name="OPERATOR">==</field>
+                                            <value name="OPERAND1">
+                                              <block type="data_variable" id="get_flag_var">
+                                                <field name="VARIABLE" id="aa_flag" variabletype="">是完全平方數</field>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <shadow type="text" id="shd_one"><field name="TEXT">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_changevariableby" id="inc_cnt">
+                                            <field name="VARIABLE" id="aa_cnt" variabletype="">個數</field>
+                                            <value name="VALUE">
+                                              <shadow type="math_number" id="num_inc_cnt"><field name="NUM">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="data_changevariableby" id="inc_i">
+                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                            <value name="VALUE">
+                                              <shadow type="math_number" id="num_inc_i"><field name="NUM">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="scratch_say" id="say_cnt">
+                            <value name="TEXT">
+                              <shadow type="text" id="shd_say_default"><field name="TEXT">Hello!</field></shadow>
+                              <block type="data_variable" id="get_cnt_var">
+                                <field name="VARIABLE" id="aa_cnt" variabletype="">個數</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
