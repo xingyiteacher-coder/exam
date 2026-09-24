@@ -1,0 +1,142 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_sum" islocal="false" iscloud="false">總和</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="flag1" x="171" y="-102">
+    <next>
+      <block type="scratch_ask" id="ask_n">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_n">
+            <field name="TEXT">n</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_n">
+            <field name="VARIABLE" id="v_n" variabletype="">n</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_n"></block>
+            </value>
+            <next>
+              <block type="control_repeat_until" id="loop_dr">
+                <field name="OPERATOR">until</field>
+                <value name="CONDITION">
+                  <block type="operator_compare" id="cmp_len">
+                    <field name="OPERATOR">==</field>
+                    <value name="OPERAND1">
+                      <block type="operator_length" id="len_n">
+                        <value name="STRING">
+                          <block type="data_variable" id="get_n_len">
+                            <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="OPERAND2">
+                      <shadow type="text" id="txt_1">
+                        <field name="TEXT">1</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="SUBSTACK">
+                  <block type="data_setvariableto" id="set_sum0">
+                    <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                    <value name="VALUE">
+                      <shadow type="math_number" id="num_0">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="set_i1">
+                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id="num_1">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="control_repeat_until" id="loop_digits">
+                            <field name="OPERATOR">until</field>
+                            <value name="CONDITION">
+                              <block type="operator_compare" id="cmp_gt">
+                                <field name="OPERATOR">&gt;</field>
+                                <value name="OPERAND1">
+                                  <block type="data_variable" id="get_i">
+                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <block type="operator_length" id="len_n_inner">
+                                    <value name="STRING">
+                                      <block type="data_variable" id="get_n_len_inner">
+                                        <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_changevariableby" id="add_digit">
+                                <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                <value name="VALUE">
+                                  <block type="operator_letter_of" id="letter_of_n">
+                                    <value name="LETTER">
+                                      <block type="data_variable" id="get_i_letter">
+                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                      </block>
+                                    </value>
+                                    <value name="STRING">
+                                      <block type="data_variable" id="get_n_str">
+                                        <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="data_changevariableby" id="inc_i">
+                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                    <value name="VALUE">
+                                      <shadow type="math_number" id="num_1_inc">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="data_setvariableto" id="update_n">
+                                <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                                <value name="VALUE">
+                                  <block type="data_variable" id="get_sum_val">
+                                    <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="scratch_say" id="say_ans">
+                    <value name="TEXT">
+                      <block type="data_variable" id="get_n_ans">
+                        <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
