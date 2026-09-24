@@ -1,97 +1,109 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <variables>
-    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
-    <variable type="" id="aa_k" islocal="false" iscloud="false">k</variable>
-    <variable type="" id="aa_str" islocal="false" iscloud="false">輸入字串</variable>
-    <variable type="" id="aa_word" islocal="false" iscloud="false">單字</variable>
-    <variable type="" id="aa_ptr" islocal="false" iscloud="false">ptr</variable>
-    <variable type="" id="aa_char" islocal="false" iscloud="false">char</variable>
-    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
-    <variable type="" id="aa_j" islocal="false" iscloud="false">j</variable>
-    <variable type="" id="aa_min_idx" islocal="false" iscloud="false">最小值位置</variable>
-    <variable type="" id="aa_temp" islocal="false" iscloud="false">temp</variable>
-    <variable type="list" id="aa_list" islocal="false" iscloud="false">數列</variable>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_raw_input" islocal="false" iscloud="false">raw_input</variable>
+    <variable type="" id="v_k" islocal="false" iscloud="false">k</variable>
+    <variable type="" id="v_word" islocal="false" iscloud="false">word</variable>
+    <variable type="" id="v_ptr" islocal="false" iscloud="false">ptr</variable>
+    <variable type="" id="v_char" islocal="false" iscloud="false">char</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_min_idx" islocal="false" iscloud="false">min_idx</variable>
+    <variable type="" id="v_temp" islocal="false" iscloud="false">temp</variable>
+    <variable type="list" id="l_arr" islocal="false" iscloud="false">數列</variable>
   </variables>
-
-  <!-- 主程式 -->
-  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
     <next>
-      <!-- 1. 讀取 N -->
       <block type="scratch_ask" id="ask_N">
         <value name="QUESTION">
-          <shadow type="text" id="shd_ask_N"><field name="TEXT">N</field></shadow>
+          <shadow type="text" id="/0x6WgAGOwr:F$qIv_S|">
+            <field name="TEXT">N</field>
+          </shadow>
         </value>
         <next>
           <block type="data_setvariableto" id="set_N">
-            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
             <value name="VALUE">
-              <block type="scratch_answer" id="get_ans_N"></block>
+              <block type="scratch_answer" id="ans_N"></block>
             </value>
             <next>
-              <!-- 2. 讀取第二行整行數列字串 -->
-              <block type="scratch_ask" id="ask_line">
+              <block type="scratch_ask" id="ask_raw">
                 <value name="QUESTION">
-                  <shadow type="text" id="shd_ask_line"><field name="TEXT">數列字串</field></shadow>
+                  <shadow type="text" id="ZkP{shZK_20%dC/X4:ag">
+                    <field name="TEXT">raw_input</field>
+                  </shadow>
                 </value>
                 <next>
-                  <block type="data_setvariableto" id="set_str">
-                    <field name="VARIABLE" id="aa_str" variabletype="">輸入字串</field>
+                  <block type="data_setvariableto" id="set_raw">
+                    <field name="VARIABLE" id="v_raw_input" variabletype="">raw_input</field>
                     <value name="VALUE">
-                      <block type="scratch_answer" id="get_ans_line"></block>
+                      <block type="scratch_answer" id="ans_raw"></block>
                     </value>
                     <next>
-                      <!-- 3. 讀取 k -->
                       <block type="scratch_ask" id="ask_k">
                         <value name="QUESTION">
-                          <shadow type="text" id="shd_ask_k"><field name="TEXT">k</field></shadow>
+                          <shadow type="text" id="YwDti_qXJt{3z*aZ-ha*">
+                            <field name="TEXT">k</field>
+                          </shadow>
                         </value>
                         <next>
                           <block type="data_setvariableto" id="set_k">
-                            <field name="VARIABLE" id="aa_k" variabletype="">k</field>
+                            <field name="VARIABLE" id="v_k" variabletype="">k</field>
                             <value name="VALUE">
-                              <block type="scratch_answer" id="get_ans_k"></block>
+                              <block type="scratch_answer" id="ans_k"></block>
                             </value>
                             <next>
-                              <!-- 清空數列清單 -->
-                              <block type="data_deletealloflist" id="del_list">
-                                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                              <block type="data_deletealloflist" id="-Ge5;WKsMPu~EDw@m+wh">
+                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                 <next>
-                                  <!-- 4. 拆解字串填入數列清單 -->
                                   <block type="data_setvariableto" id="set_word_empty">
-                                    <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                    <field name="VARIABLE" id="v_word" variabletype="">word</field>
                                     <value name="VALUE">
-                                      <shadow type="text" id="shd_empty1"><field name="TEXT"></field></shadow>
+                                      <shadow type="text" id="XH2:5H?nsv]zP7)_K5%F">
+                                        <field name="TEXT"></field>
+                                      </shadow>
                                     </value>
                                     <next>
                                       <block type="data_setvariableto" id="set_ptr_1">
-                                        <field name="VARIABLE" id="aa_ptr" variabletype="">ptr</field>
+                                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
                                         <value name="VALUE">
-                                          <shadow type="text" id="shd_ptr1"><field name="TEXT">1</field></shadow>
+                                          <shadow type="math_number" id="_hM_IlN(CoJfvC{(G00;">
+                                            <field name="NUM">1</field>
+                                          </shadow>
                                         </value>
                                         <next>
-                                          <block type="control_repeat" id="loop_parse_str">
+                                          <block type="control_repeat" id="loop_parse">
                                             <value name="TIMES">
-                                              <block type="operator_length" id="get_len">
+                                              <block type="operator_length" id="w0l`PW#kB{|4+}Pah+eN">
                                                 <value name="STRING">
-                                                  <block type="data_variable" id="var_str1">
-                                                    <field name="VARIABLE" id="aa_str" variabletype="">輸入字串</field>
+                                                  <shadow type="text" id=")24o0!0i/w)E7inr6~~A">
+                                                    <field name="TEXT">world</field>
+                                                  </shadow>
+                                                  <block type="data_variable" id="var_raw1">
+                                                    <field name="VARIABLE" id="v_raw_input" variabletype="">raw_input</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
                                             <statement name="SUBSTACK">
                                               <block type="data_setvariableto" id="set_char">
-                                                <field name="VARIABLE" id="aa_char" variabletype="">char</field>
+                                                <field name="VARIABLE" id="v_char" variabletype="">char</field>
                                                 <value name="VALUE">
-                                                  <block type="operator_letter_of" id="get_char_idx">
-                                                    <value name="LETTER">
-                                                      <block type="data_variable" id="var_ptr1">
-                                                        <field name="VARIABLE" id="aa_ptr" variabletype="">ptr</field>
+                                                  <block type="operator_letter_of" id="6aIJ]b+.]+Vz[*-$NGa!">
+                                                    <value name="STRING">
+                                                      <shadow type="text" id="];-bK^Pc?Gl2UJe(Nq^l">
+                                                        <field name="TEXT">world</field>
+                                                      </shadow>
+                                                      <block type="data_variable" id="var_raw2">
+                                                        <field name="VARIABLE" id="v_raw_input" variabletype="">raw_input</field>
                                                       </block>
                                                     </value>
-                                                    <value name="STRING">
-                                                      <block type="data_variable" id="var_str2">
-                                                        <field name="VARIABLE" id="aa_str" variabletype="">輸入字串</field>
+                                                    <value name="LETTER">
+                                                      <shadow type="math_whole_number" id="0%LbK2!7={^BmI1B8^2n">
+                                                        <field name="NUM">1</field>
+                                                      </shadow>
+                                                      <block type="data_variable" id="var_ptr1">
+                                                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
                                                       </block>
                                                     </value>
                                                   </block>
@@ -100,49 +112,74 @@
                                                   <block type="control_if_else" id="check_space">
                                                     <value name="CONDITION">
                                                       <block type="operator_compare" id="cmp_space">
-                                                        <field name="OPERATOR">=</field>
+                                                        <field name="OPERATOR">==</field>
                                                         <value name="OPERAND1">
-                                                          <block type="data_variable" id="var_char1">
-                                                            <field name="VARIABLE" id="aa_char" variabletype="">char</field>
+                                                          <block type="operator_join" id="join_x_char">
+                                                            <value name="OPERAND1">
+                                                              <shadow type="text" id="txt_x1">
+                                                                <field name="TEXT">x</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <value name="OPERAND2">
+                                                              <block type="data_variable" id="var_char1">
+                                                                <field name="VARIABLE" id="v_char" variabletype="">char</field>
+                                                              </block>
+                                                            </value>
                                                           </block>
                                                         </value>
                                                         <value name="OPERAND2">
-                                                          <shadow type="text" id="shd_space_char"><field name="TEXT"> </field></shadow>
+                                                          <shadow type="text" id="txt_x_space">
+                                                            <field name="TEXT">x </field>
+                                                          </shadow>
                                                         </value>
                                                       </block>
                                                     </value>
-                                                    <statement name="IF">
-                                                      <block type="control_if" id="check_word_not_empty">
+                                                    <statement name="SUBSTACK">
+                                                      <block type="control_if" id="check_word">
                                                         <value name="CONDITION">
-                                                          <block type="operator_compare" id="cmp_word_gt_0">
+                                                          <block type="operator_compare" id="Pyk0!s-!v=?TY~yl`S!~">
                                                             <field name="OPERATOR">&gt;</field>
                                                             <value name="OPERAND1">
-                                                              <block type="operator_length" id="get_word_len">
+                                                              <block type="operator_length" id=")0VF-Es~8]q;XsrOZK=U">
                                                                 <value name="STRING">
                                                                   <block type="data_variable" id="var_word1">
-                                                                    <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                                                    <field name="VARIABLE" id="v_word" variabletype="">word</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
                                                             </value>
                                                             <value name="OPERAND2">
-                                                              <shadow type="math_number" id="shd_zero1"><field name="NUM">0</field></shadow>
+                                                              <shadow type="text" id="h*@zHlju4Z~Od@V+F~gk">
+                                                                <field name="TEXT">0</field>
+                                                              </shadow>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <statement name="SUBSTACK">
-                                                          <block type="data_addtolist" id="add_word_list">
-                                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                          <block type="data_addtolist" id="add_num1">
+                                                            <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                             <value name="ITEM">
-                                                              <block type="data_variable" id="var_word2">
-                                                                <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                                              <block type="operator_arithmetic" id="num_word1">
+                                                                <field name="OPERATOR">-</field>
+                                                                <value name="NUM1">
+                                                                  <block type="data_variable" id="var_word2">
+                                                                    <field name="VARIABLE" id="v_word" variabletype="">word</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <shadow type="math_number" id="sub0_1">
+                                                                    <field name="NUM">0</field>
+                                                                  </shadow>
+                                                                </value>
                                                               </block>
                                                             </value>
                                                             <next>
                                                               <block type="data_setvariableto" id="reset_word">
-                                                                <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                                                <field name="VARIABLE" id="v_word" variabletype="">word</field>
                                                                 <value name="VALUE">
-                                                                  <shadow type="text" id="shd_empty2"><field name="TEXT"></field></shadow>
+                                                                  <shadow type="text" id="jy/DBeOU19KI:6Q$i9j8">
+                                                                    <field name="TEXT"></field>
+                                                                  </shadow>
                                                                 </value>
                                                               </block>
                                                             </next>
@@ -150,19 +187,25 @@
                                                         </statement>
                                                       </block>
                                                     </statement>
-                                                    <statement name="ELSE">
-                                                      <block type="data_setvariableto" id="append_char">
-                                                        <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                                    <statement name="SUBSTACK2">
+                                                      <block type="data_setvariableto" id="join_word">
+                                                        <field name="VARIABLE" id="v_word" variabletype="">word</field>
                                                         <value name="VALUE">
-                                                          <block type="operator_join" id="join_char">
+                                                          <block type="operator_join" id="-{Y?B!cz}6$UCM!37v~#">
                                                             <value name="OPERAND1">
+                                                              <shadow type="text" id="y}/J7.#l`wd5r,qL7=[.">
+                                                                <field name="TEXT">hello </field>
+                                                              </shadow>
                                                               <block type="data_variable" id="var_word3">
-                                                                <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                                                <field name="VARIABLE" id="v_word" variabletype="">word</field>
                                                               </block>
                                                             </value>
                                                             <value name="OPERAND2">
+                                                              <shadow type="text" id="dT}QnE,+Yu0RI{glLhRp">
+                                                                <field name="TEXT">world</field>
+                                                              </shadow>
                                                               <block type="data_variable" id="var_char2">
-                                                                <field name="VARIABLE" id="aa_char" variabletype="">char</field>
+                                                                <field name="VARIABLE" id="v_char" variabletype="">char</field>
                                                               </block>
                                                             </value>
                                                           </block>
@@ -171,9 +214,11 @@
                                                     </statement>
                                                     <next>
                                                       <block type="data_changevariableby" id="inc_ptr">
-                                                        <field name="VARIABLE" id="aa_ptr" variabletype="">ptr</field>
+                                                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
                                                         <value name="VALUE">
-                                                          <shadow type="math_number" id="shd_inc_ptr1"><field name="NUM">1</field></shadow>
+                                                          <shadow type="math_number" id="lq0ZY;^-/Oc,u3$~J|.7">
+                                                            <field name="NUM">1</field>
+                                                          </shadow>
                                                         </value>
                                                       </block>
                                                     </next>
@@ -182,41 +227,53 @@
                                               </block>
                                             </statement>
                                             <next>
-                                              <!-- 處理最後一個數字 -->
                                               <block type="control_if" id="check_last_word">
                                                 <value name="CONDITION">
-                                                  <block type="operator_compare" id="cmp_last_word">
+                                                  <block type="operator_compare" id="cmp_last_len">
                                                     <field name="OPERATOR">&gt;</field>
                                                     <value name="OPERAND1">
-                                                      <block type="operator_length" id="get_last_word_len">
+                                                      <block type="operator_length" id="len_last_word">
                                                         <value name="STRING">
                                                           <block type="data_variable" id="var_word4">
-                                                            <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                                            <field name="VARIABLE" id="v_word" variabletype="">word</field>
                                                           </block>
                                                         </value>
                                                       </block>
                                                     </value>
                                                     <value name="OPERAND2">
-                                                      <shadow type="math_number" id="shd_zero2"><field name="NUM">0</field></shadow>
+                                                      <shadow type="math_number" id="2^#Tn-|!#vdi|zj:]W]J">
+                                                        <field name="NUM">0</field>
+                                                      </shadow>
                                                     </value>
                                                   </block>
                                                 </value>
                                                 <statement name="SUBSTACK">
-                                                  <block type="data_addtolist" id="add_last_word">
-                                                    <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                  <block type="data_addtolist" id="add_num2">
+                                                    <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                     <value name="ITEM">
-                                                      <block type="data_variable" id="var_word5">
-                                                        <field name="VARIABLE" id="aa_word" variabletype="">單字</field>
+                                                      <block type="operator_arithmetic" id="num_word2">
+                                                        <field name="OPERATOR">-</field>
+                                                        <value name="NUM1">
+                                                          <block type="data_variable" id="var_word5">
+                                                            <field name="VARIABLE" id="v_word" variabletype="">word</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="NUM2">
+                                                          <shadow type="math_number" id="S$X~2q:j:$rtlY7rxLk-">
+                                                            <field name="NUM">0</field>
+                                                          </shadow>
+                                                        </value>
                                                       </block>
                                                     </value>
                                                   </block>
                                                 </statement>
                                                 <next>
-                                                  <!-- 5. 選擇排序法 -->
                                                   <block type="data_setvariableto" id="set_i_1">
-                                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
                                                     <value name="VALUE">
-                                                      <shadow type="text" id="shd_i1"><field name="TEXT">1</field></shadow>
+                                                      <shadow type="math_number" id="A?[VS_{EhybMA7DwjaR=">
+                                                        <field name="NUM">1</field>
+                                                      </shadow>
                                                     </value>
                                                     <next>
                                                       <block type="control_repeat" id="outer_loop">
@@ -224,52 +281,65 @@
                                                           <block type="operator_arithmetic" id="sub_N_1">
                                                             <field name="OPERATOR">-</field>
                                                             <value name="NUM1">
-                                                              <block type="data_variable" id="var_N2">
-                                                                <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                                                              <block type="data_variable" id="var_N1">
+                                                                <field name="VARIABLE" id="v_N" variabletype="">N</field>
                                                               </block>
                                                             </value>
                                                             <value name="NUM2">
-                                                              <shadow type="math_number" id="shd_1_1"><field name="NUM">1</field></shadow>
+                                                              <shadow type="math_number" id="UEq,:%u_`+ox]YGWM]E_">
+                                                                <field name="NUM">1</field>
+                                                              </shadow>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <statement name="SUBSTACK">
                                                           <block type="data_setvariableto" id="set_min_idx">
-                                                            <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                            <field name="VARIABLE" id="v_min_idx" variabletype="">min_idx</field>
                                                             <value name="VALUE">
                                                               <block type="data_variable" id="var_i_min">
-                                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
                                                               </block>
                                                             </value>
                                                             <next>
-                                                              <block type="data_setvariableto" id="set_j_ip1">
-                                                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                              <block type="data_setvariableto" id="set_j">
+                                                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
                                                                 <value name="VALUE">
-                                                                  <block type="operator_arithmetic" id="add_i_1">
+                                                                  <block type="operator_arithmetic" id="tEAm?3}IEEH{!X@e;@bh">
                                                                     <field name="OPERATOR">+</field>
                                                                     <value name="NUM1">
+                                                                      <shadow type="math_number" id="sN!154u{f7)NYyfDJ*C@">
+                                                                        <field name="NUM">0</field>
+                                                                      </shadow>
                                                                       <block type="data_variable" id="var_i1">
-                                                                        <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
                                                                       </block>
                                                                     </value>
                                                                     <value name="NUM2">
-                                                                      <shadow type="math_number" id="shd_1_2"><field name="NUM">1</field></shadow>
+                                                                      <shadow type="math_number" id="fs2$l/leg*~Sq_rkM=kw">
+                                                                        <field name="NUM">1</field>
+                                                                      </shadow>
                                                                     </value>
                                                                   </block>
                                                                 </value>
                                                                 <next>
                                                                   <block type="control_repeat" id="inner_loop">
                                                                     <value name="TIMES">
-                                                                      <block type="operator_arithmetic" id="sub_N_i">
+                                                                      <block type="operator_arithmetic" id="{78X9+(+@@2?9{rg)3vS">
                                                                         <field name="OPERATOR">-</field>
                                                                         <value name="NUM1">
-                                                                          <block type="data_variable" id="var_N3">
-                                                                            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                                                                          <shadow type="math_number" id="nrth),S[,hT84g7FW;ac">
+                                                                            <field name="NUM">0</field>
+                                                                          </shadow>
+                                                                          <block type="data_variable" id="var_N2">
+                                                                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
                                                                           </block>
                                                                         </value>
                                                                         <value name="NUM2">
+                                                                          <shadow type="math_number" id="E1zII@ELVUDV*]2TLYmF">
+                                                                            <field name="NUM">0</field>
+                                                                          </shadow>
                                                                           <block type="data_variable" id="var_i2">
-                                                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                                            <field name="VARIABLE" id="v_i" variabletype="">i</field>
                                                                           </block>
                                                                         </value>
                                                                       </block>
@@ -277,24 +347,30 @@
                                                                     <statement name="SUBSTACK">
                                                                       <block type="control_if" id="check_min">
                                                                         <value name="CONDITION">
-                                                                          <block type="operator_compare" id="cmp_lt">
+                                                                          <block type="operator_compare" id="qL!x|bB!0B-we0^*59Wl">
                                                                             <field name="OPERATOR">&lt;</field>
                                                                             <value name="OPERAND1">
-                                                                              <block type="data_itemoflist" id="get_item_j">
-                                                                                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                                              <shadow type="text" id="3:%f^Ua[zvm_fJ0[^oZ?">
+                                                                                <field name="TEXT"></field>
+                                                                              </shadow>
+                                                                              <block type="data_itemoflist" id="get_j">
+                                                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                                                 <value name="INDEX">
                                                                                   <block type="data_variable" id="var_j1">
-                                                                                    <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
                                                                                   </block>
                                                                                 </value>
                                                                               </block>
                                                                             </value>
                                                                             <value name="OPERAND2">
-                                                                              <block type="data_itemoflist" id="get_item_min">
-                                                                                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                                              <shadow type="text" id="zZ/;),WAWXQb2O,=!@__">
+                                                                                <field name="TEXT"></field>
+                                                                              </shadow>
+                                                                              <block type="data_itemoflist" id="get_min">
+                                                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                                                 <value name="INDEX">
-                                                                                  <block type="data_variable" id="var_min_idx">
-                                                                                    <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                                                  <block type="data_variable" id="var_min_idx1">
+                                                                                    <field name="VARIABLE" id="v_min_idx" variabletype="">min_idx</field>
                                                                                   </block>
                                                                                 </value>
                                                                               </block>
@@ -302,75 +378,78 @@
                                                                           </block>
                                                                         </value>
                                                                         <statement name="SUBSTACK">
-                                                                          <block type="data_setvariableto" id="update_min_idx">
-                                                                            <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                                          <block type="data_setvariableto" id="upd_min">
+                                                                            <field name="VARIABLE" id="v_min_idx" variabletype="">min_idx</field>
                                                                             <value name="VALUE">
                                                                               <block type="data_variable" id="var_j2">
-                                                                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
                                                                               </block>
                                                                             </value>
                                                                           </block>
                                                                         </statement>
                                                                         <next>
                                                                           <block type="data_changevariableby" id="inc_j">
-                                                                            <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
                                                                             <value name="VALUE">
-                                                                              <shadow type="math_number" id="shd_inc_j"><field name="NUM">1</field></shadow>
+                                                                              <shadow type="math_number" id="HNIJNQPH+cA.,~Nu{ZiA">
+                                                                                <field name="NUM">1</field>
+                                                                              </shadow>
                                                                             </value>
                                                                           </block>
                                                                         </next>
                                                                       </block>
                                                                     </statement>
                                                                     <next>
-                                                                      <!-- 交換 數列[i] 與 數列[最小值位置] -->
                                                                       <block type="data_setvariableto" id="set_temp">
-                                                                        <field name="VARIABLE" id="aa_temp" variabletype="">temp</field>
+                                                                        <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
                                                                         <value name="VALUE">
-                                                                          <block type="data_itemoflist" id="get_item_i">
-                                                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                                          <block type="data_itemoflist" id="get_i">
+                                                                            <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                                             <value name="INDEX">
                                                                               <block type="data_variable" id="var_i3">
-                                                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
                                                                               </block>
                                                                             </value>
                                                                           </block>
                                                                         </value>
                                                                         <next>
-                                                                          <block type="data_replaceitemoflist" id="replace_i">
-                                                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                                          <block type="data_replaceitemoflist" id="rep_i">
+                                                                            <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                                             <value name="INDEX">
                                                                               <block type="data_variable" id="var_i4">
-                                                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
                                                                               </block>
                                                                             </value>
                                                                             <value name="ITEM">
-                                                                              <block type="data_itemoflist" id="get_item_min_swap">
-                                                                                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                                              <block type="data_itemoflist" id="get_min_swap">
+                                                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                                                 <value name="INDEX">
                                                                                   <block type="data_variable" id="var_min_idx2">
-                                                                                    <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                                                    <field name="VARIABLE" id="v_min_idx" variabletype="">min_idx</field>
                                                                                   </block>
                                                                                 </value>
                                                                               </block>
                                                                             </value>
                                                                             <next>
-                                                                              <block type="data_replaceitemoflist" id="replace_min">
-                                                                                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                                              <block type="data_replaceitemoflist" id="rep_min">
+                                                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                                                 <value name="INDEX">
                                                                                   <block type="data_variable" id="var_min_idx3">
-                                                                                    <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                                                    <field name="VARIABLE" id="v_min_idx" variabletype="">min_idx</field>
                                                                                   </block>
                                                                                 </value>
                                                                                 <value name="ITEM">
                                                                                   <block type="data_variable" id="var_temp1">
-                                                                                    <field name="VARIABLE" id="aa_temp" variabletype="">temp</field>
+                                                                                    <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
                                                                                   </block>
                                                                                 </value>
                                                                                 <next>
                                                                                   <block type="data_changevariableby" id="inc_i">
-                                                                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
                                                                                     <value name="VALUE">
-                                                                                      <shadow type="math_number" id="shd_inc_i"><field name="NUM">1</field></shadow>
+                                                                                      <shadow type="math_number" id="zR!MR8e_]J%5!41ZUy@=">
+                                                                                        <field name="NUM">1</field>
+                                                                                      </shadow>
                                                                                     </value>
                                                                                   </block>
                                                                                 </next>
@@ -387,14 +466,13 @@
                                                           </block>
                                                         </statement>
                                                         <next>
-                                                          <!-- 6. 輸出第 k 小的數 -->
                                                           <block type="scratch_say" id="say_ans">
                                                             <value name="TEXT">
-                                                              <block type="data_itemoflist" id="get_item_k">
-                                                                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                              <block type="data_itemoflist" id="get_k">
+                                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
                                                                 <value name="INDEX">
                                                                   <block type="data_variable" id="var_k1">
-                                                                    <field name="VARIABLE" id="aa_k" variabletype="">k</field>
+                                                                    <field name="VARIABLE" id="v_k" variabletype="">k</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
