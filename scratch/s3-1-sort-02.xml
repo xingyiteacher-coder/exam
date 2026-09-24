@@ -1,0 +1,276 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_k" islocal="false" iscloud="false">k</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="aa_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="aa_min_idx" islocal="false" iscloud="false">最小值位置</variable>
+    <variable type="" id="aa_temp" islocal="false" iscloud="false">temp</variable>
+    <variable type="list" id="aa_list" islocal="false" iscloud="false">數列</variable>
+  </variables>
+
+  <!-- 主程式 -->
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_N"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_0"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_ans_N"></block>
+            </value>
+            <next>
+              <block type="data_deletealloflist" id="del_list">
+                <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                <next>
+                  <block type="control_repeat" id="loop_input">
+                    <value name="TIMES">
+                      <block type="data_variable" id="var_N1">
+                        <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_elem">
+                        <value name="QUESTION">
+                          <shadow type="text" id="shd_ask_elem"><field name="TEXT">元素</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_addtolist" id="add_item">
+                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                            <value name="ITEM">
+                              <shadow type="text" id="shd_item_def"><field name="TEXT">thing</field></shadow>
+                              <block type="scratch_answer" id="get_ans_elem"></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_ask" id="ask_k">
+                        <value name="QUESTION">
+                          <shadow type="text" id="shd_ask_k"><field name="TEXT">k</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_k">
+                            <field name="VARIABLE" id="aa_k" variabletype="">k</field>
+                            <value name="VALUE">
+                              <shadow type="text" id="shd_k_0"><field name="TEXT">0</field></shadow>
+                              <block type="scratch_answer" id="get_ans_k"></block>
+                            </value>
+                            <next>
+                              <!-- 選擇排序 -->
+                              <block type="data_setvariableto" id="set_i_1">
+                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                <value name="VALUE">
+                                  <shadow type="text" id="shd_i1"><field name="TEXT">1</field></shadow>
+                                </value>
+                                <next>
+                                  <block type="control_repeat" id="outer_loop">
+                                    <value name="TIMES">
+                                      <block type="operator_arithmetic" id="sub_N_1">
+                                        <field name="OPERATOR">-</field>
+                                        <value name="NUM1">
+                                          <shadow type="math_number" id="shd_n1"><field name="NUM">0</field></shadow>
+                                          <block type="data_variable" id="var_N2">
+                                            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <shadow type="math_number" id="shd_1_1"><field name="NUM">1</field></shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="data_setvariableto" id="set_min_idx">
+                                        <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                        <value name="VALUE">
+                                          <block type="data_variable" id="var_i_min">
+                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="data_setvariableto" id="set_j_ip1">
+                                            <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                            <value name="VALUE">
+                                              <block type="operator_arithmetic" id="add_i_1">
+                                                <field name="OPERATOR">+</field>
+                                                <value name="NUM1">
+                                                  <shadow type="math_number" id="shd_i_num"><field name="NUM">0</field></shadow>
+                                                  <block type="data_variable" id="var_i1">
+                                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <shadow type="math_number" id="shd_1_2"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="control_repeat" id="inner_loop">
+                                                <value name="TIMES">
+                                                  <block type="operator_arithmetic" id="sub_N_i">
+                                                    <field name="OPERATOR">-</field>
+                                                    <value name="NUM1">
+                                                      <shadow type="math_number" id="shd_n2"><field name="NUM">0</field></shadow>
+                                                      <block type="data_variable" id="var_N3">
+                                                        <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NUM2">
+                                                      <shadow type="math_number" id="shd_i_var"><field name="NUM">0</field></shadow>
+                                                      <block type="data_variable" id="var_i2">
+                                                        <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <block type="control_if" id="check_min">
+                                                    <value name="CONDITION">
+                                                      <block type="operator_compare" id="cmp_lt">
+                                                        <field name="OPERATOR">&lt;</field>
+                                                        <value name="OPERAND1">
+                                                          <block type="data_itemoflist" id="get_item_j">
+                                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_j1">
+                                                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <block type="data_itemoflist" id="get_item_min">
+                                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_min_idx">
+                                                                <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="SUBSTACK">
+                                                      <block type="data_setvariableto" id="update_min_idx">
+                                                        <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                        <value name="VALUE">
+                                                          <block type="data_variable" id="var_j2">
+                                                            <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="data_changevariableby" id="inc_j">
+                                                        <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                        <value name="VALUE">
+                                                          <shadow type="math_number" id="shd_inc_j"><field name="NUM">1</field></shadow>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <!-- 交換 數列[i] 與 數列[最小值位置] -->
+                                                  <block type="data_setvariableto" id="set_temp">
+                                                    <field name="VARIABLE" id="aa_temp" variabletype="">temp</field>
+                                                    <value name="VALUE">
+                                                      <block type="data_itemoflist" id="get_item_i">
+                                                        <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                        <value name="INDEX">
+                                                          <block type="data_variable" id="var_i3">
+                                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="data_replaceitemoflist" id="replace_i">
+                                                        <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                        <value name="INDEX">
+                                                          <block type="data_variable" id="var_i4">
+                                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="ITEM">
+                                                          <block type="data_itemoflist" id="get_item_min_swap">
+                                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_min_idx2">
+                                                                <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="data_replaceitemoflist" id="replace_min">
+                                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_min_idx3">
+                                                                <field name="VARIABLE" id="aa_min_idx" variabletype="">最小值位置</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ITEM">
+                                                              <block type="data_variable" id="var_temp1">
+                                                                <field name="VARIABLE" id="aa_temp" variabletype="">temp</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                  <next>
+                                                    <block type="data_changevariableby" id="inc_i">
+                                                      <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                      <value name="VALUE">
+                                                        <shadow type="math_number" id="shd_inc_i"><field name="NUM">1</field></shadow>
+                                                      </value>
+                                                    </block>
+                                                  </next>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <!-- 輸出第 k 小的數 -->
+                                      <block type="scratch_say" id="say_ans">
+                                        <value name="TEXT">
+                                          <shadow type="text" id="shd_say_def"><field name="TEXT">Hello!</field></shadow>
+                                          <block type="data_itemoflist" id="get_item_k">
+                                            <field name="LIST" id="aa_list" variabletype="list">數列</field>
+                                            <value name="INDEX">
+                                              <block type="data_variable" id="var_k1">
+                                                <field name="VARIABLE" id="aa_k" variabletype="">k</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
