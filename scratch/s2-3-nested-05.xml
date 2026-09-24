@@ -1,0 +1,183 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_sum" islocal="false" iscloud="false">總和</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="aa_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="aa_fcnt" islocal="false" iscloud="false">因數個數</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_text">
+            <field name="TEXT">N</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_val"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_answer"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_sum_0">
+                <field name="VARIABLE" id="aa_sum" variabletype="">總和</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_sum_val"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_i_1">
+                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="shd_i_val"><field name="TEXT">1</field></shadow>
+                    </value>
+                    <next>
+                      <block type="control_repeat" id="outer_loop">
+                        <value name="TIMES">
+                          <block type="data_variable" id="get_N_var">
+                            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="control_if" id="check_i_gt_1">
+                            <value name="CONDITION">
+                              <block type="operator_compare" id="cmp_gt">
+                                <field name="OPERATOR">&gt;</field>
+                                <value name="OPERAND1">
+                                  <block type="data_variable" id="get_i_var1">
+                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <shadow type="text" id="shd_cmp_1"><field name="TEXT">1</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="set_fcnt_0">
+                                <field name="VARIABLE" id="aa_fcnt" variabletype="">因數個數</field>
+                                <value name="VALUE">
+                                  <shadow type="text" id="shd_fcnt_val"><field name="TEXT">0</field></shadow>
+                                </value>
+                                <next>
+                                  <block type="data_setvariableto" id="set_j_1">
+                                    <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                    <value name="VALUE">
+                                      <shadow type="text" id="shd_j_val"><field name="TEXT">1</field></shadow>
+                                    </value>
+                                    <next>
+                                      <block type="control_repeat" id="inner_loop">
+                                        <value name="TIMES">
+                                          <block type="data_variable" id="get_i_var2">
+                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="control_if" id="check_mod_0">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_eq_mod">
+                                                <field name="OPERATOR">==</field>
+                                                <value name="OPERAND1">
+                                                  <block type="operator_mod" id="mod_op">
+                                                    <value name="NUM1">
+                                                      <block type="data_variable" id="get_i_var3">
+                                                        <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NUM2">
+                                                      <block type="data_variable" id="get_j_var1">
+                                                        <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <shadow type="text" id="shd_zero"><field name="TEXT">0</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="data_changevariableby" id="inc_fcnt">
+                                                <field name="VARIABLE" id="aa_fcnt" variabletype="">因數個數</field>
+                                                <value name="VALUE">
+                                                  <shadow type="math_number" id="num_inc_1"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="data_changevariableby" id="inc_j">
+                                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                <value name="VALUE">
+                                                  <shadow type="math_number" id="num_inc_2"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="control_if" id="check_prime">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_fcnt_2">
+                                                <field name="OPERATOR">==</field>
+                                                <value name="OPERAND1">
+                                                  <block type="data_variable" id="get_fcnt_var">
+                                                    <field name="VARIABLE" id="aa_fcnt" variabletype="">因數個數</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <shadow type="text" id="shd_two"><field name="TEXT">2</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="data_changevariableby" id="add_prime_to_sum">
+                                                <field name="VARIABLE" id="aa_sum" variabletype="">總和</field>
+                                                <value name="VALUE">
+                                                  <block type="data_variable" id="get_i_var_prime">
+                                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="data_changevariableby" id="inc_i">
+                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="num_inc_4"><field name="NUM">1</field></shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="scratch_say" id="say_sum">
+                            <value name="TEXT">
+                              <shadow type="text" id="shd_say_default"><field name="TEXT">Hello!</field></shadow>
+                              <block type="data_variable" id="get_sum_var">
+                                <field name="VARIABLE" id="aa_sum" variabletype="">總和</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
