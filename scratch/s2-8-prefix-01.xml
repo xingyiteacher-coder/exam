@@ -1,0 +1,162 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_x" islocal="false" iscloud="false">x</variable>
+    <variable type="" id="aa_sum" islocal="false" iscloud="false">累加和</variable>
+    <variable type="" id="aa_res" islocal="false" iscloud="false">結果</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+  </variables>
+
+  <!-- 主程式 -->
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_N"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_0"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_ans_N"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_sum_0">
+                <field name="VARIABLE" id="aa_sum" variabletype="">累加和</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_s0"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_res_empty">
+                    <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="shd_r0"><field name="TEXT"></field></shadow>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="set_i_1">
+                        <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                        <value name="VALUE">
+                          <shadow type="text" id="shd_i1"><field name="TEXT">1</field></shadow>
+                        </value>
+                        <next>
+                          <block type="control_repeat" id="loop_N">
+                            <value name="TIMES">
+                              <block type="data_variable" id="var_N1">
+                                <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="scratch_ask" id="ask_x">
+                                <value name="QUESTION">
+                                  <shadow type="text" id="shd_ask_x"><field name="TEXT">x</field></shadow>
+                                </value>
+                                <next>
+                                  <block type="data_setvariableto" id="set_x">
+                                    <field name="VARIABLE" id="aa_x" variabletype="">x</field>
+                                    <value name="VALUE">
+                                      <shadow type="text" id="shd_x_0"><field name="TEXT">0</field></shadow>
+                                      <block type="scratch_answer" id="get_ans_x"></block>
+                                    </value>
+                                    <next>
+                                      <block type="data_changevariableby" id="add_x_to_sum">
+                                        <field name="VARIABLE" id="aa_sum" variabletype="">累加和</field>
+                                        <value name="VALUE">
+                                          <block type="data_variable" id="var_x1">
+                                            <field name="VARIABLE" id="aa_x" variabletype="">x</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="control_if_else" id="check_first">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_i_1">
+                                                <field name="OPERATOR">==</field>
+                                                <value name="OPERAND1">
+                                                  <block type="data_variable" id="var_i1">
+                                                    <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <shadow type="text" id="shd_1"><field name="TEXT">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="data_setvariableto" id="set_res_first">
+                                                <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                                                <value name="VALUE">
+                                                  <block type="data_variable" id="var_sum1">
+                                                    <field name="VARIABLE" id="aa_sum" variabletype="">累加和</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <statement name="SUBSTACK2">
+                                              <block type="data_setvariableto" id="set_res_append">
+                                                <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                                                <value name="VALUE">
+                                                  <block type="operator_join" id="join1">
+                                                    <value name="OPERAND1">
+                                                      <shadow type="text" id="shd_j1"><field name="TEXT"></field></shadow>
+                                                      <block type="data_variable" id="var_res1">
+                                                        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="OPERAND2">
+                                                      <shadow type="text" id="shd_j2"><field name="TEXT"></field></shadow>
+                                                      <block type="operator_join" id="join2">
+                                                        <value name="OPERAND1">
+                                                          <shadow type="text" id="shd_space"><field name="TEXT"> </field></shadow>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <shadow type="text" id="shd_j3"><field name="TEXT"></field></shadow>
+                                                          <block type="data_variable" id="var_sum2">
+                                                            <field name="VARIABLE" id="aa_sum" variabletype="">累加和</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="data_changevariableby" id="inc_i">
+                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                <value name="VALUE">
+                                                  <shadow type="math_number" id="shd_inc1"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="scratch_say" id="say_res">
+                                <value name="TEXT">
+                                  <shadow type="text" id="shd_say_def"><field name="TEXT">Hello!</field></shadow>
+                                  <block type="data_variable" id="var_res_out">
+                                    <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
