@@ -1,0 +1,116 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="aa_cnt" islocal="false" iscloud="false">個數</variable>
+  </variables>
+
+  <!-- 主程式 -->
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_n">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_n"><field name="TEXT">n</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_n">
+            <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_n_0"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_ans_n"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_cnt_0">
+                <field name="VARIABLE" id="aa_cnt" variabletype="">個數</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_c0"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="control_repeat_until" id="loop_until_0">
+                    <value name="CONDITION">
+                      <block type="operator_compare" id="cmp_n_0">
+                        <field name="OPERATOR">==</field>
+                        <value name="OPERAND1">
+                          <block type="data_variable" id="var_n1">
+                            <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+                          </block>
+                        </value>
+                        <value name="OPERAND2">
+                          <shadow type="text" id="shd_zero"><field name="TEXT">0</field></shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="control_if" id="check_mod_1">
+                        <value name="CONDITION">
+                          <block type="operator_compare" id="cmp_mod_1">
+                            <field name="OPERATOR">==</field>
+                            <value name="OPERAND1">
+                              <block type="operator_mod" id="mod_n">
+                                <value name="NUM1">
+                                  <block type="data_variable" id="var_n2">
+                                    <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+                                  </block>
+                                </value>
+                                <value name="NUM2">
+                                  <shadow type="math_number" id="shd_two"><field name="NUM">2</field></shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="OPERAND2">
+                              <shadow type="text" id="shd_one"><field name="TEXT">1</field></shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="data_changevariableby" id="inc_cnt">
+                            <field name="VARIABLE" id="aa_cnt" variabletype="">個數</field>
+                            <value name="VALUE">
+                              <shadow type="math_number" id="shd_inc1"><field name="NUM">1</field></shadow>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="data_setvariableto" id="set_n_half">
+                            <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+                            <value name="VALUE">
+                              <block type="operator_mathop" id="floor_n">
+                                <field name="OPERATOR">floor</field>
+                                <value name="NUM">
+                                  <block type="operator_arithmetic" id="div_n">
+                                    <field name="OPERATOR">/</field>
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="var_n3">
+                                        <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <shadow type="math_number" id="shd_two2"><field name="NUM">2</field></shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="scratch_say" id="say_cnt">
+                        <value name="TEXT">
+                          <shadow type="text" id="shd_say_def"><field name="TEXT">Hello!</field></shadow>
+                          <block type="data_variable" id="var_cnt_out">
+                            <field name="VARIABLE" id="aa_cnt" variabletype="">個數</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
