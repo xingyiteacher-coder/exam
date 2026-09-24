@@ -1,0 +1,235 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_str" islocal="false" iscloud="false">字串</variable>
+    <variable type="" id="aa_res" islocal="false" iscloud="false">結果</variable>
+    <variable type="" id="aa_lower" islocal="false" iscloud="false">小寫字母</variable>
+    <variable type="" id="aa_upper" islocal="false" iscloud="false">大寫字母</variable>
+    <variable type="" id="aa_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="aa_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="aa_char" islocal="false" iscloud="false">字元</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_str">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_text">
+            <field name="TEXT">字串</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_str">
+            <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_str_0"><field name="TEXT"></field></shadow>
+              <block type="scratch_answer" id="get_answer"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_lower">
+                <field name="VARIABLE" id="aa_lower" variabletype="">小寫字母</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_lower_val">
+                    <field name="TEXT">abcdefghijklmnopqrstuvwxyz</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_upper">
+                    <field name="VARIABLE" id="aa_upper" variabletype="">大寫字母</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="shd_upper_val">
+                        <field name="TEXT">ABCDEFGHIJKLMNOPQRSTUVWXYZ</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="set_res_empty">
+                        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                        <value name="VALUE">
+                          <shadow type="text" id="shd_res_0"><field name="TEXT"></field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_i_1">
+                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                            <value name="VALUE">
+                              <shadow type="text" id="shd_i_1"><field name="TEXT">1</field></shadow>
+                            </value>
+                            <next>
+                              <block type="control_repeat" id="loop_outer">
+                                <value name="TIMES">
+                                  <block type="operator_length" id="get_len">
+                                    <value name="STRING">
+                                      <shadow type="text" id="shd_s1"><field name="TEXT">world</field></shadow>
+                                      <block type="data_variable" id="var_str1">
+                                        <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="data_setvariableto" id="set_char">
+                                    <field name="VARIABLE" id="aa_char" variabletype="">字元</field>
+                                    <value name="VALUE">
+                                      <block type="operator_letter_of" id="get_char">
+                                        <value name="STRING">
+                                          <shadow type="text" id="shd_s2"><field name="TEXT">world</field></shadow>
+                                          <block type="data_variable" id="var_str2">
+                                            <field name="VARIABLE" id="aa_str" variabletype="">字串</field>
+                                          </block>
+                                        </value>
+                                        <value name="LETTER">
+                                          <shadow type="math_number" id="shd_i_num"><field name="NUM">1</field></shadow>
+                                          <block type="data_variable" id="var_i1">
+                                            <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="data_setvariableto" id="set_j_1">
+                                        <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                        <value name="VALUE">
+                                          <shadow type="text" id="shd_j_1"><field name="TEXT">1</field></shadow>
+                                        </value>
+                                        <next>
+                                          <block type="control_repeat" id="loop_inner">
+                                            <value name="TIMES">
+                                              <shadow type="math_number" id="shd_26"><field name="NUM">26</field></shadow>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <block type="control_if" id="check_match">
+                                                <value name="CONDITION">
+                                                  <block type="operator_or" id="or_match">
+                                                    <value name="OPERAND1">
+                                                      <block type="operator_compare" id="cmp_eq_lower">
+                                                        <field name="OPERATOR">==</field>
+                                                        <value name="OPERAND1">
+                                                          <block type="operator_letter_of" id="get_lower_char">
+                                                            <value name="STRING">
+                                                              <shadow type="text" id="shd_s3"><field name="TEXT">world</field></shadow>
+                                                              <block type="data_variable" id="var_lower1">
+                                                                <field name="VARIABLE" id="aa_lower" variabletype="">小寫字母</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="LETTER">
+                                                              <shadow type="math_number" id="shd_j_num1"><field name="NUM">1</field></shadow>
+                                                              <block type="data_variable" id="var_j1">
+                                                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <block type="data_variable" id="var_char1">
+                                                            <field name="VARIABLE" id="aa_char" variabletype="">字元</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="OPERAND2">
+                                                      <block type="operator_compare" id="cmp_eq_upper">
+                                                        <field name="OPERATOR">==</field>
+                                                        <value name="OPERAND1">
+                                                          <block type="operator_letter_of" id="get_upper_char">
+                                                            <value name="STRING">
+                                                              <shadow type="text" id="shd_s4"><field name="TEXT">world</field></shadow>
+                                                              <block type="data_variable" id="var_upper1">
+                                                                <field name="VARIABLE" id="aa_upper" variabletype="">大寫字母</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="LETTER">
+                                                              <shadow type="math_number" id="shd_j_num2"><field name="NUM">1</field></shadow>
+                                                              <block type="data_variable" id="var_j2">
+                                                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <block type="data_variable" id="var_char2">
+                                                            <field name="VARIABLE" id="aa_char" variabletype="">字元</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <block type="data_setvariableto" id="append_upper">
+                                                    <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                                                    <value name="VALUE">
+                                                      <block type="operator_join" id="join_res">
+                                                        <value name="OPERAND1">
+                                                          <shadow type="text" id="shd_res_j1"><field name="TEXT"></field></shadow>
+                                                          <block type="data_variable" id="var_res1">
+                                                            <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <shadow type="text" id="shd_res_j2"><field name="TEXT"></field></shadow>
+                                                          <block type="operator_letter_of" id="get_alpha_upper">
+                                                            <value name="STRING">
+                                                              <shadow type="text" id="shd_s5"><field name="TEXT">world</field></shadow>
+                                                              <block type="data_variable" id="var_upper2">
+                                                                <field name="VARIABLE" id="aa_upper" variabletype="">大寫字母</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="LETTER">
+                                                              <shadow type="math_number" id="shd_j_num3"><field name="NUM">1</field></shadow>
+                                                              <block type="data_variable" id="var_j3">
+                                                                <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="data_changevariableby" id="inc_j">
+                                                    <field name="VARIABLE" id="aa_j" variabletype="">j</field>
+                                                    <value name="VALUE">
+                                                      <shadow type="math_number" id="num_inc_j"><field name="NUM">1</field></shadow>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="data_changevariableby" id="inc_i">
+                                                <field name="VARIABLE" id="aa_i" variabletype="">i</field>
+                                                <value name="VALUE">
+                                                  <shadow type="math_number" id="num_inc_i"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="scratch_say" id="say_res">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="shd_say_default"><field name="TEXT">Hello!</field></shadow>
+                                      <block type="data_variable" id="get_res_out">
+                                        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
