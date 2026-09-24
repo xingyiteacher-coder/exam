@@ -1,0 +1,191 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_a" islocal="false" iscloud="false">a</variable>
+    <variable type="" id="aa_b" islocal="false" iscloud="false">b</variable>
+    <variable type="" id="aa_sq_res" islocal="false" iscloud="false">平方結果</variable>
+    <variable type="" id="aa_term1" islocal="false" iscloud="false">項1</variable>
+    <variable type="" id="aa_term2" islocal="false" iscloud="false">項2</variable>
+    <variable type="" id="aa_res" islocal="false" iscloud="false">結果</variable>
+  </variables>
+
+  <!-- 主程式 -->
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_a">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_a"><field name="TEXT">a</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_a">
+            <field name="VARIABLE" id="aa_a" variabletype="">a</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_a_0"><field name="TEXT"></field></shadow>
+              <block type="scratch_answer" id="get_ans_a"></block>
+            </value>
+            <next>
+              <block type="scratch_ask" id="ask_b">
+                <value name="QUESTION">
+                  <shadow type="text" id="shd_ask_b"><field name="TEXT">b</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_b">
+                    <field name="VARIABLE" id="aa_b" variabletype="">b</field>
+                    <value name="VALUE">
+                      <shadow type="text" id="shd_b_0"><field name="TEXT"></field></shadow>
+                      <block type="scratch_answer" id="get_ans_b"></block>
+                    </value>
+                    <next>
+                      <block type="procedures_call" id="call_sum_sq">
+                        <mutation proccode="平方和 %s %s" argumentids='["arg_a","arg_b"]' warp="false"/>
+                        <value name="arg_a">
+                          <shadow type="text" id="shd_arg_a"><field name="TEXT"></field></shadow>
+                          <block type="data_variable" id="var_a">
+                            <field name="VARIABLE" id="aa_a" variabletype="">a</field>
+                          </block>
+                        </value>
+                        <value name="arg_b">
+                          <shadow type="text" id="shd_arg_b"><field name="TEXT"></field></shadow>
+                          <block type="data_variable" id="var_b">
+                            <field name="VARIABLE" id="aa_b" variabletype="">b</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="scratch_say" id="say_res">
+                            <value name="TEXT">
+                              <shadow type="text" id="shd_say_def"><field name="TEXT">Hello!</field></shadow>
+                              <block type="data_variable" id="var_res_out">
+                                <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+
+  <!-- 自訂函式1：平方 %s -->
+  <block type="procedures_definition" id="def_sq" x="10" y="250">
+    <statement name="custom_block">
+      <block type="procedures_prototype" id="proto_sq">
+        <mutation proccode="平方 %s" argumentids='["arg_x"]' argumentnames='["x"]' argumentdefaults='["0"]' warp="false"/>
+        <value name="arg_x">
+          <block type="argument_reporter_string_number" id="arg_rep_x">
+            <field name="VALUE">x</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="data_setvariableto" id="set_sq_res">
+        <field name="VARIABLE" id="aa_sq_res" variabletype="">平方結果</field>
+        <value name="VALUE">
+          <block type="operator_multiply" id="mul_xx">
+            <field name="OPERATOR">*</field>
+            <value name="NUM1">
+              <shadow type="math_number" id="shd_m1"><field name="NUM">1</field></shadow>
+              <block type="argument_reporter_string_number" id="get_x1">
+                <field name="VALUE">x</field>
+              </block>
+            </value>
+            <value name="NUM2">
+              <shadow type="math_number" id="shd_m2"><field name="NUM">1</field></shadow>
+              <block type="argument_reporter_string_number" id="get_x2">
+                <field name="VALUE">x</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+
+  <!-- 自訂函式2：平方和 %s %s -->
+  <block type="procedures_definition" id="def_sum_sq" x="450" y="250">
+    <statement name="custom_block">
+      <block type="procedures_prototype" id="proto_sum_sq">
+        <mutation proccode="平方和 %s %s" argumentids='["arg_a","arg_b"]' argumentnames='["a","b"]' argumentdefaults='["0","0"]' warp="false"/>
+        <value name="arg_a">
+          <block type="argument_reporter_string_number" id="arg_rep_a">
+            <field name="VALUE">a</field>
+          </block>
+        </value>
+        <value name="arg_b">
+          <block type="argument_reporter_string_number" id="arg_rep_b">
+            <field name="VALUE">b</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="procedures_call" id="call_sq_a">
+        <mutation proccode="平方 %s" argumentids='["arg_x"]' warp="false"/>
+        <value name="arg_x">
+          <shadow type="text" id="shd_call_a"><field name="TEXT"></field></shadow>
+          <block type="argument_reporter_string_number" id="get_param_a">
+            <field name="VALUE">a</field>
+          </block>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_term1">
+            <field name="VARIABLE" id="aa_term1" variabletype="">項1</field>
+            <value name="VALUE">
+              <block type="data_variable" id="var_sq_res1">
+                <field name="VARIABLE" id="aa_sq_res" variabletype="">平方結果</field>
+              </block>
+            </value>
+            <next>
+              <block type="procedures_call" id="call_sq_b">
+                <mutation proccode="平方 %s" argumentids='["arg_x"]' warp="false"/>
+                <value name="arg_x">
+                  <shadow type="text" id="shd_call_b"><field name="TEXT"></field></shadow>
+                  <block type="argument_reporter_string_number" id="get_param_b">
+                    <field name="VALUE">b</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_term2">
+                    <field name="VARIABLE" id="aa_term2" variabletype="">項2</field>
+                    <value name="VALUE">
+                      <block type="data_variable" id="var_sq_res2">
+                        <field name="VARIABLE" id="aa_sq_res" variabletype="">平方結果</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="set_res">
+                        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                        <value name="VALUE">
+                          <block type="operator_add" id="add_terms">
+                            <value name="NUM1">
+                              <shadow type="math_number" id="shd_num1"><field name="NUM">1</field></shadow>
+                              <block type="data_variable" id="var_t1">
+                                <field name="VARIABLE" id="aa_term1" variabletype="">項1</field>
+                              </block>
+                            </value>
+                            <value name="NUM2">
+                              <shadow type="math_number" id="shd_num2"><field name="NUM">1</field></shadow>
+                              <block type="data_variable" id="var_t2">
+                                <field name="VARIABLE" id="aa_term2" variabletype="">項2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
