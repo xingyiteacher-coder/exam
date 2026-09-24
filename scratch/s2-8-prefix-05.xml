@@ -1,0 +1,101 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="aa_x" islocal="false" iscloud="false">x</variable>
+    <variable type="" id="aa_sum" islocal="false" iscloud="false">總和</variable>
+  </variables>
+
+  <!-- 主程式 -->
+  <block type="event_whenflagclicked" id="start_flag" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_N">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_N"><field name="TEXT">N</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_N">
+            <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_N_0"><field name="TEXT">0</field></shadow>
+              <block type="scratch_answer" id="get_ans_N"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_sum_0">
+                <field name="VARIABLE" id="aa_sum" variabletype="">總和</field>
+                <value name="VALUE">
+                  <shadow type="text" id="shd_s0"><field name="TEXT">0</field></shadow>
+                </value>
+                <next>
+                  <block type="control_repeat" id="loop_N">
+                    <value name="TIMES">
+                      <block type="data_variable" id="var_N1">
+                        <field name="VARIABLE" id="aa_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_x">
+                        <value name="QUESTION">
+                          <shadow type="text" id="shd_ask_x"><field name="TEXT">x</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_x">
+                            <field name="VARIABLE" id="aa_x" variabletype="">x</field>
+                            <value name="VALUE">
+                              <shadow type="text" id="shd_x_0"><field name="TEXT">0</field></shadow>
+                              <block type="scratch_answer" id="get_ans_x"></block>
+                            </value>
+                            <next>
+                              <block type="data_changevariableby" id="add_x_to_sum">
+                                <field name="VARIABLE" id="aa_sum" variabletype="">總和</field>
+                                <value name="VALUE">
+                                  <block type="data_variable" id="var_x1">
+                                    <field name="VARIABLE" id="aa_x" variabletype="">x</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="control_if_else" id="check_gt_zero">
+                        <value name="CONDITION">
+                          <block type="operator_compare" id="cmp_gt">
+                            <field name="OPERATOR">&gt;</field>
+                            <value name="OPERAND1">
+                              <block type="data_variable" id="var_sum1">
+                                <field name="VARIABLE" id="aa_sum" variabletype="">總和</field>
+                              </block>
+                            </value>
+                            <value name="OPERAND2">
+                              <shadow type="text" id="shd_zero"><field name="TEXT">0</field></shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="scratch_say" id="say_yes">
+                            <value name="TEXT">
+                              <shadow type="text" id="shd_yes"><field name="TEXT">yes</field></shadow>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="SUBSTACK2">
+                          <block type="scratch_say" id="say_no">
+                            <value name="TEXT">
+                              <shadow type="text" id="shd_no"><field name="TEXT">no</field></shadow>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
