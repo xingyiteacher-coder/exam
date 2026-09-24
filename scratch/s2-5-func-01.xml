@@ -1,0 +1,80 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="aa_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="aa_res" islocal="false" iscloud="false">結果</variable>
+  </variables>
+  <block type="procedures_definition" id="xpxC2,)ra3pR-(7No?7E" x="85" y="118">
+    <statement name="custom_block">
+      <block type="procedures_prototype" id="a%N?u1/gqkFNfm`fc/}3">
+        <mutation proccode="平方 %s" argumentids="[&quot;arg_1790256155936_1&quot;]" argumentnames="[&quot;N&quot;]" argumentdefaults="[&quot;&quot;]" warp="false"></mutation>
+        <value name="arg_1790256155936_1">
+          <block type="argument_reporter_string_number" id="BCcvfp8EX+Xsrb/9VjlN">
+            <field name="VALUE">N</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="data_setvariableto" id="o~v?Rz^.!qp=W;%8}*}#">
+        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+        <value name="VALUE">
+          <shadow type="text" id="u7o}s28m$(NR5ot#k/~R"><field name="TEXT">0</field></shadow>
+          <block type="operator_multiply" id="mul_n">
+            <field name="OPERATOR">*</field>
+            <value name="NUM1">
+              <shadow type="math_number" id="shd_m1"><field name="NUM">1</field></shadow>
+              <block type="argument_reporter_string_number" id="qvRID:4l,,KJc?fVRE0t">
+                <field name="VALUE">N</field>
+              </block>
+            </value>
+            <value name="NUM2">
+              <shadow type="math_number" id="shd_m2"><field name="NUM">2</field></shadow>
+              <block type="argument_reporter_string_number" id="EcDvWgq|{zc_@7lQ,U2|">
+                <field name="VALUE">N</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+  <block type="event_whenflagclicked" id="start_flag" x="585" y="124">
+    <next>
+      <block type="scratch_ask" id="ask_n">
+        <value name="QUESTION">
+          <shadow type="text" id="shd_ask_n"><field name="TEXT">n</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_n">
+            <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+            <value name="VALUE">
+              <shadow type="text" id="shd_n_0"><field name="TEXT"></field></shadow>
+              <block type="scratch_answer" id="get_ans"></block>
+            </value>
+            <next>
+              <block type="procedures_call" id="rwwS3((.yxoE_)#J+zn2">
+                <mutation proccode="平方 %s" argumentids="[&quot;arg_1790256155936_1&quot;]" warp="false"></mutation>
+                <value name="arg_1790256155936_1">
+                  <shadow type="text" id="-Icg-/rVai2FPQAS2`:+"><field name="TEXT"></field></shadow>
+                  <block type="data_variable" id="Xc?)xdyO6E?mYIaxQO:@">
+                    <field name="VARIABLE" id="aa_n" variabletype="">n</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="scratch_say" id="say_res">
+                    <value name="TEXT">
+                      <shadow type="text" id="shd_say_def"><field name="TEXT">Hello!</field></shadow>
+                      <block type="data_variable" id="var_res">
+                        <field name="VARIABLE" id="aa_res" variabletype="">結果</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
