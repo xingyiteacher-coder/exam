@@ -13,28 +13,27 @@
   </variables>
   <block type="event_whenflagclicked" id="start" x="10" y="10">
     <next>
-      <block type="scratch_ask" id="ask_N">
+      <block type="sensing_askandwait" id="ask_N">
         <value name="QUESTION"><shadow type="text"><field name="TEXT">N</field></shadow></value>
         <next>
           <block type="data_setvariableto" id="set_N">
             <field name="VARIABLE" id="v_N">N</field>
-            <value name="VALUE"><block type="scratch_answer"></block></value>
+            <value name="VALUE"><block type="sensing_answer"></block></value>
             <next>
-              <block type="scratch_ask" id="ask_A">
+              <block type="sensing_askandwait" id="ask_A">
                 <value name="QUESTION"><shadow type="text"><field name="TEXT">A</field></shadow></value>
                 <next>
                   <block type="data_setvariableto" id="set_raw">
                     <field name="VARIABLE" id="v_raw">raw_input</field>
-                    <value name="VALUE"><block type="scratch_answer"></block></value>
+                    <value name="VALUE"><block type="sensing_answer"></block></value>
                     <next>
-                      <block type="scratch_ask" id="ask_K">
+                      <block type="sensing_askandwait" id="ask_K">
                         <value name="QUESTION"><shadow type="text"><field name="TEXT">K</field></shadow></value>
                         <next>
                           <block type="data_setvariableto" id="set_K">
                             <field name="VARIABLE" id="v_K">K</field>
-                            <value name="VALUE"><block type="scratch_answer"></block></value>
+                            <value name="VALUE"><block type="sensing_answer"></block></value>
                             <next>
-                              <!-- 解析字串至列表 A -->
                               <block type="data_deletealloflist" id="del_A">
                                 <field name="LIST" id="v_A" variabletype="list">A</field>
                                 <next>
@@ -64,8 +63,7 @@
                                                 <next>
                                                   <block type="control_if_else" id="check_sp">
                                                     <value name="CONDITION">
-                                                      <block type="operator_compare">
-                                                        <field name="OPERATOR">==</field>
+                                                      <block type="operator_equals">
                                                         <value name="OPERAND1"><block type="data_variable"><field name="VARIABLE" id="v_ch">ch</field></block></value>
                                                         <value name="OPERAND2"><shadow type="text"><field name="TEXT"> </field></shadow></value>
                                                       </block>
@@ -73,8 +71,7 @@
                                                     <statement name="SUBSTACK">
                                                       <block type="control_if" id="add_t">
                                                         <value name="CONDITION">
-                                                          <block type="operator_compare">
-                                                            <field name="OPERATOR">&gt;</field>
+                                                          <block type="operator_gt">
                                                             <value name="OPERAND1">
                                                               <block type="operator_length">
                                                                 <value name="STRING"><block type="data_variable"><field name="VARIABLE" id="v_temp">temp</field></block></value>
@@ -121,8 +118,7 @@
                                             <next>
                                               <block type="control_if" id="add_last">
                                                 <value name="CONDITION">
-                                                  <block type="operator_compare">
-                                                    <field name="OPERATOR">&gt;</field>
+                                                  <block type="operator_gt">
                                                     <value name="OPERAND1">
                                                       <block type="operator_length">
                                                         <value name="STRING"><block type="data_variable"><field name="VARIABLE" id="v_temp">temp</field></block></value>
@@ -138,7 +134,7 @@
                                                   </block>
                                                 </statement>
                                                 <next>
-                                                  <!-- 滑動視窗計算 -->
+                                                  <!-- 計算前 K 項之和 -->
                                                   <block type="data_setvariableto" id="init_sum">
                                                     <field name="VARIABLE" id="v_sum">sum</field>
                                                     <value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
@@ -171,10 +167,10 @@
                                                                 <field name="VARIABLE" id="v_max">max_sum</field>
                                                                 <value name="VALUE"><block type="data_variable"><field name="VARIABLE" id="v_sum">sum</field></block></value>
                                                                 <next>
+                                                                  <!-- 滑動視窗：重複 (N - K) 次 -->
                                                                   <block type="control_repeat" id="loop_window">
                                                                     <value name="TIMES">
-                                                                      <block type="operator_arithmetic">
-                                                                        <field name="OPERATOR">-</field>
+                                                                      <block type="operator_subtract">
                                                                         <value name="NUM1"><block type="data_variable"><field name="VARIABLE" id="v_N">N</field></block></value>
                                                                         <value name="NUM2"><block type="data_variable"><field name="VARIABLE" id="v_K">K</field></block></value>
                                                                       </block>
@@ -183,18 +179,15 @@
                                                                       <block type="data_setvariableto" id="update_sum">
                                                                         <field name="VARIABLE" id="v_sum">sum</field>
                                                                         <value name="VALUE">
-                                                                          <block type="operator_arithmetic">
-                                                                            <field name="OPERATOR">+</field>
+                                                                          <block type="operator_add">
                                                                             <value name="NUM1">
-                                                                              <block type="operator_arithmetic">
-                                                                                <field name="OPERATOR">-</field>
+                                                                              <block type="operator_subtract">
                                                                                 <value name="NUM1"><block type="data_variable"><field name="VARIABLE" id="v_sum">sum</field></block></value>
                                                                                 <value name="NUM2">
                                                                                   <block type="data_itemoflist">
                                                                                     <field name="LIST" id="v_A" variabletype="list">A</field>
                                                                                     <value name="INDEX">
-                                                                                      <block type="operator_arithmetic">
-                                                                                        <field name="OPERATOR">-</field>
+                                                                                      <block type="operator_subtract">
                                                                                         <value name="NUM1"><block type="data_variable"><field name="VARIABLE" id="v_i">i</field></block></value>
                                                                                         <value name="NUM2"><block type="data_variable"><field name="VARIABLE" id="v_K">K</field></block></value>
                                                                                       </block>
@@ -214,8 +207,7 @@
                                                                         <next>
                                                                           <block type="control_if" id="check_max">
                                                                             <value name="CONDITION">
-                                                                              <block type="operator_compare">
-                                                                                <field name="OPERATOR">&gt;</field>
+                                                                              <block type="operator_gt">
                                                                                 <value name="OPERAND1"><block type="data_variable"><field name="VARIABLE" id="v_sum">sum</field></block></value>
                                                                                 <value name="OPERAND2"><block type="data_variable"><field name="VARIABLE" id="v_max">max_sum</field></block></value>
                                                                               </block>
@@ -237,8 +229,8 @@
                                                                       </block>
                                                                     </statement>
                                                                     <next>
-                                                                      <block type="scratch_say" id="out_ans">
-                                                                        <value name="TEXT"><block type="data_variable"><field name="VARIABLE" id="v_max">max_sum</field></block></value>
+                                                                      <block type="looks_say" id="out_ans">
+                                                                        <value name="MESSAGE"><block type="data_variable"><field name="VARIABLE" id="v_max">max_sum</field></block></value>
                                                                       </block>
                                                                     </next>
                                                                   </block>
