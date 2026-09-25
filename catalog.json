@@ -140,6 +140,11 @@
     "url": "banks/s4-4-graph.txt"
   },
   {
+    "name": "師大官網範例",
+    "category": "師大官網範例",
+    "url": "banks/師大官網範例.txt"
+  },
+  {
     "name": "國小組模擬卷 01",
     "category": "模擬-國小組",
     "url": "banks/mock-county-01.txt"
