@@ -1,0 +1,230 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="N">N</variable>
+    <variable id="orders_str">orders_str</variable>
+    <variable id="orders_list">orders_list</variable>
+    <variable id="M">M</variable>
+    <variable id="priority_str">priority_str</variable>
+    <variable id="priority_list">priority_list</variable>
+    <variable id="result_str">result_str</variable>
+    <variable id="p">p</variable>
+    <variable id="o">o</variable>
+  </variables>
+  <block type="variables_set" id="set_N" x="20" y="20">
+    <field name="VAR" id="N">N</field>
+    <value name="VALUE">
+      <block type="text_prompt_ext">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">N</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="set_orders_str">
+        <field name="VAR" id="orders_str">orders_str</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+            <value name="TEXT">
+              <shadow type="text">
+                <field name="TEXT">orders</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="set_orders_list">
+            <field name="VAR" id="orders_list">orders_list</field>
+            <value name="VALUE">
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT">
+                  <block type="variables_get">
+                    <field name="VAR" id="orders_str">orders_str</field>
+                  </block>
+                </value>
+                <value name="DELIM">
+                  <shadow type="text">
+                    <field name="TEXT"> </field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="set_M">
+                <field name="VAR" id="M">M</field>
+                <value name="VALUE">
+                  <block type="text_prompt_ext">
+                    <mutation type="TEXT"></mutation>
+                    <field name="TYPE">TEXT</field>
+                    <value name="TEXT">
+                      <shadow type="text">
+                        <field name="TEXT">M</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_priority_str">
+                    <field name="VAR" id="priority_str">priority_str</field>
+                    <value name="VALUE">
+                      <block type="text_prompt_ext">
+                        <mutation type="TEXT"></mutation>
+                        <field name="TYPE">TEXT</field>
+                        <value name="TEXT">
+                          <shadow type="text">
+                            <field name="TEXT">priority</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="set_priority_list">
+                        <field name="VAR" id="priority_list">priority_list</field>
+                        <value name="VALUE">
+                          <block type="lists_split">
+                            <mutation mode="SPLIT"></mutation>
+                            <field name="MODE">SPLIT</field>
+                            <value name="INPUT">
+                              <block type="variables_get">
+                                <field name="VAR" id="priority_str">priority_str</field>
+                              </block>
+                            </value>
+                            <value name="DELIM">
+                              <shadow type="text">
+                                <field name="TEXT"> </field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="set_result_str">
+                            <field name="VAR" id="result_str">result_str</field>
+                            <value name="VALUE">
+                              <block type="text">
+                                <field name="TEXT"></field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_forEach" id="loop_p">
+                                <field name="VAR" id="p">p</field>
+                                <value name="LIST">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="priority_list">priority_list</field>
+                                  </block>
+                                </value>
+                                <statement name="DO">
+                                  <block type="controls_forEach" id="loop_o">
+                                    <field name="VAR" id="o">o</field>
+                                    <value name="LIST">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="orders_list">orders_list</field>
+                                      </block>
+                                    </value>
+                                    <statement name="DO">
+                                      <block type="controls_if" id="if_match">
+                                        <value name="IF0">
+                                          <block type="logic_compare">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="p">p</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="o">o</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="controls_if" id="if_first">
+                                            <mutation else="1"></mutation>
+                                            <value name="IF0">
+                                              <block type="logic_compare">
+                                                <field name="OP">EQ</field>
+                                                <value name="A">
+                                                  <block type="variables_get">
+                                                    <field name="VAR" id="result_str">result_str</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="text">
+                                                    <field name="TEXT"></field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="variables_set" id="set_first_res">
+                                                <field name="VAR" id="result_str">result_str</field>
+                                                <value name="VALUE">
+                                                  <block type="variables_get">
+                                                    <field name="VAR" id="o">o</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <statement name="ELSE">
+                                              <block type="variables_set" id="append_res">
+                                                <field name="VAR" id="result_str">result_str</field>
+                                                <value name="VALUE">
+                                                  <block type="text_join">
+                                                    <mutation items="3"></mutation>
+                                                    <value name="ADD0">
+                                                      <block type="variables_get">
+                                                        <field name="VAR" id="result_str">result_str</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="ADD1">
+                                                      <block type="text">
+                                                        <field name="TEXT"> </field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="ADD2">
+                                                      <block type="variables_get">
+                                                        <field name="VAR" id="o">o</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="text_print" id="print_res">
+                                    <value name="TEXT">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="result_str">result_str</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
