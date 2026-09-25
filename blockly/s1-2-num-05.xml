@@ -1,16 +1,1 @@
-<xml xmlns="https://developers.google.com/blockly/xml">
-  <block type="text_print" id="print" x="20" y="20">
-    <value name="TEXT">
-      <block type="math_single" id="abs">
-        <field name="OP">ABS</field>
-        <value name="NUM">
-          <shadow type="math_number"><field name="NUM">1</field></shadow>
-          <block type="text_prompt_ext" id="prompt_n">
-            <mutation type="NUMBER"></mutation>
-            <field name="TYPE">NUMBER</field>
-          </block>
-        </value>
-      </block>
-    </value>
-  </block>
-</xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="!R~?Vjv)#.9/T6i7kq6W">n</variable></variables><block type="special_ask" id="!dd%WUmOL-E_$DDmi,Ql" x="67" y="87"><value name="QUESTION"><shadow type="text" id="psm}Jq+8j0sB}`ffVhN;"><field name="TEXT">請輸入</field></shadow></value><next><block type="variables_set" id="7z;g]0/jX*oKIFyg|qmp"><field name="VAR" id="!R~?Vjv)#.9/T6i7kq6W">n</field><value name="VALUE"><block type="special_answer" id="*4IgN@sJRk{-??m?2C[b"></block></value><next><block type="special_say" id="IULu}U;bt;1NHk@;$n@z"><value name="TEXT"><shadow type="text" id="X[093($IvLI`i{AJjA)8"><field name="TEXT">abc</field></shadow><block type="math_single" id="abs"><field name="OP">ABS</field><value name="NUM"><shadow type="math_number" id="j3TOV;fHmwO_cW*;w(-`"><field name="NUM">1</field></shadow><block type="variables_get" id="xG?PVhhKmdrQw,H-0Afi"><field name="VAR" id="!R~?Vjv)#.9/T6i7kq6W">n</field></block></value></block></value></block></next></block></next></block></xml>
