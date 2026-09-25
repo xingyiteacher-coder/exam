@@ -3,11 +3,11 @@
     <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
     <variable type="" id="v_K" islocal="false" iscloud="false">K</variable>
     <variable type="" id="v_sum" islocal="false" iscloud="false">總和</variable>
-    <variable type="" id="v_max" islocal="false" iscloud="false">最大總和</variable>
+    <variable type="" id="v_min" islocal="false" iscloud="false">最小總和</variable>
     <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
     <variable type="list" id="l_A" islocal="false" iscloud="false">資料</variable>
   </variables>
-  <block type="event_whenflagclicked" id="start_sw" x="10" y="10">
+  <block type="event_whenflagclicked" id="start_sw_min" x="10" y="10">
     <next>
       <block type="data_deletealloflist" id="del_data">
         <field name="LIST" id="l_A" variabletype="list">資料</field>
@@ -113,9 +113,9 @@
                                           </block>
                                         </statement>
                                         <next>
-                                          <!-- 6. 初始化 最大總和 = 第一個視窗的和 -->
-                                          <block type="data_setvariableto" id="init_max">
-                                            <field name="VARIABLE" id="v_max" variabletype="">最大總和</field>
+                                          <!-- 6. 初始化 最小總和 = 第一個視窗的和 -->
+                                          <block type="data_setvariableto" id="init_min">
+                                            <field name="VARIABLE" id="v_min" variabletype="">最小總和</field>
                                             <value name="VALUE">
                                               <block type="data_variable" id="get_sum_init">
                                                 <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
@@ -189,26 +189,26 @@
                                                       </block>
                                                     </value>
                                                     <next>
-                                                      <!-- 8. 檢查並更新最大總和 -->
-                                                      <block type="control_if" id="if_update_max">
+                                                      <!-- 8. 檢查並更新最小總和 (當前總和 < 最小總和) -->
+                                                      <block type="control_if" id="if_update_min">
                                                         <value name="CONDITION">
-                                                          <block type="operator_compare" id="cmp_max">
-                                                            <field name="OPERATOR">&gt;</field>
+                                                          <block type="operator_compare" id="cmp_min">
+                                                            <field name="OPERATOR">&lt;</field>
                                                             <value name="OPERAND1">
                                                               <block type="data_variable" id="get_sum_m">
                                                                 <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
                                                               </block>
                                                             </value>
                                                             <value name="OPERAND2">
-                                                              <block type="data_variable" id="get_max_m">
-                                                                <field name="VARIABLE" id="v_max" variabletype="">最大總和</field>
+                                                              <block type="data_variable" id="get_min_m">
+                                                                <field name="VARIABLE" id="v_min" variabletype="">最小總和</field>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <statement name="SUBSTACK">
-                                                          <block type="data_setvariableto" id="set_new_max">
-                                                            <field name="VARIABLE" id="v_max" variabletype="">最大總和</field>
+                                                          <block type="data_setvariableto" id="set_new_min">
+                                                            <field name="VARIABLE" id="v_min" variabletype="">最小總和</field>
                                                             <value name="VALUE">
                                                               <block type="data_variable" id="get_sum_new">
                                                                 <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
@@ -232,8 +232,8 @@
                                                   <!-- 9. 最終輸出結果 -->
                                                   <block type="scratch_say" id="say_ans">
                                                     <value name="TEXT">
-                                                      <block type="data_variable" id="out_max">
-                                                        <field name="VARIABLE" id="v_max" variabletype="">最大總和</field>
+                                                      <block type="data_variable" id="out_min">
+                                                        <field name="VARIABLE" id="v_min" variabletype="">最小總和</field>
                                                       </block>
                                                     </value>
                                                   </block>

@@ -1,0 +1,232 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_t" islocal="false" iscloud="false">M</variable>
+    <variable type="" id="v_sum" islocal="false" iscloud="false">總和</variable>
+    <variable type="" id="v_ans" islocal="false" iscloud="false">最長長度</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_len" islocal="false" iscloud="false">當前長度</variable>
+    <variable type="list" id="l_data" islocal="false" iscloud="false">資料</variable>
+  </variables>
+
+  <block type="event_whenflagclicked" id="start" x="10" y="10">
+    <next>
+      <!-- 1. 清空資料清單 -->
+      <block type="data_deletealloflist" id="del_data">
+        <field name="LIST" id="l_data" variabletype="list">資料</field>
+        <next>
+          <!-- 2. 讀取 N -->
+          <block type="scratch_ask" id="ask_N">
+            <value name="QUESTION">
+              <shadow type="text" id="t_N"><field name="TEXT">N</field></shadow>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_N">
+                <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                <value name="VALUE"><block type="scratch_answer" id="ans_N"></block></value>
+                <next>
+                  <!-- 3. 讀取 N 個整數放入清單 -->
+                  <block type="control_repeat" id="rep_read">
+                    <value name="TIMES">
+                      <block type="data_variable" id="var_N_read"><field name="VARIABLE" id="v_N" variabletype="">N</field></block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_item">
+                        <value name="QUESTION">
+                          <shadow type="text" id="t_x"><field name="TEXT">x</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_addtolist" id="add_item">
+                            <field name="LIST" id="l_data" variabletype="list">資料</field>
+                            <value name="ITEM"><block type="scratch_answer" id="ans_item"></block></value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <!-- 4. 讀取 M -->
+                      <block type="scratch_ask" id="ask_t">
+                        <value name="QUESTION">
+                          <shadow type="text" id="t_M"><field name="TEXT">M</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_t">
+                            <field name="VARIABLE" id="v_t" variabletype="">M</field>
+                            <value name="VALUE"><block type="scratch_answer" id="ans_t"></block></value>
+                            <next>
+                              <!-- 5. 初始化變數 -->
+                              <block type="data_setvariableto" id="set_ans">
+                                <field name="VARIABLE" id="v_ans" variabletype="">最長長度</field>
+                                <value name="VALUE"><shadow type="math_number" id="n_ans0"><field name="NUM">0</field></shadow></value>
+                                <next>
+                                  <block type="data_setvariableto" id="set_sum">
+                                    <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                    <value name="VALUE"><shadow type="math_number" id="n_sum0"><field name="NUM">0</field></shadow></value>
+                                    <next>
+                                      <block type="data_setvariableto" id="set_i">
+                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                        <value name="VALUE"><shadow type="math_number" id="n_i1"><field name="NUM">1</field></shadow></value>
+                                        <next>
+                                          <block type="data_setvariableto" id="set_j">
+                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                            <value name="VALUE"><shadow type="math_number" id="n_j1"><field name="NUM">1</field></shadow></value>
+                                            <next>
+                                              <!-- 6. 可伸縮滑動視窗迴圈 (右界 j 從 1 到 N) -->
+                                              <block type="control_repeat" id="loop_R">
+                                                <value name="TIMES">
+                                                  <block type="data_variable" id="var_N_loop"><field name="VARIABLE" id="v_N" variabletype="">N</field></block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <!-- 總和 += 資料[j] -->
+                                                  <block type="data_changevariableby" id="add_R_val">
+                                                    <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                                    <value name="VALUE">
+                                                      <block type="data_itemoflist" id="get_R_item">
+                                                        <field name="LIST" id="l_data" variabletype="list">資料</field>
+                                                        <value name="INDEX">
+                                                          <block type="data_variable" id="var_j_idx"><field name="VARIABLE" id="v_j" variabletype="">j</field></block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <!-- 若 總和 > M 則向右縮小左界 i，直到 總和 <= M -->
+                                                      <block type="control_repeat_until" id="shrink_L">
+                                                        <value name="CONDITION">
+                                                          <block type="operator_compare" id="sum_lte_M">
+                                                            <field name="OPERATOR">&lt;=</field>
+                                                            <value name="OPERAND1">
+                                                              <block type="data_variable" id="var_sum_cur"><field name="VARIABLE" id="v_sum" variabletype="">總和</field></block>
+                                                            </value>
+                                                            <value name="OPERAND2">
+                                                              <block type="data_variable" id="var_M_cur"><field name="VARIABLE" id="v_t" variabletype="">M</field></block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="SUBSTACK">
+                                                          <!-- 總和 = 總和 - 資料[i] -->
+                                                          <block type="data_setvariableto" id="sub_L_val">
+                                                            <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                                            <value name="VALUE">
+                                                              <block type="operator_arithmetic" id="op_sub_L">
+                                                                <field name="OPERATOR">-</field>
+                                                                <value name="NUM1">
+                                                                  <block type="data_variable" id="var_sum_sub"><field name="VARIABLE" id="v_sum" variabletype="">總和</field></block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <block type="data_itemoflist" id="get_L_item">
+                                                                    <field name="LIST" id="l_data" variabletype="list">資料</field>
+                                                                    <value name="INDEX">
+                                                                      <block type="data_variable" id="var_i_idx"><field name="VARIABLE" id="v_i" variabletype="">i</field></block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <!-- i += 1 -->
+                                                              <block type="data_changevariableby" id="inc_i">
+                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                <value name="VALUE"><shadow type="math_number" id="n_inc_i"><field name="NUM">1</field></shadow></value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                        <next>
+                                                          <!-- 當前長度 = (j - i) + 1 -->
+                                                          <block type="data_setvariableto" id="calc_len">
+                                                            <field name="VARIABLE" id="v_len" variabletype="">當前長度</field>
+                                                            <value name="VALUE">
+                                                              <block type="operator_arithmetic" id="op_len_add1">
+                                                                <field name="OPERATOR">+</field>
+                                                                <value name="NUM1">
+                                                                  <block type="operator_arithmetic" id="op_j_minus_i">
+                                                                    <field name="OPERATOR">-</field>
+                                                                    <value name="NUM1">
+                                                                      <block type="data_variable" id="var_j_cur"><field name="VARIABLE" id="v_j" variabletype="">j</field></block>
+                                                                    </value>
+                                                                    <value name="NUM2">
+                                                                      <block type="data_variable" id="var_i_cur"><field name="VARIABLE" id="v_i" variabletype="">i</field></block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2"><shadow type="math_number" id="n_add1"><field name="NUM">1</field></shadow></value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <!-- 若 當前長度 > 最長長度 則更新 -->
+                                                              <block type="control_if" id="if_better">
+                                                                <value name="CONDITION">
+                                                                  <block type="operator_compare" id="len_gt_ans">
+                                                                    <field name="OPERATOR">&gt;</field>
+                                                                    <value name="OPERAND1">
+                                                                      <block type="data_variable" id="var_len_cur"><field name="VARIABLE" id="v_len" variabletype="">當前長度</field></block>
+                                                                    </value>
+                                                                    <value name="OPERAND2">
+                                                                      <block type="data_variable" id="var_ans_cur"><field name="VARIABLE" id="v_ans" variabletype="">最長長度</field></block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="SUBSTACK">
+                                                                  <block type="data_setvariableto" id="upd_ans">
+                                                                    <field name="VARIABLE" id="v_ans" variabletype="">最長長度</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="data_variable" id="var_len_val"><field name="VARIABLE" id="v_len" variabletype="">當前長度</field></block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <next>
+                                                                  <!-- j += 1 -->
+                                                                  <block type="data_changevariableby" id="inc_j">
+                                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                                    <value name="VALUE"><shadow type="math_number" id="n_inc_j"><field name="NUM">1</field></shadow></value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <!-- 7. 輸出答案：加上 * 1 強制轉為數字輸出 '0' -->
+                                                  <block type="scratch_say" id="say_ans">
+                                                    <value name="TEXT">
+                                                      <block type="operator_arithmetic" id="op_mul1">
+                                                        <field name="OPERATOR">*</field>
+                                                        <value name="NUM1">
+                                                          <block type="data_variable" id="out_ans"><field name="VARIABLE" id="v_ans" variabletype="">最長長度</field></block>
+                                                        </value>
+                                                        <value name="NUM2">
+                                                          <shadow type="math_number" id="n_mul1"><field name="NUM">1</field></shadow>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

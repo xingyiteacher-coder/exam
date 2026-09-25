@@ -1,0 +1,422 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_t" islocal="false" iscloud="false">t</variable>
+    <variable type="" id="v_L" islocal="false" iscloud="false">L</variable>
+    <variable type="" id="v_R" islocal="false" iscloud="false">R</variable>
+    <variable type="" id="v_sum" islocal="false" iscloud="false">總和</variable>
+    <variable type="" id="v_ans" islocal="false" iscloud="false">結果</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_temp" islocal="false" iscloud="false">暫存</variable>
+    <variable type="list" id="l_data" islocal="false" iscloud="false">資料</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_twosum" x="10" y="10">
+    <next>
+      <block type="data_deletealloflist" id="del_data">
+        <field name="LIST" id="l_data" variabletype="list">資料</field>
+        <next>
+          <!-- 1. 讀取 N -->
+          <block type="scratch_ask" id="ask_N">
+            <value name="QUESTION">
+              <shadow type="text" id="txt_N"><field name="TEXT">N</field></shadow>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_N">
+                <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                <value name="VALUE">
+                  <block type="scratch_answer" id="ans_N"></block>
+                </value>
+                <next>
+                  <!-- 2. 逐一讀取 N 個整數存入清單 -->
+                  <block type="control_repeat" id="rep_read">
+                    <value name="TIMES">
+                      <block type="data_variable" id="get_N">
+                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_item">
+                        <value name="QUESTION">
+                          <shadow type="text" id="txt_item"><field name="TEXT">x</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_addtolist" id="add_item">
+                            <field name="LIST" id="l_data" variabletype="list">資料</field>
+                            <value name="ITEM">
+                              <block type="scratch_answer" id="ans_item"></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <!-- 3. 讀取目標值 t -->
+                      <block type="scratch_ask" id="ask_t">
+                        <value name="QUESTION">
+                          <shadow type="text" id="txt_t"><field name="TEXT">t</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_t">
+                            <field name="VARIABLE" id="v_t" variabletype="">t</field>
+                            <value name="VALUE">
+                              <block type="scratch_answer" id="ans_t"></block>
+                            </value>
+                            <next>
+                              <!-- 4. 氣泡排序清單 (由小到大) -->
+                              <block type="data_setvariableto" id="init_i">
+                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                <value name="VALUE">
+                                  <shadow type="math_number" id="num_1_i"><field name="NUM">1</field></shadow>
+                                </value>
+                                <next>
+                                  <block type="control_repeat" id="rep_sort_outer">
+                                    <value name="TIMES">
+                                      <block type="operator_arithmetic" id="sub_n1">
+                                        <field name="OPERATOR">-</field>
+                                        <value name="NUM1">
+                                          <block type="data_variable" id="get_N_s1">
+                                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <shadow type="math_number" id="num_1_s"><field name="NUM">1</field></shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="data_setvariableto" id="init_j">
+                                        <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                        <value name="VALUE">
+                                          <shadow type="math_number" id="num_1_j"><field name="NUM">1</field></shadow>
+                                        </value>
+                                        <next>
+                                          <block type="control_repeat" id="rep_sort_inner">
+                                            <value name="TIMES">
+                                              <block type="operator_arithmetic" id="sub_nj">
+                                                <field name="OPERATOR">-</field>
+                                                <value name="NUM1">
+                                                  <block type="operator_arithmetic" id="sub_ni">
+                                                    <field name="OPERATOR">-</field>
+                                                    <value name="NUM1">
+                                                      <block type="data_variable" id="get_N_s2">
+                                                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NUM2">
+                                                      <block type="data_variable" id="get_i_s">
+                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <shadow type="math_number" id="num_0_s"><field name="NUM">0</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <!-- 如果 item(j) > item(j+1) 則交換 -->
+                                              <block type="control_if" id="if_swap">
+                                                <value name="CONDITION">
+                                                  <block type="operator_compare" id="cmp_gt">
+                                                    <field name="OPERATOR">&gt;</field>
+                                                    <value name="OPERAND1">
+                                                      <block type="data_itemoflist" id="item_j">
+                                                        <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                        <value name="INDEX">
+                                                          <block type="data_variable" id="get_j">
+                                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="OPERAND2">
+                                                      <block type="data_itemoflist" id="item_j1">
+                                                        <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                        <value name="INDEX">
+                                                          <block type="operator_arithmetic" id="plus_j1">
+                                                            <field name="OPERATOR">+</field>
+                                                            <value name="NUM1">
+                                                              <block type="data_variable" id="get_j2">
+                                                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="NUM2">
+                                                              <shadow type="math_number" id="num_1_add"><field name="NUM">1</field></shadow>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <!-- 交換邏輯：temp = item(j), replace(j) = item(j+1), replace(j+1) = temp -->
+                                                  <block type="data_setvariableto" id="set_temp">
+                                                    <field name="VARIABLE" id="v_temp" variabletype="">暫存</field>
+                                                    <value name="VALUE">
+                                                      <block type="data_itemoflist" id="item_j_t">
+                                                        <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                        <value name="INDEX">
+                                                          <block type="data_variable" id="get_j_t">
+                                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="data_replaceitemoflist" id="rep_j">
+                                                        <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                        <value name="INDEX">
+                                                          <block type="data_variable" id="get_j_r">
+                                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="ITEM">
+                                                          <block type="data_itemoflist" id="item_j1_t">
+                                                            <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                            <value name="INDEX">
+                                                              <block type="operator_arithmetic" id="plus_j1_t">
+                                                                <field name="OPERATOR">+</field>
+                                                                <value name="NUM1">
+                                                                  <block type="data_variable" id="get_j3">
+                                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <shadow type="math_number" id="num_1_add2"><field name="NUM">1</field></shadow>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="data_replaceitemoflist" id="rep_j1">
+                                                            <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                            <value name="INDEX">
+                                                              <block type="operator_arithmetic" id="plus_j1_r">
+                                                                <field name="OPERATOR">+</field>
+                                                                <value name="NUM1">
+                                                                  <block type="data_variable" id="get_j4">
+                                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <shadow type="math_number" id="num_1_add3"><field name="NUM">1</field></shadow>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ITEM">
+                                                              <block type="data_variable" id="get_temp">
+                                                                <field name="VARIABLE" id="v_temp" variabletype="">暫存</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="data_changevariableby" id="inc_j">
+                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                    <value name="VALUE">
+                                                      <shadow type="math_number" id="num_1_stepj"><field name="NUM">1</field></shadow>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="data_changevariableby" id="inc_i">
+                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                <value name="VALUE">
+                                                  <shadow type="math_number" id="num_1_stepi"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <!-- 5. 初始化雙指標：L = 1, R = N, 結果預設為 no -->
+                                      <block type="data_setvariableto" id="set_L">
+                                        <field name="VARIABLE" id="v_L" variabletype="">L</field>
+                                        <value name="VALUE">
+                                          <shadow type="math_number" id="num_1_L"><field name="NUM">1</field></shadow>
+                                        </value>
+                                        <next>
+                                          <block type="data_setvariableto" id="set_R">
+                                            <field name="VARIABLE" id="v_R" variabletype="">R</field>
+                                            <value name="VALUE">
+                                              <block type="data_variable" id="get_N_R">
+                                                <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="data_setvariableto" id="set_ans_no">
+                                                <field name="VARIABLE" id="v_ans" variabletype="">結果</field>
+                                                <value name="VALUE">
+                                                  <shadow type="text" id="txt_no"><field name="TEXT">no</field></shadow>
+                                                </value>
+                                                <next>
+                                                  <!-- 6. 雙指標迴圈：重複 N 次（或直到 L >= R） -->
+                                                  <block type="control_repeat" id="rep_twopointers">
+                                                    <value name="TIMES">
+                                                      <block type="data_variable" id="get_N_tp">
+                                                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="SUBSTACK">
+                                                      <block type="control_if" id="if_l_lt_r">
+                                                        <value name="CONDITION">
+                                                          <block type="operator_compare" id="cmp_lt">
+                                                            <field name="OPERATOR">&lt;</field>
+                                                            <value name="OPERAND1">
+                                                              <block type="data_variable" id="get_L">
+                                                                <field name="VARIABLE" id="v_L" variabletype="">L</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="OPERAND2">
+                                                              <block type="data_variable" id="get_R">
+                                                                <field name="VARIABLE" id="v_R" variabletype="">R</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="SUBSTACK">
+                                                          <!-- 計算總和 = item(L) + item(R) -->
+                                                          <block type="data_setvariableto" id="calc_sum">
+                                                            <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                                            <value name="VALUE">
+                                                              <block type="operator_arithmetic" id="add_lr">
+                                                                <field name="OPERATOR">+</field>
+                                                                <value name="NUM1">
+                                                                  <block type="data_itemoflist" id="item_L">
+                                                                    <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                                    <value name="INDEX">
+                                                                      <block type="data_variable" id="get_L_idx">
+                                                                        <field name="VARIABLE" id="v_L" variabletype="">L</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <block type="data_itemoflist" id="item_R">
+                                                                    <field name="LIST" id="l_A" variabletype="list">資料</field>
+                                                                    <value name="INDEX">
+                                                                      <block type="data_variable" id="get_R_idx">
+                                                                        <field name="VARIABLE" id="v_R" variabletype="">R</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <!-- 判斷總和與目標值 t 的關係 -->
+                                                              <block type="control_if_else" id="if_sum_eq">
+                                                                <value name="CONDITION">
+                                                                  <block type="operator_compare" id="cmp_eq">
+                                                                    <field name="OPERATOR">==</field>
+                                                                    <value name="OPERAND1">
+                                                                      <block type="data_variable" id="get_sum_eq">
+                                                                        <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="OPERAND2">
+                                                                      <block type="data_variable" id="get_t_eq">
+                                                                        <field name="VARIABLE" id="v_t" variabletype="">t</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="SUBSTACK">
+                                                                  <block type="data_setvariableto" id="set_ans_yes">
+                                                                    <field name="VARIABLE" id="v_ans" variabletype="">結果</field>
+                                                                    <value name="VALUE">
+                                                                      <shadow type="text" id="txt_yes"><field name="TEXT">yes</field></shadow>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <statement name="SUBSTACK2">
+                                                                  <block type="control_if_else" id="if_sum_lt">
+                                                                    <value name="CONDITION">
+                                                                      <block type="operator_compare" id="cmp_sum_lt">
+                                                                        <field name="OPERATOR">&lt;</field>
+                                                                        <value name="OPERAND1">
+                                                                          <block type="data_variable" id="get_sum_lt">
+                                                                            <field name="VARIABLE" id="v_sum" variabletype="">總和</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="OPERAND2">
+                                                                          <block type="data_variable" id="get_t_lt">
+                                                                            <field name="VARIABLE" id="v_t" variabletype="">t</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <statement name="SUBSTACK">
+                                                                      <!-- 總和小於 t，L 往右移 -->
+                                                                      <block type="data_changevariableby" id="inc_L">
+                                                                        <field name="VARIABLE" id="v_L" variabletype="">L</field>
+                                                                        <value name="VALUE">
+                                                                          <shadow type="math_number" id="num_1_incL"><field name="NUM">1</field></shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </statement>
+                                                                    <statement name="SUBSTACK2">
+                                                                      <!-- 總和大於 t，R 往左移 -->
+                                                                      <block type="data_changevariableby" id="dec_R">
+                                                                        <field name="VARIABLE" id="v_R" variabletype="">R</field>
+                                                                        <value name="VALUE">
+                                                                          <shadow type="math_number" id="num_1_decR"><field name="NUM">-1</field></shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </statement>
+                                                                  </block>
+                                                                </statement>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <!-- 7. 輸出結果 -->
+                                                      <block type="scratch_say" id="say_ans">
+                                                        <value name="TEXT">
+                                                          <block type="data_variable" id="out_ans">
+                                                            <field name="VARIABLE" id="v_ans" variabletype="">結果</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
