@@ -1,8 +1,8 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
   <variables>
     <variable id="VAR_N">N</variable>
-    <variable id="VAR_films_str">films_str</variable>
     <variable id="VAR_films_list">films_list</variable>
+    <variable id="VAR_k_loop">k_loop</variable>
     <variable id="VAR_K">K</variable>
     <variable id="VAR_fav_code">fav_code</variable>
     <variable id="VAR_max_count">max_count</variable>
@@ -30,43 +30,54 @@
       </block>
     </value>
     <next>
-      <block type="variables_set" id="set_films_str">
-        <field name="VAR" id="VAR_films_str">films_str</field>
+      <block type="variables_set" id="set_films_list">
+        <field name="VAR" id="VAR_films_list">films_list</field>
         <value name="VALUE">
-          <block type="text_trim" id="trim_films">
-            <field name="MODE">BOTH</field>
-            <value name="TEXT">
-              <block type="text_prompt_ext" id="prompt_films">
-                <mutation type="TEXT"></mutation>
-                <field name="TYPE">TEXT</field>
-                <value name="TEXT">
-                  <block type="text" id="txt_prompt_films">
-                    <field name="TEXT">films_str</field>
-                  </block>
-                </value>
-              </block>
-            </value>
+          <block type="lists_create_with" id="create_empty_list">
+            <mutation items="0"></mutation>
           </block>
         </value>
         <next>
-          <block type="variables_set" id="set_films_list">
-            <field name="VAR" id="VAR_films_list">films_list</field>
-            <value name="VALUE">
-              <block type="lists_split" id="split_films">
-                <mutation mode="SPLIT"></mutation>
-                <field name="MODE">SPLIT</field>
-                <value name="INPUT">
-                  <block type="variables_get" id="get_films_str">
-                    <field name="VAR" id="VAR_films_str">films_str</field>
+          <block type="controls_for" id="loop_read_films">
+            <field name="VAR" id="VAR_k_loop">k_loop</field>
+            <value name="FROM">
+              <block type="math_number" id="num_1_read">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="variables_get" id="get_N_loop">
+                <field name="VAR" id="VAR_N">N</field>
+              </block>
+            </value>
+            <value name="BY">
+              <block type="math_number" id="num_1_step">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="lists_setIndex" id="append_film">
+                <mutation at="false"></mutation>
+                <field name="MODE">INSERT</field>
+                <field name="WHERE">LAST</field>
+                <value name="LIST">
+                  <block type="variables_get" id="get_films_list_append">
+                    <field name="VAR" id="VAR_films_list">films_list</field>
                   </block>
                 </value>
-                <value name="DELIM">
-                  <block type="text" id="txt_space">
-                    <field name="TEXT"> </field>
+                <value name="TO">
+                  <block type="text_prompt_ext" id="prompt_film_item">
+                    <mutation type="TEXT"></mutation>
+                    <field name="TYPE">TEXT</field>
+                    <value name="TEXT">
+                      <block type="text" id="txt_prompt_film">
+                        <field name="TEXT">film</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
               </block>
-            </value>
+            </statement>
             <next>
               <block type="variables_set" id="set_K">
                 <field name="VAR" id="VAR_K">K</field>
@@ -90,17 +101,12 @@
                   <block type="variables_set" id="set_fav_code">
                     <field name="VAR" id="VAR_fav_code">fav_code</field>
                     <value name="VALUE">
-                      <block type="text_trim" id="trim_fav">
-                        <field name="MODE">BOTH</field>
+                      <block type="text_prompt_ext" id="prompt_fav">
+                        <mutation type="TEXT"></mutation>
+                        <field name="TYPE">TEXT</field>
                         <value name="TEXT">
-                          <block type="text_prompt_ext" id="prompt_fav">
-                            <mutation type="TEXT"></mutation>
-                            <field name="TYPE">TEXT</field>
-                            <value name="TEXT">
-                              <block type="text" id="txt_prompt_fav">
-                                <field name="TEXT">fav_code</field>
-                              </block>
-                            </value>
+                          <block type="text" id="txt_prompt_fav">
+                            <field name="TEXT">fav_code</field>
                           </block>
                         </value>
                       </block>
