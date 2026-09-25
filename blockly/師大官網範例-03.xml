@@ -1,0 +1,296 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="VAR_N">N</variable>
+    <variable id="VAR_films_str">films_str</variable>
+    <variable id="VAR_films_list">films_list</variable>
+    <variable id="VAR_K">K</variable>
+    <variable id="VAR_fav_code">fav_code</variable>
+    <variable id="VAR_max_count">max_count</variable>
+    <variable id="VAR_i">i</variable>
+    <variable id="VAR_j">j</variable>
+    <variable id="VAR_current_count">current_count</variable>
+    <variable id="VAR_current_item">current_item</variable>
+  </variables>
+  <block type="variables_set" id="set_N" x="20" y="20">
+    <field name="VAR" id="VAR_N">N</field>
+    <value name="VALUE">
+      <block type="math_round">
+        <field name="OP">ROUND</field>
+        <value name="NUM">
+          <block type="text_prompt_ext">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+            <value name="TEXT">
+              <shadow type="text">
+                <field name="TEXT">N</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="set_films_str">
+        <field name="VAR" id="VAR_films_str">films_str</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext">
+            <mutation type="TEXT"></mutation>
+            <field name="TYPE">TEXT</field>
+            <value name="TEXT">
+              <shadow type="text">
+                <field name="TEXT">films_str</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="set_films_list">
+            <field name="VAR" id="VAR_films_list">films_list</field>
+            <value name="VALUE">
+              <block type="lists_split">
+                <mutation mode="SPLIT"></mutation>
+                <field name="MODE">SPLIT</field>
+                <value name="INPUT">
+                  <block type="variables_get">
+                    <field name="VAR" id="VAR_films_str">films_str</field>
+                  </block>
+                </value>
+                <value name="DELIM">
+                  <shadow type="text">
+                    <field name="TEXT"> </field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="set_K">
+                <field name="VAR" id="VAR_K">K</field>
+                <value name="VALUE">
+                  <block type="math_round">
+                    <field name="OP">ROUND</field>
+                    <value name="NUM">
+                      <block type="text_prompt_ext">
+                        <mutation type="TEXT"></mutation>
+                        <field name="TYPE">TEXT</field>
+                        <value name="TEXT">
+                          <shadow type="text">
+                            <field name="TEXT">K</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="set_fav_code">
+                    <field name="VAR" id="VAR_fav_code">fav_code</field>
+                    <value name="VALUE">
+                      <block type="text_prompt_ext">
+                        <mutation type="TEXT"></mutation>
+                        <field name="TYPE">TEXT</field>
+                        <value name="TEXT">
+                          <shadow type="text">
+                            <field name="TEXT">fav_code</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="set_max_count">
+                        <field name="VAR" id="VAR_max_count">max_count</field>
+                        <value name="VALUE">
+                          <block type="math_number">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_for" id="loop_i">
+                            <field name="VAR" id="VAR_i">i</field>
+                            <value name="FROM">
+                              <shadow type="math_number">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <value name="TO">
+                              <block type="math_arithmetic">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="math_arithmetic">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="VAR_N">N</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="VAR_K">K</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <shadow type="math_number">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="BY">
+                              <shadow type="math_number">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <statement name="DO">
+                              <block type="variables_set" id="set_current_count">
+                                <field name="VAR" id="VAR_current_count">current_count</field>
+                                <value name="VALUE">
+                                  <block type="math_number">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_for" id="loop_j">
+                                    <field name="VAR" id="VAR_j">j</field>
+                                    <value name="FROM">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="VAR_i">i</field>
+                                      </block>
+                                    </value>
+                                    <value name="TO">
+                                      <block type="math_arithmetic">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="VAR_i">i</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_arithmetic">
+                                            <field name="OP">MINUS</field>
+                                            <value name="A">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="VAR_K">K</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <shadow type="math_number">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="BY">
+                                      <shadow type="math_number">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                    </value>
+                                    <statement name="DO">
+                                      <block type="variables_set" id="set_current_item">
+                                        <field name="VAR" id="VAR_current_item">current_item</field>
+                                        <value name="VALUE">
+                                          <block type="lists_getIndex">
+                                            <mutation statement="false" at="true"></mutation>
+                                            <field name="MODE">GET</field>
+                                            <field name="WHERE">FROM_START</field>
+                                            <value name="VALUE">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="VAR_films_list">films_list</field>
+                                              </block>
+                                            </value>
+                                            <value name="AT">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="VAR_j">j</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="controls_if" id="if_match">
+                                            <value name="IF0">
+                                              <block type="logic_compare">
+                                                <field name="OP">EQ</field>
+                                                <value name="A">
+                                                  <block type="variables_get">
+                                                    <field name="VAR" id="VAR_current_item">current_item</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="variables_get">
+                                                    <field name="VAR" id="VAR_fav_code">fav_code</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="math_change" id="inc_count">
+                                                <field name="VAR" id="VAR_current_count">current_count</field>
+                                                <value name="DELTA">
+                                                  <shadow type="math_number">
+                                                    <field name="NUM">1</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="controls_if" id="if_update_max">
+                                        <value name="IF0">
+                                          <block type="logic_compare">
+                                            <field name="OP">GT</field>
+                                            <value name="A">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="VAR_current_count">current_count</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="VAR_max_count">max_count</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="variables_set" id="set_max">
+                                            <field name="VAR" id="VAR_max_count">max_count</field>
+                                            <value name="VALUE">
+                                              <block type="variables_get">
+                                                <field name="VAR" id="VAR_current_count">current_count</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="text_print" id="print_result">
+                                <value name="TEXT">
+                                  <block type="variables_get">
+                                    <field name="VAR" id="VAR_max_count">max_count</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
