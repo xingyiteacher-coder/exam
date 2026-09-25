@@ -14,16 +14,16 @@
   <block type="variables_set" id="set_N" x="20" y="20">
     <field name="VAR" id="VAR_N">N</field>
     <value name="VALUE">
-      <block type="math_round">
+      <block type="math_round" id="round_N">
         <field name="OP">ROUND</field>
         <value name="NUM">
-          <block type="text_prompt_ext">
+          <block type="text_prompt_ext" id="prompt_N">
             <mutation type="TEXT"></mutation>
             <field name="TYPE">TEXT</field>
             <value name="TEXT">
-              <shadow type="text">
+              <block type="text" id="txt_prompt_N">
                 <field name="TEXT">N</field>
-              </shadow>
+              </block>
             </value>
           </block>
         </value>
@@ -33,13 +33,13 @@
       <block type="variables_set" id="set_films_str">
         <field name="VAR" id="VAR_films_str">films_str</field>
         <value name="VALUE">
-          <block type="text_prompt_ext">
+          <block type="text_prompt_ext" id="prompt_films">
             <mutation type="TEXT"></mutation>
             <field name="TYPE">TEXT</field>
             <value name="TEXT">
-              <shadow type="text">
+              <block type="text" id="txt_prompt_films">
                 <field name="TEXT">films_str</field>
-              </shadow>
+              </block>
             </value>
           </block>
         </value>
@@ -47,18 +47,18 @@
           <block type="variables_set" id="set_films_list">
             <field name="VAR" id="VAR_films_list">films_list</field>
             <value name="VALUE">
-              <block type="lists_split">
+              <block type="lists_split" id="split_films">
                 <mutation mode="SPLIT"></mutation>
                 <field name="MODE">SPLIT</field>
                 <value name="INPUT">
-                  <block type="variables_get">
+                  <block type="variables_get" id="get_films_str">
                     <field name="VAR" id="VAR_films_str">films_str</field>
                   </block>
                 </value>
                 <value name="DELIM">
-                  <shadow type="text">
+                  <block type="text" id="txt_space">
                     <field name="TEXT"> </field>
-                  </shadow>
+                  </block>
                 </value>
               </block>
             </value>
@@ -66,16 +66,16 @@
               <block type="variables_set" id="set_K">
                 <field name="VAR" id="VAR_K">K</field>
                 <value name="VALUE">
-                  <block type="math_round">
+                  <block type="math_round" id="round_K">
                     <field name="OP">ROUND</field>
                     <value name="NUM">
-                      <block type="text_prompt_ext">
+                      <block type="text_prompt_ext" id="prompt_K">
                         <mutation type="TEXT"></mutation>
                         <field name="TYPE">TEXT</field>
                         <value name="TEXT">
-                          <shadow type="text">
+                          <block type="text" id="txt_prompt_K">
                             <field name="TEXT">K</field>
-                          </shadow>
+                          </block>
                         </value>
                       </block>
                     </value>
@@ -85,13 +85,13 @@
                   <block type="variables_set" id="set_fav_code">
                     <field name="VAR" id="VAR_fav_code">fav_code</field>
                     <value name="VALUE">
-                      <block type="text_prompt_ext">
+                      <block type="text_prompt_ext" id="prompt_fav">
                         <mutation type="TEXT"></mutation>
                         <field name="TYPE">TEXT</field>
                         <value name="TEXT">
-                          <shadow type="text">
+                          <block type="text" id="txt_prompt_fav">
                             <field name="TEXT">fav_code</field>
-                          </shadow>
+                          </block>
                         </value>
                       </block>
                     </value>
@@ -99,7 +99,7 @@
                       <block type="variables_set" id="set_max_count">
                         <field name="VAR" id="VAR_max_count">max_count</field>
                         <value name="VALUE">
-                          <block type="math_number">
+                          <block type="math_number" id="num_0_max">
                             <field name="NUM">0</field>
                           </block>
                         </value>
@@ -107,45 +107,45 @@
                           <block type="controls_for" id="loop_i">
                             <field name="VAR" id="VAR_i">i</field>
                             <value name="FROM">
-                              <shadow type="math_number">
+                              <block type="math_number" id="num_1_from_i">
                                 <field name="NUM">1</field>
-                              </shadow>
+                              </block>
                             </value>
                             <value name="TO">
-                              <block type="math_arithmetic">
+                              <block type="math_arithmetic" id="add_1_i">
                                 <field name="OP">ADD</field>
                                 <value name="A">
-                                  <block type="math_arithmetic">
+                                  <block type="math_arithmetic" id="minus_N_K">
                                     <field name="OP">MINUS</field>
                                     <value name="A">
-                                      <block type="variables_get">
+                                      <block type="variables_get" id="get_N">
                                         <field name="VAR" id="VAR_N">N</field>
                                       </block>
                                     </value>
                                     <value name="B">
-                                      <block type="variables_get">
+                                      <block type="variables_get" id="get_K">
                                         <field name="VAR" id="VAR_K">K</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                                 <value name="B">
-                                  <shadow type="math_number">
+                                  <block type="math_number" id="num_1_to_i">
                                     <field name="NUM">1</field>
-                                  </shadow>
+                                  </block>
                                 </value>
                               </block>
                             </value>
                             <value name="BY">
-                              <shadow type="math_number">
+                              <block type="math_number" id="num_1_by_i">
                                 <field name="NUM">1</field>
-                              </shadow>
+                              </block>
                             </value>
                             <statement name="DO">
                               <block type="variables_set" id="set_current_count">
                                 <field name="VAR" id="VAR_current_count">current_count</field>
                                 <value name="VALUE">
-                                  <block type="math_number">
+                                  <block type="math_number" id="num_0_cur">
                                     <field name="NUM">0</field>
                                   </block>
                                 </value>
@@ -153,55 +153,55 @@
                                   <block type="controls_for" id="loop_j">
                                     <field name="VAR" id="VAR_j">j</field>
                                     <value name="FROM">
-                                      <block type="variables_get">
+                                      <block type="variables_get" id="get_i_from">
                                         <field name="VAR" id="VAR_i">i</field>
                                       </block>
                                     </value>
                                     <value name="TO">
-                                      <block type="math_arithmetic">
+                                      <block type="math_arithmetic" id="add_i_K_1">
                                         <field name="OP">ADD</field>
                                         <value name="A">
-                                          <block type="variables_get">
+                                          <block type="variables_get" id="get_i_to">
                                             <field name="VAR" id="VAR_i">i</field>
                                           </block>
                                         </value>
                                         <value name="B">
-                                          <block type="math_arithmetic">
+                                          <block type="math_arithmetic" id="minus_K_1">
                                             <field name="OP">MINUS</field>
                                             <value name="A">
-                                              <block type="variables_get">
+                                              <block type="variables_get" id="get_K_j">
                                                 <field name="VAR" id="VAR_K">K</field>
                                               </block>
                                             </value>
                                             <value name="B">
-                                              <shadow type="math_number">
+                                              <block type="math_number" id="num_1_j">
                                                 <field name="NUM">1</field>
-                                              </shadow>
+                                              </block>
                                             </value>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
                                     <value name="BY">
-                                      <shadow type="math_number">
+                                      <block type="math_number" id="num_1_by_j">
                                         <field name="NUM">1</field>
-                                      </shadow>
+                                      </block>
                                     </value>
                                     <statement name="DO">
                                       <block type="variables_set" id="set_current_item">
                                         <field name="VAR" id="VAR_current_item">current_item</field>
                                         <value name="VALUE">
-                                          <block type="lists_getIndex">
+                                          <block type="lists_getIndex" id="get_item_j">
                                             <mutation statement="false" at="true"></mutation>
                                             <field name="MODE">GET</field>
                                             <field name="WHERE">FROM_START</field>
                                             <value name="VALUE">
-                                              <block type="variables_get">
+                                              <block type="variables_get" id="get_films_list_j">
                                                 <field name="VAR" id="VAR_films_list">films_list</field>
                                               </block>
                                             </value>
                                             <value name="AT">
-                                              <block type="variables_get">
+                                              <block type="variables_get" id="get_j_at">
                                                 <field name="VAR" id="VAR_j">j</field>
                                               </block>
                                             </value>
@@ -210,15 +210,15 @@
                                         <next>
                                           <block type="controls_if" id="if_match">
                                             <value name="IF0">
-                                              <block type="logic_compare">
+                                              <block type="logic_compare" id="compare_match">
                                                 <field name="OP">EQ</field>
                                                 <value name="A">
-                                                  <block type="variables_get">
+                                                  <block type="variables_get" id="get_item_cmp">
                                                     <field name="VAR" id="VAR_current_item">current_item</field>
                                                   </block>
                                                 </value>
                                                 <value name="B">
-                                                  <block type="variables_get">
+                                                  <block type="variables_get" id="get_fav_cmp">
                                                     <field name="VAR" id="VAR_fav_code">fav_code</field>
                                                   </block>
                                                 </value>
@@ -228,9 +228,9 @@
                                               <block type="math_change" id="inc_count">
                                                 <field name="VAR" id="VAR_current_count">current_count</field>
                                                 <value name="DELTA">
-                                                  <shadow type="math_number">
+                                                  <block type="math_number" id="num_1_delta">
                                                     <field name="NUM">1</field>
-                                                  </shadow>
+                                                  </block>
                                                 </value>
                                               </block>
                                             </statement>
@@ -241,15 +241,15 @@
                                     <next>
                                       <block type="controls_if" id="if_update_max">
                                         <value name="IF0">
-                                          <block type="logic_compare">
+                                          <block type="logic_compare" id="compare_max">
                                             <field name="OP">GT</field>
                                             <value name="A">
-                                              <block type="variables_get">
+                                              <block type="variables_get" id="get_cur_cmp">
                                                 <field name="VAR" id="VAR_current_count">current_count</field>
                                               </block>
                                             </value>
                                             <value name="B">
-                                              <block type="variables_get">
+                                              <block type="variables_get" id="get_max_cmp">
                                                 <field name="VAR" id="VAR_max_count">max_count</field>
                                               </block>
                                             </value>
@@ -259,7 +259,7 @@
                                           <block type="variables_set" id="set_max">
                                             <field name="VAR" id="VAR_max_count">max_count</field>
                                             <value name="VALUE">
-                                              <block type="variables_get">
+                                              <block type="variables_get" id="get_cur_max">
                                                 <field name="VAR" id="VAR_current_count">current_count</field>
                                               </block>
                                             </value>
@@ -274,7 +274,7 @@
                             <next>
                               <block type="text_print" id="print_result">
                                 <value name="TEXT">
-                                  <block type="variables_get">
+                                  <block type="variables_get" id="get_max_final">
                                     <field name="VAR" id="VAR_max_count">max_count</field>
                                   </block>
                                 </value>
