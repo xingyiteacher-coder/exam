@@ -14,58 +14,90 @@
   <block type="event_whenflagclicked" id="start" x="10" y="10">
     <next>
       <block type="sensing_askandwait" id="ask_N">
-        <value name="QUESTION"><shadow type="text"><field name="TEXT">N</field></shadow></value>
+        <value name="QUESTION">
+          <shadow type="text"><field name="TEXT">N</field></shadow>
+        </value>
         <next>
           <block type="data_setvariableto" id="set_N">
-            <field name="VARIABLE" id="v_N">N</field>
+            <field name="VARIABLE" id="v_N" variabletype="">N</field>
             <value name="VALUE"><block type="sensing_answer"></block></value>
             <next>
               <block type="sensing_askandwait" id="ask_A">
-                <value name="QUESTION"><shadow type="text"><field name="TEXT">A</field></shadow></value>
+                <value name="QUESTION">
+                  <shadow type="text"><field name="TEXT">A</field></shadow>
+                </value>
                 <next>
                   <block type="data_setvariableto" id="set_raw">
-                    <field name="VARIABLE" id="v_raw">raw_input</field>
+                    <field name="VARIABLE" id="v_raw" variabletype="">raw_input</field>
                     <value name="VALUE"><block type="sensing_answer"></block></value>
                     <next>
                       <block type="sensing_askandwait" id="ask_K">
-                        <value name="QUESTION"><shadow type="text"><field name="TEXT">K</field></shadow></value>
+                        <value name="QUESTION">
+                          <shadow type="text"><field name="TEXT">K</field></shadow>
+                        </value>
                         <next>
                           <block type="data_setvariableto" id="set_K">
-                            <field name="VARIABLE" id="v_K">K</field>
+                            <field name="VARIABLE" id="v_K" variabletype="">K</field>
                             <value name="VALUE"><block type="sensing_answer"></block></value>
                             <next>
                               <block type="data_deletealloflist" id="del_A">
                                 <field name="LIST" id="v_A" variabletype="list">A</field>
                                 <next>
                                   <block type="data_setvariableto" id="set_ptr">
-                                    <field name="VARIABLE" id="v_ptr">ptr</field>
-                                    <value name="VALUE"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+                                    <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                    <value name="VALUE">
+                                      <shadow type="math_number"><field name="NUM">1</field></shadow>
+                                    </value>
                                     <next>
                                       <block type="data_setvariableto" id="set_temp">
-                                        <field name="VARIABLE" id="v_temp">temp</field>
-                                        <value name="VALUE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+                                        <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                        <value name="VALUE">
+                                          <shadow type="text"><field name="TEXT"></field></shadow>
+                                        </value>
                                         <next>
                                           <block type="control_repeat" id="parse_loop">
                                             <value name="TIMES">
                                               <block type="operator_length">
-                                                <value name="STRING"><block type="data_variable"><field name="VARIABLE" id="v_raw">raw_input</field></block></value>
+                                                <value name="STRING">
+                                                  <shadow type="text"><field name="TEXT"></field></shadow>
+                                                  <block type="data_variable">
+                                                    <field name="VARIABLE" id="v_raw" variabletype="">raw_input</field>
+                                                  </block>
+                                                </value>
                                               </block>
                                             </value>
                                             <statement name="SUBSTACK">
                                               <block type="data_setvariableto" id="get_ch">
-                                                <field name="VARIABLE" id="v_ch">ch</field>
+                                                <field name="VARIABLE" id="v_ch" variabletype="">ch</field>
                                                 <value name="VALUE">
                                                   <block type="operator_letter_of">
-                                                    <value name="STRING"><block type="data_variable"><field name="VARIABLE" id="v_raw">raw_input</field></block></value>
-                                                    <value name="LETTER"><block type="data_variable"><field name="VARIABLE" id="v_ptr">ptr</field></block></value>
+                                                    <value name="STRING">
+                                                      <shadow type="text"><field name="TEXT"></field></shadow>
+                                                      <block type="data_variable">
+                                                        <field name="VARIABLE" id="v_raw" variabletype="">raw_input</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="LETTER">
+                                                      <shadow type="math_number"><field name="NUM">1</field></shadow>
+                                                      <block type="data_variable">
+                                                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                                      </block>
+                                                    </value>
                                                   </block>
                                                 </value>
                                                 <next>
                                                   <block type="control_if_else" id="check_sp">
                                                     <value name="CONDITION">
                                                       <block type="operator_equals">
-                                                        <value name="OPERAND1"><block type="data_variable"><field name="VARIABLE" id="v_ch">ch</field></block></value>
-                                                        <value name="OPERAND2"><shadow type="text"><field name="TEXT"> </field></shadow></value>
+                                                        <value name="OPERAND1">
+                                                          <shadow type="text"><field name="TEXT"></field></shadow>
+                                                          <block type="data_variable">
+                                                            <field name="VARIABLE" id="v_ch" variabletype="">ch</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <shadow type="text"><field name="TEXT"> </field></shadow>
+                                                        </value>
                                                       </block>
                                                     </value>
                                                     <statement name="SUBSTACK">
@@ -73,21 +105,36 @@
                                                         <value name="CONDITION">
                                                           <block type="operator_gt">
                                                             <value name="OPERAND1">
+                                                              <shadow type="text"><field name="TEXT"></field></shadow>
                                                               <block type="operator_length">
-                                                                <value name="STRING"><block type="data_variable"><field name="VARIABLE" id="v_temp">temp</field></block></value>
+                                                                <value name="STRING">
+                                                                  <shadow type="text"><field name="TEXT"></field></shadow>
+                                                                  <block type="data_variable">
+                                                                    <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                                                  </block>
+                                                                </value>
                                                               </block>
                                                             </value>
-                                                            <value name="OPERAND2"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                                                            <value name="OPERAND2">
+                                                              <shadow type="text"><field name="TEXT">0</field></shadow>
+                                                            </value>
                                                           </block>
                                                         </value>
                                                         <statement name="SUBSTACK">
                                                           <block type="data_addtolist" id="add1">
                                                             <field name="LIST" id="v_A" variabletype="list">A</field>
-                                                            <value name="ITEM"><block type="data_variable"><field name="VARIABLE" id="v_temp">temp</field></block></value>
+                                                            <value name="ITEM">
+                                                              <shadow type="text"><field name="TEXT"></field></shadow>
+                                                              <block type="data_variable">
+                                                                <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                                              </block>
+                                                            </value>
                                                             <next>
                                                               <block type="data_setvariableto" id="res_t">
-                                                                <field name="VARIABLE" id="v_temp">temp</field>
-                                                                <value name="VALUE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+                                                                <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                                                <value name="VALUE">
+                                                                  <shadow type="text"><field name="TEXT"></field></shadow>
+                                                                </value>
                                                               </block>
                                                             </next>
                                                           </block>
@@ -96,19 +143,31 @@
                                                     </statement>
                                                     <statement name="SUBSTACK2">
                                                       <block type="data_setvariableto" id="app_t">
-                                                        <field name="VARIABLE" id="v_temp">temp</field>
+                                                        <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
                                                         <value name="VALUE">
                                                           <block type="operator_join">
-                                                            <value name="STRING1"><block type="data_variable"><field name="VARIABLE" id="v_temp">temp</field></block></value>
-                                                            <value name="STRING2"><block type="data_variable"><field name="VARIABLE" id="v_ch">ch</field></block></value>
+                                                            <value name="STRING1">
+                                                              <shadow type="text"><field name="TEXT"></field></shadow>
+                                                              <block type="data_variable">
+                                                                <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="STRING2">
+                                                              <shadow type="text"><field name="TEXT"></field></shadow>
+                                                              <block type="data_variable">
+                                                                <field name="VARIABLE" id="v_ch" variabletype="">ch</field>
+                                                              </block>
+                                                            </value>
                                                           </block>
                                                         </value>
                                                       </block>
                                                     </statement>
                                                     <next>
                                                       <block type="data_changevariableby" id="inc_p">
-                                                        <field name="VARIABLE" id="v_ptr">ptr</field>
-                                                        <value name="VALUE"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+                                                        <field name="VARIABLE" id="v_ptr" variabletype="">ptr</field>
+                                                        <value name="VALUE">
+                                                          <shadow type="math_number"><field name="NUM">1</field></shadow>
+                                                        </value>
                                                       </block>
                                                     </next>
                                                   </block>
@@ -120,76 +179,136 @@
                                                 <value name="CONDITION">
                                                   <block type="operator_gt">
                                                     <value name="OPERAND1">
+                                                      <shadow type="text"><field name="TEXT"></field></shadow>
                                                       <block type="operator_length">
-                                                        <value name="STRING"><block type="data_variable"><field name="VARIABLE" id="v_temp">temp</field></block></value>
+                                                        <value name="STRING">
+                                                          <shadow type="text"><field name="TEXT"></field></shadow>
+                                                          <block type="data_variable">
+                                                            <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                                          </block>
+                                                        </value>
                                                       </block>
                                                     </value>
-                                                    <value name="OPERAND2"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                                                    <value name="OPERAND2">
+                                                      <shadow type="text"><field name="TEXT">0</field></shadow>
+                                                    </value>
                                                   </block>
                                                 </value>
                                                 <statement name="SUBSTACK">
                                                   <block type="data_addtolist" id="add2">
                                                     <field name="LIST" id="v_A" variabletype="list">A</field>
-                                                    <value name="ITEM"><block type="data_variable"><field name="VARIABLE" id="v_temp">temp</field></block></value>
+                                                    <value name="ITEM">
+                                                      <shadow type="text"><field name="TEXT"></field></shadow>
+                                                      <block type="data_variable">
+                                                        <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                                      </block>
+                                                    </value>
                                                   </block>
                                                 </statement>
                                                 <next>
                                                   <!-- 計算前 K 項之和 -->
                                                   <block type="data_setvariableto" id="init_sum">
-                                                    <field name="VARIABLE" id="v_sum">sum</field>
-                                                    <value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                                                    <field name="VARIABLE" id="v_sum" variabletype="">sum</field>
+                                                    <value name="VALUE">
+                                                      <shadow type="math_number"><field name="NUM">0</field></shadow>
+                                                    </value>
                                                     <next>
                                                       <block type="data_setvariableto" id="init_i">
-                                                        <field name="VARIABLE" id="v_i">i</field>
-                                                        <value name="VALUE"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                        <value name="VALUE">
+                                                          <shadow type="math_number"><field name="NUM">1</field></shadow>
+                                                        </value>
                                                         <next>
                                                           <block type="control_repeat" id="loop_first_k">
-                                                            <value name="TIMES"><block type="data_variable"><field name="VARIABLE" id="v_K">K</field></block></value>
+                                                            <value name="TIMES">
+                                                              <block type="data_variable">
+                                                                <field name="VARIABLE" id="v_K" variabletype="">K</field>
+                                                              </block>
+                                                            </value>
                                                             <statement name="SUBSTACK">
                                                               <block type="data_changevariableby" id="add_k">
-                                                                <field name="VARIABLE" id="v_sum">sum</field>
+                                                                <field name="VARIABLE" id="v_sum" variabletype="">sum</field>
                                                                 <value name="VALUE">
                                                                   <block type="data_itemoflist">
                                                                     <field name="LIST" id="v_A" variabletype="list">A</field>
-                                                                    <value name="INDEX"><block type="data_variable"><field name="VARIABLE" id="v_i">i</field></block></value>
+                                                                    <value name="INDEX">
+                                                                      <shadow type="math_integer"><field name="NUM">1</field></shadow>
+                                                                      <block type="data_variable">
+                                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                      </block>
+                                                                    </value>
                                                                   </block>
                                                                 </value>
                                                                 <next>
                                                                   <block type="data_changevariableby" id="inc_i1">
-                                                                    <field name="VARIABLE" id="v_i">i</field>
-                                                                    <value name="VALUE"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+                                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                    <value name="VALUE">
+                                                                      <shadow type="math_number"><field name="NUM">1</field></shadow>
+                                                                    </value>
                                                                   </block>
                                                                 </next>
                                                               </block>
                                                             </statement>
                                                             <next>
                                                               <block type="data_setvariableto" id="init_max">
-                                                                <field name="VARIABLE" id="v_max">max_sum</field>
-                                                                <value name="VALUE"><block type="data_variable"><field name="VARIABLE" id="v_sum">sum</field></block></value>
+                                                                <field name="VARIABLE" id="v_max" variabletype="">max_sum</field>
+                                                                <value name="VALUE">
+                                                                  <block type="data_variable">
+                                                                    <field name="VARIABLE" id="v_sum" variabletype="">sum</field>
+                                                                  </block>
+                                                                </value>
                                                                 <next>
                                                                   <!-- 滑動視窗：重複 (N - K) 次 -->
                                                                   <block type="control_repeat" id="loop_window">
                                                                     <value name="TIMES">
                                                                       <block type="operator_subtract">
-                                                                        <value name="NUM1"><block type="data_variable"><field name="VARIABLE" id="v_N">N</field></block></value>
-                                                                        <value name="NUM2"><block type="data_variable"><field name="VARIABLE" id="v_K">K</field></block></value>
+                                                                        <value name="NUM1">
+                                                                          <shadow type="math_number"><field name="NUM">0</field></shadow>
+                                                                          <block type="data_variable">
+                                                                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="NUM2">
+                                                                          <shadow type="math_number"><field name="NUM">0</field></shadow>
+                                                                          <block type="data_variable">
+                                                                            <field name="VARIABLE" id="v_K" variabletype="">K</field>
+                                                                          </block>
+                                                                        </value>
                                                                       </block>
                                                                     </value>
                                                                     <statement name="SUBSTACK">
                                                                       <block type="data_setvariableto" id="update_sum">
-                                                                        <field name="VARIABLE" id="v_sum">sum</field>
+                                                                        <field name="VARIABLE" id="v_sum" variabletype="">sum</field>
                                                                         <value name="VALUE">
                                                                           <block type="operator_add">
                                                                             <value name="NUM1">
+                                                                              <shadow type="math_number"><field name="NUM">0</field></shadow>
                                                                               <block type="operator_subtract">
-                                                                                <value name="NUM1"><block type="data_variable"><field name="VARIABLE" id="v_sum">sum</field></block></value>
+                                                                                <value name="NUM1">
+                                                                                  <shadow type="math_number"><field name="NUM">0</field></shadow>
+                                                                                  <block type="data_variable">
+                                                                                    <field name="VARIABLE" id="v_sum" variabletype="">sum</field>
+                                                                                  </block>
+                                                                                </value>
                                                                                 <value name="NUM2">
+                                                                                  <shadow type="math_number"><field name="NUM">0</field></shadow>
                                                                                   <block type="data_itemoflist">
                                                                                     <field name="LIST" id="v_A" variabletype="list">A</field>
                                                                                     <value name="INDEX">
+                                                                                      <shadow type="math_integer"><field name="NUM">1</field></shadow>
                                                                                       <block type="operator_subtract">
-                                                                                        <value name="NUM1"><block type="data_variable"><field name="VARIABLE" id="v_i">i</field></block></value>
-                                                                                        <value name="NUM2"><block type="data_variable"><field name="VARIABLE" id="v_K">K</field></block></value>
+                                                                                        <value name="NUM1">
+                                                                                          <shadow type="math_number"><field name="NUM">0</field></shadow>
+                                                                                          <block type="data_variable">
+                                                                                            <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="NUM2">
+                                                                                          <shadow type="math_number"><field name="NUM">0</field></shadow>
+                                                                                          <block type="data_variable">
+                                                                                            <field name="VARIABLE" id="v_K" variabletype="">K</field>
+                                                                                          </block>
+                                                                                        </value>
                                                                                       </block>
                                                                                     </value>
                                                                                   </block>
@@ -197,9 +316,15 @@
                                                                               </block>
                                                                             </value>
                                                                             <value name="NUM2">
+                                                                              <shadow type="math_number"><field name="NUM">0</field></shadow>
                                                                               <block type="data_itemoflist">
                                                                                 <field name="LIST" id="v_A" variabletype="list">A</field>
-                                                                                <value name="INDEX"><block type="data_variable"><field name="VARIABLE" id="v_i">i</field></block></value>
+                                                                                <value name="INDEX">
+                                                                                  <shadow type="math_integer"><field name="NUM">1</field></shadow>
+                                                                                  <block type="data_variable">
+                                                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                                  </block>
+                                                                                </value>
                                                                               </block>
                                                                             </value>
                                                                           </block>
@@ -208,20 +333,36 @@
                                                                           <block type="control_if" id="check_max">
                                                                             <value name="CONDITION">
                                                                               <block type="operator_gt">
-                                                                                <value name="OPERAND1"><block type="data_variable"><field name="VARIABLE" id="v_sum">sum</field></block></value>
-                                                                                <value name="OPERAND2"><block type="data_variable"><field name="VARIABLE" id="v_max">max_sum</field></block></value>
+                                                                                <value name="OPERAND1">
+                                                                                  <shadow type="text"><field name="TEXT"></field></shadow>
+                                                                                  <block type="data_variable">
+                                                                                    <field name="VARIABLE" id="v_sum" variabletype="">sum</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="OPERAND2">
+                                                                                  <shadow type="text"><field name="TEXT"></field></shadow>
+                                                                                  <block type="data_variable">
+                                                                                    <field name="VARIABLE" id="v_max" variabletype="">max_sum</field>
+                                                                                  </block>
+                                                                                </value>
                                                                               </block>
                                                                             </value>
                                                                             <statement name="SUBSTACK">
                                                                               <block type="data_setvariableto" id="set_new_max">
-                                                                                <field name="VARIABLE" id="v_max">max_sum</field>
-                                                                                <value name="VALUE"><block type="data_variable"><field name="VARIABLE" id="v_sum">sum</field></block></value>
+                                                                                <field name="VARIABLE" id="v_max" variabletype="">max_sum</field>
+                                                                                <value name="VALUE">
+                                                                                  <block type="data_variable">
+                                                                                    <field name="VARIABLE" id="v_sum" variabletype="">sum</field>
+                                                                                  </block>
+                                                                                </value>
                                                                               </block>
                                                                             </statement>
                                                                             <next>
                                                                               <block type="data_changevariableby" id="inc_i2">
-                                                                                <field name="VARIABLE" id="v_i">i</field>
-                                                                                <value name="VALUE"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+                                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                                <value name="VALUE">
+                                                                                  <shadow type="math_number"><field name="NUM">1</field></shadow>
+                                                                                </value>
                                                                               </block>
                                                                             </next>
                                                                           </block>
@@ -230,7 +371,12 @@
                                                                     </statement>
                                                                     <next>
                                                                       <block type="looks_say" id="out_ans">
-                                                                        <value name="MESSAGE"><block type="data_variable"><field name="VARIABLE" id="v_max">max_sum</field></block></value>
+                                                                        <value name="MESSAGE">
+                                                                          <shadow type="text"><field name="TEXT"></field></shadow>
+                                                                          <block type="data_variable">
+                                                                            <field name="VARIABLE" id="v_max" variabletype="">max_sum</field>
+                                                                          </block>
+                                                                        </value>
                                                                       </block>
                                                                     </next>
                                                                   </block>
