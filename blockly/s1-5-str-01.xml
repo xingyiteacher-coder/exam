@@ -1,14 +1,1 @@
-<xml xmlns="https://developers.google.com/blockly/xml">
-  <block type="text_print" id="print" x="20" y="20">
-    <value name="TEXT">
-      <block type="text_length" id="len">
-        <value name="VALUE">
-          <block type="text_prompt_ext" id="prompt_s">
-            <mutation type="TEXT"></mutation>
-            <field name="TYPE">TEXT</field>
-          </block>
-        </value>
-      </block>
-    </value>
-  </block>
-</xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><block type="special_ask" id="5#7A:?4*c/sV;Wlc~{lL" x="29" y="-81"><value name="QUESTION"><shadow type="text" id="-{li4Z;FD=5w(5tok;@C"><field name="TEXT">請輸入</field></shadow></value><next><block type="special_say" id=";aX,Cg!S+(EbDyg$?ku="><value name="TEXT"><shadow type="text" id="gyvJJ603F~c9fjd~Q6Q2"><field name="TEXT">abc</field></shadow><block type="text_length" id="len"><value name="VALUE"><block type="special_answer" id="1ZRq?la/gPkwud~GP$4!"></block></value></block></value></block></next></block></xml>
