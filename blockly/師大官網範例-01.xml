@@ -1,7 +1,5 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
   <variables>
-    <variable id="raw_input">raw_input</variable>
-    <variable id="input_list">input_list</variable>
     <variable id="start_num">start_num</variable>
     <variable id="end_num">end_num</variable>
     <variable id="count">count</variable>
@@ -10,230 +8,191 @@
     <variable id="str_num">str_num</variable>
     <variable id="rev_str">rev_str</variable>
   </variables>
-  <block type="variables_set" id="set_raw_input" x="20" y="20">
-    <field name="VAR" id="raw_input">raw_input</field>
+  <block type="variables_set" id="set_start_num" x="20" y="20">
+    <field name="VAR" id="start_num">start_num</field>
     <value name="VALUE">
-      <block type="text_prompt_ext">
-        <mutation type="TEXT"></mutation>
-        <field name="TYPE">TEXT</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">請輸入號碼</field>
-          </shadow>
-        </value>
-      </block>
-    </value>
-    <next>
-      <block type="variables_set" id="set_input_list">
-        <field name="VAR" id="input_list">input_list</field>
-        <value name="VALUE">
-          <block type="lists_split">
-            <mutation mode="SPLIT"></mutation>
-            <field name="MODE">SPLIT</field>
-            <value name="INPUT">
-              <block type="variables_get">
-                <field name="VAR" id="raw_input">raw_input</field>
-              </block>
-            </value>
-            <value name="DELIM">
+      <block type="math_round">
+        <field name="OP">ROUND</field>
+        <value name="NUM">
+          <block type="text_prompt_ext">
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
+            <value name="TEXT">
               <shadow type="text">
-                <field name="TEXT"> </field>
+                <field name="TEXT">請輸入起始號碼</field>
               </shadow>
             </value>
           </block>
         </value>
-        <next>
-          <block type="variables_set" id="set_start_num">
-            <field name="VAR" id="start_num">start_num</field>
-            <value name="VALUE">
-              <block type="lists_getIndex">
-                <mutation statement="false" at="true"></mutation>
-                <field name="MODE">GET</field>
-                <field name="WHERE">FROM_START</field>
-                <value name="VALUE">
-                  <block type="variables_get">
-                    <field name="VAR" id="input_list">input_list</field>
-                  </block>
-                </value>
-                <value name="AT">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="set_end_num">
+        <field name="VAR" id="end_num">end_num</field>
+        <value name="VALUE">
+          <block type="math_round">
+            <field name="OP">ROUND</field>
+            <value name="NUM">
+              <block type="text_prompt_ext">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">請輸入結束號碼</field>
+                  </shadow>
                 </value>
               </block>
             </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="set_count">
+            <field name="VAR" id="count">count</field>
+            <value name="VALUE">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+            </value>
             <next>
-              <block type="variables_set" id="set_end_num">
-                <field name="VAR" id="end_num">end_num</field>
-                <value name="VALUE">
-                  <block type="lists_getIndex">
-                    <mutation statement="false" at="true"></mutation>
-                    <field name="MODE">GET</field>
-                    <field name="WHERE">FROM_START</field>
-                    <value name="VALUE">
-                      <block type="variables_get">
-                        <field name="VAR" id="input_list">input_list</field>
-                      </block>
-                    </value>
-                    <value name="AT">
-                      <block type="math_number">
-                        <field name="NUM">2</field>
-                      </block>
-                    </value>
+              <block type="controls_for" id="loop_i">
+                <field name="VAR" id="i">i</field>
+                <value name="FROM">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get">
+                    <field name="VAR" id="start_num">start_num</field>
                   </block>
                 </value>
-                <next>
-                  <block type="variables_set" id="set_count">
-                    <field name="VAR" id="count">count</field>
+                <value name="TO">
+                  <shadow type="math_number">
+                    <field name="NUM">10</field>
+                  </shadow>
+                  <block type="variables_get">
+                    <field name="VAR" id="end_num">end_num</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <statement name="DO">
+                  <block type="variables_set" id="set_str_num">
+                    <field name="VAR" id="str_num">str_num</field>
                     <value name="VALUE">
-                      <block type="math_number">
-                        <field name="NUM">0</field>
+                      <block type="text_join">
+                        <mutation items="1"></mutation>
+                        <value name="ADD0">
+                          <block type="variables_get">
+                            <field name="VAR" id="i">i</field>
+                          </block>
+                        </value>
                       </block>
                     </value>
                     <next>
-                      <block type="controls_for" id="loop_i">
-                        <field name="VAR" id="i">i</field>
-                        <value name="FROM">
-                          <shadow type="math_number">
-                            <field name="NUM">1</field>
-                          </shadow>
-                          <block type="variables_get">
-                            <field name="VAR" id="start_num">start_num</field>
+                      <block type="variables_set" id="set_rev_str">
+                        <field name="VAR" id="rev_str">rev_str</field>
+                        <value name="VALUE">
+                          <block type="text">
+                            <field name="TEXT"></field>
                           </block>
                         </value>
-                        <value name="TO">
-                          <shadow type="math_number">
-                            <field name="NUM">10</field>
-                          </shadow>
-                          <block type="variables_get">
-                            <field name="VAR" id="end_num">end_num</field>
-                          </block>
-                        </value>
-                        <value name="BY">
-                          <shadow type="math_number">
-                            <field name="NUM">1</field>
-                          </shadow>
-                        </value>
-                        <statement name="DO">
-                          <block type="variables_set" id="set_str_num">
-                            <field name="VAR" id="str_num">str_num</field>
-                            <value name="VALUE">
-                              <block type="text_join">
-                                <mutation items="1"></mutation>
-                                <value name="ADD0">
+                        <next>
+                          <block type="controls_for" id="loop_j">
+                            <field name="VAR" id="j">j</field>
+                            <value name="FROM">
+                              <block type="text_length">
+                                <value name="VALUE">
                                   <block type="variables_get">
-                                    <field name="VAR" id="i">i</field>
+                                    <field name="VAR" id="str_num">str_num</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
-                            <next>
-                              <block type="variables_set" id="set_rev_str">
+                            <value name="TO">
+                              <block type="math_number">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                            <value name="BY">
+                              <block type="math_number">
+                                <field name="NUM">-1</field>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="variables_set" id="append_rev">
                                 <field name="VAR" id="rev_str">rev_str</field>
                                 <value name="VALUE">
-                                  <block type="text">
-                                    <field name="TEXT"></field>
-                                  </block>
-                                </value>
-                                <next>
-                                  <block type="controls_for" id="loop_j">
-                                    <field name="VAR" id="j">j</field>
-                                    <value name="FROM">
-                                      <block type="text_length">
+                                  <block type="text_join">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="rev_str">rev_str</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="text_charAt">
+                                        <mutation at="true"></mutation>
+                                        <field name="WHERE">FROM_START</field>
                                         <value name="VALUE">
                                           <block type="variables_get">
                                             <field name="VAR" id="str_num">str_num</field>
                                           </block>
                                         </value>
-                                      </block>
-                                    </value>
-                                    <value name="TO">
-                                      <block type="math_number">
-                                        <field name="NUM">1</field>
-                                      </block>
-                                    </value>
-                                    <value name="BY">
-                                      <block type="math_number">
-                                        <field name="NUM">-1</field>
-                                      </block>
-                                    </value>
-                                    <statement name="DO">
-                                      <block type="variables_set" id="append_rev">
-                                        <field name="VAR" id="rev_str">rev_str</field>
-                                        <value name="VALUE">
-                                          <block type="text_join">
-                                            <mutation items="2"></mutation>
-                                            <value name="ADD0">
-                                              <block type="variables_get">
-                                                <field name="VAR" id="rev_str">rev_str</field>
-                                              </block>
-                                            </value>
-                                            <value name="ADD1">
-                                              <block type="text_charAt">
-                                                <mutation at="true"></mutation>
-                                                <field name="WHERE">FROM_START</field>
-                                                <value name="VALUE">
-                                                  <block type="variables_get">
-                                                    <field name="VAR" id="str_num">str_num</field>
-                                                  </block>
-                                                </value>
-                                                <value name="AT">
-                                                  <block type="variables_get">
-                                                    <field name="VAR" id="j">j</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </value>
+                                        <value name="AT">
+                                          <block type="variables_get">
+                                            <field name="VAR" id="j">j</field>
                                           </block>
                                         </value>
                                       </block>
-                                    </statement>
-                                    <next>
-                                      <block type="controls_if" id="check_palindrome">
-                                        <value name="IF0">
-                                          <block type="logic_compare">
-                                            <field name="OP">EQ</field>
-                                            <value name="A">
-                                              <block type="variables_get">
-                                                <field name="VAR" id="str_num">str_num</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <block type="variables_get">
-                                                <field name="VAR" id="rev_str">rev_str</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                        <statement name="DO0">
-                                          <block type="math_change" id="inc_count">
-                                            <field name="VAR" id="count">count</field>
-                                            <value name="DELTA">
-                                              <shadow type="math_number">
-                                                <field name="NUM">1</field>
-                                              </shadow>
-                                            </value>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </next>
+                                    </value>
                                   </block>
-                                </next>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="check_palindrome">
+                                <value name="IF0">
+                                  <block type="logic_compare">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="str_num">str_num</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get">
+                                        <field name="VAR" id="rev_str">rev_str</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="math_change" id="inc_count">
+                                    <field name="VAR" id="count">count</field>
+                                    <value name="DELTA">
+                                      <shadow type="math_number">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </statement>
                               </block>
                             </next>
-                          </block>
-                        </statement>
-                        <next>
-                          <block type="text_print" id="print_ans">
-                            <value name="TEXT">
-                              <block type="variables_get">
-                                <field name="VAR" id="count">count</field>
-                              </block>
-                            </value>
                           </block>
                         </next>
                       </block>
                     </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print" id="print_ans">
+                    <value name="TEXT">
+                      <block type="variables_get">
+                        <field name="VAR" id="count">count</field>
+                      </block>
+                    </value>
                   </block>
                 </next>
               </block>
