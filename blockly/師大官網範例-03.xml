@@ -18,8 +18,8 @@
         <field name="OP">ROUND</field>
         <value name="NUM">
           <block type="text_prompt_ext" id="prompt_N">
-            <mutation type="TEXT"></mutation>
-            <field name="TYPE">TEXT</field>
+            <mutation type="NUMBER"></mutation>
+            <field name="TYPE">NUMBER</field>
             <value name="TEXT">
               <block type="text" id="txt_prompt_N">
                 <field name="TEXT">N</field>
@@ -33,12 +33,17 @@
       <block type="variables_set" id="set_films_str">
         <field name="VAR" id="VAR_films_str">films_str</field>
         <value name="VALUE">
-          <block type="text_prompt_ext" id="prompt_films">
-            <mutation type="TEXT"></mutation>
-            <field name="TYPE">TEXT</field>
+          <block type="text_trim" id="trim_films">
+            <field name="MODE">BOTH</field>
             <value name="TEXT">
-              <block type="text" id="txt_prompt_films">
-                <field name="TEXT">films_str</field>
+              <block type="text_prompt_ext" id="prompt_films">
+                <mutation type="TEXT"></mutation>
+                <field name="TYPE">TEXT</field>
+                <value name="TEXT">
+                  <block type="text" id="txt_prompt_films">
+                    <field name="TEXT">films_str</field>
+                  </block>
+                </value>
               </block>
             </value>
           </block>
@@ -70,8 +75,8 @@
                     <field name="OP">ROUND</field>
                     <value name="NUM">
                       <block type="text_prompt_ext" id="prompt_K">
-                        <mutation type="TEXT"></mutation>
-                        <field name="TYPE">TEXT</field>
+                        <mutation type="NUMBER"></mutation>
+                        <field name="TYPE">NUMBER</field>
                         <value name="TEXT">
                           <block type="text" id="txt_prompt_K">
                             <field name="TEXT">K</field>
@@ -85,12 +90,17 @@
                   <block type="variables_set" id="set_fav_code">
                     <field name="VAR" id="VAR_fav_code">fav_code</field>
                     <value name="VALUE">
-                      <block type="text_prompt_ext" id="prompt_fav">
-                        <mutation type="TEXT"></mutation>
-                        <field name="TYPE">TEXT</field>
+                      <block type="text_trim" id="trim_fav">
+                        <field name="MODE">BOTH</field>
                         <value name="TEXT">
-                          <block type="text" id="txt_prompt_fav">
-                            <field name="TEXT">fav_code</field>
+                          <block type="text_prompt_ext" id="prompt_fav">
+                            <mutation type="TEXT"></mutation>
+                            <field name="TYPE">TEXT</field>
+                            <value name="TEXT">
+                              <block type="text" id="txt_prompt_fav">
+                                <field name="TEXT">fav_code</field>
+                              </block>
+                            </value>
                           </block>
                         </value>
                       </block>
