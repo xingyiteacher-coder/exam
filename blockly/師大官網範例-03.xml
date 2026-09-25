@@ -11,8 +11,10 @@
     <variable id="VAR_current_count">current_count</variable>
     <variable id="VAR_current_item">current_item</variable>
   </variables>
+  
   <block type="variables_set" id="set_N" x="20" y="20">
     <field name="VAR" id="VAR_N">N</field>
+    <comment pinned="true" w="220" h="60">【步驟 1】讀取總場次 N</comment>
     <value name="VALUE">
       <block type="math_round" id="round_N">
         <field name="OP">ROUND</field>
@@ -32,6 +34,7 @@
     <next>
       <block type="variables_set" id="set_films_list">
         <field name="VAR" id="VAR_films_list">films_list</field>
+        <comment pinned="true" w="260" h="70">【步驟 2】建立空清單，準備依序存入 N 個短片代碼</comment>
         <value name="VALUE">
           <block type="lists_create_with" id="create_empty_list">
             <mutation items="0"></mutation>
@@ -81,6 +84,7 @@
             <next>
               <block type="variables_set" id="set_K">
                 <field name="VAR" id="VAR_K">K</field>
+                <comment pinned="true" w="260" h="70">【步驟 3】讀取連續觀看場次 K 與最喜歡的短片代碼</comment>
                 <value name="VALUE">
                   <block type="math_round" id="round_K">
                     <field name="OP">ROUND</field>
@@ -114,6 +118,7 @@
                     <next>
                       <block type="variables_set" id="set_max_count">
                         <field name="VAR" id="VAR_max_count">max_count</field>
+                        <comment pinned="true" w="220" h="60">【步驟 4】初始化最大次數為 0</comment>
                         <value name="VALUE">
                           <block type="math_number" id="num_0_max">
                             <field name="NUM">0</field>
@@ -122,6 +127,7 @@
                         <next>
                           <block type="controls_for" id="loop_i">
                             <field name="VAR" id="VAR_i">i</field>
+                            <comment pinned="true" w="280" h="80">【步驟 5：滑動視窗】外層迴圈移動視窗起點 (i 從 1 到 N - K + 1)</comment>
                             <value name="FROM">
                               <block type="math_number" id="num_1_from_i">
                                 <field name="NUM">1</field>
@@ -168,6 +174,7 @@
                                 <next>
                                   <block type="controls_for" id="loop_j">
                                     <field name="VAR" id="VAR_j">j</field>
+                                    <comment pinned="true" w="260" h="70">【步驟 6】內層迴圈計算長度 K 的視窗內出現幾次目標短片</comment>
                                     <value name="FROM">
                                       <block type="variables_get" id="get_i_from">
                                         <field name="VAR" id="VAR_i">i</field>
@@ -256,6 +263,7 @@
                                     </statement>
                                     <next>
                                       <block type="controls_if" id="if_update_max">
+                                        <comment pinned="true" w="240" h="60">【步驟 7】如果目前視窗次數更佳，更新最大值</comment>
                                         <value name="IF0">
                                           <block type="logic_compare" id="compare_max">
                                             <field name="OP">GT</field>
@@ -289,6 +297,7 @@
                             </statement>
                             <next>
                               <block type="text_print" id="print_result">
+                                <comment pinned="true" w="220" h="60">【步驟 8】印出最多可看到的場次數</comment>
                                 <value name="TEXT">
                                   <block type="variables_get" id="get_max_final">
                                     <field name="VAR" id="VAR_max_count">max_count</field>
