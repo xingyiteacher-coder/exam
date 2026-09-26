@@ -1,1 +1,443 @@
-
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_r" islocal="false" iscloud="false">r</variable>
+    <variable type="" id="v_c" islocal="false" iscloud="false">c</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_idx_cur" islocal="false" iscloud="false">idx_cur</variable>
+    <variable type="" id="v_val_up" islocal="false" iscloud="false">val_up</variable>
+    <variable type="" id="v_val_left" islocal="false" iscloud="false">val_left</variable>
+    <variable type="" id="v_min_val" islocal="false" iscloud="false">min_val</variable>
+    <variable type="" id="v_dp_val" islocal="false" iscloud="false">dp_val</variable>
+    <variable type="list" id="l_grid" islocal="false" iscloud="false">網格</variable>
+    <variable type="list" id="l_dp" islocal="false" iscloud="false">dp</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <block type="data_deletealloflist" id="del_grid">
+        <field name="LIST" id="l_grid" variabletype="list">網格</field>
+        <next>
+          <block type="data_deletealloflist" id="del_dp">
+            <field name="LIST" id="l_dp" variabletype="list">dp</field>
+            <next>
+              <block type="scratch_ask" id="ask_r">
+                <value name="QUESTION">
+                  <shadow type="text" id="q_r"><field name="TEXT">r</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_r">
+                    <field name="VARIABLE" id="v_r" variabletype="">r</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_r"></block></value>
+                    <next>
+                      <block type="scratch_ask" id="ask_c">
+                        <value name="QUESTION">
+                          <shadow type="text" id="q_c"><field name="TEXT">c</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="set_c">
+                            <field name="VARIABLE" id="v_c" variabletype="">c</field>
+                            <value name="VALUE"><block type="scratch_answer" id="ans_c"></block></value>
+                            <next>
+                              <block type="control_repeat" id="loop_read">
+                                <value name="TIMES">
+                                  <block type="operator_arithmetic" id="op_r_mul_c">
+                                    <field name="OPERATOR">*</field>
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="var_r_read">
+                                        <field name="VARIABLE" id="v_r" variabletype="">r</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <block type="data_variable" id="var_c_read">
+                                        <field name="VARIABLE" id="v_c" variabletype="">c</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="scratch_ask" id="ask_x">
+                                    <value name="QUESTION">
+                                      <shadow type="text" id="q_x"><field name="TEXT">x</field></shadow>
+                                    </value>
+                                    <next>
+                                      <block type="data_addtolist" id="add_grid">
+                                        <field name="LIST" id="l_grid" variabletype="list">網格</field>
+                                        <value name="ITEM"><block type="scratch_answer" id="ans_x"></block></value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="data_setvariableto" id="set_i_1">
+                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                    <value name="VALUE"><shadow type="math_number" id="num_1_i"><field name="NUM">1</field></shadow></value>
+                                    <next>
+                                      <block type="control_repeat" id="loop_i">
+                                        <value name="TIMES">
+                                          <block type="data_variable" id="var_r_loop">
+                                            <field name="VARIABLE" id="v_r" variabletype="">r</field>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_setvariableto" id="set_j_1">
+                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                            <value name="VALUE"><shadow type="math_number" id="num_1_j"><field name="NUM">1</field></shadow></value>
+                                            <next>
+                                              <block type="control_repeat" id="loop_j">
+                                                <value name="TIMES">
+                                                  <block type="data_variable" id="var_c_loop">
+                                                    <field name="VARIABLE" id="v_c" variabletype="">c</field>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <block type="data_setvariableto" id="set_idx_cur">
+                                                    <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                    <value name="VALUE">
+                                                      <block type="operator_arithmetic" id="op_add_j">
+                                                        <field name="OPERATOR">+</field>
+                                                        <value name="NUM1">
+                                                          <block type="operator_arithmetic" id="op_mul_c">
+                                                            <field name="OPERATOR">*</field>
+                                                            <value name="NUM1">
+                                                              <block type="operator_arithmetic" id="op_sub_i_1">
+                                                                <field name="OPERATOR">-</field>
+                                                                <value name="NUM1">
+                                                                  <block type="data_variable" id="var_i_idx">
+                                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2"><shadow type="math_number" id="num_1_sub_i"><field name="NUM">1</field></shadow></value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="NUM2">
+                                                              <block type="data_variable" id="var_c_idx">
+                                                                <field name="VARIABLE" id="v_c" variabletype="">c</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="NUM2">
+                                                          <block type="data_variable" id="var_j_idx">
+                                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="control_if_else" id="check_i_1">
+                                                        <value name="CONDITION">
+                                                          <block type="operator_compare" id="cmp_i_1">
+                                                            <field name="OPERATOR">==</field>
+                                                            <value name="OPERAND1">
+                                                              <block type="data_variable" id="var_i_cmp1">
+                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="OPERAND2"><shadow type="math_number" id="num_1_i_cmp"><field name="NUM">1</field></shadow></value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="SUBSTACK">
+                                                          <block type="control_if_else" id="check_j_1_r1">
+                                                            <value name="CONDITION">
+                                                              <block type="operator_compare" id="cmp_j_1_r1">
+                                                                <field name="OPERATOR">==</field>
+                                                                <value name="OPERAND1">
+                                                                  <block type="data_variable" id="var_j_cmp1">
+                                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="OPERAND2"><shadow type="math_number" id="num_1_j_cmp"><field name="NUM">1</field></shadow></value>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="SUBSTACK">
+                                                              <block type="data_setvariableto" id="set_dp_val_11">
+                                                                <field name="VARIABLE" id="v_dp_val" variabletype="">dp_val</field>
+                                                                <value name="VALUE">
+                                                                  <block type="data_itemoflist" id="get_grid_11">
+                                                                    <field name="LIST" id="l_grid" variabletype="list">網格</field>
+                                                                    <value name="INDEX">
+                                                                      <block type="data_variable" id="var_idx_11">
+                                                                        <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </statement>
+                                                            <statement name="SUBSTACK2">
+                                                              <block type="data_setvariableto" id="set_dp_val_1j">
+                                                                <field name="VARIABLE" id="v_dp_val" variabletype="">dp_val</field>
+                                                                <value name="VALUE">
+                                                                  <block type="operator_arithmetic" id="add_dp_left_grid">
+                                                                    <field name="OPERATOR">+</field>
+                                                                    <value name="NUM1">
+                                                                      <block type="data_itemoflist" id="get_dp_left_1j">
+                                                                        <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                                        <value name="INDEX">
+                                                                          <block type="operator_arithmetic" id="sub_idx_1">
+                                                                            <field name="OPERATOR">-</field>
+                                                                            <value name="NUM1">
+                                                                              <block type="data_variable" id="var_idx_1j">
+                                                                                <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="NUM2"><shadow type="math_number" id="num_1_sub_idx"><field name="NUM">1</field></shadow></value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="NUM2">
+                                                                      <block type="data_itemoflist" id="get_grid_1j">
+                                                                        <field name="LIST" id="l_grid" variabletype="list">網格</field>
+                                                                        <value name="INDEX">
+                                                                          <block type="data_variable" id="var_idx_grid_1j">
+                                                                            <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </statement>
+                                                        <statement name="SUBSTACK2">
+                                                          <block type="control_if_else" id="check_j_1_r2">
+                                                            <value name="CONDITION">
+                                                              <block type="operator_compare" id="cmp_j_1_r2">
+                                                                <field name="OPERATOR">==</field>
+                                                                <value name="OPERAND1">
+                                                                  <block type="data_variable" id="var_j_cmp2">
+                                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="OPERAND2"><shadow type="math_number" id="num_1_j_cmp2"><field name="NUM">1</field></shadow></value>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="SUBSTACK">
+                                                              <block type="data_setvariableto" id="set_dp_val_i1">
+                                                                <field name="VARIABLE" id="v_dp_val" variabletype="">dp_val</field>
+                                                                <value name="VALUE">
+                                                                  <block type="operator_arithmetic" id="add_dp_up_grid">
+                                                                    <field name="OPERATOR">+</field>
+                                                                    <value name="NUM1">
+                                                                      <block type="data_itemoflist" id="get_dp_up_i1">
+                                                                        <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                                        <value name="INDEX">
+                                                                          <block type="operator_arithmetic" id="sub_idx_c">
+                                                                            <field name="OPERATOR">-</field>
+                                                                            <value name="NUM1">
+                                                                              <block type="data_variable" id="var_idx_i1">
+                                                                                <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="NUM2">
+                                                                              <block type="data_variable" id="var_c_sub">
+                                                                                <field name="VARIABLE" id="v_c" variabletype="">c</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="NUM2">
+                                                                      <block type="data_itemoflist" id="get_grid_i1">
+                                                                        <field name="LIST" id="l_grid" variabletype="list">網格</field>
+                                                                        <value name="INDEX">
+                                                                          <block type="data_variable" id="var_idx_grid_i1">
+                                                                            <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </statement>
+                                                            <statement name="SUBSTACK2">
+                                                              <block type="data_setvariableto" id="set_val_up">
+                                                                <field name="VARIABLE" id="v_val_up" variabletype="">val_up</field>
+                                                                <value name="VALUE">
+                                                                  <block type="data_itemoflist" id="get_dp_up_ij">
+                                                                    <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                                    <value name="INDEX">
+                                                                      <block type="operator_arithmetic" id="sub_idx_c_ij">
+                                                                        <field name="OPERATOR">-</field>
+                                                                        <value name="NUM1">
+                                                                          <block type="data_variable" id="var_idx_ij_up">
+                                                                            <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="NUM2">
+                                                                          <block type="data_variable" id="var_c_sub_ij">
+                                                                            <field name="VARIABLE" id="v_c" variabletype="">c</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="data_setvariableto" id="set_val_left">
+                                                                    <field name="VARIABLE" id="v_val_left" variabletype="">val_left</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="data_itemoflist" id="get_dp_left_ij">
+                                                                        <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                                        <value name="INDEX">
+                                                                          <block type="operator_arithmetic" id="sub_idx_1_ij">
+                                                                            <field name="OPERATOR">-</field>
+                                                                            <value name="NUM1">
+                                                                              <block type="data_variable" id="var_idx_ij_left">
+                                                                                <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="NUM2"><shadow type="math_number" id="num_1_sub_ij"><field name="NUM">1</field></shadow></value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="control_if_else" id="check_min">
+                                                                        <value name="CONDITION">
+                                                                          <block type="operator_compare" id="cmp_up_left">
+                                                                            <field name="OPERATOR">&lt;</field>
+                                                                            <value name="OPERAND1">
+                                                                              <block type="data_variable" id="var_up_cmp">
+                                                                                <field name="VARIABLE" id="v_val_up" variabletype="">val_up</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="OPERAND2">
+                                                                              <block type="data_variable" id="var_left_cmp">
+                                                                                <field name="VARIABLE" id="v_val_left" variabletype="">val_left</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <statement name="SUBSTACK">
+                                                                          <block type="data_setvariableto" id="set_min_up">
+                                                                            <field name="VARIABLE" id="v_min_val" variabletype="">min_val</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="data_variable" id="var_up_val">
+                                                                                <field name="VARIABLE" id="v_val_up" variabletype="">val_up</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </statement>
+                                                                        <statement name="SUBSTACK2">
+                                                                          <block type="data_setvariableto" id="set_min_left">
+                                                                            <field name="VARIABLE" id="v_min_val" variabletype="">min_val</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="data_variable" id="var_left_val">
+                                                                                <field name="VARIABLE" id="v_val_left" variabletype="">val_left</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </statement>
+                                                                        <next>
+                                                                          <block type="data_setvariableto" id="set_dp_val_ij">
+                                                                            <field name="VARIABLE" id="v_dp_val" variabletype="">dp_val</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="operator_arithmetic" id="add_min_grid">
+                                                                                <field name="OPERATOR">+</field>
+                                                                                <value name="NUM1">
+                                                                                  <block type="data_variable" id="var_min_ij">
+                                                                                    <field name="VARIABLE" id="v_min_val" variabletype="">min_val</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="NUM2">
+                                                                                  <block type="data_itemoflist" id="get_grid_ij">
+                                                                                    <field name="LIST" id="l_grid" variabletype="list">網格</field>
+                                                                                    <value name="INDEX">
+                                                                                      <block type="data_variable" id="var_idx_grid_ij">
+                                                                                        <field name="VARIABLE" id="v_idx_cur" variabletype="">idx_cur</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </statement>
+                                                        <next>
+                                                          <block type="data_addtolist" id="add_dp_val">
+                                                            <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                            <value name="ITEM">
+                                                              <block type="data_variable" id="var_dp_val_add">
+                                                                <field name="VARIABLE" id="v_dp_val" variabletype="">dp_val</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="data_changevariableby" id="inc_j">
+                                                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                                <value name="VALUE"><shadow type="math_number" id="num_1_inc_j"><field name="NUM">1</field></shadow></value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="data_changevariableby" id="inc_i">
+                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                    <value name="VALUE"><shadow type="math_number" id="num_1_inc_i"><field name="NUM">1</field></shadow></value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="scratch_say" id="say_ans">
+                                            <value name="TEXT">
+                                              <block type="data_itemoflist" id="get_dp_final">
+                                                <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                <value name="INDEX">
+                                                  <block type="operator_arithmetic" id="op_mul_r_c_final">
+                                                    <field name="OPERATOR">*</field>
+                                                    <value name="NUM1">
+                                                      <block type="data_variable" id="var_r_final">
+                                                        <field name="VARIABLE" id="v_r" variabletype="">r</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NUM2">
+                                                      <block type="data_variable" id="var_c_final">
+                                                        <field name="VARIABLE" id="v_c" variabletype="">c</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
