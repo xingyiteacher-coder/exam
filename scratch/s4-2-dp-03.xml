@@ -1,1 +1,255 @@
-
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_max_len" islocal="false" iscloud="false">最長長度</variable>
+    <variable type="" id="v_cand" islocal="false" iscloud="false">候補長度</variable>
+    <variable type="list" id="l_arr" islocal="false" iscloud="false">數列</variable>
+    <variable type="list" id="l_dp" islocal="false" iscloud="false">dp</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <block type="data_deletealloflist" id="del_arr">
+        <field name="LIST" id="l_arr" variabletype="list">數列</field>
+        <next>
+          <block type="data_deletealloflist" id="del_dp">
+            <field name="LIST" id="l_dp" variabletype="list">dp</field>
+            <next>
+              <block type="scratch_ask" id="ask_N">
+                <value name="QUESTION">
+                  <shadow type="text" id="q_N"><field name="TEXT">N</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_N">
+                    <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_N"></block></value>
+                    <next>
+                      <block type="control_repeat" id="loop_read">
+                        <value name="TIMES">
+                          <block type="data_variable" id="var_N_read">
+                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="scratch_ask" id="ask_x">
+                            <value name="QUESTION">
+                              <shadow type="text" id="q_x"><field name="TEXT">x</field></shadow>
+                            </value>
+                            <next>
+                              <block type="data_addtolist" id="add_arr">
+                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                <value name="ITEM"><block type="scratch_answer" id="ans_x"></block></value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="data_setvariableto" id="set_max_0">
+                            <field name="VARIABLE" id="v_max_len" variabletype="">最長長度</field>
+                            <value name="VALUE"><shadow type="math_number" id="num_0_max"><field name="NUM">0</field></shadow></value>
+                            <next>
+                              <block type="data_setvariableto" id="set_i_1">
+                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                <value name="VALUE"><shadow type="math_number" id="num_1_i"><field name="NUM">1</field></shadow></value>
+                                <next>
+                                  <block type="control_repeat" id="loop_outer_i">
+                                    <value name="TIMES">
+                                      <block type="data_variable" id="var_N_i">
+                                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="data_addtolist" id="add_dp_1">
+                                        <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                        <value name="ITEM"><shadow type="math_number" id="num_1_dp"><field name="NUM">1</field></shadow></value>
+                                        <next>
+                                          <block type="data_setvariableto" id="set_j_1">
+                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                            <value name="VALUE"><shadow type="math_number" id="num_1_j"><field name="NUM">1</field></shadow></value>
+                                            <next>
+                                              <block type="control_repeat" id="loop_inner_j">
+                                                <value name="TIMES">
+                                                  <block type="operator_arithmetic" id="sub_i_1">
+                                                    <field name="OPERATOR">-</field>
+                                                    <value name="NUM1">
+                                                      <block type="data_variable" id="var_i_loop">
+                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NUM2"><shadow type="math_number" id="num_1_sub"><field name="NUM">1</field></shadow></value>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <block type="control_if" id="check_lt">
+                                                    <value name="CONDITION">
+                                                      <block type="operator_compare" id="cmp_arr_j_i">
+                                                        <field name="OPERATOR">&lt;</field>
+                                                        <value name="OPERAND1">
+                                                          <block type="data_itemoflist" id="get_arr_j">
+                                                            <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_j_idx">
+                                                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <block type="data_itemoflist" id="get_arr_i">
+                                                            <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_i_idx">
+                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="SUBSTACK">
+                                                      <block type="data_setvariableto" id="set_cand">
+                                                        <field name="VARIABLE" id="v_cand" variabletype="">候補長度</field>
+                                                        <value name="VALUE">
+                                                          <block type="operator_arithmetic" id="add_dp_j_1">
+                                                            <field name="OPERATOR">+</field>
+                                                            <value name="NUM1">
+                                                              <block type="data_itemoflist" id="get_dp_j">
+                                                                <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                                <value name="INDEX">
+                                                                  <block type="data_variable" id="var_j_dp">
+                                                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="NUM2"><shadow type="math_number" id="num_1_cand"><field name="NUM">1</field></shadow></value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="control_if" id="check_cand_gt">
+                                                            <value name="CONDITION">
+                                                              <block type="operator_compare" id="cmp_cand_dp_i">
+                                                                <field name="OPERATOR">&gt;</field>
+                                                                <value name="OPERAND1">
+                                                                  <block type="data_variable" id="var_cand_val">
+                                                                    <field name="VARIABLE" id="v_cand" variabletype="">候補長度</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="OPERAND2">
+                                                                  <block type="data_itemoflist" id="get_dp_i">
+                                                                    <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                                    <value name="INDEX">
+                                                                      <block type="data_variable" id="var_i_dp">
+                                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="SUBSTACK">
+                                                              <block type="data_replaceitemoflist" id="rep_dp_i">
+                                                                <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                                <value name="INDEX">
+                                                                  <block type="data_variable" id="var_i_rep">
+                                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="ITEM">
+                                                                  <block type="data_variable" id="var_cand_rep">
+                                                                    <field name="VARIABLE" id="v_cand" variabletype="">候補長度</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="data_changevariableby" id="inc_j">
+                                                        <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                        <value name="VALUE"><shadow type="math_number" id="num_1_inc_j"><field name="NUM">1</field></shadow></value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="control_if" id="check_update_max">
+                                                    <value name="CONDITION">
+                                                      <block type="operator_compare" id="cmp_dp_i_max">
+                                                        <field name="OPERATOR">&gt;</field>
+                                                        <value name="OPERAND1">
+                                                          <block type="data_itemoflist" id="get_dp_i_final">
+                                                            <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_i_final">
+                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <block type="data_variable" id="var_max_val">
+                                                            <field name="VARIABLE" id="v_max_len" variabletype="">最長長度</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="SUBSTACK">
+                                                      <block type="data_setvariableto" id="set_max_new">
+                                                        <field name="VARIABLE" id="v_max_len" variabletype="">最長長度</field>
+                                                        <value name="VALUE">
+                                                          <block type="data_itemoflist" id="get_dp_i_newmax">
+                                                            <field name="LIST" id="l_dp" variabletype="list">dp</field>
+                                                            <value name="INDEX">
+                                                              <block type="data_variable" id="var_i_newmax">
+                                                                <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="data_changevariableby" id="inc_i">
+                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                        <value name="VALUE"><shadow type="math_number" id="num_1_inc_i"><field name="NUM">1</field></shadow></value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="scratch_say" id="say_ans">
+                                        <value name="TEXT">
+                                          <block type="data_variable" id="out_ans">
+                                            <field name="VARIABLE" id="v_max_len" variabletype="">最長長度</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
