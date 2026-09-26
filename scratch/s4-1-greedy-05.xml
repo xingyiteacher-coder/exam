@@ -1,1 +1,267 @@
-
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_temp" islocal="false" iscloud="false">temp</variable>
+    <variable type="" id="v_max_pair" islocal="false" iscloud="false">最大對和</variable>
+    <variable type="" id="v_current_sum" islocal="false" iscloud="false">目前對和</variable>
+    <variable type="list" id="l_arr" islocal="false" iscloud="false">數列</variable>
+  </variables>
+  
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <!-- 1. 初始化清單 -->
+      <block type="data_deletealloflist" id="del_arr">
+        <field name="LIST" id="l_arr" variabletype="list">數列</field>
+        <next>
+          <!-- 2. 讀取 N -->
+          <block type="scratch_ask" id="ask_N">
+            <value name="QUESTION">
+              <shadow type="text" id="q_N"><field name="TEXT">N</field></shadow>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_N">
+                <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                <value name="VALUE"><block type="scratch_answer" id="ans_N"></block></value>
+                <next>
+                  <!-- 3. 迴圈讀取 N 個整數存入清單[cite: 4] -->
+                  <block type="control_repeat" id="rep_read">
+                    <value name="TIMES">
+                      <block type="data_variable" id="get_N">
+                        <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                      </block>
+                    </value>
+                    <statement name="SUBSTACK">
+                      <block type="scratch_ask" id="ask_item">
+                        <value name="QUESTION">
+                          <shadow type="text" id="txt_item"><field name="TEXT">x</field></shadow>
+                        </value>
+                        <next>
+                          <block type="data_addtolist" id="add_item">
+                            <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                            <value name="ITEM"><block type="scratch_answer" id="ans_item"></block></value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <!-- 4. 氣泡排序：將數列由小到大排序[cite: 2] -->
+                      <block type="data_setvariableto" id="set_i_1">
+                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                        <value name="VALUE"><shadow type="math_number" id="num1_i"><field name="NUM">1</field></shadow></value>
+                        <next>
+                          <block type="control_repeat" id="outer_loop">
+                            <value name="TIMES">
+                              <block type="operator_arithmetic" id="sub_N_1">
+                                <field name="OPERATOR">-</field>
+                                <value name="NUM1"><block type="data_variable" id="v_N1"><field name="VARIABLE" id="v_N" variabletype="">N</field></block></value>
+                                <value name="NUM2"><shadow type="math_number" id="n1_outer"><field name="NUM">1</field></shadow></value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="set_j_1">
+                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                <value name="VALUE"><shadow type="math_number" id="num1_j"><field name="NUM">1</field></shadow></value>
+                                <next>
+                                  <block type="control_repeat" id="inner_loop">
+                                    <value name="TIMES">
+                                      <block type="operator_arithmetic" id="sub_N_i">
+                                        <field name="OPERATOR">-</field>
+                                        <value name="NUM1"><block type="data_variable" id="v_N2"><field name="VARIABLE" id="v_N" variabletype="">N</field></block></value>
+                                        <value name="NUM2"><block type="data_variable" id="v_i2"><field name="VARIABLE" id="v_i" variabletype="">i</field></block></value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="control_if" id="check_gt">
+                                        <value name="CONDITION">
+                                          <block type="operator_compare" id="cmp_val">
+                                            <field name="OPERATOR">&gt;</field>
+                                            <value name="OPERAND1">
+                                              <block type="data_itemoflist" id="get_j">
+                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                <value name="INDEX"><block type="data_variable" id="v_j1"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                              </block>
+                                            </value>
+                                            <value name="OPERAND2">
+                                              <block type="data_itemoflist" id="get_j1">
+                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                <value name="INDEX">
+                                                  <block type="operator_arithmetic" id="add_j_1">
+                                                    <field name="OPERATOR">+</field>
+                                                    <value name="NUM1"><block type="data_variable" id="v_j2"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                    <value name="NUM2"><shadow type="math_number" id="n1_j_add"><field name="NUM">1</field></shadow></value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <block type="data_setvariableto" id="set_temp">
+                                            <field name="VARIABLE" id="v_temp" variabletype="">temp</field>
+                                            <value name="VALUE">
+                                              <block type="data_itemoflist" id="get_j_swap">
+                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                <value name="INDEX"><block type="data_variable" id="v_j3"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="data_replaceitemoflist" id="rep_j">
+                                                <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                <value name="INDEX"><block type="data_variable" id="v_j4"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                <value name="ITEM">
+                                                  <block type="data_itemoflist" id="get_j1_swap">
+                                                    <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                    <value name="INDEX">
+                                                      <block type="operator_arithmetic" id="add_j_1_swap">
+                                                        <field name="OPERATOR">+</field>
+                                                        <value name="NUM1"><block type="data_variable" id="v_j5"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                        <value name="NUM2"><shadow type="math_number" id="n1_j_add_swap"><field name="NUM">1</field></shadow></value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="data_replaceitemoflist" id="rep_j1">
+                                                    <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                    <value name="INDEX">
+                                                      <block type="operator_arithmetic" id="add_j_1_rep">
+                                                        <field name="OPERATOR">+</field>
+                                                        <value name="NUM1"><block type="data_variable" id="v_j6"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                        <value name="NUM2"><shadow type="math_number" id="n1_j_add_rep"><field name="NUM">1</field></shadow></value>
+                                                      </block>
+                                                    </value>
+                                                    <value name="ITEM"><block type="data_variable" id="v_temp1"><field name="VARIABLE" id="v_temp" variabletype="">temp</field></block></value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="data_changevariableby" id="inc_j">
+                                            <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                            <value name="VALUE"><shadow type="math_number" id="n1_inc_j"><field name="NUM">1</field></shadow></value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="data_changevariableby" id="inc_i">
+                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                        <value name="VALUE"><shadow type="math_number" id="n1_inc_i"><field name="NUM">1</field></shadow></value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <!-- 5. 初始化 最大對和 = 0, i = 1 -->
+                              <block type="data_setvariableto" id="set_max_0">
+                                <field name="VARIABLE" id="v_max_pair" variabletype="">最大對和</field>
+                                <value name="VALUE"><shadow type="math_number" id="num_z0"><field name="NUM">0</field></shadow></value>
+                                <next>
+                                  <block type="data_setvariableto" id="set_i_loop">
+                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                    <value name="VALUE"><shadow type="math_number" id="num1_il"><field name="NUM">1</field></shadow></value>
+                                    <next>
+                                      <!-- 6. 首尾配對迴圈：重複 N / 2 次 -->
+                                      <block type="control_repeat" id="loop_pair">
+                                        <value name="TIMES">
+                                          <block type="operator_arithmetic" id="div_n_2">
+                                            <field name="OPERATOR">/</field>
+                                            <value name="NUM1"><block type="data_variable" id="v_N_p"><field name="VARIABLE" id="v_N" variabletype="">N</field></block></value>
+                                            <value name="NUM2"><shadow type="math_number" id="num2_p"><field name="NUM">2</field></shadow></value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <!-- 計算目前對和 = 第 i 個數 + 第 (N - i + 1) 個數 -->
+                                          <block type="data_setvariableto" id="calc_curr_sum">
+                                            <field name="VARIABLE" id="v_current_sum" variabletype="">目前對和</field>
+                                            <value name="VALUE">
+                                              <block type="operator_arithmetic" id="plus_pair">
+                                                <field name="OPERATOR">+</field>
+                                                <value name="NUM1">
+                                                  <block type="data_itemoflist" id="get_left_item">
+                                                    <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                    <value name="INDEX"><block type="data_variable" id="get_i_v"><field name="VARIABLE" id="v_i" variabletype="">i</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <block type="data_itemoflist" id="get_right_item">
+                                                    <field name="LIST" id="l_arr" variabletype="list">數列</field>
+                                                    <value name="INDEX">
+                                                      <block type="operator_arithmetic" id="calc_right_idx">
+                                                        <field name="OPERATOR">-</field>
+                                                        <value name="NUM1">
+                                                          <block type="operator_arithmetic" id="add_n_1">
+                                                            <field name="OPERATOR">+</field>
+                                                            <value name="NUM1"><block type="data_variable" id="v_N_idx"><field name="VARIABLE" id="v_N" variabletype="">N</field></block></value>
+                                                            <value name="NUM2"><shadow type="math_number" id="n1_idx"><field name="NUM">1</field></shadow></value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="NUM2"><block type="data_variable" id="get_i_v2"><field name="VARIABLE" id="v_i" variabletype="">i</field></block></value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <!-- 若目前對和 > 最大對和，則更新最大對和 -->
+                                              <block type="control_if" id="check_update_max">
+                                                <value name="CONDITION">
+                                                  <block type="operator_compare" id="cmp_max">
+                                                    <field name="OPERATOR">&gt;</field>
+                                                    <value name="OPERAND1"><block type="data_variable" id="get_curr_v"><field name="VARIABLE" id="v_current_sum" variabletype="">目前對和</field></block></value>
+                                                    <value name="OPERAND2"><block type="data_variable" id="get_max_v"><field name="VARIABLE" id="v_max_pair" variabletype="">最大對和</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <block type="data_setvariableto" id="set_new_max">
+                                                    <field name="VARIABLE" id="v_max_pair" variabletype="">最大對和</field>
+                                                    <value name="VALUE"><block type="data_variable" id="get_curr_v2"><field name="VARIABLE" id="v_current_sum" variabletype="">目前對和</field></block></value>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="data_changevariableby" id="inc_i_p">
+                                                    <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                    <value name="VALUE"><shadow type="math_number" id="n1_inc_p"><field name="NUM">1</field></shadow></value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <!-- 7. 輸出最終結果 -->
+                                          <block type="scratch_say" id="say_ans">
+                                            <value name="TEXT">
+                                              <block type="data_variable" id="out_max">
+                                                <field name="VARIABLE" id="v_max_pair" variabletype="">最大對和</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
