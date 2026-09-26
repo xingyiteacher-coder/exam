@@ -1,1 +1,313 @@
-
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_amount" islocal="false" iscloud="false">amount</variable>
+    <variable type="" id="v_total" islocal="false" iscloud="false">total_coins</variable>
+    <variable type="" id="v_coin" islocal="false" iscloud="false">coin</variable>
+    <variable type="" id="v_count" islocal="false" iscloud="false">count</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_coins" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_amount">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_amount"><field name="TEXT">amount</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_amount">
+            <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_amount"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_total_0">
+                <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                <value name="VALUE">
+                  <shadow type="math_number" id="num_0"><field name="NUM">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_coin_50">
+                    <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                    <value name="VALUE">
+                      <shadow type="math_number" id="num_50"><field name="NUM">50</field></shadow>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="set_count_50">
+                        <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                        <value name="VALUE">
+                          <block type="operator_divide" id="div_50">
+                            <value name="NUM1">
+                              <block type="operator_subtract" id="sub_50">
+                                <field name="OPERATOR">-</field>
+                                <value name="NUM1">
+                                  <block type="data_variable" id="get_amt_1">
+                                    <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                  </block>
+                                </value>
+                                <value name="NUM2">
+                                  <block type="operator_mod" id="mod_50">
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="get_amt_2">
+                                        <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <block type="data_variable" id="get_coin_1">
+                                        <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="NUM2">
+                              <block type="data_variable" id="get_coin_2">
+                                <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="data_setvariableto" id="add_total_50">
+                            <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                            <value name="VALUE">
+                              <block type="operator_add" id="add_t_50">
+                                <value name="NUM1">
+                                  <block type="data_variable" id="get_total_1">
+                                    <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                  </block>
+                                </value>
+                                <value name="NUM2">
+                                  <block type="data_variable" id="get_count_1">
+                                    <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="data_setvariableto" id="update_amt_50">
+                                <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                <value name="VALUE">
+                                  <block type="operator_mod" id="mod_amt_50">
+                                    <value name="NUM1">
+                                      <block type="data_variable" id="get_amt_3">
+                                        <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM2">
+                                      <block type="data_variable" id="get_coin_3">
+                                        <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="data_setvariableto" id="set_coin_10">
+                                    <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                    <value name="VALUE">
+                                      <shadow type="math_number" id="num_10"><field name="NUM">10</field></shadow>
+                                    </value>
+                                    <next>
+                                      <block type="data_setvariableto" id="set_count_10">
+                                        <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                        <value name="VALUE">
+                                          <block type="operator_divide" id="div_10">
+                                            <value name="NUM1">
+                                              <block type="operator_subtract" id="sub_10">
+                                                <field name="OPERATOR">-</field>
+                                                <value name="NUM1">
+                                                  <block type="data_variable" id="get_amt_4">
+                                                    <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <block type="operator_mod" id="mod_10">
+                                                    <value name="NUM1">
+                                                      <block type="data_variable" id="get_amt_5">
+                                                        <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NUM2">
+                                                      <block type="data_variable" id="get_coin_4">
+                                                        <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="NUM2">
+                                              <block type="data_variable" id="get_coin_5">
+                                                <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="data_setvariableto" id="add_total_10">
+                                            <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                            <value name="VALUE">
+                                              <block type="operator_add" id="add_t_10">
+                                                <value name="NUM1">
+                                                  <block type="data_variable" id="get_total_2">
+                                                    <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <block type="data_variable" id="get_count_2">
+                                                    <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="data_setvariableto" id="update_amt_10">
+                                                <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                <value name="VALUE">
+                                                  <block type="operator_mod" id="mod_amt_10">
+                                                    <value name="NUM1">
+                                                      <block type="data_variable" id="get_amt_6">
+                                                        <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NUM2">
+                                                      <block type="data_variable" id="get_coin_6">
+                                                        <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="data_setvariableto" id="set_coin_5">
+                                                    <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                                    <value name="VALUE">
+                                                      <shadow type="math_number" id="num_5"><field name="NUM">5</field></shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="data_setvariableto" id="set_count_5">
+                                                        <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                                        <value name="VALUE">
+                                                          <block type="operator_divide" id="div_5">
+                                                            <value name="NUM1">
+                                                              <block type="operator_subtract" id="sub_5">
+                                                                <field name="OPERATOR">-</field>
+                                                                <value name="NUM1">
+                                                                  <block type="data_variable" id="get_amt_7">
+                                                                    <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <block type="operator_mod" id="mod_5">
+                                                                    <value name="NUM1">
+                                                                      <block type="data_variable" id="get_amt_8">
+                                                                        <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="NUM2">
+                                                                      <block type="data_variable" id="get_coin_7">
+                                                                        <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="NUM2">
+                                                              <block type="data_variable" id="get_coin_8">
+                                                                <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="data_setvariableto" id="add_total_5">
+                                                            <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                                            <value name="VALUE">
+                                                              <block type="operator_add" id="add_t_5">
+                                                                <value name="NUM1">
+                                                                  <block type="data_variable" id="get_total_3">
+                                                                    <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NUM2">
+                                                                  <block type="data_variable" id="get_count_3">
+                                                                    <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="data_setvariableto" id="update_amt_5">
+                                                                <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                                <value name="VALUE">
+                                                                  <block type="operator_mod" id="mod_amt_5">
+                                                                    <value name="NUM1">
+                                                                      <block type="data_variable" id="get_amt_9">
+                                                                        <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="NUM2">
+                                                                      <block type="data_variable" id="get_coin_9">
+                                                                        <field name="VARIABLE" id="v_coin" variabletype="">coin</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="data_setvariableto" id="add_total_1">
+                                                                    <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="operator_add" id="add_t_1">
+                                                                        <value name="NUM1">
+                                                                          <block type="data_variable" id="get_total_4">
+                                                                            <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="NUM2">
+                                                                          <block type="data_variable" id="get_amt_10">
+                                                                            <field name="VARIABLE" id="v_amount" variabletype="">amount</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="scratch_say" id="say_ans">
+                                                                        <value name="TEXT">
+                                                                          <block type="data_variable" id="out_ans">
+                                                                            <field name="VARIABLE" id="v_total" variabletype="">total_coins</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
