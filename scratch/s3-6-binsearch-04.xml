@@ -1,1 +1,184 @@
-
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_n" islocal="false" iscloud="false">n</variable>
+    <variable type="" id="v_left" islocal="false" iscloud="false">left</variable>
+    <variable type="" id="v_right" islocal="false" iscloud="false">right</variable>
+    <variable type="" id="v_mid" islocal="false" iscloud="false">mid</variable>
+    <variable type="" id="v_ans" islocal="false" iscloud="false">ans</variable>
+  </variables>
+  <block type="event_whenflagclicked" id="start_sqrt" x="10" y="10">
+    <next>
+      <block type="scratch_ask" id="ask_n">
+        <value name="QUESTION">
+          <shadow type="text" id="txt_n"><field name="TEXT">n</field></shadow>
+        </value>
+        <next>
+          <block type="data_setvariableto" id="set_n">
+            <field name="VARIABLE" id="v_n" variabletype="">n</field>
+            <value name="VALUE">
+              <block type="scratch_answer" id="ans_n"></block>
+            </value>
+            <next>
+              <block type="data_setvariableto" id="set_left">
+                <field name="VARIABLE" id="v_left" variabletype="">left</field>
+                <value name="VALUE">
+                  <shadow type="math_number" id="num_0"><field name="NUM">0</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_right">
+                    <field name="VARIABLE" id="v_right" variabletype="">right</field>
+                    <value name="VALUE">
+                      <block type="data_variable" id="get_n_val">
+                        <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="data_setvariableto" id="set_ans_0">
+                        <field name="VARIABLE" id="v_ans" variabletype="">ans</field>
+                        <value name="VALUE">
+                          <shadow type="math_number" id="num_0_ans"><field name="NUM">0</field></shadow>
+                        </value>
+                        <next>
+                          <block type="control_repeat_until" id="rep_until_sqrt">
+                            <value name="CONDITION">
+                              <block type="operator_compare" id="cmp_gt">
+                                <field name="OPERATOR">&gt;</field>
+                                <value name="OPERAND1">
+                                  <block type="data_variable" id="get_left">
+                                    <field name="VARIABLE" id="v_left" variabletype="">left</field>
+                                  </block>
+                                </value>
+                                <value name="OPERAND2">
+                                  <block type="data_variable" id="get_right">
+                                    <field name="VARIABLE" id="v_right" variabletype="">right</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="SUBSTACK">
+                              <block type="data_setvariableto" id="set_mid">
+                                <field name="VARIABLE" id="v_mid" variabletype="">mid</field>
+                                <value name="VALUE">
+                                  <block type="operator_round" id="round_mid">
+                                    <value name="NUM">
+                                      <block type="operator_divide" id="div_mid">
+                                        <value name="NUM1">
+                                          <block type="operator_add" id="add_lr">
+                                            <value name="NUM1">
+                                              <block type="data_variable" id="get_left2">
+                                                <field name="VARIABLE" id="v_left" variabletype="">left</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM2">
+                                              <block type="data_variable" id="get_right2">
+                                                <field name="VARIABLE" id="v_right" variabletype="">right</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="NUM2">
+                                          <shadow type="math_number" id="num_2"><field name="NUM">2</field></shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="control_if_else" id="if_else_sqrt">
+                                    <value name="CONDITION">
+                                      <block type="operator_compare" id="cmp_le">
+                                        <field name="OPERATOR">&lt;=</field>
+                                        <value name="OPERAND1">
+                                          <block type="operator_multiply" id="mul_mid">
+                                            <field name="OPERATOR">*</field>
+                                            <value name="NUM1">
+                                              <block type="data_variable" id="get_mid">
+                                                <field name="VARIABLE" id="v_mid" variabletype="">mid</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM2">
+                                              <block type="data_variable" id="get_mid2">
+                                                <field name="VARIABLE" id="v_mid" variabletype="">mid</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="OPERAND2">
+                                          <block type="data_variable" id="get_n">
+                                            <field name="VARIABLE" id="v_n" variabletype="">n</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="SUBSTACK">
+                                      <block type="data_setvariableto" id="set_ans">
+                                        <field name="VARIABLE" id="v_ans" variabletype="">ans</field>
+                                        <value name="VALUE">
+                                          <block type="data_variable" id="get_mid3">
+                                            <field name="VARIABLE" id="v_mid" variabletype="">mid</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="data_setvariableto" id="set_left_up">
+                                            <field name="VARIABLE" id="v_left" variabletype="">left</field>
+                                            <value name="VALUE">
+                                              <block type="operator_add" id="add_mid_1">
+                                                <value name="NUM1">
+                                                  <block type="data_variable" id="get_mid4">
+                                                    <field name="VARIABLE" id="v_mid" variabletype="">mid</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM2">
+                                                  <shadow type="math_number" id="num_1_plus"><field name="NUM">1</field></shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <statement name="SUBSTACK2">
+                                      <block type="data_setvariableto" id="set_right_down">
+                                        <field name="VARIABLE" id="v_right" variabletype="">right</field>
+                                        <value name="VALUE">
+                                          <block type="operator_subtract" id="sub_mid_1">
+                                            <field name="OPERATOR">-</field>
+                                            <value name="NUM1">
+                                              <block type="data_variable" id="get_mid5">
+                                                <field name="VARIABLE" id="v_mid" variabletype="">mid</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM2">
+                                              <shadow type="math_number" id="num_1_sub"><field name="NUM">1</field></shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="scratch_say" id="say_ans">
+                                <value name="TEXT">
+                                  <block type="data_variable" id="out_ans">
+                                    <field name="VARIABLE" id="v_ans" variabletype="">ans</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
