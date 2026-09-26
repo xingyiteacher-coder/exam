@@ -1,1 +1,326 @@
-
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="v_N" islocal="false" iscloud="false">N</variable>
+    <variable type="" id="v_i" islocal="false" iscloud="false">i</variable>
+    <variable type="" id="v_j" islocal="false" iscloud="false">j</variable>
+    <variable type="" id="v_count" islocal="false" iscloud="false">count</variable>
+    <variable type="" id="v_last_end" islocal="false" iscloud="false">last_end</variable>
+    <variable type="" id="v_temp_s" islocal="false" iscloud="false">temp_s</variable>
+    <variable type="" id="v_temp_e" islocal="false" iscloud="false">temp_e</variable>
+    <variable type="list" id="l_start" islocal="false" iscloud="false">開始時間</variable>
+    <variable type="list" id="l_end" islocal="false" iscloud="false">結束時間</variable>
+  </variables>
+  
+  <block type="event_whenflagclicked" id="start" x="20" y="20">
+    <next>
+      <!-- 1. 初始化清單 -->
+      <block type="data_deletealloflist" id="del_start">
+        <field name="LIST" id="l_start" variabletype="list">開始時間</field>
+        <next>
+          <block type="data_deletealloflist" id="del_end">
+            <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+            <next>
+              <!-- 2. 讀取 N -->
+              <block type="scratch_ask" id="ask_N">
+                <value name="QUESTION">
+                  <shadow type="text" id="q_N"><field name="TEXT">N</field></shadow>
+                </value>
+                <next>
+                  <block type="data_setvariableto" id="set_N">
+                    <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                    <value name="VALUE"><block type="scratch_answer" id="ans_N"></block></value>
+                    <next>
+                      <!-- 3. 迴圈讀取 N 個活動的開始與結束時間 -->
+                      <block type="control_repeat" id="rep_read">
+                        <value name="TIMES">
+                          <block type="data_variable" id="get_N">
+                            <field name="VARIABLE" id="v_N" variabletype="">N</field>
+                          </block>
+                        </value>
+                        <statement name="SUBSTACK">
+                          <block type="scratch_ask" id="ask_start">
+                            <value name="QUESTION">
+                              <shadow type="text" id="q_s"><field name="TEXT">開始時間</field></shadow>
+                            </value>
+                            <next>
+                              <block type="data_addtolist" id="add_s">
+                                <field name="LIST" id="l_start" variabletype="list">開始時間</field>
+                                <value name="ITEM"><block type="scratch_answer" id="ans_s"></block></value>
+                                <next>
+                                  <block type="scratch_ask" id="ask_end">
+                                    <value name="QUESTION">
+                                      <shadow type="text" id="q_e"><field name="TEXT">結束時間</field></shadow>
+                                    </value>
+                                    <next>
+                                      <block type="data_addtolist" id="add_e">
+                                        <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                        <value name="ITEM"><block type="scratch_answer" id="ans_e"></block></value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <!-- 4. 依結束時間進行氣泡排序 (同時對調開始時間) -->
+                          <block type="data_setvariableto" id="set_i_1">
+                            <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                            <value name="VALUE"><shadow type="math_number" id="num1_i"><field name="NUM">1</field></shadow></value>
+                            <next>
+                              <block type="control_repeat" id="outer_loop">
+                                <value name="TIMES">
+                                  <block type="operator_arithmetic" id="sub_N_1">
+                                    <field name="OPERATOR">-</field>
+                                    <value name="NUM1"><block type="data_variable" id="v_N1"><field name="VARIABLE" id="v_N" variabletype="">N</field></block></value>
+                                    <value name="NUM2"><shadow type="math_number" id="n1_outer"><field name="NUM">1</field></shadow></value>
+                                  </block>
+                                </value>
+                                <statement name="SUBSTACK">
+                                  <block type="data_setvariableto" id="set_j_1">
+                                    <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                    <value name="VALUE"><shadow type="math_number" id="num1_j"><field name="NUM">1</field></shadow></value>
+                                    <next>
+                                      <block type="control_repeat" id="inner_loop">
+                                        <value name="TIMES">
+                                          <block type="operator_arithmetic" id="sub_N_i">
+                                            <field name="OPERATOR">-</field>
+                                            <value name="NUM1"><block type="data_variable" id="v_N2"><field name="VARIABLE" id="v_N" variabletype="">N</field></block></value>
+                                            <value name="NUM2"><block type="data_variable" id="v_i2"><field name="VARIABLE" id="v_i" variabletype="">i</field></block></value>
+                                          </block>
+                                        </value>
+                                        <statement name="SUBSTACK">
+                                          <!-- 若當前結束時間 > 下一個結束時間，則交換兩者 (支援氣泡排序邏輯)[cite: 2] -->
+                                          <block type="control_if" id="check_gt">
+                                            <value name="CONDITION">
+                                              <block type="operator_compare" id="cmp_val">
+                                                <field name="OPERATOR">&gt;</field>
+                                                <value name="OPERAND1">
+                                                  <block type="data_itemoflist" id="get_j_e">
+                                                    <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                                    <value name="INDEX"><block type="data_variable" id="v_j1"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <value name="OPERAND2">
+                                                  <block type="data_itemoflist" id="get_j1_e">
+                                                    <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                                    <value name="INDEX">
+                                                      <block type="operator_arithmetic" id="add_j_1">
+                                                        <field name="OPERATOR">+</field>
+                                                        <value name="NUM1"><block type="data_variable" id="v_j2"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                        <value name="NUM2"><shadow type="math_number" id="n1_j_add"><field name="NUM">1</field></shadow></value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="SUBSTACK">
+                                              <!-- 交換結束時間 -->
+                                              <block type="data_setvariableto" id="set_temp_e">
+                                                <field name="VARIABLE" id="v_temp_e" variabletype="">temp_e</field>
+                                                <value name="VALUE">
+                                                  <block type="data_itemoflist" id="item_e_j">
+                                                    <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                                    <value name="INDEX"><block type="data_variable" id="v_j_e1"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <!-- 同步交換開始時間 -->
+                                                  <block type="data_setvariableto" id="set_temp_s">
+                                                    <field name="VARIABLE" id="v_temp_s" variabletype="">temp_s</field>
+                                                    <value name="VALUE">
+                                                      <block type="data_itemoflist" id="item_s_j">
+                                                        <field name="LIST" id="l_start" variabletype="list">開始時間</field>
+                                                        <value name="INDEX"><block type="data_variable" id="v_j_s1"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="data_replaceitemoflist" id="rep_e_j">
+                                                        <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                                        <value name="INDEX"><block type="data_variable" id="v_j_e2"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                        <value name="ITEM">
+                                                          <block type="data_itemoflist" id="item_e_j1">
+                                                            <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                                            <value name="INDEX">
+                                                              <block type="operator_arithmetic" id="add_j_1_e">
+                                                                <field name="OPERATOR">+</field>
+                                                                <value name="NUM1"><block type="data_variable" id="v_j3"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                                <value name="NUM2"><shadow type="math_number" id="n1_e"><field name="NUM">1</field></shadow></value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="data_replaceitemoflist" id="rep_s_j">
+                                                            <field name="LIST" id="l_start" variabletype="list">開始時間</field>
+                                                            <value name="INDEX"><block type="data_variable" id="v_j_s2"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                            <value name="ITEM">
+                                                              <block type="data_itemoflist" id="item_s_j1">
+                                                                <field name="LIST" id="l_start" variabletype="list">開始時間</field>
+                                                                <value name="INDEX">
+                                                                  <block type="operator_arithmetic" id="add_j_1_s">
+                                                                    <field name="OPERATOR">+</field>
+                                                                    <value name="NUM1"><block type="data_variable" id="v_j4"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                                    <value name="NUM2"><shadow type="math_number" id="n1_s"><field name="NUM">1</field></shadow></value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="data_replaceitemoflist" id="rep_e_j1">
+                                                                <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                                                <value name="INDEX">
+                                                                  <block type="operator_arithmetic" id="add_j_1_e2">
+                                                                    <field name="OPERATOR">+</field>
+                                                                    <value name="NUM1"><block type="data_variable" id="v_j5"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                                    <value name="NUM2"><shadow type="math_number" id="n1_e2"><field name="NUM">1</field></shadow></value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="ITEM"><block type="data_variable" id="v_temp_e1"><field name="VARIABLE" id="v_temp_e" variabletype="">temp_e</field></block></value>
+                                                                <next>
+                                                                  <block type="data_replaceitemoflist" id="rep_s_j1">
+                                                                    <field name="LIST" id="l_start" variabletype="list">開始時間</field>
+                                                                    <value name="INDEX">
+                                                                      <block type="operator_arithmetic" id="add_j_1_s2">
+                                                                        <field name="OPERATOR">+</field>
+                                                                        <value name="NUM1"><block type="data_variable" id="v_j6"><field name="VARIABLE" id="v_j" variabletype="">j</field></block></value>
+                                                                        <value name="NUM2"><shadow type="math_number" id="n1_s2"><field name="NUM">1</field></shadow></value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="ITEM"><block type="data_variable" id="v_temp_s1"><field name="VARIABLE" id="v_temp_s" variabletype="">temp_s</field></block></value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="data_changevariableby" id="inc_j">
+                                                <field name="VARIABLE" id="v_j" variabletype="">j</field>
+                                                <value name="VALUE"><shadow type="math_number" id="n1_inc_j"><field name="NUM">1</field></shadow></value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="data_changevariableby" id="inc_i">
+                                            <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                            <value name="VALUE"><shadow type="math_number" id="n1_inc_i"><field name="NUM">1</field></shadow></value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <!-- 5. 貪婪演算法核心邏輯：計算最多可參加活動數 -->
+                                  <block type="data_setvariableto" id="set_count_1">
+                                    <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                    <value name="VALUE"><shadow type="math_number" id="num1_cnt"><field name="NUM">1</field></shadow></value>
+                                    <next>
+                                      <block type="data_setvariableto" id="set_last_end">
+                                        <field name="VARIABLE" id="v_last_end" variabletype="">last_end</field>
+                                        <value name="VALUE">
+                                          <block type="data_itemoflist" id="first_end">
+                                            <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                            <value name="INDEX"><shadow type="math_number" id="idx1"><field name="NUM">1</field></shadow></value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="data_setvariableto" id="set_i_loop">
+                                            <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                            <value name="VALUE"><shadow type="math_number" id="num2_i"><field name="NUM">2</field></shadow></value>
+                                            <next>
+                                              <block type="control_repeat" id="greedy_loop">
+                                                <value name="TIMES">
+                                                  <block type="operator_arithmetic" id="sub_N_1_g">
+                                                    <field name="OPERATOR">-</field>
+                                                    <value name="NUM1"><block type="data_variable" id="v_N_g"><field name="VARIABLE" id="v_N" variabletype="">N</field></block></value>
+                                                    <value name="NUM2"><shadow type="math_number" id="n1_g"><field name="NUM">1</field></shadow></value>
+                                                  </block>
+                                                </value>
+                                                <statement name="SUBSTACK">
+                                                  <block type="control_if" id="check_compatible">
+                                                    <value name="CONDITION">
+                                                      <block type="operator_compare" id="cmp_start_end">
+                                                        <field name="OPERATOR">&gt;=</field>
+                                                        <value name="OPERAND1">
+                                                          <block type="data_itemoflist" id="get_curr_start">
+                                                            <field name="LIST" id="l_start" variabletype="list">開始時間</field>
+                                                            <value name="INDEX"><block type="data_variable" id="v_i_curr"><field name="VARIABLE" id="v_i" variabletype="">i</field></block></value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OPERAND2">
+                                                          <block type="data_variable" id="get_last_e">
+                                                            <field name="VARIABLE" id="v_last_end" variabletype="">last_end</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="SUBSTACK">
+                                                      <block type="data_changevariableby" id="inc_count">
+                                                        <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                                        <value name="VALUE"><shadow type="math_number" id="n1_cnt"><field name="NUM">1</field></shadow></value>
+                                                        <next>
+                                                          <block type="data_setvariableto" id="update_last_end">
+                                                            <field name="VARIABLE" id="v_last_end" variabletype="">last_end</field>
+                                                            <value name="VALUE">
+                                                              <block type="data_itemoflist" id="get_curr_end">
+                                                                <field name="LIST" id="l_end" variabletype="list">結束時間</field>
+                                                                <value name="INDEX"><block type="data_variable" id="v_i_curr2"><field name="VARIABLE" id="v_i" variabletype="">i</field></block></value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="data_changevariableby" id="inc_i_greedy">
+                                                        <field name="VARIABLE" id="v_i" variabletype="">i</field>
+                                                        <value name="VALUE"><shadow type="math_number" id="n1_inc_g"><field name="NUM">1</field></shadow></value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <!-- 6. 輸出最終結果 -->
+                                                  <block type="scratch_say" id="say_result">
+                                                    <value name="TEXT">
+                                                      <block type="data_variable" id="out_count">
+                                                        <field name="VARIABLE" id="v_count" variabletype="">count</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
