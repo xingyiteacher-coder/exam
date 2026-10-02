@@ -1,0 +1,4 @@
+{
+  "report": "https://script.google.com/macros/s/AKfycbxj3VgwXrqpQ57xUOJRRFlIic0Ny-sH9a3YR0ZJbxeCqM0oaDfQvvV_q6Z5RvSMvJbT/exec",
+  "bank": "https://raw.githubusercontent.com/xingyiteacher-coder/exam/refs/heads/main/banks/mock-county-05.txt"
+}
